@@ -1,311 +1,619 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sterling & Associates - Premier Corporate Law Firm</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Sterling & Associates | Justice is Precision</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
     <style>
-        * { font-family: 'Inter', sans-serif; }
-        .glassmorphism {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        :root {
+            --c-bg-base: #0a0b0e;
+            --c-bg-overlay: rgba(10, 11, 14, 0.92);
+            --c-text-main: #b8b8b8;
+            --c-text-muted: rgba(184, 184, 184, 0.6);
+            --c-accent-navy: #1a1f3a;
+            --c-platinum: #b8b8b8;
+            --ease-fluid: cubic-bezier(0.25, 1, 0.5, 1);
+            --font-serif: 'DM Serif Display', serif;
+            --font-sans: 'Space Grotesk', sans-serif;
         }
-        .glassmorphism-dark {
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            cursor: none;
         }
-        .animate-fade-in {
-            animation: fadeIn 0.8s ease-out;
+
+        body {
+            background-color: var(--c-bg-base);
+            font-family: var(--font-sans);
+            color: var(--c-text-main);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
-        .animate-slide-up {
-            animation: slideUp 0.8s ease-out;
+
+        /* Dual-layer background system */
+        .layer-sharp {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2560&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            z-index: 1;
+            filter: grayscale(0.8) brightness(0.4);
         }
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
+
+        .layer-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2560&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            filter: blur(40px) brightness(0.2) grayscale(0.9);
+            transform: scale(1.1);
+            z-index: 2;
+            mask-image: radial-gradient(
+                circle 400px at var(--x, 50%) var(--y, 50%),
+                transparent 0%,
+                black 100%
+            );
+            -webkit-mask-image: radial-gradient(
+                circle 400px at var(--x, 50%) var(--y, 50%),
+                transparent 0%,
+                black 100%
+            );
         }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+
+        /* SVG noise texture overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 3;
+            opacity: 0.12;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        .noise-overlay::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--c-bg-overlay);
+            mix-blend-mode: multiply;
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+
+        /* Custom cursor */
+        .cursor-dot,
+        .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .cursor-dot {
+            width: 3px;
+            height: 3px;
+            background-color: var(--c-platinum);
+        }
+
+        .cursor-outline {
+            width: 28px;
+            height: 28px;
+            border: 1px solid rgba(184, 184, 184, 0.3);
+            transition: width 0.3s var(--ease-fluid), height 0.3s var(--ease-fluid), background-color 0.3s var(--ease-fluid);
+        }
+
+        body:active .cursor-outline {
+            width: 16px;
+            height: 16px;
+            background-color: rgba(184, 184, 184, 0.1);
+            border-color: rgba(184, 184, 184, 0.7);
+        }
+
+        /* Content layers */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+        }
+
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 5rem;
+            text-align: center;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 3rem 5rem;
+            border-bottom: 1px solid rgba(184, 184, 184, 0.1);
+            opacity: 0;
+            animation: fadeInSlow 2s var(--ease-fluid) forwards 0.3s;
+        }
+
+        .brand {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            color: var(--c-platinum);
+            text-decoration: none;
+            transition: opacity 0.4s var(--ease-fluid);
+        }
+
+        .brand:hover {
+            opacity: 0.7;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .nav-link {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 400;
+            color: var(--c-text-muted);
+            text-decoration: none;
+            transition: color 0.4s var(--ease-fluid);
+        }
+
+        .nav-link:hover {
+            color: var(--c-platinum);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: 6rem;
+            line-height: 1.1;
+            font-weight: 400;
+            letter-spacing: -0.03em;
+            margin-bottom: 2rem;
+            color: var(--c-platinum);
+            opacity: 0;
+            animation: fadeInSlow 3s var(--ease-fluid) forwards 0.8s;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--c-text-muted);
+            opacity: 0;
+            animation: fadeInSlow 3s var(--ease-fluid) forwards 2s;
+        }
+
+        /* Practice Areas Section */
+        .practice-areas-content {
+            max-width: 600px;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            color: var(--c-platinum);
+            margin-bottom: 4rem;
+            opacity: 0;
+            animation: fadeInSlow 2s var(--ease-fluid) forwards 1s;
+        }
+
+        .practice-list {
+            list-style: none;
+        }
+
+        .practice-item {
+            font-family: var(--font-sans);
+            font-size: 1.1rem;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            color: var(--c-text-muted);
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(184, 184, 184, 0.1);
+            opacity: 0;
+            animation: fadeInSlow 2s var(--ease-fluid) forwards;
+            transition: color 0.4s var(--ease-fluid);
+        }
+
+        .practice-item:nth-child(1) { animation-delay: 1.2s; }
+        .practice-item:nth-child(2) { animation-delay: 1.4s; }
+        .practice-item:nth-child(3) { animation-delay: 1.6s; }
+        .practice-item:nth-child(4) { animation-delay: 1.8s; }
+
+        .practice-item:hover {
+            color: var(--c-platinum);
+        }
+
+        .practice-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Legacy Section */
+        .legacy-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6rem;
+            max-width: 1000px;
+        }
+
+        .legacy-stat {
+            text-align: center;
+            opacity: 0;
+            animation: fadeInSlow 2s var(--ease-fluid) forwards;
+        }
+
+        .legacy-stat:nth-child(1) { animation-delay: 1s; }
+        .legacy-stat:nth-child(2) { animation-delay: 1.3s; }
+        .legacy-stat:nth-child(3) { animation-delay: 1.6s; }
+
+        .stat-number {
+            font-family: var(--font-serif);
+            font-size: 4rem;
+            font-weight: 400;
+            color: var(--c-platinum);
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--c-text-muted);
+        }
+
+        /* Counsel Section */
+        .counsel-content {
+            max-width: 500px;
+        }
+
+        .counsel-title {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            color: var(--c-platinum);
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInSlow 2s var(--ease-fluid) forwards 1s;
+        }
+
+        .contact-info {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--c-text-muted);
+            opacity: 0;
+            animation: fadeInSlow 2s var(--ease-fluid) forwards 1.5s;
+        }
+
+        .contact-link {
+            color: var(--c-platinum);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(184, 184, 184, 0.3);
+            transition: border-color 0.4s var(--ease-fluid);
+        }
+
+        .contact-link:hover {
+            border-color: var(--c-platinum);
+        }
+
+        /* Footer */
+        .footer {
+            position: fixed;
+            bottom: 3rem;
+            left: 5rem;
+            font-family: var(--font-sans);
+            font-variant-numeric: tabular-nums;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            color: rgba(184, 184, 184, 0.4);
+            z-index: 100;
+            opacity: 0;
+            animation: fadeInSlow 2s var(--ease-fluid) forwards 3s;
+        }
+
+        .coordinates {
+            position: fixed;
+            bottom: 3rem;
+            right: 5rem;
+            font-family: var(--font-sans);
+            font-variant-numeric: tabular-nums;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            color: rgba(184, 184, 184, 0.4);
+            z-index: 100;
+            opacity: 0;
+            animation: fadeInSlow 2s var(--ease-fluid) forwards 3s;
+        }
+
+        /* Animations */
+        @keyframes fadeInSlow {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 4.5rem;
+            }
+            
+            .legacy-content {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+            
+            .stat-number {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 0 2rem;
+            }
+            
+            .header {
+                padding: 2rem;
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .nav-links {
+                gap: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .counsel-title {
+                font-size: 2.2rem;
+            }
+            
+            .footer,
+            .coordinates {
+                position: relative;
+                bottom: auto;
+                left: auto;
+                right: auto;
+                text-align: center;
+                margin-top: 2rem;
+            }
+        }
+
+        /* Smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
         }
     </style>
 </head>
-<body class="bg-slate-950 text-white overflow-x-hidden">
-    
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 glassmorphism">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <div class="flex items-center">
-                    <div class="text-2xl font-bold bg-gradient-to-r from-slate-200 to-slate-400 bg-clip-text text-transparent">
-                        Sterling & Associates
-                    </div>
-                </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#practice-areas" class="text-slate-300 hover:text-white transition-colors duration-300">Practice Areas</a>
-                    <a href="#attorneys" class="text-slate-300 hover:text-white transition-colors duration-300">Attorneys</a>
-                    <a href="#results" class="text-slate-300 hover:text-white transition-colors duration-300">Results</a>
-                    <a href="#contact" class="text-slate-300 hover:text-white transition-colors duration-300">Contact</a>
-                </div>
-                <button class="bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-500 hover:to-slate-600 px-6 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105">
-                    Free Consultation
-                </button>
-            </div>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section class="min-h-screen flex items-center justify-center relative overflow-hidden py-24 px-6">
-        <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-blue-950"></div>
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-slate-800/20 via-transparent to-transparent"></div>
-        
-        <div class="relative z-10 max-w-6xl mx-auto text-center animate-fade-in">
-            <h1 class="text-5xl md:text-7xl font-black mb-8 leading-tight">
-                <span class="bg-gradient-to-r from-slate-100 via-slate-200 to-slate-300 bg-clip-text text-transparent">
-                    Legal Excellence
-                </span>
-                <br>
-                <span class="text-slate-400">
-                    Delivered
-                </span>
-            </h1>
-            <p class="text-xl md:text-2xl text-slate-300 mb-12 max-w-3xl mx-auto leading-relaxed">
-                Fortune 500 companies trust Sterling & Associates for complex corporate litigation, mergers & acquisitions, and strategic legal counsel.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                <button class="bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-500 hover:to-slate-600 px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
-                    Schedule Consultation
-                </button>
-                <button class="glassmorphism px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white/10 transition-all duration-300">
-                    View Case Studies
-                </button>
-            </div>
-        </div>
-        
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-float">
-            <div class="w-6 h-10 border-2 border-slate-400 rounded-full flex justify-center">
-                <div class="w-1 h-3 bg-slate-400 rounded-full mt-2 animate-pulse"></div>
-            </div>
-        </div>
-    </section>
+<body>
+    <!-- Background layers -->
+    <div class="layer-sharp"></div>
+    <div class="layer-blur"></div>
+    <div class="noise-overlay"></div>
 
-    <!-- Practice Areas -->
-    <section id="practice-areas" class="py-24 px-6">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-20 animate-slide-up">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-slate-200 to-slate-400 bg-clip-text text-transparent">
-                    Practice Areas
-                </h2>
-                <p class="text-xl text-slate-400 max-w-3xl mx-auto">
-                    Comprehensive legal services for complex business challenges
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="glassmorphism-dark p-8 rounded-2xl hover:bg-white/5 transition-all duration-300 transform hover:scale-105">
-                    <div class="w-12 h-12 bg-gradient-to-br from-slate-600 to-slate-700 rounded-lg mb-6"></div>
-                    <h3 class="text-xl font-bold mb-4">Corporate Law</h3>
-                    <p class="text-slate-400 leading-relaxed">Mergers, acquisitions, corporate governance, and strategic transactions for Fortune 500 companies.</p>
-                </div>
-                
-                <div class="glassmorphism-dark p-8 rounded-2xl hover:bg-white/5 transition-all duration-300 transform hover:scale-105">
-                    <div class="w-12 h-12 bg-gradient-to-br from-slate-600 to-slate-700 rounded-lg mb-6"></div>
-                    <h3 class="text-xl font-bold mb-4">Commercial Litigation</h3>
-                    <p class="text-slate-400 leading-relaxed">High-stakes dispute resolution, breach of contract, and complex commercial litigation.</p>
-                </div>
-                
-                <div class="glassmorphism-dark p-8 rounded-2xl hover:bg-white/5 transition-all duration-300 transform hover:scale-105">
-                    <div class="w-12 h-12 bg-gradient-to-br from-slate-600 to-slate-700 rounded-lg mb-6"></div>
-                    <h3 class="text-xl font-bold mb-4">Securities & Finance</h3>
-                    <p class="text-slate-400 leading-relaxed">Capital markets, securities compliance, and financial regulatory matters.</p>
-                </div>
-                
-                <div class="glassmorphism-dark p-8 rounded-2xl hover:bg-white/5 transition-all duration-300 transform hover:scale-105">
-                    <div class="w-12 h-12 bg-gradient-to-br from-slate-600 to-slate-700 rounded-lg mb-6"></div>
-                    <h3 class="text-xl font-bold mb-4">Intellectual Property</h3>
-                    <p class="text-slate-400 leading-relaxed">Patent prosecution, trademark protection, and IP litigation for innovative companies.</p>
-                </div>
-                
-                <div class="glassmorphism-dark p-8 rounded-2xl hover:bg-white/5 transition-all duration-300 transform hover:scale-105">
-                    <div class="w-12 h-12 bg-gradient-to-br from-slate-600 to-slate-700 rounded-lg mb-6"></div>
-                    <h3 class="text-xl font-bold mb-4">Employment Law</h3>
-                    <p class="text-slate-400 leading-relaxed">Executive compensation, employment disputes, and workforce compliance strategies.</p>
-                </div>
-                
-                <div class="glassmorphism-dark p-8 rounded-2xl hover:bg-white/5 transition-all duration-300 transform hover:scale-105">
-                    <div class="w-12 h-12 bg-gradient-to-br from-slate-600 to-slate-700 rounded-lg mb-6"></div>
-                    <h3 class="text-xl font-bold mb-4">Regulatory Compliance</h3>
-                    <p class="text-slate-400 leading-relaxed">Government investigations, compliance programs, and regulatory defense.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Custom cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
 
-    <!-- Results Stats -->
-    <section id="results" class="py-24 px-6 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-slate-900/50 to-blue-950/50"></div>
-        <div class="relative z-10 max-w-6xl mx-auto text-center">
-            <h2 class="text-4xl md:text-5xl font-bold mb-20 bg-gradient-to-r from-slate-200 to-slate-400 bg-clip-text text-transparent">
-                Proven Results
-            </h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
-                <div class="glassmorphism p-8 rounded-2xl">
-                    <div class="text-4xl font-black mb-2 bg-gradient-to-r from-slate-200 to-slate-300 bg-clip-text text-transparent">$2.8B</div>
-                    <div class="text-slate-400">Total Recoveries</div>
-                </div>
-                
-                <div class="glassmorphism p-8 rounded-2xl">
-                    <div class="text-4xl font-black mb-2 bg-gradient-to-r from-slate-200 to-slate-300 bg-clip-text text-transparent">98%</div>
-                    <div class="text-slate-400">Success Rate</div>
-                </div>
-                
-                <div class="glassmorphism p-8 rounded-2xl">
-                    <div class="text-4xl font-black mb-2 bg-gradient-to-r from-slate-200 to-slate-300 bg-clip-text text-transparent">150+</div>
-                    <div class="text-slate-400">Fortune 500 Clients</div>
-                </div>
-                
-                <div class="glassmorphism p-8 rounded-2xl">
-                    <div class="text-4xl font-black mb-2 bg-gradient-to-r from-slate-200 to-slate-300 bg-clip-text text-transparent">25</div>
-                    <div class="text-slate-400">Years Experience</div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Header -->
+    <header class="header">
+        <a href="#hero" class="brand">Sterling & Associates</a>
+        <nav class="nav-links">
+            <a href="#practice" class="nav-link">Practice</a>
+            <a href="#legacy" class="nav-link">Legacy</a>
+            <a href="#counsel" class="nav-link">Counsel</a>
+        </nav>
+    </header>
 
-    <!-- Attorney Profiles -->
-    <section id="attorneys" class="py-24 px-6">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-20">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-slate-200 to-slate-400 bg-clip-text text-transparent">
-                    Our Attorneys
-                </h2>
-                <p class="text-xl text-slate-400 max-w-3xl mx-auto">
-                    Leading legal minds with decades of experience
-                </p>
+    <!-- Content -->
+    <div class="content-wrapper">
+        <!-- Hero Section -->
+        <section id="hero" class="section hero">
+            <div class="hero-content">
+                <h1 class="hero-title"><em>Justice</em> is precision</h1>
+                <p class="hero-subtitle">Excellence in legal counsel since 1987</p>
             </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="glassmorphism-dark p-8 rounded-2xl text-center">
-                    <div class="w-24 h-24 bg-gradient-to-br from-slate-600 to-slate-700 rounded-full mx-auto mb-6"></div>
-                    <h3 class="text-xl font-bold mb-2">James Sterling</h3>
-                    <p class="text-slate-400 mb-4">Managing Partner</p>
-                    <p class="text-sm text-slate-500">Harvard Law, 30+ years experience in corporate law and M&A transactions.</p>
-                </div>
-                
-                <div class="glassmorphism-dark p-8 rounded-2xl text-center">
-                    <div class="w-24 h-24 bg-gradient-to-br from-slate-600 to-slate-700 rounded-full mx-auto mb-6"></div>
-                    <h3 class="text-xl font-bold mb-2">Sarah Chen</h3>
-                    <p class="text-slate-400 mb-4">Senior Partner</p>
-                    <p class="text-sm text-slate-500">Stanford Law, leading securities and finance practice with Fortune 100 clients.</p>
-                </div>
-                
-                <div class="glassmorphism-dark p-8 rounded-2xl text-center">
-                    <div class="w-24 h-24 bg-gradient-to-br from-slate-600 to-slate-700 rounded-full mx-auto mb-6"></div>
-                    <h3 class="text-xl font-bold mb-2">Michael Rodriguez</h3>
-                    <p class="text-slate-400 mb-4">Senior Partner</p>
-                    <p class="text-sm text-slate-500">Yale Law, specializes in complex litigation and intellectual property matters.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Trust Badges & CTA -->
-    <section id="contact" class="py-24 px-6">
-        <div class="max-w-4xl mx-auto text-center">
-            <div class="glassmorphism p-12 rounded-3xl">
-                <h2 class="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-slate-200 to-slate-400 bg-clip-text text-transparent">
-                    Ready to Discuss Your Case?
-                </h2>
-                <p class="text-xl text-slate-300 mb-12 max-w-2xl mx-auto">
-                    Get strategic legal counsel from attorneys who have successfully handled billions in corporate transactions.
-                </p>
-                
-                <div class="flex flex-wrap justify-center gap-8 mb-12 text-sm text-slate-400">
-                    <div class="flex items-center">
-                        <div class="w-2 h-2 bg-slate-400 rounded-full mr-2"></div>
-                        AV Rated by Martindale
-                    </div>
-                    <div class="flex items-center">
-                        <div class="w-2 h-2 bg-slate-400 rounded-full mr-2"></div>
-                        Best Lawyers Recognition
-                    </div>
-                    <div class="flex items-center">
-                        <div class="w-2 h-2 bg-slate-400 rounded-full mr-2"></div>
-                        AmLaw 100 Firm
-                    </div>
-                </div>
-                
-                <button class="bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-500 hover:to-slate-600 px-12 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
-                    Schedule Your Free Consultation
-                </button>
-                
-                <p class="text-sm text-slate-500 mt-6">Confidential consultation • No obligation • 24/7 availability</p>
+        <!-- Practice Areas Section -->
+        <section id="practice" class="section">
+            <div class="practice-areas-content">
+                <h2 class="section-title">Practice Areas</h2>
+                <ul class="practice-list">
+                    <li class="practice-item">Corporate Law</li>
+                    <li class="practice-item">Intellectual Property</li>
+                    <li class="practice-item">Litigation</li>
+                    <li class="practice-item">Mergers & Acquisitions</li>
+                </ul>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Legacy Section -->
+        <section id="legacy" class="section">
+            <div class="legacy-content">
+                <div class="legacy-stat">
+                    <div class="stat-number">1987</div>
+                    <div class="stat-label">Established</div>
+                </div>
+                <div class="legacy-stat">
+                    <div class="stat-number">$2.8B</div>
+                    <div class="stat-label">Recovered</div>
+                </div>
+                <div class="legacy-stat">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Counsel Section -->
+        <section id="counsel" class="section">
+            <div class="counsel-content">
+                <h2 class="counsel-title">Request a Consultation</h2>
+                <div class="contact-info">
+                    <p><a href="mailto:inquiries@sterlinglaw.com" class="contact-link">inquiries@sterlinglaw.com</a></p>
+                    <p><a href="tel:+12125551987" class="contact-link">+1 (212) 555-1987</a></p>
+                </div>
+            </div>
+        </section>
+    </div>
 
     <!-- Footer -->
-    <footer class="py-12 px-6 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <div class="text-xl font-bold mb-4 bg-gradient-to-r from-slate-200 to-slate-400 bg-clip-text text-transparent">
-                        Sterling & Associates
-                    </div>
-                    <p class="text-slate-400 text-sm">
-                        Premier corporate law firm serving Fortune 500 companies nationwide.
-                    </p>
-                </div>
-                
-                <div>
-                    <h3 class="font-semibold mb-4">Practice Areas</h3>
-                    <ul class="space-y-2 text-sm text-slate-400">
-                        <li>Corporate Law</li>
-                        <li>Commercial Litigation</li>
-                        <li>Securities & Finance</li>
-                        <li>Intellectual Property</li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="font-semibold mb-4">Contact</h3>
-                    <ul class="space-y-2 text-sm text-slate-400">
-                        <li>New York Office</li>
-                        <li>San Francisco Office</li>
-                        <li>Chicago Office</li>
-                        <li>1-800-STERLING</li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="font-semibold mb-4">Resources</h3>
-                    <ul class="space-y-2 text-sm text-slate-400">
-                        <li>Legal Insights</li>
-                        <li>Case Studies</li>
-                        <li>Client Portal</li>
-                        <li>Attorney Directory</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500">
-                <p>&copy; 2024 Sterling & Associates. All rights reserved.</p>
-                <p>Built by <a href="https://agentic-assistance.com" class="text-slate-400 hover:text-white transition-colors">Agentic Assistance</a> — agentic-assistance.com</p>
-            </div>
-        </div>
+    <footer class="footer">
+        © 2026 Sterling & Associates
     </footer>
     
+    <div class="coordinates">
+        40.7589° N, 73.9851° W
+    </div>
+
+    <script>
+        // Dual-layer background with mouse tracking
+        const blurLayer = document.querySelector('.layer-blur');
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let cursorX = window.innerWidth / 2;
+        let cursorY = window.innerHeight / 2;
+
+        // Mouse movement tracking
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            // Update cursor dot immediately
+            cursorDot.style.left = `${mouseX}px`;
+            cursorDot.style.top = `${mouseY}px`;
+        });
+
+        // Animation loop for smooth cursor trailing and blur mask
+        function animate() {
+            const ease = 0.08;
+            
+            cursorX += (mouseX - cursorX) * ease;
+            cursorY += (mouseY - cursorY) * ease;
+            
+            cursorOutline.style.left = `${cursorX}px`;
+            cursorOutline.style.top = `${cursorY}px`;
+            
+            // Update blur layer mask position
+            const xPercent = (cursorX / window.innerWidth) * 100;
+            const yPercent = (cursorY / window.innerHeight) * 100;
+            
+            blurLayer.style.setProperty('--x', `${xPercent}%`);
+            blurLayer.style.setProperty('--y', `${yPercent}%`);
+            
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            mouseX = window.innerWidth / 2;
+            mouseY = window.innerHeight / 2;
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections for animation triggers
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
 </body>
 </html>
