@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agentic Assistance — AI-Powered Solutions for Modern Business</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #6366f1;
+      --bg: #0f172a;
+      --text: #f1f5f9;
+      --accent: #8b5cf6;
+      --card-bg: #1e293b;
+      --border: #334155;
+      --radius: 12px;
+      --max-w: 1100px;
+    }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+
+    /* NAV */
+    nav { padding: 20px 0; display: flex; justify-content: space-between; align-items: center; }
+    nav .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); text-decoration: none; }
+    nav .cta-btn { background: var(--primary); color: #fff; padding: 10px 24px; border-radius: var(--radius); text-decoration: none; font-weight: 600; transition: opacity .2s; }
+    nav .cta-btn:hover { opacity: .85; }
+
+    /* HERO */
+    .hero { padding: 80px 0 60px; text-align: center; }
+    .hero h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 20px; }
+    .hero p { font-size: 1.2rem; max-width: 600px; margin: 0 auto 32px; opacity: .8; }
+    .hero .btn-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .hero .btn-primary { background: var(--primary); color: #fff; padding: 14px 36px; border-radius: var(--radius); text-decoration: none; font-weight: 700; font-size: 1.1rem; transition: transform .2s; }
+    .hero .btn-primary:hover { transform: translateY(-2px); }
+    .hero .btn-secondary { border: 2px solid var(--primary); color: var(--primary); padding: 14px 36px; border-radius: var(--radius); text-decoration: none; font-weight: 700; font-size: 1.1rem; transition: all .2s; }
+    .hero .btn-secondary:hover { background: var(--primary); color: #fff; }
+
+    /* FEATURES */
+    .features { padding: 60px 0; }
+    .features h2 { text-align: center; font-size: 2rem; margin-bottom: 48px; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; }
+    .feature-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; box-shadow: 0 4px 16px rgba(0,0,0,.2); transition: transform .2s; }
+    .feature-card:hover { transform: translateY(-4px); }
+    .feature-card .icon { font-size: 2rem; margin-bottom: 12px; color: var(--primary); }
+    .feature-card h3 { margin-bottom: 8px; color: var(--text); }
+
+    /* ABOUT */
+    .about { padding: 60px 0; background: var(--card-bg); border-radius: var(--radius); margin: 40px 0; border: 1px solid var(--border); }
+    .about h2 { text-align: center; font-size: 2rem; margin-bottom: 24px; }
+    .about p { text-align: center; font-size: 1.1rem; max-width: 700px; margin: 0 auto; opacity: .9; line-height: 1.7; }
+
+    /* PRICING - Converted to Services showcase */
+    .pricing { padding: 60px 0; }
+    .pricing h2 { text-align: center; font-size: 2rem; margin-bottom: 48px; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; max-width: 900px; margin: 0 auto; }
+    .price-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 40px 32px; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,.2); position: relative; transition: transform .2s; }
+    .price-card:hover { transform: translateY(-4px); }
+    .price-card.featured { border: 3px solid var(--primary); }
+    .price-card .icon { font-size: 3rem; color: var(--primary); margin-bottom: 16px; }
+    .price-card h3 { font-size: 1.5rem; margin-bottom: 12px; }
+    .price-card p { opacity: .8; margin-bottom: 24px; }
+    .price-card a { display: block; background: var(--primary); color: #fff; padding: 14px; border-radius: var(--radius); text-decoration: none; font-weight: 700; transition: opacity .2s; }
+    .price-card a:hover { opacity: .9; }
+
+    /* TESTIMONIALS */
+    .testimonials { padding: 60px 0; }
+    .testimonials h2 { text-align: center; font-size: 2rem; margin-bottom: 48px; }
+    .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+    .testimonial { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; box-shadow: 0 4px 16px rgba(0,0,0,.2); }
+    .testimonial .stars { color: #f59e0b; margin-bottom: 12px; }
+    .testimonial .quote { font-style: italic; margin-bottom: 16px; opacity: .9; }
+    .testimonial .author { font-weight: 700; color: var(--primary); }
+
+    /* CTA */
+    .cta-section { padding: 80px 0; text-align: center; background: linear-gradient(135deg, var(--primary), var(--accent)); color: #fff; border-radius: var(--radius); margin: 60px auto; max-width: var(--max-w); }
+    .cta-section h2 { font-size: 2.2rem; margin-bottom: 16px; }
+    .cta-section p { margin-bottom: 32px; opacity: .9; font-size: 1.1rem; }
+    .cta-section a { background: #fff; color: var(--primary); padding: 14px 36px; border-radius: var(--radius); text-decoration: none; font-weight: 700; font-size: 1.1rem; transition: transform .2s; }
+    .cta-section a:hover { transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer { padding: 40px 0; text-align: center; opacity: .6; font-size: .9rem; border-top: 1px solid var(--border); margin-top: 40px; }
+
+    @media (max-width: 600px) {
+      .hero { padding: 48px 0 32px; }
+      .features-grid, .pricing-grid, .testimonial-grid { grid-template-columns: 1fr; }
+      .hero .btn-group { flex-direction: column; align-items: center; }
+      .hero .btn-primary, .hero .btn-secondary { width: 200px; }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <a href="#" class="logo">Agentic Assistance</a>
+      <a href="mailto:nova@agentic-assistance.com" class="cta-btn">Get Started</a>
+    </nav>
+  </div>
+
+  <div class="container">
+    <section class="hero">
+      <h1>Agentic Assistance — AI-Powered Solutions for Modern Business</h1>
+      <p>Transform your business operations with cutting-edge AI automation. From landing pages to custom workflows, we deliver fast, affordable, and high-quality digital solutions.</p>
+      <div class="btn-group">
+        <a href="mailto:nova@agentic-assistance.com" class="btn-primary">Start Your Project</a>
+        <a href="#features" class="btn-secondary">Explore Services</a>
+      </div>
+    </section>
+  </div>
+
+  <div class="container">
+    <section class="features" id="features">
+      <h2>Our AI-Powered Services</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="icon">🎨</div>
+          <h3>AI Landing Pages</h3>
+          <p>Professional, conversion-optimized landing pages generated from your brief. Get beautiful, responsive pages in minutes, not weeks.</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">📊</div>
+          <h3>SEO Audits</h3>
+          <p>Comprehensive SEO analysis powered by AI. Identify opportunities, fix issues, and boost your search rankings with actionable insights.</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">📄</div>
+          <h3>Invoice Generation</h3>
+          <p>Automated invoice creation and management. Streamline your billing process with smart templates and client communication.</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">✉️</div>
+          <h3>Email Automation</h3>
+          <p>Intelligent email sequences that engage customers and drive conversions. Personalized campaigns that work while you sleep.</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">⚡</div>
+          <h3>Custom AI Skills</h3>
+          <p>Bespoke AI solutions tailored to your unique business needs. From data processing to customer service automation.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="container">
+    <section class="about">
+      <h2>About Agentic Assistance</h2>
+      <p>We're a small, agile team leveraging cutting-edge AI technology to deliver fast, affordable, and high-quality digital services. Our mission is to make advanced AI accessible to businesses of all sizes, helping you automate processes, improve efficiency, and focus on what you do best. With expertise in modern AI tools and business automation, we're your trusted partner in digital transformation.</p>
+    </section>
+  </div>
+
+  <div class="container">
+    <section class="pricing" id="services">
+      <h2>Service Showcase</h2>
+      <div class="pricing-grid">
+        <div class="price-card">
+          <div class="icon">🚀</div>
+          <h3>Quick Launch</h3>
+          <p>Perfect for startups and small businesses looking to establish their digital presence quickly and professionally.</p>
+          <a href="mailto:nova@agentic-assistance.com">Get Quote</a>
+        </div>
+        <div class="price-card featured">
+          <div class="icon">⭐</div>
+          <h3>Business Pro</h3>
+          <p>Comprehensive AI solutions for growing businesses. Multiple services, ongoing support, and custom integrations.</p>
+          <a href="mailto:nova@agentic-assistance.com">Most Popular</a>
+        </div>
+        <div class="price-card">
+          <div class="icon">🏢</div>
+          <h3>Enterprise</h3>
+          <p>Full-scale AI transformation for large organizations. Custom solutions, dedicated support, and strategic consultation.</p>
+          <a href="mailto:nova@agentic-assistance.com">Contact Us</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="container">
+    <section class="testimonials">
+      <h2>What Our Clients Say</h2>
+      <div class="testimonial-grid">
+        <div class="testimonial">
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <div class="quote">"Agentic Assistance transformed our lead generation with their AI-powered landing page. We saw a 300% increase in conversions within the first month."</div>
+          <div class="author">Sarah Chen, Marketing Director</div>
+        </div>
+        <div class="testimonial">
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <div class="quote">"The custom AI workflow they built for our invoice processing saved us 20 hours per week. Incredible ROI and fantastic service."</div>
+          <div class="author">Marcus Rodriguez, Finance Manager</div>
+        </div>
+        <div class="testimonial">
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <div class="quote">"Professional, fast, and affordable. Their SEO audit revealed opportunities we never knew existed. Highly recommended!"</div>
+          <div class="author">Emily Foster, Business Owner</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="cta-section">
+    <h2>Ready to Transform Your Business?</h2>
+    <p>Join hundreds of businesses already leveraging AI to work smarter, not harder. Get started with a free consultation today.</p>
+    <a href="mailto:nova@agentic-assistance.com">Contact Nova Today</a>
+  </div>
+
+  <div class="container">
+    <footer>
+      <p>© 2026 Agentic Assistance. All rights reserved. | Contact: nova@agentic-assistance.com</p>
+    </footer>
+  </div>
+</body>
+</html>
