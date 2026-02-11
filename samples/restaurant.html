@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ember & Oak - Upscale Dining Experience</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-gold {
+            background: linear-gradient(135deg, #ffd700, #ffb347, #ff8c00);
+        }
+        .gradient-gold-subtle {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 179, 71, 0.05));
+        }
+        .gradient-amber {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white overflow-x-hidden">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-card">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold gradient-gold bg-clip-text text-transparent">Ember & Oak</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" class="hover:text-yellow-400 transition-colors">Menu</a>
+                    <a href="#" class="hover:text-yellow-400 transition-colors">Experience</a>
+                    <a href="#" class="hover:text-yellow-400 transition-colors">Events</a>
+                    <a href="#" class="hover:text-yellow-400 transition-colors">Contact</a>
+                </div>
+                <button class="gradient-gold text-black px-6 py-2 rounded-full font-semibold hover:scale-105 transition-transform">Reserve Table</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center relative pt-24">
+        <div class="absolute inset-0 gradient-gold-subtle"></div>
+        <div class="relative z-10 text-center max-w-5xl mx-auto px-6">
+            <h1 class="text-5xl md:text-7xl font-black mb-8 leading-tight">
+                WHERE FIRE MEETS
+                <span class="gradient-gold bg-clip-text text-transparent">FLAVOR</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+                An intimate culinary journey featuring wood-fired cuisine, carefully curated wines, and an atmosphere that ignites conversation and connection.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                <button class="gradient-gold text-black px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-transform">
+                    Reserve Your Table
+                </button>
+                <button class="glass-card px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:bg-opacity-10 transition-colors">
+                    View Menu
+                </button>
+            </div>
+            <div class="mt-16 glass-card p-6 rounded-2xl max-w-md mx-auto">
+                <div class="text-sm text-gray-400 mb-2">Tonight's Special</div>
+                <div class="text-xl font-semibold text-yellow-400">48hr Dry-Aged Ribeye</div>
+                <div class="text-gray-300">Wood-fired with seasonal vegetables</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Highlights -->
+    <section class="py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6">Signature <span class="gradient-gold bg-clip-text text-transparent">Menu</span></h2>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">Artfully crafted dishes using the finest seasonal ingredients</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Appetizers -->
+                <div class="glass-card p-8 rounded-2xl hover:scale-105 transition-transform duration-300">
+                    <div class="gradient-gold text-black text-sm font-bold px-3 py-1 rounded-full w-fit mb-6">STARTERS</div>
+                    <h3 class="text-2xl font-bold mb-4">Ember-Kissed Oysters</h3>
+                    <p class="text-gray-400 mb-6">Blue Point oysters with smoked butter and herbs</p>
+                    <div class="text-2xl font-semibold text-yellow-400">$24</div>
+                </div>
+
+                <!-- Mains -->
+                <div class="glass-card p-8 rounded-2xl hover:scale-105 transition-transform duration-300 border-yellow-400">
+                    <div class="gradient-gold text-black text-sm font-bold px-3 py-1 rounded-full w-fit mb-6">CHEF'S CHOICE</div>
+                    <h3 class="text-2xl font-bold mb-4">Oak-Fired Wagyu</h3>
+                    <p class="text-gray-400 mb-6">A5 Wagyu with roasted bone marrow and truffle</p>
+                    <div class="text-2xl font-semibold text-yellow-400">$89</div>
+                </div>
+
+                <!-- Desserts -->
+                <div class="glass-card p-8 rounded-2xl hover:scale-105 transition-transform duration-300">
+                    <div class="gradient-gold text-black text-sm font-bold px-3 py-1 rounded-full w-fit mb-6">DESSERT</div>
+                    <h3 class="text-2xl font-bold mb-4">Smoked Chocolate</h3>
+                    <p class="text-gray-400 mb-6">Dark chocolate soufflé with vanilla bean gelato</p>
+                    <div class="text-2xl font-semibold text-yellow-400">$18</div>
+                </div>
+            </div>
+
+            <div class="text-center mt-16">
+                <button class="gradient-gold text-black px-8 py-4 rounded-full font-semibold hover:scale-105 transition-transform">
+                    View Full Menu
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ambiance Section -->
+    <section class="py-32 px-6 bg-black bg-opacity-20">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-4xl md:text-6xl font-bold mb-8">The <span class="gradient-gold bg-clip-text text-transparent">Experience</span></h2>
+                    <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+                        Step into our intimate dining room where exposed brick meets warm candlelight. Our open kitchen allows you to witness culinary artistry in motion, while the gentle crackle of our wood-fired oven provides the perfect soundtrack to your evening.
+                    </p>
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-2 h-2 gradient-gold rounded-full"></div>
+                            <span class="text-gray-300">Open wood-fired kitchen</span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-2 h-2 gradient-gold rounded-full"></div>
+                            <span class="text-gray-300">Curated wine pairings</span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-2 h-2 gradient-gold rounded-full"></div>
+                            <span class="text-gray-300">Intimate 45-seat dining room</span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-2 h-2 gradient-gold rounded-full"></div>
+                            <span class="text-gray-300">Chef's table experiences</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="glass-card aspect-square rounded-2xl bg-gradient-to-br from-yellow-400 to-orange-500 opacity-20"></div>
+                    <div class="absolute inset-6 glass-card rounded-xl bg-gradient-to-br from-amber-400 to-yellow-600 opacity-30"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6">Guest <span class="gradient-gold bg-clip-text text-transparent">Stories</span></h2>
+                <p class="text-xl text-gray-400">What our diners are saying</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass-card p-8 rounded-xl">
+                    <div class="flex text-yellow-400 mb-4">★★★★★</div>
+                    <p class="text-gray-300 mb-6 italic">"An absolutely transcendent dining experience. Every dish tells a story, and the atmosphere is pure magic."</p>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 gradient-gold rounded-full"></div>
+                        <div>
+                            <div class="font-semibold">Sarah Mitchell</div>
+                            <div class="text-gray-400 text-sm">Food Critic, Culinary Quarterly</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-card p-8 rounded-xl">
+                    <div class="flex text-yellow-400 mb-4">★★★★★</div>
+                    <p class="text-gray-300 mb-6 italic">"The wood-fired flavors paired with exceptional service made our anniversary unforgettable."</p>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 gradient-gold rounded-full"></div>
+                        <div>
+                            <div class="font-semibold">James & Maria Rodriguez</div>
+                            <div class="text-gray-400 text-sm">Anniversary Celebration</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-card p-8 rounded-xl">
+                    <div class="flex text-yellow-400 mb-4">★★★★★</div>
+                    <p class="text-gray-300 mb-6 italic">"Ember & Oak has redefined fine dining in the city. The chef's passion is evident in every bite."</p>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 gradient-gold rounded-full"></div>
+                        <div>
+                            <div class="font-semibold">David Chen</div>
+                            <div class="text-gray-400 text-sm">Michelin Guide Inspector</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Hours -->
+    <section class="py-32 px-6 bg-black bg-opacity-20">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <div>
+                    <h2 class="text-4xl md:text-6xl font-bold mb-8">Visit <span class="gradient-gold bg-clip-text text-transparent">Us</span></h2>
+                    <div class="space-y-8">
+                        <div class="glass-card p-6 rounded-xl">
+                            <h3 class="text-xl font-semibold mb-3 text-yellow-400">Location</h3>
+                            <p class="text-gray-300">
+                                1847 Heritage Boulevard<br>
+                                Culinary District, Downtown<br>
+                                San Francisco, CA 94102
+                            </p>
+                        </div>
+                        
+                        <div class="glass-card p-6 rounded-xl">
+                            <h3 class="text-xl font-semibold mb-3 text-yellow-400">Hours</h3>
+                            <div class="space-y-2 text-gray-300">
+                                <div class="flex justify-between">
+                                    <span>Tuesday - Thursday</span>
+                                    <span>5:30 PM - 10:00 PM</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Friday - Saturday</span>
+                                    <span>5:30 PM - 11:00 PM</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Sunday</span>
+                                    <span>5:30 PM - 9:00 PM</span>
+                                </div>
+                                <div class="flex justify-between text-gray-500">
+                                    <span>Monday</span>
+                                    <span>Closed</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="glass-card p-6 rounded-xl">
+                            <h3 class="text-xl font-semibold mb-3 text-yellow-400">Reservations</h3>
+                            <p class="text-gray-300 mb-4">Call us at <span class="text-yellow-400">(415) 555-3847</span></p>
+                            <p class="text-gray-400 text-sm">We recommend reservations 2-3 weeks in advance for weekend dining</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex items-center justify-center">
+                    <div class="glass-card p-12 rounded-2xl text-center">
+                        <div class="w-32 h-32 gradient-gold rounded-full mx-auto mb-8 flex items-center justify-center">
+                            <div class="text-4xl text-black font-bold">E&O</div>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Ready for an extraordinary evening?</h3>
+                        <p class="text-gray-400 mb-8">Reserve your table for an unforgettable culinary journey</p>
+                        <button class="gradient-gold text-black px-8 py-4 rounded-full font-semibold hover:scale-105 transition-transform">
+                            Make Reservation
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="text-2xl font-bold gradient-gold bg-clip-text text-transparent mb-8">Ember & Oak</div>
+            <div class="text-gray-400 text-sm mb-4">Built by Agentic Assistance — agentic-assistance.com</div>
+            <div class="text-gray-500 text-xs">© 2024 Ember & Oak. All rights reserved.</div>
+        </div>
+    </footer>
+
+</body>
+</html>

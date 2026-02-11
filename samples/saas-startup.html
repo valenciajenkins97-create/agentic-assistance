@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlowSync - Project Management Redefined</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-blue {
+            background: linear-gradient(135deg, #06b6d4, #0891b2, #0e7490);
+        }
+        .gradient-cyan {
+            background: linear-gradient(135deg, #22d3ee, #06b6d4, #0891b2);
+        }
+        .gradient-blue-subtle {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(8, 145, 178, 0.05));
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white overflow-x-hidden">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-card">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold gradient-cyan bg-clip-text text-transparent">FlowSync</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" class="hover:text-cyan-400 transition-colors">Features</a>
+                    <a href="#" class="hover:text-cyan-400 transition-colors">Pricing</a>
+                    <a href="#" class="hover:text-cyan-400 transition-colors">Integrations</a>
+                    <a href="#" class="hover:text-cyan-400 transition-colors">Resources</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-300 hover:text-white transition-colors">Sign In</button>
+                    <button class="gradient-cyan text-black px-6 py-2 rounded-full font-semibold hover:scale-105 transition-transform">Start Free Trial</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center relative pt-24">
+        <div class="absolute inset-0 gradient-blue-subtle"></div>
+        <div class="relative z-10 text-center max-w-6xl mx-auto px-6">
+            <h1 class="text-5xl md:text-7xl font-black mb-8 leading-tight">
+                PROJECT MANAGEMENT
+                <span class="gradient-cyan bg-clip-text text-transparent">REIMAGINED</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed">
+                FlowSync brings clarity to chaos with intelligent workflows, real-time collaboration, and insights that drive results. The future of team productivity is here.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center mb-16">
+                <button class="gradient-cyan text-black px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-transform">
+                    Start Free Trial
+                </button>
+                <button class="glass-card px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:bg-opacity-10 transition-colors">
+                    Watch Demo
+                </button>
+            </div>
+            
+            <!-- Dashboard Preview -->
+            <div class="glass-card p-8 rounded-2xl max-w-4xl mx-auto">
+                <div class="bg-gray-800 rounded-xl p-6">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                        <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                        <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                        <div class="flex-1 text-center text-gray-400 text-sm">FlowSync Dashboard</div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="bg-gradient-to-br from-cyan-400 to-blue-500 p-4 rounded-lg opacity-80"></div>
+                        <div class="bg-gradient-to-br from-blue-400 to-indigo-500 p-4 rounded-lg opacity-60"></div>
+                        <div class="bg-gradient-to-br from-indigo-400 to-purple-500 p-4 rounded-lg opacity-40"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6">Built for <span class="gradient-cyan bg-clip-text text-transparent">Modern</span> Teams</h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">Every feature designed to eliminate friction and accelerate delivery</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass-card p-8 rounded-2xl hover:scale-105 transition-transform duration-300">
+                    <div class="w-12 h-12 gradient-cyan rounded-lg flex items-center justify-center mb-6">
+                        <div class="w-6 h-6 bg-black rounded"></div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Smart Workflows</h3>
+                    <p class="text-gray-400">AI-powered automation that adapts to your team's patterns and optimizes processes in real-time.</p>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl hover:scale-105 transition-transform duration-300">
+                    <div class="w-12 h-12 gradient-cyan rounded-lg flex items-center justify-center mb-6">
+                        <div class="w-6 h-6 bg-black rounded-full"></div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Real-time Collaboration</h3>
+                    <p class="text-gray-400">See changes instantly, comment contextually, and keep everyone aligned with live updates across all devices.</p>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl hover:scale-105 transition-transform duration-300">
+                    <div class="w-12 h-12 gradient-cyan rounded-lg flex items-center justify-center mb-6">
+                        <div class="w-6 h-6 bg-black rounded-sm"></div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Advanced Analytics</h3>
+                    <p class="text-gray-400">Deep insights into team performance, project health, and delivery predictability with beautiful visualizations.</p>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl hover:scale-105 transition-transform duration-300">
+                    <div class="w-12 h-12 gradient-cyan rounded-lg flex items-center justify-center mb-6">
+                        <div class="w-6 h-6 bg-black rounded-lg"></div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Custom Views</h3>
+                    <p class="text-gray-400">Kanban, timeline, calendar, or list - view your work exactly how your brain processes it best.</p>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl hover:scale-105 transition-transform duration-300">
+                    <div class="w-12 h-12 gradient-cyan rounded-lg flex items-center justify-center mb-6">
+                        <div class="w-6 h-6 bg-black rounded-xl"></div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Global Search</h3>
+                    <p class="text-gray-400">Find anything, anywhere, instantly. Our intelligent search understands context and surfaces relevant results.</p>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl hover:scale-105 transition-transform duration-300">
+                    <div class="w-12 h-12 gradient-cyan rounded-lg flex items-center justify-center mb-6">
+                        <div class="w-6 h-6 bg-black rounded-2xl"></div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Enterprise Security</h3>
+                    <p class="text-gray-400">Bank-level encryption, SSO integration, and compliance ready for the most demanding organizations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Table -->
+    <section class="py-32 px-6 bg-black bg-opacity-20">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6">Simple <span class="gradient-cyan bg-clip-text text-transparent">Pricing</span></h2>
+                <p class="text-xl text-gray-400">Choose the plan that scales with your ambition</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Starter -->
+                <div class="glass-card p-8 rounded-2xl hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-2xl font-bold mb-4">Starter</h3>
+                    <div class="text-4xl font-black mb-6">$9<span class="text-lg text-gray-400">/month</span></div>
+                    <div class="text-gray-400 mb-8">Per user, billed monthly</div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center"><span class="text-cyan-400 mr-3">✓</span> Up to 10 projects</li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-3">✓</span> Basic workflows</li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-3">✓</span> Team collaboration</li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-3">✓</span> Mobile apps</li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-3">✓</span> Email support</li>
+                    </ul>
+                    <button class="w-full py-3 rounded-full border border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black transition-colors">Start Free Trial</button>
+                </div>
+
+                <!-- Professional -->
+                <div class="glass-card p-8 rounded-2xl hover:scale-105 transition-transform duration-300 border-cyan-400">
+                    <div class="gradient-cyan text-black text-sm font-bold px-3 py-1 rounded-full w-fit mb-4">MOST POPULAR</div>
+                    <h3 class="text-2xl font-bold mb-4">Professional</h3>
+                    <div class="text-4xl font-black mb-6">$19<span class="text-lg text-gray-400">/month</span></div>
+                    <div class="text-gray-400 mb-8">Per user, billed monthly</div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center"><span class="text-cyan-400 mr-3">✓</span> Everything in Starter</li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-3">✓</span> Unlimited projects</li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-3">✓</span> Advanced automation</li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-3">✓</span> Custom fields & views</li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-3">✓</span> Priority support</li>
+                    </ul>
+                    <button class="w-full py-3 rounded-full gradient-cyan text-black font-semibold hover:scale-105 transition-transform">Start Free Trial</button>
+                </div>
+
+                <!-- Enterprise -->
+                <div class="glass-card p-8 rounded-2xl hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-2xl font-bold mb-4">Enterprise</h3>
+                    <div class="text-4xl font-black mb-6">$39<span class="text-lg text-gray-400">/month</span></div>
+                    <div class="text-gray-400 mb-8">Per user, billed monthly</div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center"><span class="text-cyan-400 mr-3">✓</span> Everything in Professional</li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-3">✓</span> Advanced security & compliance</li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-3">✓</span> Custom integrations</li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-3">✓</span> Dedicated success manager</li>
+                        <li class="flex items-center"><span class="text-cyan-400 mr-3">✓</span> White-label options</li>
+                    </ul>
+                    <button class="w-full py-3 rounded-full border border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black transition-colors">Contact Sales</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Integrations -->
+    <section class="py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6">Connect <span class="gradient-cyan bg-clip-text text-transparent">Everything</span></h2>
+                <p class="text-xl text-gray-400">FlowSync integrates with the tools your team already loves</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
+                <div class="glass-card p-6 rounded-xl text-center hover:scale-105 transition-transform">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg mx-auto mb-3"></div>
+                    <div class="text-sm font-semibold">Slack</div>
+                </div>
+                
+                <div class="glass-card p-6 rounded-xl text-center hover:scale-105 transition-transform">
+                    <div class="w-16 h-16 bg-gradient-to-br from-gray-600 to-gray-800 rounded-lg mx-auto mb-3"></div>
+                    <div class="text-sm font-semibold">GitHub</div>
+                </div>
+                
+                <div class="glass-card p-6 rounded-xl text-center hover:scale-105 transition-transform">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg mx-auto mb-3"></div>
+                    <div class="text-sm font-semibold">Zoom</div>
+                </div>
+                
+                <div class="glass-card p-6 rounded-xl text-center hover:scale-105 transition-transform">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-700 rounded-lg mx-auto mb-3"></div>
+                    <div class="text-sm font-semibold">Figma</div>
+                </div>
+                
+                <div class="glass-card p-6 rounded-xl text-center hover:scale-105 transition-transform">
+                    <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-700 rounded-lg mx-auto mb-3"></div>
+                    <div class="text-sm font-semibold">Notion</div>
+                </div>
+                
+                <div class="glass-card p-6 rounded-xl text-center hover:scale-105 transition-transform">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-700 rounded-lg mx-auto mb-3"></div>
+                    <div class="text-sm font-semibold">Drive</div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-16">
+                <button class="gradient-cyan text-black px-8 py-4 rounded-full font-semibold hover:scale-105 transition-transform">
+                    View All Integrations
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-32 px-6 bg-black bg-opacity-20">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6">Trusted by <span class="gradient-cyan bg-clip-text text-transparent">Thousands</span></h2>
+                <p class="text-xl text-gray-400">Teams worldwide rely on FlowSync to deliver exceptional results</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 rounded-xl">
+                    <div class="flex text-cyan-400 mb-4">★★★★★</div>
+                    <p class="text-gray-300 mb-6 italic">"FlowSync transformed how our team works. We're shipping 40% faster and with fewer bugs. It's incredible."</p>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 gradient-cyan rounded-full"></div>
+                        <div>
+                            <div class="font-semibold">Sarah Chen</div>
+                            <div class="text-gray-400 text-sm">CTO, TechFlow</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-card p-8 rounded-xl">
+                    <div class="flex text-cyan-400 mb-4">★★★★★</div>
+                    <p class="text-gray-300 mb-6 italic">"The automation features are game-changing. Tasks that used to take hours now happen automatically."</p>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 gradient-cyan rounded-full"></div>
+                        <div>
+                            <div class="font-semibold">Marcus Johnson</div>
+                            <div class="text-gray-400 text-sm">Head of Product, Innovate Labs</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-card p-8 rounded-xl">
+                    <div class="flex text-cyan-400 mb-4">★★★★★</div>
+                    <p class="text-gray-300 mb-6 italic">"Finally, a project management tool that doesn't get in the way of actual work. FlowSync just works."</p>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 gradient-cyan rounded-full"></div>
+                        <div>
+                            <div class="font-semibold">Elena Rodriguez</div>
+                            <div class="text-gray-400 text-sm">Design Lead, Creative Studio</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-32 px-6 relative">
+        <div class="absolute inset-0 gradient-blue-subtle"></div>
+        <div class="relative z-10 max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-6xl font-bold mb-8">Ready to <span class="gradient-cyan bg-clip-text text-transparent">Transform</span> Your Workflow?</h2>
+            <p class="text-xl text-gray-300 mb-12">Join thousands of teams already building better products with FlowSync</p>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                <button class="gradient-cyan text-black px-12 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-transform">
+                    Start Free Trial
+                </button>
+                <button class="glass-card px-12 py-4 rounded-full text-lg font-semibold hover:bg-white hover:bg-opacity-10 transition-colors">
+                    Schedule Demo
+                </button>
+            </div>
+            <div class="mt-8 text-gray-400">No credit card required • 14-day free trial • Cancel anytime</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="text-2xl font-bold gradient-cyan bg-clip-text text-transparent mb-8">FlowSync</div>
+            <div class="text-gray-400 text-sm mb-4">Built by Agentic Assistance — agentic-assistance.com</div>
+            <div class="text-gray-500 text-xs">© 2024 FlowSync. All rights reserved.</div>
+        </div>
+    </footer>
+
+</body>
+</html>

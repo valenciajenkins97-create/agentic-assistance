@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IronForge Fitness - Premium Gym & Fitness Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-orange {
+            background: linear-gradient(135deg, #ff6b35, #f7931e, #ff4500);
+        }
+        .gradient-orange-subtle {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(247, 147, 30, 0.05));
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white overflow-x-hidden">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-card">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold gradient-orange bg-clip-text text-transparent">IronForge</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" class="hover:text-orange-400 transition-colors">Classes</a>
+                    <a href="#" class="hover:text-orange-400 transition-colors">Trainers</a>
+                    <a href="#" class="hover:text-orange-400 transition-colors">Membership</a>
+                    <a href="#" class="hover:text-orange-400 transition-colors">About</a>
+                </div>
+                <button class="gradient-orange px-6 py-2 rounded-full font-semibold hover:scale-105 transition-transform">Join Now</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center relative pt-24">
+        <div class="absolute inset-0 gradient-orange-subtle"></div>
+        <div class="relative z-10 text-center max-w-5xl mx-auto px-6">
+            <h1 class="text-5xl md:text-7xl font-black mb-8 leading-tight">
+                FORGE YOUR
+                <span class="gradient-orange bg-clip-text text-transparent">STRONGEST</span>
+                SELF
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+                Transform your body and mind at our premium fitness facility. State-of-the-art equipment, expert trainers, and a community that drives results.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                <button class="gradient-orange px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-transform">
+                    Start Your Journey
+                </button>
+                <button class="glass-card px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:bg-opacity-10 transition-colors">
+                    Take a Tour
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Membership Tiers -->
+    <section class="py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6">Choose Your <span class="gradient-orange bg-clip-text text-transparent">Membership</span></h2>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">Flexible plans designed to fit your lifestyle and fitness goals</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Basic Tier -->
+                <div class="glass-card p-8 rounded-2xl hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-2xl font-bold mb-4">Foundation</h3>
+                    <div class="text-4xl font-black mb-6">$49<span class="text-lg text-gray-400">/month</span></div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center"><span class="text-orange-400 mr-2">✓</span> Gym Access</li>
+                        <li class="flex items-center"><span class="text-orange-400 mr-2">✓</span> Basic Equipment</li>
+                        <li class="flex items-center"><span class="text-orange-400 mr-2">✓</span> Locker Room</li>
+                    </ul>
+                    <button class="w-full py-3 rounded-full border border-orange-400 text-orange-400 hover:bg-orange-400 hover:text-black transition-colors">Choose Plan</button>
+                </div>
+
+                <!-- Premium Tier -->
+                <div class="glass-card p-8 rounded-2xl hover:scale-105 transition-transform duration-300 border-orange-400">
+                    <div class="gradient-orange text-black text-sm font-bold px-3 py-1 rounded-full w-fit mb-4">MOST POPULAR</div>
+                    <h3 class="text-2xl font-bold mb-4">Elite</h3>
+                    <div class="text-4xl font-black mb-6">$99<span class="text-lg text-gray-400">/month</span></div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center"><span class="text-orange-400 mr-2">✓</span> Everything in Foundation</li>
+                        <li class="flex items-center"><span class="text-orange-400 mr-2">✓</span> Group Classes</li>
+                        <li class="flex items-center"><span class="text-orange-400 mr-2">✓</span> Personal Training (2x/month)</li>
+                        <li class="flex items-center"><span class="text-orange-400 mr-2">✓</span> Nutrition Consultation</li>
+                    </ul>
+                    <button class="w-full py-3 rounded-full gradient-orange text-black font-semibold hover:scale-105 transition-transform">Choose Plan</button>
+                </div>
+
+                <!-- Elite Tier -->
+                <div class="glass-card p-8 rounded-2xl hover:scale-105 transition-transform duration-300">
+                    <h3 class="text-2xl font-bold mb-4">Champion</h3>
+                    <div class="text-4xl font-black mb-6">$199<span class="text-lg text-gray-400">/month</span></div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center"><span class="text-orange-400 mr-2">✓</span> Everything in Elite</li>
+                        <li class="flex items-center"><span class="text-orange-400 mr-2">✓</span> Unlimited Personal Training</li>
+                        <li class="flex items-center"><span class="text-orange-400 mr-2">✓</span> VIP Lounge Access</li>
+                        <li class="flex items-center"><span class="text-orange-400 mr-2">✓</span> Recovery Suite</li>
+                    </ul>
+                    <button class="w-full py-3 rounded-full border border-orange-400 text-orange-400 hover:bg-orange-400 hover:text-black transition-colors">Choose Plan</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Class Schedule -->
+    <section class="py-32 px-6 bg-black bg-opacity-20">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6">Weekly <span class="gradient-orange bg-clip-text text-transparent">Classes</span></h2>
+                <p class="text-xl text-gray-400">High-energy group sessions led by certified trainers</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass-card p-6 rounded-xl">
+                    <div class="gradient-orange text-black text-xs font-bold px-2 py-1 rounded w-fit mb-3">MONDAY</div>
+                    <h3 class="text-xl font-bold mb-2">HIIT Intensity</h3>
+                    <p class="text-gray-400 mb-3">High-intensity interval training</p>
+                    <div class="text-orange-400 font-semibold">6:00 AM • 45 min</div>
+                </div>
+                
+                <div class="glass-card p-6 rounded-xl">
+                    <div class="gradient-orange text-black text-xs font-bold px-2 py-1 rounded w-fit mb-3">TUESDAY</div>
+                    <h3 class="text-xl font-bold mb-2">Strength & Steel</h3>
+                    <p class="text-gray-400 mb-3">Compound movement focus</p>
+                    <div class="text-orange-400 font-semibold">7:00 PM • 60 min</div>
+                </div>
+                
+                <div class="glass-card p-6 rounded-xl">
+                    <div class="gradient-orange text-black text-xs font-bold px-2 py-1 rounded w-fit mb-3">FRIDAY</div>
+                    <h3 class="text-xl font-bold mb-2">Fight Club</h3>
+                    <p class="text-gray-400 mb-3">Boxing & martial arts</p>
+                    <div class="text-orange-400 font-semibold">6:30 PM • 50 min</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trainer Spotlights -->
+    <section class="py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6">Elite <span class="gradient-orange bg-clip-text text-transparent">Trainers</span></h2>
+                <p class="text-xl text-gray-400">Learn from the best in the industry</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-card p-6 rounded-xl text-center group hover:scale-105 transition-transform duration-300">
+                    <div class="w-24 h-24 bg-gradient-to-br from-orange-400 to-red-500 rounded-full mx-auto mb-6"></div>
+                    <h3 class="text-xl font-bold mb-2">Marcus Steel</h3>
+                    <p class="text-orange-400 mb-3">Head Strength Coach</p>
+                    <p class="text-gray-400 text-sm">15+ years experience, former Olympic athlete</p>
+                </div>
+                
+                <div class="glass-card p-6 rounded-xl text-center group hover:scale-105 transition-transform duration-300">
+                    <div class="w-24 h-24 bg-gradient-to-br from-orange-400 to-red-500 rounded-full mx-auto mb-6"></div>
+                    <h3 class="text-xl font-bold mb-2">Sarah Phoenix</h3>
+                    <p class="text-orange-400 mb-3">HIIT Specialist</p>
+                    <p class="text-gray-400 text-sm">Certified nutrition coach, transformation expert</p>
+                </div>
+                
+                <div class="glass-card p-6 rounded-xl text-center group hover:scale-105 transition-transform duration-300">
+                    <div class="w-24 h-24 bg-gradient-to-br from-orange-400 to-red-500 rounded-full mx-auto mb-6"></div>
+                    <h3 class="text-xl font-bold mb-2">Jake Thunder</h3>
+                    <p class="text-orange-400 mb-3">Combat Training</p>
+                    <p class="text-gray-400 text-sm">MMA champion, defensive tactics instructor</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-32 px-6 relative">
+        <div class="absolute inset-0 gradient-orange-subtle"></div>
+        <div class="relative z-10 max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-6xl font-bold mb-8">Ready to <span class="gradient-orange bg-clip-text text-transparent">Transform?</span></h2>
+            <p class="text-xl text-gray-300 mb-12">Join thousands who've already discovered their strongest selves at IronForge Fitness</p>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                <button class="gradient-orange px-12 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-transform">
+                    Start Free Trial
+                </button>
+                <button class="glass-card px-12 py-4 rounded-full text-lg font-semibold hover:bg-white hover:bg-opacity-10 transition-colors">
+                    Schedule Tour
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="text-2xl font-bold gradient-orange bg-clip-text text-transparent mb-8">IronForge</div>
+            <div class="text-gray-400 text-sm mb-4">Built by Agentic Assistance — agentic-assistance.com</div>
+            <div class="text-gray-500 text-xs">© 2024 IronForge Fitness. All rights reserved.</div>
+        </div>
+    </footer>
+
+</body>
+</html>
