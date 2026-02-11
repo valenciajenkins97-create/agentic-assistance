@@ -3,395 +3,635 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agentic Assistance - AI That Actually Works For Your Business</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Agentic Assistance | Digital Experiences That Feel Inevitable</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            font-family: 'Inter', sans-serif;
+        :root {
+            --c-bg-base: #0c0c0c;
+            --c-bg-overlay: rgba(12, 12, 12, 0.85);
+            --c-text-main: #ffffff;
+            --c-text-muted: rgba(255, 255, 255, 0.65);
+            --c-accent: #d4851f;
+            --c-accent-muted: rgba(212, 133, 31, 0.6);
+            --c-border: rgba(255, 255, 255, 0.12);
+            --ease-fluid: cubic-bezier(0.25, 1, 0.5, 1);
+            --font-serif: 'DM Serif Display', serif;
+            --font-sans: 'Space Grotesk', sans-serif;
         }
-        
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            cursor: none;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--c-bg-base);
+            font-family: var(--font-sans);
+            color: var(--c-text-main);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Background Layers */
+        .layer-sharp {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=2560&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            z-index: 1;
+            filter: grayscale(0.4) brightness(0.3);
+        }
+
+        .layer-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=2560&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            filter: blur(25px) brightness(0.5) sepia(0.3) hue-rotate(20deg);
+            transform: scale(1.1);
+            z-index: 2;
+            mask-image: radial-gradient(
+                circle 400px at var(--x, 50%) var(--y, 50%),
+                transparent 0%,
+                black 100%
+            );
+            -webkit-mask-image: radial-gradient(
+                circle 400px at var(--x, 50%) var(--y, 50%),
+                transparent 0%,
+                black 100%
+            );
+        }
+
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            opacity: 0.12;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .noise-overlay::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--c-bg-overlay);
+            mix-blend-mode: multiply;
+        }
+
+        /* Custom Cursor */
+        .cursor-dot, .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .cursor-dot {
+            width: 3px;
+            height: 3px;
+            background-color: var(--c-accent);
+            box-shadow: 0 0 8px rgba(212, 133, 31, 0.4);
+        }
+
+        .cursor-outline {
+            width: 28px;
+            height: 28px;
+            border: 1px solid var(--c-accent-muted);
+            transition: width 0.3s var(--ease-fluid), height 0.3s var(--ease-fluid), border-color 0.3s var(--ease-fluid);
+        }
+
+        body:active .cursor-outline {
+            width: 18px;
+            height: 18px;
+            border-color: var(--c-accent);
+        }
+
+        /* Content Layer */
+        .content-layer {
+            position: relative;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .content-layer * {
+            pointer-events: auto;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+            padding: 3rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--c-border);
+            backdrop-filter: blur(10px);
+            background: rgba(12, 12, 12, 0.8);
+        }
+
+        .brand {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-style: italic;
+            color: var(--c-text-main);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .brand:hover {
+            color: var(--c-accent);
+        }
+
+        .nav-contact {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 400;
+            color: var(--c-text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-contact:hover {
+            color: var(--c-accent);
+        }
+
+        /* Sections */
+        .section {
+            min-height: 100vh;
+            padding: 6rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .section.hero {
+            align-items: center;
+            text-align: center;
+            padding-top: 10rem;
+        }
+
+        /* Hero Section */
+        .hero-text {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            line-height: 1.1;
+            font-weight: 400;
+            letter-spacing: -0.03em;
+            color: var(--c-text-main);
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInSlow 2.5s var(--ease-fluid) forwards 0.8s;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--c-text-muted);
+            opacity: 0;
+            animation: fadeInSlow 2.5s var(--ease-fluid) forwards 2s;
+        }
+
+        .hero-coords {
+            position: absolute;
+            bottom: 4rem;
+            left: 4rem;
+            font-family: var(--font-sans);
+            font-variant-numeric: tabular-nums;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            color: rgba(212, 133, 31, 0.4);
+        }
+
+        /* Services Section */
+        .services-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.2;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            color: var(--c-text-main);
+            margin-bottom: 4rem;
+            max-width: 600px;
+        }
+
+        .services-list {
+            max-width: 800px;
+        }
+
+        .service-item {
+            padding: 2.5rem 0;
+            border-bottom: 1px solid var(--c-border);
+            transition: border-color 0.3s ease;
+        }
+
+        .service-item:hover {
+            border-color: var(--c-accent-muted);
+        }
+
+        .service-name {
+            font-family: var(--font-sans);
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: var(--c-text-main);
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .service-item:hover .service-name {
+            color: var(--c-accent);
+        }
+
+        .service-desc {
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            color: var(--c-text-muted);
+            line-height: 1.6;
+        }
+
+        /* Work Section */
+        .work-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.2;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            color: var(--c-text-main);
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .work-item {
+            position: relative;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            border-radius: 2px;
+            group: hover;
+        }
+
+        .work-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(0.8) brightness(0.7);
+            transition: all 0.6s var(--ease-fluid);
+        }
+
+        .work-item:hover .work-image {
+            filter: grayscale(0.2) brightness(0.9);
+            transform: scale(1.05);
+        }
+
+        .work-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(12, 12, 12, 0.8), rgba(212, 133, 31, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.6s var(--ease-fluid);
+        }
+
+        .work-item:hover .work-overlay {
+            opacity: 1;
+        }
+
+        .work-name {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--c-text-main);
+            text-align: center;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.2;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            color: var(--c-text-main);
+            margin-bottom: 3rem;
+        }
+
+        .contact-email {
+            font-family: var(--font-sans);
+            font-size: 1.2rem;
+            color: var(--c-accent);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            display: inline-block;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-email:hover {
+            opacity: 0.7;
+        }
+
+        .contact-tagline {
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            color: var(--c-text-muted);
+            line-height: 1.6;
+            margin-bottom: 3rem;
+        }
+
+        .contact-coords {
+            font-family: var(--font-sans);
+            font-variant-numeric: tabular-nums;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            color: rgba(212, 133, 31, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid var(--c-border);
+            padding: 2rem 4rem;
+            text-align: center;
+        }
+
+        .footer-text {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            color: var(--c-text-muted);
+        }
+
         /* Animations */
-        @keyframes fadeInUp {
+        @keyframes fadeInSlow {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(-10px) scale(1);
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav {
+                padding: 2rem;
             }
-            50% {
-                transform: translateY(10px) scale(1.05);
+
+            .section {
+                padding: 4rem 2rem;
             }
-        }
-        
-        @keyframes pulse-glow {
-            0%, 100% {
-                opacity: 0.5;
-                transform: scale(1);
+
+            .hero-coords {
+                left: 2rem;
+                bottom: 2rem;
             }
-            50% {
-                opacity: 0.8;
-                transform: scale(1.1);
+
+            .work-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
-        }
-        
-        .fade-in-up {
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-        
-        .float {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        .pulse-glow {
-            animation: pulse-glow 4s ease-in-out infinite;
-        }
-        
-        /* Grid pattern background */
-        .grid-pattern {
-            background-image: 
-                radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0);
-            background-size: 20px 20px;
-        }
-        
-        /* Glassmorphism utilities */
-        .glass {
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-        }
-        
-        /* Custom gradient */
-        .gradient-violet {
-            background: linear-gradient(135deg, rgb(139 92 246) 0%, rgb(147 51 234) 100%);
-        }
-        
-        /* Hover glow effect */
-        .hover-glow:hover {
-            box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
-        }
-        
-        /* Scroll animations */
-        .scroll-animate {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-        
-        .scroll-animate.visible {
-            opacity: 1;
-            transform: translateY(0);
+
+            .footer {
+                padding: 2rem;
+            }
         }
     </style>
 </head>
-<body class="bg-[#0a0a0a] text-white overflow-x-hidden">
-    
-    <!-- Navbar -->
-    <nav class="fixed top-0 w-full z-50 transition-all duration-300" id="navbar">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-2">
-                    <div class="w-8 h-8 bg-gradient-to-br from-violet-500 to-purple-600 rounded-lg"></div>
-                    <span class="text-xl font-bold">Agentic Assistance</span>
-                </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#services" class="text-gray-300 hover:text-white transition-colors">Services</a>
-                    <a href="#how-it-works" class="text-gray-300 hover:text-white transition-colors">How It Works</a>
-                    <a href="#results" class="text-gray-300 hover:text-white transition-colors">Results</a>
-                    <a href="#contact" class="px-6 py-2 bg-gradient-to-r from-violet-500 to-purple-600 rounded-lg hover:opacity-90 transition-opacity">Get Started</a>
-                </div>
-            </div>
-        </div>
+<body>
+    <!-- Background Layers -->
+    <div class="layer-sharp"></div>
+    <div class="layer-blur"></div>
+    <div class="noise-overlay"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="#" class="brand">Agentic Assistance</a>
+        <a href="mailto:nova@agentic-assistance.com" class="nav-contact">Connect</a>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <!-- Grid Pattern Background -->
-        <div class="absolute inset-0 grid-pattern opacity-30"></div>
-        
-        <!-- Animated Gradient Orb -->
-        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-violet-500/20 to-purple-600/20 rounded-full blur-3xl float pulse-glow"></div>
-        
-        <div class="container mx-auto px-6 text-center relative z-10">
-            <div class="fade-in-up">
-                <h1 class="text-5xl md:text-7xl font-bold mb-8 leading-tight">
-                    AI That Actually Works<br>
-                    <span class="bg-gradient-to-r from-violet-400 to-purple-600 bg-clip-text text-transparent">For Your Business</span>
-                </h1>
-                <p class="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
-                    Skip the months of development and get professional-grade AI solutions delivered in minutes. 
-                    From landing pages to automation workflows, we build what you need, when you need it.
-                </p>
-                
-                <!-- CTAs -->
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
-                    <button class="px-8 py-4 bg-gradient-to-r from-violet-500 to-purple-600 rounded-lg text-lg font-semibold hover:opacity-90 transition-all duration-300 hover:scale-105 hover-glow">
-                        Get Started
-                    </button>
-                    <button class="px-8 py-4 border border-gray-600 rounded-lg text-lg font-semibold hover:border-violet-500 transition-all duration-300 hover:bg-white/5">
-                        See Our Work
-                    </button>
-                </div>
-                
-                <!-- Trust Badges -->
-                <div class="flex flex-wrap items-center justify-center gap-8 text-gray-400">
-                    <div class="flex items-center space-x-2">
-                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-                        <span>50+ Projects Delivered</span>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
-                        <span>24hr Turnaround</span>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
-                        <span>100% Satisfaction</span>
-                    </div>
-                </div>
+    <!-- Content -->
+    <div class="content-layer">
+        <!-- Hero Section -->
+        <section class="section hero" id="hero">
+            <div class="hero-text">
+                <h1 class="hero-title">We build digital experiences that feel <em>inevitable</em></h1>
+                <p class="hero-subtitle">AI-Powered Web Services Agency</p>
             </div>
-        </div>
-    </section>
+            <div class="hero-coords">
+                37.7749° N, 122.4194° W
+            </div>
+        </section>
 
-    <!-- Services Section -->
-    <section id="services" class="py-32">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-20 scroll-animate">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6">Services That Deliver</h2>
-                <p class="text-xl text-gray-400 max-w-2xl mx-auto">
-                    Choose from our suite of AI-powered services designed to accelerate your business growth
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="glass bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 hover:scale-105 hover-glow scroll-animate">
-                    <div class="w-12 h-12 bg-gradient-to-br from-violet-500 to-purple-600 rounded-lg mb-6"></div>
-                    <h3 class="text-2xl font-bold mb-4">AI Landing Pages</h3>
-                    <p class="text-gray-400">Full responsive sites from a single prompt. Beautiful, fast, and conversion-optimized.</p>
+        <!-- Services Section -->
+        <section class="section" id="services">
+            <h2 class="services-title">What we craft</h2>
+            <div class="services-list">
+                <div class="service-item">
+                    <h3 class="service-name">AI Landing Pages</h3>
+                    <p class="service-desc">Conversion-optimized experiences that adapt to your audience, powered by intelligent design systems.</p>
                 </div>
-                
-                <div class="glass bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 hover:scale-105 hover-glow scroll-animate">
-                    <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-lg mb-6"></div>
-                    <h3 class="text-2xl font-bold mb-4">SEO Audits</h3>
-                    <p class="text-gray-400">Comprehensive analysis with actionable fixes to boost your search rankings.</p>
+                <div class="service-item">
+                    <h3 class="service-name">SEO Intelligence</h3>
+                    <p class="service-desc">Data-driven optimization that learns and evolves, ensuring your content reaches the right people.</p>
                 </div>
-                
-                <div class="glass bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 hover:scale-105 hover-glow scroll-animate">
-                    <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg mb-6"></div>
-                    <h3 class="text-2xl font-bold mb-4">AI Automation</h3>
-                    <p class="text-gray-400">Workflows that save hours daily. Let AI handle the repetitive work.</p>
+                <div class="service-item">
+                    <h3 class="service-name">Email Automation</h3>
+                    <p class="service-desc">Personalized communication flows that feel human, scale infinitely, and drive meaningful engagement.</p>
                 </div>
-                
-                <div class="glass bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 hover:scale-105 hover-glow scroll-animate">
-                    <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg mb-6"></div>
-                    <h3 class="text-2xl font-bold mb-4">Email Systems</h3>
-                    <p class="text-gray-400">Outreach sequences that convert. Personalized at scale with AI precision.</p>
-                </div>
-                
-                <div class="glass bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 hover:scale-105 hover-glow scroll-animate">
-                    <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-rose-600 rounded-lg mb-6"></div>
-                    <h3 class="text-2xl font-bold mb-4">Custom AI Skills</h3>
-                    <p class="text-gray-400">Bespoke tools built for your needs. Unique solutions for unique challenges.</p>
-                </div>
-                
-                <div class="glass bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 hover:scale-105 hover-glow scroll-animate">
-                    <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg mb-6"></div>
-                    <h3 class="text-2xl font-bold mb-4">Content Generation</h3>
-                    <p class="text-gray-400">Blog posts, copy, social media at scale. Always on-brand, always engaging.</p>
+                <div class="service-item">
+                    <h3 class="service-name">Custom AI Tools</h3>
+                    <p class="service-desc">Bespoke intelligent systems designed to solve your unique challenges and amplify your team's capabilities.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- How It Works Section -->
-    <section id="how-it-works" class="py-32">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-20 scroll-animate">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6">How It Works</h2>
-                <p class="text-xl text-gray-400 max-w-2xl mx-auto">
-                    From idea to implementation in three simple steps
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-12">
-                <div class="text-center scroll-animate">
-                    <div class="w-20 h-20 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-8 text-2xl font-bold">1</div>
-                    <h3 class="text-2xl font-bold mb-4">Tell Us What You Need</h3>
-                    <p class="text-gray-400">Describe your project in plain English. No technical jargon required.</p>
+        <!-- Work Section -->
+        <section class="section" id="work">
+            <h2 class="work-title">Selected Work</h2>
+            <div class="work-grid">
+                <div class="work-item">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop" alt="Analytics Dashboard" class="work-image">
+                    <div class="work-overlay">
+                        <h3 class="work-name">Intelligence Platform</h3>
+                    </div>
                 </div>
-                
-                <div class="text-center scroll-animate">
-                    <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-full flex items-center justify-center mx-auto mb-8 text-2xl font-bold">2</div>
-                    <h3 class="text-2xl font-bold mb-4">Our AI Builds It in Minutes</h3>
-                    <p class="text-gray-400">Advanced AI systems create your solution while you grab a coffee.</p>
+                <div class="work-item">
+                    <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=800&auto=format&fit=crop" alt="E-commerce Experience" class="work-image">
+                    <div class="work-overlay">
+                        <h3 class="work-name">Commerce Evolution</h3>
+                    </div>
                 </div>
-                
-                <div class="text-center scroll-animate">
-                    <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-8 text-2xl font-bold">3</div>
-                    <h3 class="text-2xl font-bold mb-4">Review, Refine, Launch</h3>
-                    <p class="text-gray-400">Quick iterations until perfect. Then launch and watch it work.</p>
+                <div class="work-item">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop" alt="Brand Identity" class="work-image">
+                    <div class="work-overlay">
+                        <h3 class="work-name">Brand Architecture</h3>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Results/Social Proof Section -->
-    <section id="results" class="py-32">
-        <div class="container mx-auto px-6">
-            <!-- Stats -->
-            <div class="text-center mb-20 scroll-animate">
-                <h2 class="text-4xl md:text-5xl font-bold mb-12">Results That Speak</h2>
-                <div class="grid md:grid-cols-3 gap-8 mb-16">
-                    <div class="glass bg-white/5 border border-white/10 rounded-2xl p-8">
-                        <div class="text-4xl md:text-5xl font-bold gradient-violet bg-clip-text text-transparent mb-2">50+</div>
-                        <div class="text-gray-400">Projects Delivered</div>
-                    </div>
-                    <div class="glass bg-white/5 border border-white/10 rounded-2xl p-8">
-                        <div class="text-4xl md:text-5xl font-bold gradient-violet bg-clip-text text-transparent mb-2">3 Min</div>
-                        <div class="text-gray-400">Average Build Time</div>
-                    </div>
-                    <div class="glass bg-white/5 border border-white/10 rounded-2xl p-8">
-                        <div class="text-4xl md:text-5xl font-bold gradient-violet bg-clip-text text-transparent mb-2">99%</div>
-                        <div class="text-gray-400">Client Satisfaction</div>
-                    </div>
+        <!-- Contact Section -->
+        <section class="section" id="contact">
+            <div class="contact-content">
+                <h2 class="contact-title">Let's create something inevitable</h2>
+                <a href="mailto:nova@agentic-assistance.com" class="contact-email">nova@agentic-assistance.com</a>
+                <p class="contact-tagline">Ready to transform your digital presence with intelligence that feels effortless?</p>
+                <div class="contact-coords">
+                    Ready to begin · Available worldwide
                 </div>
             </div>
-            
-            <!-- Testimonials -->
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="glass bg-white/5 border border-white/10 rounded-2xl p-8 scroll-animate">
-                    <p class="text-gray-300 mb-6">"They built our entire landing page in under 5 minutes. The quality was incredible and it converted 40% better than our old site."</p>
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-full mr-3"></div>
-                        <div>
-                            <div class="font-semibold">Sarah Chen</div>
-                            <div class="text-gray-400 text-sm">CEO, TechStart</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="glass bg-white/5 border border-white/10 rounded-2xl p-8 scroll-animate">
-                    <p class="text-gray-300 mb-6">"The AI automation saved us 20 hours per week. ROI was immediate and the setup was painless."</p>
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full mr-3"></div>
-                        <div>
-                            <div class="font-semibold">Marcus Rodriguez</div>
-                            <div class="text-gray-400 text-sm">Founder, GrowthCo</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="glass bg-white/5 border border-white/10 rounded-2xl p-8 scroll-animate">
-                    <p class="text-gray-300 mb-6">"Best investment we've made this year. Their AI solutions are game-changing for productivity."</p>
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full mr-3"></div>
-                        <div>
-                            <div class="font-semibold">Emma Thompson</div>
-                            <div class="text-gray-400 text-sm">CMO, ScaleUp Inc</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- CTA Section -->
-    <section id="contact" class="py-32">
-        <div class="container mx-auto px-6">
-            <div class="text-center max-w-4xl mx-auto scroll-animate">
-                <h2 class="text-4xl md:text-6xl font-bold mb-8">Ready to 10x Your Productivity?</h2>
-                <p class="text-xl text-gray-400 mb-12">Join hundreds of businesses already using AI to scale faster</p>
-                
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-lg mx-auto mb-8">
-                    <input 
-                        type="email" 
-                        placeholder="Enter your email" 
-                        class="flex-1 px-6 py-4 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-violet-500 transition-colors glass"
-                    >
-                    <button class="px-8 py-4 bg-gradient-to-r from-violet-500 to-purple-600 rounded-lg font-semibold hover:opacity-90 transition-all duration-300 hover:scale-105 hover-glow whitespace-nowrap">
-                        Get Started
-                    </button>
-                </div>
-                
-                <p class="text-gray-500">No credit card required. Results in minutes.</p>
-            </div>
-        </div>
-    </section>
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer-text">© 2026 Agentic Assistance</p>
+        </footer>
+    </div>
 
-    <!-- Footer -->
-    <footer class="py-16 border-t border-white/10">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row items-center justify-between">
-                <div class="flex items-center space-x-2 mb-4 md:mb-0">
-                    <div class="w-8 h-8 bg-gradient-to-br from-violet-500 to-purple-600 rounded-lg"></div>
-                    <span class="text-xl font-bold">Agentic Assistance</span>
-                </div>
-                
-                <div class="flex items-center space-x-8 mb-4 md:mb-0">
-                    <a href="mailto:nova@agentic-assistance.com" class="text-gray-400 hover:text-white transition-colors">
-                        nova@agentic-assistance.com
-                    </a>
-                    <a href="#services" class="text-gray-400 hover:text-white transition-colors">Services</a>
-                    <a href="#results" class="text-gray-400 hover:text-white transition-colors">Results</a>
-                </div>
-                
-                <div class="text-gray-500">
-                    © 2024 Agentic Assistance. All rights reserved.
-                </div>
-            </div>
-        </div>
-    </footer>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
 
-    <!-- JavaScript for scroll effects and navbar -->
     <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('glass', 'bg-black/20', 'border-b', 'border-white/10');
-            } else {
-                navbar.classList.remove('glass', 'bg-black/20', 'border-b', 'border-white/10');
-            }
+        // Mouse tracking and blur effect
+        const blurLayer = document.querySelector('.layer-blur');
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let cursorX = window.innerWidth / 2;
+        let cursorY = window.innerHeight / 2;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            cursorDot.style.left = `${mouseX}px`;
+            cursorDot.style.top = `${mouseY}px`;
         });
 
-        // Scroll animations
+        function animate() {
+            const ease = 0.08;
+            cursorX += (mouseX - cursorX) * ease;
+            cursorY += (mouseY - cursorY) * ease;
+            
+            cursorOutline.style.left = `${cursorX}px`;
+            cursorOutline.style.top = `${cursorY}px`;
+            
+            const xPercent = (cursorX / window.innerWidth) * 100;
+            const yPercent = (cursorY / window.innerHeight) * 100;
+            
+            blurLayer.style.setProperty('--x', `${xPercent}%`);
+            blurLayer.style.setProperty('--y', `${yPercent}%`);
+            
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        // Cursor hover effects
+        const interactiveElements = document.querySelectorAll('a, .service-item, .work-item');
+        
+        interactiveElements.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                cursorOutline.style.width = '40px';
+                cursorOutline.style.height = '40px';
+                cursorOutline.style.borderColor = 'var(--c-accent)';
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                cursorOutline.style.width = '28px';
+                cursorOutline.style.height = '28px';
+                cursorOutline.style.borderColor = 'var(--c-accent-muted)';
+            });
+        });
+
+        // Smooth reveal animations on scroll
         const observerOptions = {
             threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
+            rootMargin: '0px 0px -10% 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.scroll-animate').forEach(el => {
+        // Observe elements for scroll animations
+        document.querySelectorAll('.services-title, .service-item, .work-title, .work-item, .contact-title').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 1.2s var(--ease-fluid), transform 1.2s var(--ease-fluid)';
             observer.observe(el);
         });
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
+        // Resize handler
+        window.addEventListener('resize', () => {
+            mouseX = window.innerWidth / 2;
+            mouseY = window.innerHeight / 2;
         });
     </script>
 </body>
