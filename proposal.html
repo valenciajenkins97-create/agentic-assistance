@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATT JOHNSON | Web Development Proposals</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+
+        :root {
+            --bg-void: #050505;
+            --bg-cream: #f7f5f0;
+            --text-gold: #c5a059;
+            --text-ink: #111111;
+            --text-light: #e0e0e0;
+            --border-width: 1px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-void);
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+            transition: all 0.6s ease;
+        }
+
+        /* Typography Classes */
+        .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .script {
+            font-family: 'Pinyon Script', cursive;
+        }
+
+        .uppercase {
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        .gold {
+            color: var(--text-gold);
+        }
+
+        .cream-bg {
+            background-color: var(--bg-cream);
+            color: var(--text-ink);
+        }
+
+        /* Luxury Button Styles */
+        .btn-luxury {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: transparent;
+            border: 1px solid rgba(197, 160, 89, 0.5);
+            color: var(--text-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 0.7rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .btn-luxury::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: var(--text-gold);
+            transition: width 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn-luxury:hover {
+            color: var(--bg-void);
+            border-color: var(--text-gold);
+        }
+
+        .btn-luxury:hover::before {
+            width: 100%;
+        }
+
+        .btn-luxury-light {
+            border: 1px solid var(--text-ink);
+            color: var(--text-ink);
+        }
+
+        .btn-luxury-light::before {
+            background-color: var(--text-ink);
+        }
+
+        .btn-luxury-light:hover {
+            color: var(--bg-cream);
+        }
+
+        /* Card Style with Double Borders */
+        .luxury-card {
+            background-color: var(--bg-cream);
+            color: var(--text-ink);
+            padding: 3rem 2rem;
+            position: relative;
+            transition: transform 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .luxury-card::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid var(--text-ink);
+            pointer-events: none;
+        }
+
+        .luxury-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* MODE 1: FORM STYLES (Dark Mode) */
+        .form-mode {
+            background-color: var(--bg-void);
+            color: var(--text-light);
+            min-height: 100vh;
+        }
+
+        .form-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .form-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .form-header .divider {
+            width: 200px;
+            height: 2px;
+            background-color: var(--text-gold);
+            margin: 2rem auto;
+        }
+
+        .form-header .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-gold);
+            letter-spacing: 0.1em;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .form-section {
+            background: rgba(197, 160, 89, 0.05);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            padding: 2rem;
+            border-radius: 0;
+        }
+
+        .form-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--text-gold);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            background: transparent;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            color: var(--bg-cream);
+            padding: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--text-gold);
+            background: rgba(197, 160, 89, 0.05);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .addons-section {
+            grid-column: 1 / -1;
+        }
+
+        .addons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .addon-item {
+            background: rgba(197, 160, 89, 0.08);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .addon-item:hover {
+            border-color: var(--text-gold);
+            background: rgba(197, 160, 89, 0.12);
+        }
+
+        .addon-item input[type="checkbox"] {
+            width: auto;
+            margin-right: 1rem;
+            transform: scale(1.2);
+            accent-color: var(--text-gold);
+        }
+
+        .addon-item label {
+            flex: 1;
+            margin: 0;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .addon-price {
+            color: var(--text-gold);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-actions {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .form-actions .btn-luxury {
+            margin: 0 0.5rem 1rem 0.5rem;
+        }
+
+        /* MODE 2: PROPOSAL STYLES (Light Mode) */
+        .proposal-mode {
+            background-color: var(--bg-cream);
+            color: var(--text-ink);
+        }
+
+        .proposal-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .proposal-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--bg-void) 0%, #1a1a1a 100%);
+            color: var(--text-light);
+            position: relative;
+        }
+
+        .proposal-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .proposal-header .tagline {
+            font-size: 1.1rem;
+            color: var(--text-gold);
+            letter-spacing: 0.1em;
+        }
+
+        .proposal-header .proposal-meta {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .proposal-section {
+            margin-bottom: 3rem;
+        }
+
+        .proposal-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--text-ink);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--text-gold);
+            padding-bottom: 0.5rem;
+        }
+
+        .client-info-card {
+            background-color: var(--bg-cream);
+            padding: 2rem;
+            position: relative;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(17, 17, 17, 0.1);
+        }
+
+        .client-info-card::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid rgba(17, 17, 17, 0.2);
+            pointer-events: none;
+        }
+
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: white;
+            border: 1px solid var(--text-ink);
+        }
+
+        .pricing-table th {
+            background: var(--text-ink);
+            color: var(--bg-cream);
+            padding: 1rem;
+            text-align: left;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .pricing-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(17, 17, 17, 0.1);
+            font-size: 0.9rem;
+        }
+
+        .pricing-table tr:nth-child(even) td {
+            background: rgba(247, 245, 240, 0.5);
+        }
+
+        .pricing-table .total-row td {
+            background: var(--text-gold) !important;
+            color: var(--bg-void);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .timeline-section {
+            background-color: rgba(197, 160, 89, 0.05);
+            padding: 2rem;
+            position: relative;
+            border: 1px solid rgba(197, 160, 89, 0.2);
+        }
+
+        .timeline-section::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            pointer-events: none;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--text-gold);
+            border-radius: 50%;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .terms-section {
+            background-color: rgba(17, 17, 17, 0.03);
+            padding: 2rem;
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .signature-section {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--text-gold);
+        }
+
+        .signature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .signature-line {
+            border-bottom: 2px solid var(--text-ink);
+            width: 100%;
+            margin: 1rem 0 0.5rem 0;
+            height: 40px;
+        }
+
+        .proposal-footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(17, 17, 17, 0.1);
+        }
+
+        .proposal-footer h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-ink);
+        }
+
+        .proposal-footer .script-text {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 1.5rem;
+            color: var(--text-gold);
+            margin: 0.5rem 0;
+        }
+
+        /* Control Buttons */
+        .controls {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .form-container {
+                padding: 2rem 1rem;
+            }
+
+            .form-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .proposal-container {
+                padding: 1rem;
+            }
+
+            .proposal-header h1 {
+                font-size: 2rem;
+            }
+
+            .signature-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .controls {
+                position: static;
+                justify-content: center;
+                margin-bottom: 2rem;
+            }
+
+            .addons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .controls, .btn-luxury {
+                display: none !important;
+            }
+
+            body {
+                background: white !important;
+                color: black !important;
+            }
+
+            .proposal-container {
+                max-width: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .proposal-header {
+                background: white !important;
+                color: black !important;
+            }
+
+            .luxury-card::before,
+            .client-info-card::before,
+            .timeline-section::before {
+                border-color: #ccc !important;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Loading Animation */
+        .generating {
+            text-align: center;
+            padding: 4rem;
+        }
+
+        .generating::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--text-gold);
+            border-radius: 50%;
+            border-top: 2px solid transparent;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="form-mode">
+    <!-- MODE 1: INPUT FORM (Dark Mode) -->
+    <div id="formView" class="form-container">
+        <div class="form-header">
+            <h1 class="serif">MATT JOHNSON | Web Development</h1>
+            <div class="divider"></div>
+            <p class="subtitle uppercase">Professional Proposal Generator</p>
+        </div>
+
+        <form id="proposalForm">
+            <div class="form-grid">
+                <div class="form-section">
+                    <h3 class="serif">Client Information</h3>
+                    
+                    <div class="form-group">
+                        <label for="clientName">Client Name *</label>
+                        <input type="text" id="clientName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="clientEmail">Client Email *</label>
+                        <input type="email" id="clientEmail" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectType">Project Type *</label>
+                        <select id="projectType" required>
+                            <option value="">Select Project Type</option>
+                            <option value="Landing Page">Landing Page</option>
+                            <option value="Multi-page Website">Multi-page Website</option>
+                            <option value="E-commerce Site">E-commerce Site</option>
+                            <option value="Web Application">Web Application</option>
+                            <option value="Website Redesign">Website Redesign</option>
+                            <option value="Custom Development">Custom Development</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectDescription">Project Description *</label>
+                        <textarea id="projectDescription" placeholder="Describe the project scope, goals, and key features in detail..." required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="serif">Project Details</h3>
+                    
+                    <div class="form-group">
+                        <label for="estimatedHours">Estimated Hours *</label>
+                        <input type="number" id="estimatedHours" min="1" step="0.5" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hourlyRate">Hourly Rate ($) *</label>
+                        <input type="number" id="hourlyRate" value="125" min="50" step="5" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="timeline">Timeline & Delivery *</label>
+                        <select id="timeline" required>
+                            <option value="">Select Timeline</option>
+                            <option value="Standard">Standard Delivery</option>
+                            <option value="3-Day">3-Day Rush (1.5x rate)</option>
+                            <option value="24-Hour">24-Hour Rush (2x rate)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="paymentTerms">Payment Terms *</label>
+                        <select id="paymentTerms" required>
+                            <option value="">Select Payment Terms</option>
+                            <option value="50% Upfront">50% Upfront, 50% on Completion</option>
+                            <option value="100% Upfront">100% Upfront</option>
+                            <option value="Net 30">Net 30 (Invoice on Completion)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-section addons-section">
+                    <h3 class="serif">Additional Services</h3>
+                    
+                    <div class="addons-grid">
+                        <div class="addon-item">
+                            <input type="checkbox" id="seo" value="75">
+                            <label for="seo">SEO Optimization</label>
+                            <span class="addon-price">+$75</span>
+                        </div>
+                        
+                        <div class="addon-item">
+                            <input type="checkbox" id="analytics" value="50">
+                            <label for="analytics">Analytics Setup</label>
+                            <span class="addon-price">+$50</span>
+                        </div>
+                        
+                        <div class="addon-item">
+                            <input type="checkbox" id="content" value="50">
+                            <label for="content">Content Writing</label>
+                            <span class="addon-price">+$50</span>
+                        </div>
+                        
+                        <div class="addon-item">
+                            <input type="checkbox" id="social" value="25">
+                            <label for="social">Social Media Integration</label>
+                            <span class="addon-price">+$25</span>
+                        </div>
+                        
+                        <div class="addon-item">
+                            <input type="checkbox" id="maintenance" value="100">
+                            <label for="maintenance">Maintenance Package</label>
+                            <span class="addon-price">+$100/mo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-luxury">Generate Proposal</button>
+                <button type="button" class="btn-luxury" onclick="saveDraft()">Save Draft</button>
+                <button type="button" class="btn-luxury" onclick="loadDraft()">Load Draft</button>
+                <button type="button" class="btn-luxury" onclick="clearForm()">Clear Form</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- MODE 2: PROPOSAL OUTPUT (Light Mode) -->
+    <div id="proposalView" class="proposal-mode hidden">
+        <div class="controls">
+            <button class="btn-luxury btn-luxury-light" onclick="printProposal()">Print / Save PDF</button>
+            <button class="btn-luxury btn-luxury-light" onclick="backToForm()">Edit Proposal</button>
+        </div>
+
+        <div class="proposal-container">
+            <div class="proposal-header">
+                <h1 class="serif">MATT JOHNSON</h1>
+                <p class="tagline uppercase">Web Development Services</p>
+                <div class="proposal-meta" id="proposalMeta"></div>
+            </div>
+
+            <div id="proposalContent">
+                <!-- Proposal content will be generated here -->
+            </div>
+
+            <div class="proposal-footer">
+                <h3 class="serif">Matt Johnson Web Development</h3>
+                <p class="script-text">Crafting exceptional digital experiences</p>
+                <p style="font-size: 0.9rem; color: #666; margin-top: 1rem;">
+                    Portfolio: <a href="https://valenciajenkins97-create.github.io/agentic-assistance/" target="_blank" style="color: var(--text-gold);">valenciajenkins97-create.github.io/agentic-assistance/</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let proposalData = {};
+
+        // Form submission handler
+        document.getElementById('proposalForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            generateProposal();
+        });
+
+        function generateProposal() {
+            // Collect form data
+            proposalData = {
+                clientName: document.getElementById('clientName').value,
+                clientEmail: document.getElementById('clientEmail').value,
+                projectType: document.getElementById('projectType').value,
+                projectDescription: document.getElementById('projectDescription').value,
+                estimatedHours: parseFloat(document.getElementById('estimatedHours').value),
+                hourlyRate: parseFloat(document.getElementById('hourlyRate').value),
+                timeline: document.getElementById('timeline').value,
+                paymentTerms: document.getElementById('paymentTerms').value,
+                addons: {
+                    seo: document.getElementById('seo').checked,
+                    analytics: document.getElementById('analytics').checked,
+                    content: document.getElementById('content').checked,
+                    social: document.getElementById('social').checked,
+                    maintenance: document.getElementById('maintenance').checked
+                }
+            };
+
+            // Calculate pricing
+            const pricing = calculatePricing(proposalData);
+            
+            // Generate proposal number and date
+            const proposalNumber = 'MJ-' + Date.now().toString().slice(-6);
+            const currentDate = new Date().toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+
+            // Update proposal meta
+            document.getElementById('proposalMeta').innerHTML = `
+                <p>Proposal #${proposalNumber} | ${currentDate}</p>
+            `;
+            
+            // Generate proposal content
+            const proposalHTML = generateProposalHTML(proposalData, pricing, proposalNumber, currentDate);
+            document.getElementById('proposalContent').innerHTML = proposalHTML;
+            
+            // Switch to proposal view
+            document.getElementById('formView').classList.add('hidden');
+            document.getElementById('proposalView').classList.remove('hidden');
+            document.body.className = 'proposal-mode';
+        }
+
+        function calculatePricing(data) {
+            let basePrice = data.estimatedHours * data.hourlyRate;
+            let addonsTotal = 0;
+            let rushMultiplier = 1;
+
+            // Calculate add-ons
+            if (data.addons.seo) addonsTotal += 75;
+            if (data.addons.analytics) addonsTotal += 50;
+            if (data.addons.content) addonsTotal += 50;
+            if (data.addons.social) addonsTotal += 25;
+
+            // Maintenance is recurring, handled separately
+            const maintenanceMonthly = data.addons.maintenance ? 100 : 0;
+
+            // Calculate rush multiplier
+            if (data.timeline === '24-Hour') rushMultiplier = 2;
+            else if (data.timeline === '3-Day') rushMultiplier = 1.5;
+
+            const rushFee = basePrice * (rushMultiplier - 1);
+            const subtotal = basePrice + addonsTotal + rushFee;
+            const total = subtotal;
+
+            return {
+                basePrice,
+                addonsTotal,
+                rushMultiplier,
+                rushFee,
+                subtotal,
+                total,
+                maintenanceMonthly
+            };
+        }
+
+        function generateProposalHTML(data, pricing, proposalNumber, currentDate) {
+            return `
+                <div class="proposal-section">
+                    <div class="client-info-card">
+                        <h3 style="margin-bottom: 1rem; font-family: 'Playfair Display', serif;">Proposal for ${data.clientName}</h3>
+                        <p><strong>Email:</strong> ${data.clientEmail}</p>
+                        <p><strong>Project Type:</strong> ${data.projectType}</p>
+                        <p><strong>Proposal Number:</strong> ${proposalNumber}</p>
+                        <p><strong>Date:</strong> ${currentDate}</p>
+                    </div>
+                </div>
+
+                <div class="proposal-section">
+                    <h2>Project Overview</h2>
+                    <div class="luxury-card">
+                        <p style="font-size: 1.1rem; line-height: 1.8;">${data.projectDescription}</p>
+                    </div>
+                </div>
+
+                <div class="proposal-section">
+                    <h2>Investment Breakdown</h2>
+                    <table class="pricing-table">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Hours</th>
+                                <th>Rate</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>${data.projectType} Development</td>
+                                <td>${data.estimatedHours}</td>
+                                <td>$${data.hourlyRate}/hr</td>
+                                <td>$${pricing.basePrice.toLocaleString()}</td>
+                            </tr>
+                            ${generateAddonsRows(data.addons)}
+                            ${pricing.rushFee > 0 ? `
+                            <tr>
+                                <td>Rush Delivery (${data.timeline})</td>
+                                <td>—</td>
+                                <td>${pricing.rushMultiplier}x</td>
+                                <td>$${pricing.rushFee.toLocaleString()}</td>
+                            </tr>
+                            ` : ''}
+                            <tr class="total-row">
+                                <td colspan="3"><strong>Total Project Investment</strong></td>
+                                <td><strong>$${pricing.total.toLocaleString()}</strong></td>
+                            </tr>
+                            ${pricing.maintenanceMonthly > 0 ? `
+                            <tr style="background: rgba(197, 160, 89, 0.1) !important;">
+                                <td colspan="3"><em>Monthly Maintenance (Optional)</em></td>
+                                <td><em>$${pricing.maintenanceMonthly}/month</em></td>
+                            </tr>
+                            ` : ''}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="proposal-section">
+                    <h2>Project Timeline</h2>
+                    <div class="timeline-section">
+                        ${generateTimeline(data.timeline, data.projectType)}
+                    </div>
+                </div>
+
+                <div class="proposal-section">
+                    <h2>Scope of Work</h2>
+                    <div class="luxury-card">
+                        <h4 style="margin-bottom: 1rem; color: var(--text-gold);">What's Included:</h4>
+                        <ul style="line-height: 2; padding-left: 1.5rem;">
+                            <li>Modern, responsive design optimized for all devices</li>
+                            <li>Clean, semantic HTML5, CSS3, and JavaScript</li>
+                            <li>Cross-browser compatibility testing</li>
+                            <li>Basic on-page SEO optimization</li>
+                            <li>Performance optimization and testing</li>
+                            <li>30 days of complimentary minor revisions</li>
+                            <li>Complete source files and documentation</li>
+                            <li>Training session for content management</li>
+                            ${data.addons.seo ? '<li>Advanced SEO optimization and setup</li>' : ''}
+                            ${data.addons.analytics ? '<li>Google Analytics 4 setup and configuration</li>' : ''}
+                            ${data.addons.content ? '<li>Professional content writing and editing</li>' : ''}
+                            ${data.addons.social ? '<li>Social media platform integration</li>' : ''}
+                            ${data.addons.maintenance ? '<li>Monthly maintenance and updates package</li>' : ''}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="proposal-section">
+                    <h2>Payment Terms & Schedule</h2>
+                    <div class="terms-section">
+                        <p><strong>Payment Terms:</strong> ${data.paymentTerms}</p>
+                        <p><strong>Accepted Methods:</strong> Bank transfer, PayPal, Stripe, major credit cards</p>
+                        
+                        ${generatePaymentSchedule(data.paymentTerms, pricing.total)}
+                        
+                        <p style="margin-top: 1rem;"><strong>Project Commencement:</strong> Work begins upon receipt of signed proposal and initial payment (if applicable).</p>
+                    </div>
+                </div>
+
+                <div class="proposal-section">
+                    <h2>Terms & Conditions</h2>
+                    <div class="terms-section">
+                        <p><strong>Proposal Validity:</strong> This proposal is valid for 30 days from the date above.</p>
+                        
+                        <p><strong>Revisions Policy:</strong> Up to three rounds of revisions are included in the project scope. Additional revisions beyond the included limit will be billed at $${data.hourlyRate}/hour.</p>
+                        
+                        <p><strong>Timeline:</strong> Project timeline commences upon receipt of signed proposal and initial payment. Delays in client feedback or content provision may affect the delivery schedule.</p>
+                        
+                        <p><strong>Intellectual Property:</strong> Upon final payment, all custom development work and design elements become the property of the client. Third-party components remain subject to their respective licenses.</p>
+                        
+                        <p><strong>Cancellation Policy:</strong> Either party may cancel this project with 48 hours written notice. Completed work will be billed at the agreed hourly rate, and any advance payments for incomplete work will be refunded.</p>
+                        
+                        <p><strong>Warranty:</strong> All work is guaranteed to be free from defects for 90 days following project completion. This warranty covers functionality, not design preferences or additional feature requests.</p>
+                    </div>
+                </div>
+
+                <div class="signature-section">
+                    <div class="signature-grid">
+                        <div>
+                            <p><strong>Client Approval</strong></p>
+                            <div class="signature-line"></div>
+                            <p style="margin-top: 0.5rem; font-size: 0.9rem;">${data.clientName}</p>
+                            <p style="font-size: 0.9rem;">Date: _______________</p>
+                        </div>
+                        <div>
+                            <p><strong>Service Provider</strong></p>
+                            <div class="signature-line"></div>
+                            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Matt Johnson</p>
+                            <p style="font-size: 0.9rem;">Date: ${currentDate}</p>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(197, 160, 89, 0.05); border-left: 4px solid var(--text-gold);">
+                        <p style="font-style: italic; text-align: center;">
+                            "By signing above, both parties agree to the project scope, timeline, and payment terms outlined in this proposal. This agreement becomes effective upon execution by both parties."
+                        </p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function generateAddonsRows(addons) {
+            let rows = '';
+            if (addons.seo) rows += '<tr><td>SEO Optimization</td><td>—</td><td>Add-on</td><td>$75</td></tr>';
+            if (addons.analytics) rows += '<tr><td>Analytics Setup</td><td>—</td><td>Add-on</td><td>$50</td></tr>';
+            if (addons.content) rows += '<tr><td>Content Writing</td><td>—</td><td>Add-on</td><td>$50</td></tr>';
+            if (addons.social) rows += '<tr><td>Social Media Integration</td><td>—</td><td>Add-on</td><td>$25</td></tr>';
+            return rows;
+        }
+
+        function generateTimeline(timeline, projectType) {
+            const timelines = {
+                'Standard': [
+                    'Days 1-2: Project discovery, requirements gathering, and wireframing',
+                    'Days 3-5: Design concept development and client review',
+                    'Days 6-10: Front-end development and functionality implementation',
+                    'Days 11-12: Testing, optimization, and quality assurance',
+                    'Days 13-14: Client review, revisions, and final delivery'
+                ],
+                '3-Day': [
+                    'Day 1: Expedited discovery, design concepts, and approval',
+                    'Day 2: Intensive development and core functionality',
+                    'Day 3: Testing, optimization, and final delivery'
+                ],
+                '24-Hour': [
+                    'Hours 1-4: Immediate project kickoff and requirements confirmation',
+                    'Hours 5-16: Intensive design and development sprint',
+                    'Hours 17-20: Testing, optimization, and quality checks',
+                    'Hours 21-24: Final revisions and delivery'
+                ]
+            };
+
+            const milestones = timelines[timeline] || timelines['Standard'];
+            
+            return milestones.map(milestone => 
+                `<div class="timeline-item">${milestone}</div>`
+            ).join('');
+        }
+
+        function generatePaymentSchedule(terms, total) {
+            switch(terms) {
+                case '50% Upfront':
+                    return `
+                        <p><strong>Payment Schedule:</strong></p>
+                        <p>• Down Payment: $${(total * 0.5).toLocaleString()} (due upon signing)</p>
+                        <p>• Final Payment: $${(total * 0.5).toLocaleString()} (due upon project completion)</p>
+                    `;
+                case '100% Upfront':
+                    return `
+                        <p><strong>Payment Schedule:</strong></p>
+                        <p>• Full Payment: $${total.toLocaleString()} (due upon signing)</p>
+                    `;
+                case 'Net 30':
+                    return `
+                        <p><strong>Payment Schedule:</strong></p>
+                        <p>• Invoice Amount: $${total.toLocaleString()} (due 30 days after project completion)</p>
+                    `;
+                default:
+                    return '';
+            }
+        }
+
+        function printProposal() {
+            window.print();
+        }
+
+        function backToForm() {
+            document.getElementById('formView').classList.remove('hidden');
+            document.getElementById('proposalView').classList.add('hidden');
+            document.body.className = 'form-mode';
+        }
+
+        function saveDraft() {
+            const formData = {};
+            const form = document.getElementById('proposalForm');
+            const inputs = form.querySelectorAll('input, select, textarea');
+            
+            inputs.forEach(input => {
+                if (input.type === 'checkbox') {
+                    formData[input.id] = input.checked;
+                } else {
+                    formData[input.id] = input.value;
+                }
+            });
+
+            localStorage.setItem('proposalDraft', JSON.stringify(formData));
+            alert('Draft saved successfully!');
+        }
+
+        function loadDraft() {
+            const saved = localStorage.getItem('proposalDraft');
+            if (saved) {
+                const formData = JSON.parse(saved);
+                
+                Object.keys(formData).forEach(key => {
+                    const element = document.getElementById(key);
+                    if (element) {
+                        if (element.type === 'checkbox') {
+                            element.checked = formData[key];
+                        } else {
+                            element.value = formData[key];
+                        }
+                    }
+                });
+                
+                alert('Draft loaded successfully!');
+            } else {
+                alert('No saved draft found.');
+            }
+        }
+
+        function clearForm() {
+            if (confirm('Are you sure you want to clear all form data?')) {
+                document.getElementById('proposalForm').reset();
+                document.getElementById('hourlyRate').value = '125';
+                localStorage.removeItem('proposalAutoSave');
+            }
+        }
+
+        // Auto-save functionality
+        document.getElementById('proposalForm').addEventListener('input', function() {
+            const formData = {};
+            const inputs = this.querySelectorAll('input, select, textarea');
+            
+            inputs.forEach(input => {
+                if (input.type === 'checkbox') {
+                    formData[input.id] = input.checked;
+                } else {
+                    formData[input.id] = input.value;
+                }
+            });
+            
+            localStorage.setItem('proposalAutoSave', JSON.stringify(formData));
+        });
+
+        // Load auto-saved data on page load
+        window.addEventListener('load', function() {
+            const autoSaved = localStorage.getItem('proposalAutoSave');
+            if (autoSaved && !localStorage.getItem('skipAutoLoad')) {
+                const formData = JSON.parse(autoSaved);
+                Object.keys(formData).forEach(key => {
+                    const element = document.getElementById(key);
+                    if (element && formData[key]) {
+                        if (element.type === 'checkbox') {
+                            element.checked = formData[key];
+                        } else {
+                            element.value = formData[key];
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVA TRADING | Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --c-bg-base: #0a0a0f;
+            --c-bg-overlay: rgba(10, 10, 15, 0.85);
+            --c-glass: rgba(255, 255, 255, 0.05);
+            --c-glass-border: rgba(255, 255, 255, 0.1);
+            --c-text-main: #ffffff;
+            --c-text-muted: rgba(255, 255, 255, 0.7);
+            --c-text-dim: rgba(255, 255, 255, 0.4);
+            --c-accent-gold: #c5a059;
+            --c-accent-gold-bright: #ddb76a;
+            --c-profit: #00ff88;
+            --c-loss: #ff4757;
+            --c-neutral: #6c7293;
+            --c-warning: #ffa502;
+            --ease-fluid: cubic-bezier(0.25, 1, 0.5, 1);
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Manrope', sans-serif;
+            --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --gradient-gold: linear-gradient(135deg, #c5a059, #ddb76a);
+            --gradient-profit: linear-gradient(135deg, #00ff88, #00b894);
+            --gradient-loss: linear-gradient(135deg, #ff4757, #e55039);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            cursor: none;
+        }
+
+        body {
+            background-color: var(--c-bg-base);
+            font-family: var(--font-sans);
+            color: var(--c-text-main);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Sanctuary-inspired noise overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            opacity: 0.08;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.8'/%3E%3C/svg%3E");
+            animation: noise-move 8s infinite linear;
+        }
+
+        @keyframes noise-move {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(-5px, 0); }
+            50% { transform: translate(-5px, -5px); }
+            75% { transform: translate(0, -5px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        /* Sanctuary-inspired custom cursor */
+        .cursor-dot, .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+            transition: all 0.1s ease-out;
+        }
+
+        .cursor-dot {
+            width: 4px;
+            height: 4px;
+            background-color: var(--c-accent-gold);
+            box-shadow: 0 0 8px rgba(197, 160, 89, 0.3);
+        }
+
+        .cursor-outline {
+            width: 32px;
+            height: 32px;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            transition: width 0.2s var(--ease-fluid), height 0.2s var(--ease-fluid);
+        }
+
+        .cursor-outline.hover {
+            width: 48px;
+            height: 48px;
+            border-color: var(--c-accent-gold);
+        }
+
+        /* Main container with smooth scroll */
+        .main-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 4;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease var(--ease-fluid) 0.2s forwards;
+        }
+
+        .hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 400;
+            margin-bottom: 1rem;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .hero-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            color: var(--c-text-muted);
+        }
+
+        .hero-pnl {
+            font-family: var(--font-sans);
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: var(--c-profit);
+        }
+
+        /* Grid System */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: var(--c-glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--c-glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-glass);
+            transition: all 0.4s var(--ease-fluid);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .glass-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(197, 160, 89, 0.2);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+        }
+
+        .card-title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            color: var(--c-accent-gold);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-title::before {
+            content: '';
+            width: 3px;
+            height: 24px;
+            background: var(--gradient-gold);
+            border-radius: 2px;
+        }
+
+        /* Portfolio Overview */
+        .portfolio-overview {
+            grid-column: 1 / -1;
+        }
+
+        .portfolio-wallets {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .wallet-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s var(--ease-fluid);
+        }
+
+        .wallet-card:hover {
+            border-color: rgba(197, 160, 89, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .wallet-label {
+            font-size: 0.85rem;
+            color: var(--c-text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .wallet-value {
+            font-family: var(--font-sans);
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .wallet-change {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        /* Open Positions Table */
+        .positions-table {
+            grid-column: 1 / 8;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            border-radius: 12px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .data-table th {
+            color: var(--c-text-dim);
+            font-weight: 500;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .data-table td {
+            font-weight: 500;
+        }
+
+        .data-table tr:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        /* Signal Gauges */
+        .signal-gauges {
+            grid-column: 8 / -1;
+        }
+
+        .gauges-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .signal-gauge {
+            text-align: center;
+        }
+
+        .gauge-circle {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1rem;
+        }
+
+        .gauge-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                var(--c-loss) 0deg 60deg,
+                var(--c-warning) 60deg 120deg,
+                var(--c-profit) 120deg 180deg,
+                var(--c-profit) 180deg 240deg,
+                var(--c-warning) 240deg 300deg,
+                var(--c-loss) 300deg 360deg
+            );
+            padding: 4px;
+        }
+
+        .gauge-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--c-bg-base);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .gauge-value {
+            font-family: var(--font-sans);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .gauge-label {
+            font-size: 0.7rem;
+            color: var(--c-text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .gauge-coin {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--c-accent-gold);
+        }
+
+        /* Recent Trades */
+        .recent-trades {
+            grid-column: 1 / 7;
+        }
+
+        .trades-scroll {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-right: -1rem;
+            padding-right: 1rem;
+        }
+
+        .trades-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .trades-scroll::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+        }
+
+        .trades-scroll::-webkit-scrollbar-thumb {
+            background: var(--c-accent-gold);
+            border-radius: 2px;
+        }
+
+        /* Polymarket Sniper */
+        .polymarket-sniper {
+            grid-column: 7 / -1;
+        }
+
+        .sniper-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .sniper-stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .sniper-value {
+            font-family: var(--font-sans);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .sniper-label {
+            font-size: 0.8rem;
+            color: var(--c-text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .alerts-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .alert-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border-left: 3px solid var(--c-accent-gold);
+            font-size: 0.85rem;
+        }
+
+        /* Engine Weights */
+        .engine-weights {
+            grid-column: 1 / 7;
+        }
+
+        .weight-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .weight-name {
+            min-width: 200px;
+            font-size: 0.9rem;
+            color: var(--c-text-muted);
+        }
+
+        .weight-value {
+            min-width: 50px;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            text-align: right;
+            margin-right: 1rem;
+        }
+
+        .weight-bar {
+            flex: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .weight-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.8s var(--ease-fluid);
+        }
+
+        .weight-bullish { background: var(--gradient-profit); }
+        .weight-bearish { background: var(--gradient-loss); }
+
+        /* Market Regime */
+        .market-regime {
+            grid-column: 7 / -1;
+        }
+
+        .regime-indicator {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .regime-badge {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: var(--gradient-gold);
+            color: var(--c-bg-base);
+            box-shadow: 0 8px 24px rgba(197, 160, 89, 0.3);
+        }
+
+        .regime-confidence {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--c-text-muted);
+        }
+
+        .regime-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .regime-stat {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+        }
+
+        .regime-stat-value {
+            font-family: var(--font-sans);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .regime-stat-label {
+            font-size: 0.8rem;
+            color: var(--c-text-dim);
+            text-transform: uppercase;
+        }
+
+        /* Activity Feed */
+        .activity-feed {
+            grid-column: 1 / -1;
+        }
+
+        .activity-scroll {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .activity-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border-left: 3px solid var(--c-accent-gold);
+            transition: all 0.3s var(--ease-fluid);
+        }
+
+        .activity-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(4px);
+        }
+
+        .activity-time {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            color: var(--c-text-dim);
+            min-width: 60px;
+            font-weight: 500;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--c-text-main);
+        }
+
+        .activity-detail {
+            font-size: 0.85rem;
+            color: var(--c-text-muted);
+        }
+
+        /* Utility Classes */
+        .profit { color: var(--c-profit); }
+        .loss { color: var(--c-loss); }
+        .neutral { color: var(--c-neutral); }
+        .warning { color: var(--c-warning); }
+        .gold { color: var(--c-accent-gold); }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s var(--ease-fluid) forwards;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .dashboard-grid {
+                grid-template-columns: repeat(8, 1fr);
+            }
+            
+            .positions-table {
+                grid-column: 1 / -1;
+            }
+            
+            .signal-gauges {
+                grid-column: 1 / -1;
+            }
+            
+            .gauges-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 1rem;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .glass-card {
+                padding: 1.5rem;
+            }
+            
+            .portfolio-wallets {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .gauges-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .sniper-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero-meta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* Scroll Progress Indicator */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--gradient-gold);
+            z-index: 1000;
+            transition: width 0.1s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Noise Overlay -->
+    <div class="noise-overlay"></div>
+    
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+    
+    <!-- Scroll Progress -->
+    <div class="scroll-progress"></div>
+
+    <div class="main-container">
+        <!-- Hero Section -->
+        <header class="hero">
+            <h1>NOVA TRADING</h1>
+            <div class="hero-meta">
+                <div id="current-datetime"></div>
+                <div class="hero-pnl">+$2,847.23 (12.4%)</div>
+            </div>
+        </header>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- Portfolio Overview -->
+            <section class="glass-card portfolio-overview">
+                <h2 class="card-title">Portfolio Overview</h2>
+                <div class="portfolio-wallets">
+                    <div class="wallet-card">
+                        <div class="wallet-label">Base USDC</div>
+                        <div class="wallet-value neutral">$4,285.32</div>
+                        <div class="wallet-change profit">+2.3%</div>
+                    </div>
+                    <div class="wallet-card">
+                        <div class="wallet-label">Base ETH</div>
+                        <div class="wallet-value neutral">1.847 ETH</div>
+                        <div class="wallet-change profit">+5.7%</div>
+                    </div>
+                    <div class="wallet-card">
+                        <div class="wallet-label">Hyperliquid</div>
+                        <div class="wallet-value neutral">$3,523.67</div>
+                        <div class="wallet-change profit">+8.2%</div>
+                    </div>
+                    <div class="wallet-card">
+                        <div class="wallet-label">Total Portfolio</div>
+                        <div class="wallet-value gold">$22,943.89</div>
+                        <div class="wallet-change profit">+12.4%</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Open Positions -->
+            <section class="glass-card positions-table">
+                <h2 class="card-title">Open Positions</h2>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Coin</th>
+                                <th>Size</th>
+                                <th>Entry Price</th>
+                                <th>Current Price</th>
+                                <th>Unrealized P&L</th>
+                                <th>Liq. Price</th>
+                            </tr>
+                        </thead>
+                        <tbody id="positions-data">
+                            <tr>
+                                <td><strong>ETH</strong></td>
+                                <td>0.25 ETH</td>
+                                <td>$3,247.83</td>
+                                <td>$3,398.92</td>
+                                <td class="profit">+$37.77</td>
+                                <td>$2,845.20</td>
+                            </tr>
+                            <tr>
+                                <td><strong>BTC</strong></td>
+                                <td>0.05 BTC</td>
+                                <td>$91,245.30</td>
+                                <td>$94,823.45</td>
+                                <td class="profit">+$178.91</td>
+                                <td>$78,450.12</td>
+                            </tr>
+                            <tr>
+                                <td><strong>SOL</strong></td>
+                                <td>15.3 SOL</td>
+                                <td>$238.44</td>
+                                <td>$227.89</td>
+                                <td class="loss">-$161.42</td>
+                                <td>$195.20</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Signal Gauges -->
+            <section class="glass-card signal-gauges">
+                <h2 class="card-title">Signal Strength</h2>
+                <div class="gauges-grid">
+                    <div class="signal-gauge">
+                        <div class="gauge-circle">
+                            <div class="gauge-bg">
+                                <div class="gauge-inner">
+                                    <div class="gauge-value profit">78</div>
+                                    <div class="gauge-label">Strong Buy</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gauge-coin">ETH</div>
+                    </div>
+                    <div class="signal-gauge">
+                        <div class="gauge-circle">
+                            <div class="gauge-bg">
+                                <div class="gauge-inner">
+                                    <div class="gauge-value warning">52</div>
+                                    <div class="gauge-label">Hold</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gauge-coin">BTC</div>
+                    </div>
+                    <div class="signal-gauge">
+                        <div class="gauge-circle">
+                            <div class="gauge-bg">
+                                <div class="gauge-inner">
+                                    <div class="gauge-value profit">89</div>
+                                    <div class="gauge-label">Strong Buy</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gauge-coin">SOL</div>
+                    </div>
+                    <div class="signal-gauge">
+                        <div class="gauge-circle">
+                            <div class="gauge-bg">
+                                <div class="gauge-inner">
+                                    <div class="gauge-value profit">73</div>
+                                    <div class="gauge-label">Buy</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gauge-coin">HYPE</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Trades -->
+            <section class="glass-card recent-trades">
+                <h2 class="card-title">Recent Trades</h2>
+                <div class="trades-scroll">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>Coin</th>
+                                <th>Direction</th>
+                                <th>Size</th>
+                                <th>Entry</th>
+                                <th>Exit</th>
+                                <th>P&L</th>
+                                <th>Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody id="trades-data">
+                            <tr>
+                                <td>21:43</td>
+                                <td><strong>ETH</strong></td>
+                                <td class="profit">LONG</td>
+                                <td>0.15</td>
+                                <td>$3,247.83</td>
+                                <td>$3,398.92</td>
+                                <td class="profit">+$22.66</td>
+                                <td>4h 23m</td>
+                            </tr>
+                            <tr>
+                                <td>18:29</td>
+                                <td><strong>BTC</strong></td>
+                                <td class="loss">SHORT</td>
+                                <td>0.02</td>
+                                <td>$93,450.12</td>
+                                <td>$94,823.45</td>
+                                <td class="loss">-$27.47</td>
+                                <td>2h 14m</td>
+                            </tr>
+                            <tr>
+                                <td>16:15</td>
+                                <td><strong>SOL</strong></td>
+                                <td class="profit">LONG</td>
+                                <td>8.5</td>
+                                <td>$225.30</td>
+                                <td>$238.44</td>
+                                <td class="profit">+$111.69</td>
+                                <td>6h 47m</td>
+                            </tr>
+                            <tr>
+                                <td>14:52</td>
+                                <td><strong>HYPE</strong></td>
+                                <td class="profit">LONG</td>
+                                <td>45</td>
+                                <td>$28.93</td>
+                                <td>$31.47</td>
+                                <td class="profit">+$114.30</td>
+                                <td>1h 23m</td>
+                            </tr>
+                            <tr>
+                                <td>12:08</td>
+                                <td><strong>ETH</strong></td>
+                                <td class="loss">SHORT</td>
+                                <td>0.08</td>
+                                <td>$3,301.22</td>
+                                <td>$3,247.83</td>
+                                <td class="profit">+$4.27</td>
+                                <td>3h 07m</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Polymarket Sniper -->
+            <section class="glass-card polymarket-sniper">
+                <h2 class="card-title">Polymarket Sniper</h2>
+                <div class="sniper-stats">
+                    <div class="sniper-stat">
+                        <div class="sniper-value gold">73</div>
+                        <div class="sniper-label">Alerts Fired</div>
+                    </div>
+                    <div class="sniper-stat">
+                        <div class="sniper-value profit">84.2%</div>
+                        <div class="sniper-label">Accuracy</div>
+                    </div>
+                    <div class="sniper-stat">
+                        <div class="sniper-value warning">23.7%</div>
+                        <div class="sniper-label">Avg Edge</div>
+                    </div>
+                </div>
+                <div class="alerts-list">
+                    <div class="alert-item">
+                        <span>TRUMP_WIN_2024 • Oversold</span>
+                        <span class="profit">+18.4%</span>
+                    </div>
+                    <div class="alert-item">
+                        <span>BTC_100K_EOY • Mean Revert</span>
+                        <span class="profit">+31.2%</span>
+                    </div>
+                    <div class="alert-item">
+                        <span>AI_BREAKTHROUGH • Volume Spike</span>
+                        <span class="profit">+12.8%</span>
+                    </div>
+                    <div class="alert-item">
+                        <span>ETH_5K_Q1 • RSI Divergence</span>
+                        <span class="loss">-8.3%</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Engine Weights -->
+            <section class="glass-card engine-weights">
+                <h2 class="card-title">Engine Weights</h2>
+                <div class="weight-item">
+                    <div class="weight-name">MFI_GREEN_MOMENTUM</div>
+                    <div class="weight-value profit">+12</div>
+                    <div class="weight-bar">
+                        <div class="weight-fill weight-bullish" style="width: 75%;"></div>
+                    </div>
+                </div>
+                <div class="weight-item">
+                    <div class="weight-name">RSI_OVERSOLD_CROSS</div>
+                    <div class="weight-value profit">+9</div>
+                    <div class="weight-bar">
+                        <div class="weight-fill weight-bullish" style="width: 56%;"></div>
+                    </div>
+                </div>
+                <div class="weight-item">
+                    <div class="weight-name">WT_BULLISH_DIVERGENCE</div>
+                    <div class="weight-value profit">+7</div>
+                    <div class="weight-bar">
+                        <div class="weight-fill weight-bullish" style="width: 44%;"></div>
+                    </div>
+                </div>
+                <div class="weight-item">
+                    <div class="weight-name">VOLUME_CONFIRMATION</div>
+                    <div class="weight-value profit">+5</div>
+                    <div class="weight-bar">
+                        <div class="weight-fill weight-bullish" style="width: 31%;"></div>
+                    </div>
+                </div>
+                <div class="weight-item">
+                    <div class="weight-name">BELOW_VWAP_SUPPORT</div>
+                    <div class="weight-value profit">+3</div>
+                    <div class="weight-bar">
+                        <div class="weight-fill weight-bullish" style="width: 19%;"></div>
+                    </div>
+                </div>
+                <div class="weight-item">
+                    <div class="weight-name">WT_CROSS_OVERBOUGHT</div>
+                    <div class="weight-value loss">-6</div>
+                    <div class="weight-bar">
+                        <div class="weight-fill weight-bearish" style="width: 38%;"></div>
+                    </div>
+                </div>
+                <div class="weight-item">
+                    <div class="weight-name">MOMENTUM_EXHAUSTION</div>
+                    <div class="weight-value loss">-8</div>
+                    <div class="weight-bar">
+                        <div class="weight-fill weight-bearish" style="width: 50%;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Market Regime -->
+            <section class="glass-card market-regime">
+                <h2 class="card-title">Market Regime</h2>
+                <div class="regime-indicator">
+                    <div class="regime-badge">TRENDING</div>
+                    <div class="regime-confidence">94% Confidence • Strong Momentum Detected</div>
+                </div>
+                <div class="regime-stats">
+                    <div class="regime-stat">
+                        <div class="regime-stat-value profit">+2.8σ</div>
+                        <div class="regime-stat-label">Price Z-Score</div>
+                    </div>
+                    <div class="regime-stat">
+                        <div class="regime-stat-value warning">0.84</div>
+                        <div class="regime-stat-label">Volatility</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 24h Activity Feed -->
+            <section class="glass-card activity-feed">
+                <h2 class="card-title">24h Activity Timeline</h2>
+                <div class="activity-scroll">
+                    <div class="activity-item">
+                        <div class="activity-time">22:14</div>
+                        <div class="activity-content">
+                            <div class="activity-title">Position Opened: ETH LONG</div>
+                            <div class="activity-detail">0.25 ETH at $3,247.83 • 2.5x leverage • $811.96 collateral</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-time">21:58</div>
+                        <div class="activity-content">
+                            <div class="activity-title">Sniper Alert: BTC Oversold</div>
+                            <div class="activity-detail">OVERSOLD_GOLDEN_HOUR signal fired • 23.4% edge detected</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-time">21:43</div>
+                        <div class="activity-content">
+                            <div class="activity-title">Trade Closed: ETH LONG</div>
+                            <div class="activity-detail">0.15 ETH closed at $3,398.92 • +$22.66 profit • 4h 23m duration</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-time">20:31</div>
+                        <div class="activity-content">
+                            <div class="activity-title">Engine Weight Update</div>
+                            <div class="activity-detail">MFI_GREEN_MOMENTUM boosted to +12 (was +9) • 2.3k samples</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-time">19:22</div>
+                        <div class="activity-content">
+                            <div class="activity-title">Regime Change Detected</div>
+                            <div class="activity-detail">Market shifted from VOLATILE to TRENDING • 94% confidence</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-time">18:45</div>
+                        <div class="activity-content">
+                            <div class="activity-title">Signal Generated: SOL Strong Buy</div>
+                            <div class="activity-detail">Composite score: 89/100 • Multiple bullish confirmations</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-time">17:33</div>
+                        <div class="activity-content">
+                            <div class="activity-title">Polymarket Edge: AI_BREAKTHROUGH</div>
+                            <div class="activity-detail">Volume spike detected • 12.8% projected edge</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-time">16:15</div>
+                        <div class="activity-content">
+                            <div class="activity-title">Portfolio Rebalance</div>
+                            <div class="activity-detail">Base USDC allocation increased to 35% • Risk adjusted</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Dashboard state and data
+        let dashboardData = {
+            portfolio: {
+                baseUSDC: 4285.32,
+                baseETH: 1.847,
+                hyperliquid: 3523.67,
+                totalValue: 22943.89,
+                totalPnL: 12.4,
+                totalPnLAmount: 2847.23
+            },
+            positions: [
+                { coin: 'ETH', size: '0.25 ETH', entry: 3247.83, current: 3398.92, pnl: 37.77, liq: 2845.20 },
+                { coin: 'BTC', size: '0.05 BTC', entry: 91245.30, current: 94823.45, pnl: 178.91, liq: 78450.12 },
+                { coin: 'SOL', size: '15.3 SOL', entry: 238.44, current: 227.89, pnl: -161.42, liq: 195.20 }
+            ],
+            signals: {
+                ETH: { score: 78, label: 'Strong Buy' },
+                BTC: { score: 52, label: 'Hold' },
+                SOL: { score: 89, label: 'Strong Buy' },
+                HYPE: { score: 73, label: 'Buy' }
+            },
+            sniper: {
+                alertsFired: 73,
+                accuracy: 84.2,
+                avgEdge: 23.7
+            },
+            regime: {
+                current: 'TRENDING',
+                confidence: 94,
+                zScore: 2.8,
+                volatility: 0.84
+            }
+        };
+
+        // Custom cursor functionality
+        let cursorDot, cursorOutline;
+        let mousePosition = { x: 0, y: 0 };
+        let requestId = null;
+
+        function initializeCursor() {
+            cursorDot = document.querySelector('.cursor-dot');
+            cursorOutline = document.querySelector('.cursor-outline');
+
+            document.addEventListener('mousemove', (e) => {
+                mousePosition.x = e.clientX;
+                mousePosition.y = e.clientY;
+                
+                if (!requestId) {
+                    requestId = requestAnimationFrame(updateCursor);
+                }
+            });
+
+            // Hover effects
+            document.addEventListener('mouseenter', (e) => {
+                if (e.target.closest('.glass-card, .wallet-card, .sniper-stat, .activity-item')) {
+                    cursorOutline.classList.add('hover');
+                }
+            }, true);
+
+            document.addEventListener('mouseleave', (e) => {
+                if (e.target.closest('.glass-card, .wallet-card, .sniper-stat, .activity-item')) {
+                    cursorOutline.classList.remove('hover');
+                }
+            }, true);
+        }
+
+        function updateCursor() {
+            cursorDot.style.left = mousePosition.x + 'px';
+            cursorDot.style.top = mousePosition.y + 'px';
+            cursorOutline.style.left = mousePosition.x + 'px';
+            cursorOutline.style.top = mousePosition.y + 'px';
+            
+            requestId = null;
+        }
+
+        // Date/time display
+        function updateDateTime() {
+            const now = new Date();
+            const options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                timeZoneName: 'short'
+            };
+            document.getElementById('current-datetime').textContent = now.toLocaleDateString('en-US', options);
+        }
+
+        // Intersection Observer for animations
+        function initializeAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, index * 100);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.glass-card').forEach(card => {
+                observer.observe(card);
+            });
+        }
+
+        // Scroll progress indicator
+        function initializeScrollProgress() {
+            const progressBar = document.querySelector('.scroll-progress');
+            
+            window.addEventListener('scroll', () => {
+                const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = (window.pageYOffset / totalHeight) * 100;
+                progressBar.style.width = progress + '%';
+            });
+        }
+
+        // Update dashboard data function
+        function updateDashboard(newData) {
+            if (newData.portfolio) {
+                Object.assign(dashboardData.portfolio, newData.portfolio);
+            }
+            if (newData.positions) {
+                dashboardData.positions = newData.positions;
+            }
+            if (newData.signals) {
+                Object.assign(dashboardData.signals, newData.signals);
+            }
+            if (newData.sniper) {
+                Object.assign(dashboardData.sniper, newData.sniper);
+            }
+            if (newData.regime) {
+                Object.assign(dashboardData.regime, newData.regime);
+            }
+            
+            renderDashboard();
+        }
+
+        // Render dashboard with updated data
+        function renderDashboard() {
+            // Update portfolio values
+            const portfolioElements = {
+                baseUSDC: document.querySelector('.wallet-card:nth-child(1) .wallet-value'),
+                baseETH: document.querySelector('.wallet-card:nth-child(2) .wallet-value'),
+                hyperliquid: document.querySelector('.wallet-card:nth-child(3) .wallet-value'),
+                totalValue: document.querySelector('.wallet-card:nth-child(4) .wallet-value')
+            };
+
+            if (portfolioElements.baseUSDC) {
+                portfolioElements.baseUSDC.textContent = `$${dashboardData.portfolio.baseUSDC.toLocaleString()}`;
+                portfolioElements.baseETH.textContent = `${dashboardData.portfolio.baseETH.toFixed(3)} ETH`;
+                portfolioElements.hyperliquid.textContent = `$${dashboardData.portfolio.hyperliquid.toLocaleString()}`;
+                portfolioElements.totalValue.textContent = `$${dashboardData.portfolio.totalValue.toLocaleString()}`;
+            }
+
+            // Update hero P&L
+            const heroPnL = document.querySelector('.hero-pnl');
+            if (heroPnL) {
+                heroPnL.textContent = `+$${dashboardData.portfolio.totalPnLAmount.toLocaleString()} (${dashboardData.portfolio.totalPnL}%)`;
+            }
+
+            // Update signal gauges
+            Object.keys(dashboardData.signals).forEach(coin => {
+                const signal = dashboardData.signals[coin];
+                const gauges = document.querySelectorAll('.signal-gauge');
+                
+                gauges.forEach(gauge => {
+                    const coinName = gauge.querySelector('.gauge-coin').textContent;
+                    if (coinName === coin) {
+                        const valueEl = gauge.querySelector('.gauge-value');
+                        const labelEl = gauge.querySelector('.gauge-label');
+                        
+                        valueEl.textContent = signal.score;
+                        labelEl.textContent = signal.label;
+                        
+                        // Update color based on score
+                        valueEl.className = signal.score >= 70 ? 'gauge-value profit' :
+                                          signal.score >= 50 ? 'gauge-value warning' :
+                                          'gauge-value neutral';
+                    }
+                });
+            });
+
+            // Update sniper stats
+            const sniperElements = document.querySelectorAll('.sniper-value');
+            if (sniperElements.length >= 3) {
+                sniperElements[0].textContent = dashboardData.sniper.alertsFired;
+                sniperElements[1].textContent = `${dashboardData.sniper.accuracy}%`;
+                sniperElements[2].textContent = `${dashboardData.sniper.avgEdge}%`;
+            }
+
+            // Update regime
+            const regimeBadge = document.querySelector('.regime-badge');
+            const regimeConfidence = document.querySelector('.regime-confidence');
+            const regimeStats = document.querySelectorAll('.regime-stat-value');
+            
+            if (regimeBadge) {
+                regimeBadge.textContent = dashboardData.regime.current;
+                regimeConfidence.textContent = `${dashboardData.regime.confidence}% Confidence • Strong Momentum Detected`;
+                
+                if (regimeStats.length >= 2) {
+                    regimeStats[0].textContent = `+${dashboardData.regime.zScore}σ`;
+                    regimeStats[1].textContent = dashboardData.regime.volatility;
+                }
+            }
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCursor();
+            updateDateTime();
+            initializeAnimations();
+            initializeScrollProgress();
+            
+            // Update date/time every minute
+            setInterval(updateDateTime, 60000);
+            
+            console.log('NOVA Trading Dashboard initialized');
+            console.log('Current data:', dashboardData);
+            console.log('To update: updateDashboard(newData)');
+        });
+
+        // Expose updateDashboard globally
+        window.updateDashboard = updateDashboard;
+        window.dashboardData = dashboardData;
+    </script>
+</body>
+</html>
