@@ -3,1301 +3,885 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOVA TRADING | Dashboard</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <title>Nova Terminal</title>
     <style>
         :root {
-            --c-bg-base: #0a0a0f;
-            --c-bg-overlay: rgba(10, 10, 15, 0.85);
-            --c-glass: rgba(255, 255, 255, 0.05);
-            --c-glass-border: rgba(255, 255, 255, 0.1);
-            --c-text-main: #ffffff;
-            --c-text-muted: rgba(255, 255, 255, 0.7);
-            --c-text-dim: rgba(255, 255, 255, 0.4);
-            --c-accent-gold: #c5a059;
-            --c-accent-gold-bright: #ddb76a;
-            --c-profit: #00ff88;
-            --c-loss: #ff4757;
-            --c-neutral: #6c7293;
-            --c-warning: #ffa502;
-            --ease-fluid: cubic-bezier(0.25, 1, 0.5, 1);
-            --font-serif: 'Playfair Display', serif;
-            --font-sans: 'Manrope', sans-serif;
-            --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.4);
-            --gradient-gold: linear-gradient(135deg, #c5a059, #ddb76a);
-            --gradient-profit: linear-gradient(135deg, #00ff88, #00b894);
-            --gradient-loss: linear-gradient(135deg, #ff4757, #e55039);
+            --bg-app: #F2F2F7;
+            --bg-card: #FFFFFF;
+            --text-primary: #000000;
+            --text-secondary: #8E8E93;
+            --text-tertiary: #C7C7CC;
+            --accent-black: #1C1C1E;
+            --accent-track: #E5E5EA;
+            --gradient-bull: linear-gradient(135deg, #6BF3D6 0%, #4FA3FF 100%);
+            --gradient-bear: linear-gradient(135deg, #FF6B95 0%, #FF9F4F 100%);
+            --radius-l: 24px;
+            --radius-m: 16px;
+            --radius-s: 12px;
+            --radius-pill: 999px;
+            --space-xs: 4px;
+            --space-s: 8px;
+            --space-m: 16px;
+            --space-l: 24px;
+            --shadow-card: 0 4px 24px rgba(0,0,0,0.04);
+            --shadow-float: 0 8px 32px rgba(0,0,0,0.08);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            cursor: none;
         }
 
         body {
-            background-color: var(--c-bg-base);
-            font-family: var(--font-sans);
-            color: var(--c-text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-app);
+            color: var(--text-primary);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            font-size: 13px;
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-            line-height: 1.6;
         }
 
-        /* Sanctuary-inspired noise overlay */
-        .noise-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+        .layout {
+            display: grid;
+            grid-template-columns: 260px 1fr 300px;
+            grid-template-rows: 60px 1fr 280px;
+            gap: var(--space-m);
+            padding: var(--space-m);
             height: 100%;
-            z-index: 3;
-            opacity: 0.08;
-            pointer-events: none;
-            mix-blend-mode: overlay;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.8'/%3E%3C/svg%3E");
-            animation: noise-move 8s infinite linear;
+            width: 100%;
         }
 
-        @keyframes noise-move {
-            0% { transform: translate(0, 0); }
-            25% { transform: translate(-5px, 0); }
-            50% { transform: translate(-5px, -5px); }
-            75% { transform: translate(0, -5px); }
-            100% { transform: translate(0, 0); }
+        header {
+            grid-column: 1 / -1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-s);
         }
 
-        /* Sanctuary-inspired custom cursor */
-        .cursor-dot, .cursor-outline {
-            position: fixed;
-            top: 0;
-            left: 0;
-            transform: translate(-50%, -50%);
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--text-primary);
             border-radius: 50%;
-            z-index: 9999;
-            pointer-events: none;
-            transition: all 0.1s ease-out;
         }
 
-        .cursor-dot {
-            width: 4px;
-            height: 4px;
-            background-color: var(--c-accent-gold);
-            box-shadow: 0 0 8px rgba(197, 160, 89, 0.3);
+        .nav-pills {
+            background: var(--bg-card);
+            padding: 4px;
+            border-radius: var(--radius-pill);
+            display: flex;
+            gap: 2px;
+            box-shadow: var(--shadow-card);
         }
 
-        .cursor-outline {
-            width: 32px;
-            height: 32px;
-            border: 1px solid rgba(197, 160, 89, 0.3);
-            transition: width 0.2s var(--ease-fluid), height 0.2s var(--ease-fluid);
+        .nav-item {
+            padding: 8px 20px;
+            border-radius: var(--radius-pill);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text-secondary);
         }
 
-        .cursor-outline.hover {
-            width: 48px;
-            height: 48px;
-            border-color: var(--c-accent-gold);
+        .nav-item.active {
+            background: #fff;
+            color: var(--text-primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         }
 
-        /* Main container with smooth scroll */
-        .main-container {
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 2rem;
+        .account-info {
+            display: flex;
+            align-items: center;
+            gap: var(--space-m);
+            font-weight: 600;
+        }
+
+        .account-value {
+            font-size: 16px;
+        }
+
+        .timestamp {
+            color: var(--text-secondary);
+            font-size: 12px;
+        }
+
+        .panel {
+            background: var(--bg-card);
+            border-radius: var(--radius-m);
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
             position: relative;
-            z-index: 4;
         }
 
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            margin-bottom: 4rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease var(--ease-fluid) 0.2s forwards;
-        }
-
-        .hero h1 {
-            font-family: var(--font-serif);
-            font-size: clamp(3rem, 8vw, 5rem);
-            font-weight: 400;
-            margin-bottom: 1rem;
-            background: var(--gradient-gold);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 2px;
-        }
-
-        .hero-meta {
+        .panel-header {
+            padding: var(--space-m);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 2rem;
-            font-family: var(--font-sans);
-            font-size: 0.9rem;
-            color: var(--c-text-muted);
         }
 
-        .hero-pnl {
-            font-family: var(--font-sans);
-            font-size: 1.8rem;
-            font-weight: 500;
-            color: var(--c-profit);
+        .panel-title {
+            font-size: 15px;
+            font-weight: 700;
         }
 
-        /* Grid System */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
+        .portfolio-panel {
+            grid-column: 1;
+            grid-row: 2 / span 2;
         }
 
-        /* Glassmorphism Cards */
-        .glass-card {
-            background: var(--c-glass);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--c-glass-border);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: var(--shadow-glass);
-            transition: all 0.4s var(--ease-fluid);
-            opacity: 0;
-            transform: translateY(30px);
+        .portfolio-stats {
+            padding: 0 var(--space-m) var(--space-m) var(--space-m);
         }
 
-        .glass-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .glass-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(197, 160, 89, 0.2);
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
-        }
-
-        .card-title {
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
-            font-weight: 400;
-            margin-bottom: 1.5rem;
-            color: var(--c-accent-gold);
+        .stat-item {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 0.5rem;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--bg-app);
         }
 
-        .card-title::before {
-            content: '';
-            width: 3px;
-            height: 24px;
-            background: var(--gradient-gold);
-            border-radius: 2px;
+        .stat-item:last-child {
+            border-bottom: none;
         }
 
-        /* Portfolio Overview */
-        .portfolio-overview {
-            grid-column: 1 / -1;
+        .text-label {
+            color: var(--text-secondary);
+            font-size: 12px;
         }
 
-        .portfolio-wallets {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .wallet-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s var(--ease-fluid);
-        }
-
-        .wallet-card:hover {
-            border-color: rgba(197, 160, 89, 0.3);
-            transform: translateY(-4px);
-        }
-
-        .wallet-label {
-            font-size: 0.85rem;
-            color: var(--c-text-dim);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.5rem;
-        }
-
-        .wallet-value {
-            font-family: var(--font-sans);
-            font-size: 1.6rem;
+        .text-value {
             font-weight: 600;
-            margin-bottom: 0.5rem;
         }
 
-        .wallet-change {
-            font-size: 0.8rem;
-            opacity: 0.8;
+        .active-coins {
+            flex: 1;
+            overflow-y: auto;
         }
 
-        /* Open Positions Table */
-        .positions-table {
-            grid-column: 1 / 8;
+        .market-item {
+            padding: 12px var(--space-m);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--bg-app);
+            cursor: pointer;
         }
 
-        .table-container {
-            overflow-x: auto;
-            border-radius: 12px;
+        .market-item:hover {
+            background-color: rgba(0,0,0,0.02);
         }
 
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-family: var(--font-sans);
-            font-size: 0.9rem;
+        .pair-name {
+            font-weight: 600;
+            font-size: 14px;
         }
 
-        .data-table th,
-        .data-table td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        .pair-vol {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-top: 2px;
         }
 
-        .data-table th {
-            color: var(--c-text-dim);
-            font-weight: 500;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .change-pill {
+            padding: 4px 8px;
+            border-radius: var(--radius-pill);
+            font-size: 11px;
+            font-weight: 600;
+            min-width: 50px;
+            text-align: right;
         }
 
-        .data-table td {
-            font-weight: 500;
+        .change-pill.up {
+            background: rgba(52, 199, 89, 0.1);
+            color: #34C759;
         }
 
-        .data-table tr:hover {
-            background: rgba(255, 255, 255, 0.03);
+        .change-pill.down {
+            background: rgba(255, 59, 48, 0.1);
+            color: #FF3B30;
         }
 
-        /* Signal Gauges */
-        .signal-gauges {
-            grid-column: 8 / -1;
+        .signals-panel {
+            grid-column: 2;
+            grid-row: 2;
         }
 
-        .gauges-grid {
+        .overall-signal {
+            padding: var(--space-m);
+            text-align: center;
+            border-bottom: 1px solid var(--bg-app);
+        }
+
+        .big-price {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .signal-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-m);
+            padding: var(--space-m);
         }
 
-        .signal-gauge {
+        .signal-card {
+            background: var(--bg-app);
+            border-radius: var(--radius-s);
+            padding: var(--space-m);
             text-align: center;
         }
 
-        .gauge-circle {
-            position: relative;
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 1rem;
+        .signal-score {
+            font-size: 24px;
+            font-weight: 700;
+            margin: var(--space-s) 0;
         }
 
-        .gauge-bg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: conic-gradient(
-                from 0deg,
-                var(--c-loss) 0deg 60deg,
-                var(--c-warning) 60deg 120deg,
-                var(--c-profit) 120deg 180deg,
-                var(--c-profit) 180deg 240deg,
-                var(--c-warning) 240deg 300deg,
-                var(--c-loss) 300deg 360deg
-            );
-            padding: 4px;
-        }
-
-        .gauge-inner {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: var(--c-bg-base);
+        .signal-metrics {
             display: flex;
-            align-items: center;
-            justify-content: center;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-top: var(--space-s);
+        }
+
+        .chart-area {
+            flex: 1;
+            padding: var(--space-m);
+            display: flex;
             flex-direction: column;
         }
 
-        .gauge-value {
-            font-family: var(--font-sans);
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 0.25rem;
-        }
-
-        .gauge-label {
-            font-size: 0.7rem;
-            color: var(--c-text-dim);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .gauge-coin {
-            font-family: var(--font-serif);
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: var(--c-accent-gold);
-        }
-
-        /* Recent Trades */
-        .recent-trades {
-            grid-column: 1 / 7;
-        }
-
-        .trades-scroll {
-            max-height: 400px;
-            overflow-y: auto;
-            margin-right: -1rem;
-            padding-right: 1rem;
-        }
-
-        .trades-scroll::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .trades-scroll::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
-        }
-
-        .trades-scroll::-webkit-scrollbar-thumb {
-            background: var(--c-accent-gold);
-            border-radius: 2px;
-        }
-
-        /* Polymarket Sniper */
-        .polymarket-sniper {
-            grid-column: 7 / -1;
-        }
-
-        .sniper-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .sniper-stat {
-            text-align: center;
-            padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .sniper-value {
-            font-family: var(--font-sans);
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .sniper-label {
-            font-size: 0.8rem;
-            color: var(--c-text-dim);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .alerts-list {
-            max-height: 200px;
-            overflow-y: auto;
-        }
-
-        .alert-item {
+        .chart-container {
+            flex: 1;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem;
-            margin-bottom: 0.5rem;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 8px;
-            border-left: 3px solid var(--c-accent-gold);
-            font-size: 0.85rem;
+            align-items: end;
+            gap: 2px;
+            padding: var(--space-m) 0;
         }
 
-        /* Engine Weights */
+        .chart-bar {
+            flex: 1;
+            background: var(--accent-track);
+            border-radius: 2px;
+            min-height: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .chart-bar.positive {
+            background: #34C759;
+        }
+
+        .chart-bar.negative {
+            background: #FF3B30;
+        }
+
+        .positions-panel {
+            grid-column: 3;
+            grid-row: 2;
+        }
+
+        .book-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: "SF Mono", "Roboto Mono", monospace;
+            font-size: 11px;
+        }
+
+        .book-table th {
+            text-align: left;
+            color: var(--text-secondary);
+            font-weight: 500;
+            padding: 8px 12px;
+        }
+
+        .book-table td {
+            padding: 4px 12px;
+        }
+
+        .ask-row td {
+            color: #FF3B30;
+        }
+
+        .bid-row td {
+            color: #34C759;
+        }
+
+        .pnl-divider {
+            padding: var(--space-m);
+            text-align: center;
+            border-top: 1px solid var(--bg-app);
+            border-bottom: 1px solid var(--bg-app);
+            font-weight: 700;
+        }
+
+        .quick-stats {
+            padding: var(--space-m);
+        }
+
+        .quick-stats .stat-item {
+            padding: 8px 0;
+        }
+
+        .recent-trades {
+            grid-column: 2;
+            grid-row: 3;
+        }
+
+        .tab-row {
+            padding: 0 var(--space-m);
+            border-bottom: 1px solid var(--bg-app);
+            display: flex;
+            gap: 20px;
+        }
+
+        .tab {
+            padding: 16px 0;
+            font-weight: 600;
+            color: var(--text-secondary);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .tab.active {
+            color: var(--text-primary);
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--text-primary);
+        }
+
+        .trades-content {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            padding: 12px var(--space-m);
+            border-bottom: 1px solid var(--bg-app);
+            font-size: 12px;
+        }
+
+        .trade-direction {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            background: var(--bg-app);
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 10px;
+            text-transform: uppercase;
+        }
+
+        .status-badge.win {
+            background: rgba(52, 199, 89, 0.1);
+            color: #34C759;
+        }
+
+        .status-badge.loss {
+            background: rgba(255, 59, 48, 0.1);
+            color: #FF3B30;
+        }
+
+        .engine-status {
+            grid-column: 3;
+            grid-row: 3;
+        }
+
+        .regime-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-m);
+            border-bottom: 1px solid var(--bg-app);
+        }
+
+        .regime-pill {
+            padding: 6px 12px;
+            background: var(--gradient-bull);
+            color: white;
+            border-radius: var(--radius-pill);
+            font-weight: 600;
+            font-size: 11px;
+        }
+
+        .regime-pill.bear {
+            background: var(--gradient-bear);
+        }
+
         .engine-weights {
-            grid-column: 1 / 7;
+            padding: var(--space-m);
         }
 
         .weight-item {
             display: flex;
             align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .weight-name {
-            min-width: 200px;
-            font-size: 0.9rem;
-            color: var(--c-text-muted);
-        }
-
-        .weight-value {
-            min-width: 50px;
-            font-family: var(--font-sans);
-            font-weight: 600;
-            text-align: right;
-            margin-right: 1rem;
+            justify-content: space-between;
+            margin-bottom: var(--space-s);
         }
 
         .weight-bar {
             flex: 1;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
+            height: 4px;
+            background: var(--accent-track);
+            border-radius: 2px;
+            margin: 0 var(--space-s);
             overflow: hidden;
         }
 
         .weight-fill {
             height: 100%;
+            background: var(--accent-black);
+            transition: width 0.3s ease;
+        }
+
+        .confidence-score {
+            text-align: center;
+            padding: var(--space-m);
+            border-top: 1px solid var(--bg-app);
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #D1D1D6;
             border-radius: 3px;
-            transition: width 0.8s var(--ease-fluid);
-        }
-
-        .weight-bullish { background: var(--gradient-profit); }
-        .weight-bearish { background: var(--gradient-loss); }
-
-        /* Market Regime */
-        .market-regime {
-            grid-column: 7 / -1;
-        }
-
-        .regime-indicator {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .regime-badge {
-            display: inline-block;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-family: var(--font-serif);
-            font-size: 1.2rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            background: var(--gradient-gold);
-            color: var(--c-bg-base);
-            box-shadow: 0 8px 24px rgba(197, 160, 89, 0.3);
-        }
-
-        .regime-confidence {
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            color: var(--c-text-muted);
-        }
-
-        .regime-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .regime-stat {
-            text-align: center;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 12px;
-        }
-
-        .regime-stat-value {
-            font-family: var(--font-sans);
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .regime-stat-label {
-            font-size: 0.8rem;
-            color: var(--c-text-dim);
-            text-transform: uppercase;
-        }
-
-        /* Activity Feed */
-        .activity-feed {
-            grid-column: 1 / -1;
-        }
-
-        .activity-scroll {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .activity-item {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 12px;
-            border-left: 3px solid var(--c-accent-gold);
-            transition: all 0.3s var(--ease-fluid);
-        }
-
-        .activity-item:hover {
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateX(4px);
-        }
-
-        .activity-time {
-            font-family: var(--font-sans);
-            font-size: 0.8rem;
-            color: var(--c-text-dim);
-            min-width: 60px;
-            font-weight: 500;
-        }
-
-        .activity-content {
-            flex: 1;
-        }
-
-        .activity-title {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-            color: var(--c-text-main);
-        }
-
-        .activity-detail {
-            font-size: 0.85rem;
-            color: var(--c-text-muted);
-        }
-
-        /* Utility Classes */
-        .profit { color: var(--c-profit); }
-        .loss { color: var(--c-loss); }
-        .neutral { color: var(--c-neutral); }
-        .warning { color: var(--c-warning); }
-        .gold { color: var(--c-accent-gold); }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in {
-            animation: fadeInUp 0.8s var(--ease-fluid) forwards;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1200px) {
-            .dashboard-grid {
-                grid-template-columns: repeat(8, 1fr);
-            }
-            
-            .positions-table {
-                grid-column: 1 / -1;
-            }
-            
-            .signal-gauges {
-                grid-column: 1 / -1;
-            }
-            
-            .gauges-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .main-container {
-                padding: 1rem;
-            }
-            
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            
-            .glass-card {
-                padding: 1.5rem;
-            }
-            
-            .portfolio-wallets {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .gauges-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .sniper-stats {
-                grid-template-columns: 1fr;
-            }
-            
-            .hero h1 {
-                font-size: 3rem;
-            }
-            
-            .hero-meta {
-                flex-direction: column;
-                gap: 1rem;
-            }
-        }
-
-        /* Scroll Progress Indicator */
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 2px;
-            background: var(--gradient-gold);
-            z-index: 1000;
-            transition: width 0.1s ease-out;
         }
     </style>
 </head>
 <body>
-    <!-- Noise Overlay -->
-    <div class="noise-overlay"></div>
-    
-    <!-- Custom Cursor -->
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
-    
-    <!-- Scroll Progress -->
-    <div class="scroll-progress"></div>
+    <header>
+        <div class="logo">
+            <div class="logo-dot"></div>
+            Nova Terminal
+        </div>
+        <nav class="nav-pills">
+            <div class="nav-item active">Dashboard</div>
+            <div class="nav-item">Signals</div>
+            <div class="nav-item">Positions</div>
+            <div class="nav-item">History</div>
+        </nav>
+        <div class="account-info">
+            <div class="account-value" id="accountValue">$24,573.82</div>
+            <div class="timestamp" id="timestamp">22:24 UTC</div>
+        </div>
+    </header>
 
-    <div class="main-container">
-        <!-- Hero Section -->
-        <header class="hero">
-            <h1>NOVA TRADING</h1>
-            <div class="hero-meta">
-                <div id="current-datetime"></div>
-                <div class="hero-pnl">+$2,847.23 (12.4%)</div>
+    <div class="layout">
+        <!-- Portfolio Panel -->
+        <div class="panel portfolio-panel">
+            <div class="panel-header">
+                <div class="panel-title">Portfolio</div>
             </div>
-        </header>
+            <div class="portfolio-stats">
+                <div class="stat-item">
+                    <div class="text-label">Base USDC</div>
+                    <div class="text-value" id="baseUSDC">$12,450.00</div>
+                </div>
+                <div class="stat-item">
+                    <div class="text-label">Base ETH</div>
+                    <div class="text-value" id="baseETH">2.847 ETH</div>
+                </div>
+                <div class="stat-item">
+                    <div class="text-label">HL Balance</div>
+                    <div class="text-value" id="hlBalance">$8,923.45</div>
+                </div>
+                <div class="stat-item">
+                    <div class="text-label">Total Value</div>
+                    <div class="text-value" id="totalValue">$24,573.82</div>
+                </div>
+            </div>
+            <div class="panel-header">
+                <div class="panel-title">Active Coins</div>
+            </div>
+            <div class="active-coins">
+                <div class="market-item">
+                    <div>
+                        <div class="pair-name">ETH</div>
+                        <div class="pair-vol">Signal: 75</div>
+                    </div>
+                    <div class="change-pill up">+12</div>
+                </div>
+                <div class="market-item">
+                    <div>
+                        <div class="pair-name">BTC</div>
+                        <div class="pair-vol">Signal: 45</div>
+                    </div>
+                    <div class="change-pill up">+8</div>
+                </div>
+                <div class="market-item">
+                    <div>
+                        <div class="pair-name">SOL</div>
+                        <div class="pair-vol">Signal: -20</div>
+                    </div>
+                    <div class="change-pill down">-15</div>
+                </div>
+                <div class="market-item">
+                    <div>
+                        <div class="pair-name">HYPE</div>
+                        <div class="pair-vol">Signal: 85</div>
+                    </div>
+                    <div class="change-pill up">+22</div>
+                </div>
+            </div>
+        </div>
 
-        <!-- Dashboard Grid -->
-        <div class="dashboard-grid">
-            <!-- Portfolio Overview -->
-            <section class="glass-card portfolio-overview">
-                <h2 class="card-title">Portfolio Overview</h2>
-                <div class="portfolio-wallets">
-                    <div class="wallet-card">
-                        <div class="wallet-label">Base USDC</div>
-                        <div class="wallet-value neutral">$4,285.32</div>
-                        <div class="wallet-change profit">+2.3%</div>
-                    </div>
-                    <div class="wallet-card">
-                        <div class="wallet-label">Base ETH</div>
-                        <div class="wallet-value neutral">1.847 ETH</div>
-                        <div class="wallet-change profit">+5.7%</div>
-                    </div>
-                    <div class="wallet-card">
-                        <div class="wallet-label">Hyperliquid</div>
-                        <div class="wallet-value neutral">$3,523.67</div>
-                        <div class="wallet-change profit">+8.2%</div>
-                    </div>
-                    <div class="wallet-card">
-                        <div class="wallet-label">Total Portfolio</div>
-                        <div class="wallet-value gold">$22,943.89</div>
-                        <div class="wallet-change profit">+12.4%</div>
+        <!-- Signals Panel -->
+        <div class="panel signals-panel">
+            <div class="panel-header">
+                <div class="panel-title">Signals</div>
+            </div>
+            <div class="overall-signal">
+                <div class="text-label">Overall Signal</div>
+                <div class="big-price" id="overallSignal" style="color: #34C759;">+42</div>
+            </div>
+            <div class="signal-grid">
+                <div class="signal-card">
+                    <div class="pair-name">ETH</div>
+                    <div class="signal-score change-pill up">+75</div>
+                    <div class="signal-metrics">
+                        <span>WT: 0.8</span>
+                        <span>RSI: 65</span>
+                        <span>Bull</span>
                     </div>
                 </div>
-            </section>
-
-            <!-- Open Positions -->
-            <section class="glass-card positions-table">
-                <h2 class="card-title">Open Positions</h2>
-                <div class="table-container">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Coin</th>
-                                <th>Size</th>
-                                <th>Entry Price</th>
-                                <th>Current Price</th>
-                                <th>Unrealized P&L</th>
-                                <th>Liq. Price</th>
-                            </tr>
-                        </thead>
-                        <tbody id="positions-data">
-                            <tr>
-                                <td><strong>ETH</strong></td>
-                                <td>0.25 ETH</td>
-                                <td>$3,247.83</td>
-                                <td>$3,398.92</td>
-                                <td class="profit">+$37.77</td>
-                                <td>$2,845.20</td>
-                            </tr>
-                            <tr>
-                                <td><strong>BTC</strong></td>
-                                <td>0.05 BTC</td>
-                                <td>$91,245.30</td>
-                                <td>$94,823.45</td>
-                                <td class="profit">+$178.91</td>
-                                <td>$78,450.12</td>
-                            </tr>
-                            <tr>
-                                <td><strong>SOL</strong></td>
-                                <td>15.3 SOL</td>
-                                <td>$238.44</td>
-                                <td>$227.89</td>
-                                <td class="loss">-$161.42</td>
-                                <td>$195.20</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- Signal Gauges -->
-            <section class="glass-card signal-gauges">
-                <h2 class="card-title">Signal Strength</h2>
-                <div class="gauges-grid">
-                    <div class="signal-gauge">
-                        <div class="gauge-circle">
-                            <div class="gauge-bg">
-                                <div class="gauge-inner">
-                                    <div class="gauge-value profit">78</div>
-                                    <div class="gauge-label">Strong Buy</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="gauge-coin">ETH</div>
-                    </div>
-                    <div class="signal-gauge">
-                        <div class="gauge-circle">
-                            <div class="gauge-bg">
-                                <div class="gauge-inner">
-                                    <div class="gauge-value warning">52</div>
-                                    <div class="gauge-label">Hold</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="gauge-coin">BTC</div>
-                    </div>
-                    <div class="signal-gauge">
-                        <div class="gauge-circle">
-                            <div class="gauge-bg">
-                                <div class="gauge-inner">
-                                    <div class="gauge-value profit">89</div>
-                                    <div class="gauge-label">Strong Buy</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="gauge-coin">SOL</div>
-                    </div>
-                    <div class="signal-gauge">
-                        <div class="gauge-circle">
-                            <div class="gauge-bg">
-                                <div class="gauge-inner">
-                                    <div class="gauge-value profit">73</div>
-                                    <div class="gauge-label">Buy</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="gauge-coin">HYPE</div>
+                <div class="signal-card">
+                    <div class="pair-name">BTC</div>
+                    <div class="signal-score change-pill up">+45</div>
+                    <div class="signal-metrics">
+                        <span>WT: 0.4</span>
+                        <span>RSI: 58</span>
+                        <span>Bull</span>
                     </div>
                 </div>
-            </section>
-
-            <!-- Recent Trades -->
-            <section class="glass-card recent-trades">
-                <h2 class="card-title">Recent Trades</h2>
-                <div class="trades-scroll">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Timestamp</th>
-                                <th>Coin</th>
-                                <th>Direction</th>
-                                <th>Size</th>
-                                <th>Entry</th>
-                                <th>Exit</th>
-                                <th>P&L</th>
-                                <th>Duration</th>
-                            </tr>
-                        </thead>
-                        <tbody id="trades-data">
-                            <tr>
-                                <td>21:43</td>
-                                <td><strong>ETH</strong></td>
-                                <td class="profit">LONG</td>
-                                <td>0.15</td>
-                                <td>$3,247.83</td>
-                                <td>$3,398.92</td>
-                                <td class="profit">+$22.66</td>
-                                <td>4h 23m</td>
-                            </tr>
-                            <tr>
-                                <td>18:29</td>
-                                <td><strong>BTC</strong></td>
-                                <td class="loss">SHORT</td>
-                                <td>0.02</td>
-                                <td>$93,450.12</td>
-                                <td>$94,823.45</td>
-                                <td class="loss">-$27.47</td>
-                                <td>2h 14m</td>
-                            </tr>
-                            <tr>
-                                <td>16:15</td>
-                                <td><strong>SOL</strong></td>
-                                <td class="profit">LONG</td>
-                                <td>8.5</td>
-                                <td>$225.30</td>
-                                <td>$238.44</td>
-                                <td class="profit">+$111.69</td>
-                                <td>6h 47m</td>
-                            </tr>
-                            <tr>
-                                <td>14:52</td>
-                                <td><strong>HYPE</strong></td>
-                                <td class="profit">LONG</td>
-                                <td>45</td>
-                                <td>$28.93</td>
-                                <td>$31.47</td>
-                                <td class="profit">+$114.30</td>
-                                <td>1h 23m</td>
-                            </tr>
-                            <tr>
-                                <td>12:08</td>
-                                <td><strong>ETH</strong></td>
-                                <td class="loss">SHORT</td>
-                                <td>0.08</td>
-                                <td>$3,301.22</td>
-                                <td>$3,247.83</td>
-                                <td class="profit">+$4.27</td>
-                                <td>3h 07m</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- Polymarket Sniper -->
-            <section class="glass-card polymarket-sniper">
-                <h2 class="card-title">Polymarket Sniper</h2>
-                <div class="sniper-stats">
-                    <div class="sniper-stat">
-                        <div class="sniper-value gold">73</div>
-                        <div class="sniper-label">Alerts Fired</div>
-                    </div>
-                    <div class="sniper-stat">
-                        <div class="sniper-value profit">84.2%</div>
-                        <div class="sniper-label">Accuracy</div>
-                    </div>
-                    <div class="sniper-stat">
-                        <div class="sniper-value warning">23.7%</div>
-                        <div class="sniper-label">Avg Edge</div>
+                <div class="signal-card">
+                    <div class="pair-name">SOL</div>
+                    <div class="signal-score change-pill down">-20</div>
+                    <div class="signal-metrics">
+                        <span>WT: -0.3</span>
+                        <span>RSI: 42</span>
+                        <span>Bear</span>
                     </div>
                 </div>
-                <div class="alerts-list">
-                    <div class="alert-item">
-                        <span>TRUMP_WIN_2024 • Oversold</span>
-                        <span class="profit">+18.4%</span>
-                    </div>
-                    <div class="alert-item">
-                        <span>BTC_100K_EOY • Mean Revert</span>
-                        <span class="profit">+31.2%</span>
-                    </div>
-                    <div class="alert-item">
-                        <span>AI_BREAKTHROUGH • Volume Spike</span>
-                        <span class="profit">+12.8%</span>
-                    </div>
-                    <div class="alert-item">
-                        <span>ETH_5K_Q1 • RSI Divergence</span>
-                        <span class="loss">-8.3%</span>
+                <div class="signal-card">
+                    <div class="pair-name">HYPE</div>
+                    <div class="signal-score change-pill up">+85</div>
+                    <div class="signal-metrics">
+                        <span>WT: 0.9</span>
+                        <span>RSI: 72</span>
+                        <span>Bull</span>
                     </div>
                 </div>
-            </section>
+            </div>
+            <div class="chart-area">
+                <div class="text-label">Signal History (24h)</div>
+                <div class="chart-container" id="signalChart">
+                    <!-- Chart bars will be generated by JavaScript -->
+                </div>
+            </div>
+        </div>
 
-            <!-- Engine Weights -->
-            <section class="glass-card engine-weights">
-                <h2 class="card-title">Engine Weights</h2>
+        <!-- Open Positions Panel -->
+        <div class="panel positions-panel">
+            <div class="panel-header">
+                <div class="panel-title">Open Positions</div>
+            </div>
+            <table class="book-table">
+                <thead>
+                    <tr>
+                        <th>Coin</th>
+                        <th>Size</th>
+                        <th>Entry</th>
+                        <th>P&L</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bid-row">
+                        <td>ETH</td>
+                        <td>1.2</td>
+                        <td>$3,450</td>
+                        <td>+$324</td>
+                    </tr>
+                    <tr class="bid-row">
+                        <td>HYPE</td>
+                        <td>850</td>
+                        <td>$12.40</td>
+                        <td>+$187</td>
+                    </tr>
+                    <tr class="ask-row">
+                        <td>SOL</td>
+                        <td>-15</td>
+                        <td>$198</td>
+                        <td>-$45</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pnl-divider" style="color: #34C759;">
+                Total Unrealized: +$466
+            </div>
+            <div class="quick-stats">
+                <div class="stat-item">
+                    <div class="text-label">Margin Used</div>
+                    <div class="text-value">$8,250</div>
+                </div>
+                <div class="stat-item">
+                    <div class="text-label">Liq Distance</div>
+                    <div class="text-value">-24.5%</div>
+                </div>
+                <div class="stat-item">
+                    <div class="text-label">Funding Rate</div>
+                    <div class="text-value">0.0125%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Trades Panel -->
+        <div class="panel recent-trades">
+            <div class="panel-header">
+                <div class="panel-title">Activity</div>
+            </div>
+            <div class="tab-row">
+                <div class="tab active">Recent Trades</div>
+                <div class="tab">Sniper Alerts</div>
+                <div class="tab">Activity</div>
+            </div>
+            <div class="trades-content">
+                <div class="history-item">
+                    <div>14:32</div>
+                    <div>ETH</div>
+                    <div class="trade-direction" style="color: #34C759;">▲ Long</div>
+                    <div>0.5</div>
+                    <div class="status-badge win">WIN</div>
+                </div>
+                <div class="history-item">
+                    <div>13:18</div>
+                    <div>HYPE</div>
+                    <div class="trade-direction" style="color: #34C759;">▲ Long</div>
+                    <div>200</div>
+                    <div class="status-badge win">WIN</div>
+                </div>
+                <div class="history-item">
+                    <div>12:45</div>
+                    <div>SOL</div>
+                    <div class="trade-direction" style="color: #FF3B30;">▼ Short</div>
+                    <div>10</div>
+                    <div class="status-badge">OPEN</div>
+                </div>
+                <div class="history-item">
+                    <div>11:22</div>
+                    <div>BTC</div>
+                    <div class="trade-direction" style="color: #FF3B30;">▼ Short</div>
+                    <div>0.1</div>
+                    <div class="status-badge loss">LOSS</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Engine Status Panel -->
+        <div class="panel engine-status">
+            <div class="panel-header">
+                <div class="panel-title">Engine Status</div>
+            </div>
+            <div class="regime-indicator">
+                <div class="text-label">Market Regime</div>
+                <div class="regime-pill">BULL</div>
+            </div>
+            <div class="engine-weights">
+                <div class="text-label" style="margin-bottom: var(--space-s);">Engine Weights</div>
                 <div class="weight-item">
-                    <div class="weight-name">MFI_GREEN_MOMENTUM</div>
-                    <div class="weight-value profit">+12</div>
-                    <div class="weight-bar">
-                        <div class="weight-fill weight-bullish" style="width: 75%;"></div>
-                    </div>
+                    <span>Trend</span>
+                    <div class="weight-bar"><div class="weight-fill" style="width: 75%;"></div></div>
+                    <span>75%</span>
                 </div>
                 <div class="weight-item">
-                    <div class="weight-name">RSI_OVERSOLD_CROSS</div>
-                    <div class="weight-value profit">+9</div>
-                    <div class="weight-bar">
-                        <div class="weight-fill weight-bullish" style="width: 56%;"></div>
-                    </div>
+                    <span>Mean Rev</span>
+                    <div class="weight-bar"><div class="weight-fill" style="width: 45%;"></div></div>
+                    <span>45%</span>
                 </div>
                 <div class="weight-item">
-                    <div class="weight-name">WT_BULLISH_DIVERGENCE</div>
-                    <div class="weight-value profit">+7</div>
-                    <div class="weight-bar">
-                        <div class="weight-fill weight-bullish" style="width: 44%;"></div>
-                    </div>
+                    <span>Momentum</span>
+                    <div class="weight-bar"><div class="weight-fill" style="width: 60%;"></div></div>
+                    <span>60%</span>
                 </div>
-                <div class="weight-item">
-                    <div class="weight-name">VOLUME_CONFIRMATION</div>
-                    <div class="weight-value profit">+5</div>
-                    <div class="weight-bar">
-                        <div class="weight-fill weight-bullish" style="width: 31%;"></div>
-                    </div>
-                </div>
-                <div class="weight-item">
-                    <div class="weight-name">BELOW_VWAP_SUPPORT</div>
-                    <div class="weight-value profit">+3</div>
-                    <div class="weight-bar">
-                        <div class="weight-fill weight-bullish" style="width: 19%;"></div>
-                    </div>
-                </div>
-                <div class="weight-item">
-                    <div class="weight-name">WT_CROSS_OVERBOUGHT</div>
-                    <div class="weight-value loss">-6</div>
-                    <div class="weight-bar">
-                        <div class="weight-fill weight-bearish" style="width: 38%;"></div>
-                    </div>
-                </div>
-                <div class="weight-item">
-                    <div class="weight-name">MOMENTUM_EXHAUSTION</div>
-                    <div class="weight-value loss">-8</div>
-                    <div class="weight-bar">
-                        <div class="weight-fill weight-bearish" style="width: 50%;"></div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Market Regime -->
-            <section class="glass-card market-regime">
-                <h2 class="card-title">Market Regime</h2>
-                <div class="regime-indicator">
-                    <div class="regime-badge">TRENDING</div>
-                    <div class="regime-confidence">94% Confidence • Strong Momentum Detected</div>
-                </div>
-                <div class="regime-stats">
-                    <div class="regime-stat">
-                        <div class="regime-stat-value profit">+2.8σ</div>
-                        <div class="regime-stat-label">Price Z-Score</div>
-                    </div>
-                    <div class="regime-stat">
-                        <div class="regime-stat-value warning">0.84</div>
-                        <div class="regime-stat-label">Volatility</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 24h Activity Feed -->
-            <section class="glass-card activity-feed">
-                <h2 class="card-title">24h Activity Timeline</h2>
-                <div class="activity-scroll">
-                    <div class="activity-item">
-                        <div class="activity-time">22:14</div>
-                        <div class="activity-content">
-                            <div class="activity-title">Position Opened: ETH LONG</div>
-                            <div class="activity-detail">0.25 ETH at $3,247.83 • 2.5x leverage • $811.96 collateral</div>
-                        </div>
-                    </div>
-                    <div class="activity-item">
-                        <div class="activity-time">21:58</div>
-                        <div class="activity-content">
-                            <div class="activity-title">Sniper Alert: BTC Oversold</div>
-                            <div class="activity-detail">OVERSOLD_GOLDEN_HOUR signal fired • 23.4% edge detected</div>
-                        </div>
-                    </div>
-                    <div class="activity-item">
-                        <div class="activity-time">21:43</div>
-                        <div class="activity-content">
-                            <div class="activity-title">Trade Closed: ETH LONG</div>
-                            <div class="activity-detail">0.15 ETH closed at $3,398.92 • +$22.66 profit • 4h 23m duration</div>
-                        </div>
-                    </div>
-                    <div class="activity-item">
-                        <div class="activity-time">20:31</div>
-                        <div class="activity-content">
-                            <div class="activity-title">Engine Weight Update</div>
-                            <div class="activity-detail">MFI_GREEN_MOMENTUM boosted to +12 (was +9) • 2.3k samples</div>
-                        </div>
-                    </div>
-                    <div class="activity-item">
-                        <div class="activity-time">19:22</div>
-                        <div class="activity-content">
-                            <div class="activity-title">Regime Change Detected</div>
-                            <div class="activity-detail">Market shifted from VOLATILE to TRENDING • 94% confidence</div>
-                        </div>
-                    </div>
-                    <div class="activity-item">
-                        <div class="activity-time">18:45</div>
-                        <div class="activity-content">
-                            <div class="activity-title">Signal Generated: SOL Strong Buy</div>
-                            <div class="activity-detail">Composite score: 89/100 • Multiple bullish confirmations</div>
-                        </div>
-                    </div>
-                    <div class="activity-item">
-                        <div class="activity-time">17:33</div>
-                        <div class="activity-content">
-                            <div class="activity-title">Polymarket Edge: AI_BREAKTHROUGH</div>
-                            <div class="activity-detail">Volume spike detected • 12.8% projected edge</div>
-                        </div>
-                    </div>
-                    <div class="activity-item">
-                        <div class="activity-time">16:15</div>
-                        <div class="activity-content">
-                            <div class="activity-title">Portfolio Rebalance</div>
-                            <div class="activity-detail">Base USDC allocation increased to 35% • Risk adjusted</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            </div>
+            <div class="confidence-score">
+                <div class="text-label">Confidence Score</div>
+                <div class="text-value" style="font-size: 18px; color: #34C759;">87%</div>
+                <div class="text-label" style="margin-top: var(--space-xs);">Last calibration: 2h ago</div>
+            </div>
         </div>
     </div>
 
     <script>
-        // Dashboard state and data
-        let dashboardData = {
-            portfolio: {
-                baseUSDC: 4285.32,
-                baseETH: 1.847,
-                hyperliquid: 3523.67,
-                totalValue: 22943.89,
-                totalPnL: 12.4,
-                totalPnLAmount: 2847.23
+        // Dashboard data object with realistic trading system values
+        const dashboardData = {
+            account: {
+                totalValue: 24573.82,
+                baseUSDC: 12450.00,
+                baseETH: 2.847,
+                hlBalance: 8923.45,
+                timestamp: new Date().toLocaleTimeString('en-US', { 
+                    hour12: false, 
+                    timeZone: 'UTC',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                }) + ' UTC'
+            },
+            signals: {
+                overall: 42,
+                coins: {
+                    ETH: { score: 75, wavetrend: 0.8, rsi: 65, regime: 'Bull' },
+                    BTC: { score: 45, wavetrend: 0.4, rsi: 58, regime: 'Bull' },
+                    SOL: { score: -20, wavetrend: -0.3, rsi: 42, regime: 'Bear' },
+                    HYPE: { score: 85, wavetrend: 0.9, rsi: 72, regime: 'Bull' }
+                },
+                history: [12, 18, -5, 22, 15, 8, -12, 25, 32, 28, 15, 42, 38, 45, 52, 48, 35, 28, 42, 38, 45, 42, 38, 42]
             },
             positions: [
-                { coin: 'ETH', size: '0.25 ETH', entry: 3247.83, current: 3398.92, pnl: 37.77, liq: 2845.20 },
-                { coin: 'BTC', size: '0.05 BTC', entry: 91245.30, current: 94823.45, pnl: 178.91, liq: 78450.12 },
-                { coin: 'SOL', size: '15.3 SOL', entry: 238.44, current: 227.89, pnl: -161.42, liq: 195.20 }
+                { coin: 'ETH', size: 1.2, entry: 3450, pnl: 324, side: 'long' },
+                { coin: 'HYPE', size: 850, entry: 12.40, pnl: 187, side: 'long' },
+                { coin: 'SOL', size: -15, entry: 198, pnl: -45, side: 'short' }
             ],
-            signals: {
-                ETH: { score: 78, label: 'Strong Buy' },
-                BTC: { score: 52, label: 'Hold' },
-                SOL: { score: 89, label: 'Strong Buy' },
-                HYPE: { score: 73, label: 'Buy' }
+            stats: {
+                marginUsed: 8250,
+                liquidationDistance: -24.5,
+                fundingRate: 0.0125,
+                totalUnrealized: 466
             },
-            sniper: {
-                alertsFired: 73,
-                accuracy: 84.2,
-                avgEdge: 23.7
+            engine: {
+                regime: 'BULL',
+                weights: {
+                    trend: 75,
+                    meanReversion: 45,
+                    momentum: 60
+                },
+                confidence: 87,
+                lastCalibration: '2h ago'
             },
-            regime: {
-                current: 'TRENDING',
-                confidence: 94,
-                zScore: 2.8,
-                volatility: 0.84
-            }
+            trades: [
+                { time: '14:32', coin: 'ETH', direction: 'Long', size: 0.5, status: 'WIN', side: 'long' },
+                { time: '13:18', coin: 'HYPE', direction: 'Long', size: 200, status: 'WIN', side: 'long' },
+                { time: '12:45', coin: 'SOL', direction: 'Short', size: 10, status: 'OPEN', side: 'short' },
+                { time: '11:22', coin: 'BTC', direction: 'Short', size: 0.1, status: 'LOSS', side: 'short' }
+            ]
         };
 
-        // Custom cursor functionality
-        let cursorDot, cursorOutline;
-        let mousePosition = { x: 0, y: 0 };
-        let requestId = null;
+        // Function to update dashboard with new data
+        function updateDashboard(data) {
+            // Update account info
+            if (data.account) {
+                document.getElementById('accountValue').textContent = `$${data.account.totalValue.toLocaleString()}`;
+                document.getElementById('baseUSDC').textContent = `$${data.account.baseUSDC.toLocaleString()}`;
+                document.getElementById('baseETH').textContent = `${data.account.baseETH} ETH`;
+                document.getElementById('hlBalance').textContent = `$${data.account.hlBalance.toLocaleString()}`;
+                document.getElementById('totalValue').textContent = `$${data.account.totalValue.toLocaleString()}`;
+                document.getElementById('timestamp').textContent = data.account.timestamp;
+            }
 
-        function initializeCursor() {
-            cursorDot = document.querySelector('.cursor-dot');
-            cursorOutline = document.querySelector('.cursor-outline');
+            // Update overall signal
+            if (data.signals) {
+                const overallEl = document.getElementById('overallSignal');
+                overallEl.textContent = data.signals.overall > 0 ? `+${data.signals.overall}` : data.signals.overall;
+                overallEl.style.color = data.signals.overall > 0 ? '#34C759' : '#FF3B30';
+            }
 
-            document.addEventListener('mousemove', (e) => {
-                mousePosition.x = e.clientX;
-                mousePosition.y = e.clientY;
+            // Update signal history chart
+            if (data.signals && data.signals.history) {
+                const chartContainer = document.getElementById('signalChart');
+                chartContainer.innerHTML = '';
+                const maxHeight = 40; // pixels
+                const maxValue = Math.max(...data.signals.history.map(Math.abs));
                 
-                if (!requestId) {
-                    requestId = requestAnimationFrame(updateCursor);
-                }
-            });
-
-            // Hover effects
-            document.addEventListener('mouseenter', (e) => {
-                if (e.target.closest('.glass-card, .wallet-card, .sniper-stat, .activity-item')) {
-                    cursorOutline.classList.add('hover');
-                }
-            }, true);
-
-            document.addEventListener('mouseleave', (e) => {
-                if (e.target.closest('.glass-card, .wallet-card, .sniper-stat, .activity-item')) {
-                    cursorOutline.classList.remove('hover');
-                }
-            }, true);
-        }
-
-        function updateCursor() {
-            cursorDot.style.left = mousePosition.x + 'px';
-            cursorDot.style.top = mousePosition.y + 'px';
-            cursorOutline.style.left = mousePosition.x + 'px';
-            cursorOutline.style.top = mousePosition.y + 'px';
-            
-            requestId = null;
-        }
-
-        // Date/time display
-        function updateDateTime() {
-            const now = new Date();
-            const options = {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                timeZoneName: 'short'
-            };
-            document.getElementById('current-datetime').textContent = now.toLocaleDateString('en-US', options);
-        }
-
-        // Intersection Observer for animations
-        function initializeAnimations() {
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry, index) => {
-                    if (entry.isIntersecting) {
-                        setTimeout(() => {
-                            entry.target.classList.add('visible');
-                        }, index * 100);
+                data.signals.history.forEach(value => {
+                    const bar = document.createElement('div');
+                    bar.className = 'chart-bar';
+                    const height = Math.abs(value) / maxValue * maxHeight;
+                    bar.style.height = `${height}px`;
+                    
+                    if (value > 0) {
+                        bar.classList.add('positive');
+                    } else if (value < 0) {
+                        bar.classList.add('negative');
                     }
+                    
+                    chartContainer.appendChild(bar);
                 });
-            }, observerOptions);
-
-            document.querySelectorAll('.glass-card').forEach(card => {
-                observer.observe(card);
-            });
-        }
-
-        // Scroll progress indicator
-        function initializeScrollProgress() {
-            const progressBar = document.querySelector('.scroll-progress');
-            
-            window.addEventListener('scroll', () => {
-                const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-                const progress = (window.pageYOffset / totalHeight) * 100;
-                progressBar.style.width = progress + '%';
-            });
-        }
-
-        // Update dashboard data function
-        function updateDashboard(newData) {
-            if (newData.portfolio) {
-                Object.assign(dashboardData.portfolio, newData.portfolio);
-            }
-            if (newData.positions) {
-                dashboardData.positions = newData.positions;
-            }
-            if (newData.signals) {
-                Object.assign(dashboardData.signals, newData.signals);
-            }
-            if (newData.sniper) {
-                Object.assign(dashboardData.sniper, newData.sniper);
-            }
-            if (newData.regime) {
-                Object.assign(dashboardData.regime, newData.regime);
-            }
-            
-            renderDashboard();
-        }
-
-        // Render dashboard with updated data
-        function renderDashboard() {
-            // Update portfolio values
-            const portfolioElements = {
-                baseUSDC: document.querySelector('.wallet-card:nth-child(1) .wallet-value'),
-                baseETH: document.querySelector('.wallet-card:nth-child(2) .wallet-value'),
-                hyperliquid: document.querySelector('.wallet-card:nth-child(3) .wallet-value'),
-                totalValue: document.querySelector('.wallet-card:nth-child(4) .wallet-value')
-            };
-
-            if (portfolioElements.baseUSDC) {
-                portfolioElements.baseUSDC.textContent = `$${dashboardData.portfolio.baseUSDC.toLocaleString()}`;
-                portfolioElements.baseETH.textContent = `${dashboardData.portfolio.baseETH.toFixed(3)} ETH`;
-                portfolioElements.hyperliquid.textContent = `$${dashboardData.portfolio.hyperliquid.toLocaleString()}`;
-                portfolioElements.totalValue.textContent = `$${dashboardData.portfolio.totalValue.toLocaleString()}`;
-            }
-
-            // Update hero P&L
-            const heroPnL = document.querySelector('.hero-pnl');
-            if (heroPnL) {
-                heroPnL.textContent = `+$${dashboardData.portfolio.totalPnLAmount.toLocaleString()} (${dashboardData.portfolio.totalPnL}%)`;
-            }
-
-            // Update signal gauges
-            Object.keys(dashboardData.signals).forEach(coin => {
-                const signal = dashboardData.signals[coin];
-                const gauges = document.querySelectorAll('.signal-gauge');
-                
-                gauges.forEach(gauge => {
-                    const coinName = gauge.querySelector('.gauge-coin').textContent;
-                    if (coinName === coin) {
-                        const valueEl = gauge.querySelector('.gauge-value');
-                        const labelEl = gauge.querySelector('.gauge-label');
-                        
-                        valueEl.textContent = signal.score;
-                        labelEl.textContent = signal.label;
-                        
-                        // Update color based on score
-                        valueEl.className = signal.score >= 70 ? 'gauge-value profit' :
-                                          signal.score >= 50 ? 'gauge-value warning' :
-                                          'gauge-value neutral';
-                    }
-                });
-            });
-
-            // Update sniper stats
-            const sniperElements = document.querySelectorAll('.sniper-value');
-            if (sniperElements.length >= 3) {
-                sniperElements[0].textContent = dashboardData.sniper.alertsFired;
-                sniperElements[1].textContent = `${dashboardData.sniper.accuracy}%`;
-                sniperElements[2].textContent = `${dashboardData.sniper.avgEdge}%`;
-            }
-
-            // Update regime
-            const regimeBadge = document.querySelector('.regime-badge');
-            const regimeConfidence = document.querySelector('.regime-confidence');
-            const regimeStats = document.querySelectorAll('.regime-stat-value');
-            
-            if (regimeBadge) {
-                regimeBadge.textContent = dashboardData.regime.current;
-                regimeConfidence.textContent = `${dashboardData.regime.confidence}% Confidence • Strong Momentum Detected`;
-                
-                if (regimeStats.length >= 2) {
-                    regimeStats[0].textContent = `+${dashboardData.regime.zScore}σ`;
-                    regimeStats[1].textContent = dashboardData.regime.volatility;
-                }
             }
         }
 
-        // Initialize everything when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeCursor();
-            updateDateTime();
-            initializeAnimations();
-            initializeScrollProgress();
+        // Initialize the dashboard
+        updateDashboard(dashboardData);
+
+        // Generate signal history chart on load
+        const chartContainer = document.getElementById('signalChart');
+        const maxHeight = 40;
+        const maxValue = Math.max(...dashboardData.signals.history.map(Math.abs));
+
+        dashboardData.signals.history.forEach(value => {
+            const bar = document.createElement('div');
+            bar.className = 'chart-bar';
+            const height = Math.abs(value) / maxValue * maxHeight;
+            bar.style.height = `${height}px`;
             
-            // Update date/time every minute
-            setInterval(updateDateTime, 60000);
+            if (value > 0) {
+                bar.classList.add('positive');
+            } else if (value < 0) {
+                bar.classList.add('negative');
+            }
             
-            console.log('NOVA Trading Dashboard initialized');
-            console.log('Current data:', dashboardData);
-            console.log('To update: updateDashboard(newData)');
+            chartContainer.appendChild(bar);
         });
 
-        // Expose updateDashboard globally
-        window.updateDashboard = updateDashboard;
-        window.dashboardData = dashboardData;
+        // Auto-update timestamp every minute
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('timestamp').textContent = 
+                now.toLocaleTimeString('en-US', { 
+                    hour12: false, 
+                    timeZone: 'UTC',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                }) + ' UTC';
+        }, 60000);
     </script>
 </body>
 </html>
