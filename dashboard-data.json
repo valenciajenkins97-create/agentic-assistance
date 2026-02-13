@@ -1,0 +1,296 @@
+{
+  "generatedAt": "2026-02-13T22:48:43.018Z",
+  "account": {
+    "baseUSDC": 58.4803,
+    "baseETH": 0.000379880318003408,
+    "baseWETH": 0.002557478556195106,
+    "baseETHValue": 6.017444016094334,
+    "hlAccountValue": 22.385413,
+    "hlMarginUsed": 0,
+    "hlWithdrawable": 22.385413,
+    "totalValue": 86.88315701609433
+  },
+  "prices": {
+    "ETH": 2048.59,
+    "BTC": 68835.63,
+    "SOL": 84.53,
+    "HYPE": 31.5085
+  },
+  "positions": [],
+  "signals": {
+    "overall": 11,
+    "action": "NEUTRAL",
+    "wt1": -31.771427745058674,
+    "rsi": 45.14352282568801,
+    "mfi": 0,
+    "history": [
+      5,
+      -25,
+      -25,
+      -25,
+      5,
+      -15,
+      -30,
+      -15,
+      0,
+      15,
+      15,
+      15,
+      14,
+      14,
+      4,
+      1,
+      -5,
+      -14,
+      -14,
+      4,
+      -12,
+      3,
+      3,
+      11
+    ],
+    "totalSnapshots": 112,
+    "lastUpdate": "2026-02-13T22:45:15.636Z"
+  },
+  "journal": [
+    {
+      "timestamp": "2026-02-13T20:29:59.139Z",
+      "action": "CLOSE_POSITION",
+      "details": {
+        "coin": "ETH",
+        "positionSize": 0.0055,
+        "isLong": true,
+        "orderPrice": 2033.9292500000001
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-13T16:50:11.276Z",
+      "action": "OPEN_LONG",
+      "details": {
+        "coin": "ETH",
+        "size": "0.0055",
+        "sizeUsd": 11.242986999999998,
+        "leverage": 2,
+        "orderPrice": 2071.305
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-13T16:45:08.534Z",
+      "action": "OPEN_LONG_ERROR",
+      "details": {
+        "coin": "ETH",
+        "sizeUsd": 11.242986999999998,
+        "leverage": 2,
+        "error": "Trade size $11.242986999999998 exceeds maximum $5"
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-13T16:40:07.255Z",
+      "action": "OPEN_LONG_ERROR",
+      "details": {
+        "coin": "ETH",
+        "sizeUsd": 11.242986999999998,
+        "leverage": 2,
+        "error": "Trade size $11.242986999999998 exceeds maximum $5"
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-13T07:00:18.006Z",
+      "action": "OPEN_LONG_ERROR",
+      "details": {
+        "coin": "ETH",
+        "sizeUsd": 3,
+        "leverage": 2,
+        "error": "Order 0: Order must have minimum value of $10. asset=1"
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-13T06:54:09.656Z",
+      "action": "EXECUTE_SIGNAL_ERROR",
+      "details": {
+        "signal": {
+          "action": "STRONG_BUY",
+          "price": 1934
+        },
+        "score": 60,
+        "error": "Invalid key: Expected \"orders\" but received undefined"
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-13T06:54:09.656Z",
+      "action": "OPEN_LONG_ERROR",
+      "details": {
+        "coin": "ETH",
+        "sizeUsd": 5,
+        "leverage": 2,
+        "error": "Invalid key: Expected \"orders\" but received undefined"
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-13T06:53:34.215Z",
+      "action": "EXECUTE_SIGNAL_ERROR",
+      "details": {
+        "signal": {
+          "action": "STRONG_BUY",
+          "price": 1934
+        },
+        "score": 60,
+        "error": "Cannot read properties of undefined (reading 'updateLeverage')"
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-13T06:53:34.215Z",
+      "action": "OPEN_LONG_ERROR",
+      "details": {
+        "coin": "ETH",
+        "sizeUsd": 5,
+        "leverage": 2,
+        "error": "Cannot read properties of undefined (reading 'updateLeverage')"
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    }
+  ],
+  "engine": {
+    "weights": {
+      "WT_CROSS_OVERSOLD": -1,
+      "WT_CROSS_OVERBOUGHT": 5,
+      "WT_CROSS_UP": 0,
+      "WT_CROSS_DOWN": -4,
+      "MFI_GREEN": 8,
+      "MFI_RED": -7,
+      "RSI_OVERSOLD": 7,
+      "RSI_OVERBOUGHT": -6,
+      "ABOVE_VWAP": -5,
+      "BELOW_VWAP": 3
+    },
+    "samplesUsed": 52067,
+    "lastCalibration": "2026-02-13T20:06:21.068Z",
+    "changes": [
+      {
+        "signal": "WT_CROSS_OVERSOLD",
+        "from": 30,
+        "to": -1,
+        "direction": "FLIPPED"
+      },
+      {
+        "signal": "WT_CROSS_OVERBOUGHT",
+        "from": -30,
+        "to": 5,
+        "direction": "FLIPPED"
+      },
+      {
+        "signal": "WT_CROSS_UP",
+        "from": 15,
+        "to": 0,
+        "direction": "FLIPPED"
+      },
+      {
+        "signal": "WT_CROSS_DOWN",
+        "from": -15,
+        "to": -4,
+        "direction": "magnitude"
+      },
+      {
+        "signal": "MFI_GREEN",
+        "from": 15,
+        "to": 8,
+        "direction": "magnitude"
+      },
+      {
+        "signal": "MFI_RED",
+        "from": -15,
+        "to": -7,
+        "direction": "magnitude"
+      },
+      {
+        "signal": "RSI_OVERSOLD",
+        "from": 10,
+        "to": 7,
+        "direction": "magnitude"
+      },
+      {
+        "signal": "RSI_OVERBOUGHT",
+        "from": -10,
+        "to": -6,
+        "direction": "magnitude"
+      },
+      {
+        "signal": "ABOVE_VWAP",
+        "from": 5,
+        "to": -5,
+        "direction": "FLIPPED"
+      },
+      {
+        "signal": "BELOW_VWAP",
+        "from": -5,
+        "to": 3,
+        "direction": "FLIPPED"
+      }
+    ]
+  },
+  "coins": {
+    "core": [
+      "ETH",
+      "BTC",
+      "SOL",
+      "HYPE"
+    ],
+    "dynamic": [
+      {
+        "coin": "XRP",
+        "symbol": "XRP-USD",
+        "minTrade": 5,
+        "maxTrade": 8,
+        "addedBy": "volume-scanner",
+        "addedAt": "2026-02-13T20:13:41.075Z",
+        "reason": "Vol $79.9M, +3.2%, OI $80.2M"
+      },
+      {
+        "coin": "ZEC",
+        "symbol": "ZEC-USD",
+        "minTrade": 5,
+        "maxTrade": 8,
+        "addedBy": "volume-scanner",
+        "addedAt": "2026-02-13T20:13:41.075Z",
+        "reason": "Vol $31.6M, +19.6%, OI $60.2M"
+      },
+      {
+        "coin": "LIT",
+        "symbol": "LIT-USD",
+        "minTrade": 5,
+        "maxTrade": 8,
+        "addedBy": "volume-scanner",
+        "addedAt": "2026-02-13T20:13:41.075Z",
+        "reason": "Vol $19.7M, +14.2%, OI $54.2M"
+      },
+      {
+        "coin": "ZRO",
+        "symbol": "ZRO-USD",
+        "minTrade": 5,
+        "maxTrade": 8,
+        "addedBy": "volume-scanner",
+        "addedAt": "2026-02-13T20:13:41.075Z",
+        "reason": "Vol $18.9M, -3.5%, OI $50.5M"
+      }
+    ]
+  },
+  "sniper": {
+    "alerts": {
+      "total": 0,
+      "recent": []
+    },
+    "log": {
+      "total": 0,
+      "snipeWorthy": 0,
+      "recent": []
+    }
+  }
+}

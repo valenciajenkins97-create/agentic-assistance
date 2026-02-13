@@ -534,34 +534,7 @@
                 <div class="panel-title">Active Coins</div>
             </div>
             <div class="active-coins">
-                <div class="market-item">
-                    <div>
-                        <div class="pair-name">ETH</div>
-                        <div class="pair-vol">Signal: 75</div>
-                    </div>
-                    <div class="change-pill up">+12</div>
-                </div>
-                <div class="market-item">
-                    <div>
-                        <div class="pair-name">BTC</div>
-                        <div class="pair-vol">Signal: 45</div>
-                    </div>
-                    <div class="change-pill up">+8</div>
-                </div>
-                <div class="market-item">
-                    <div>
-                        <div class="pair-name">SOL</div>
-                        <div class="pair-vol">Signal: -20</div>
-                    </div>
-                    <div class="change-pill down">-15</div>
-                </div>
-                <div class="market-item">
-                    <div>
-                        <div class="pair-name">HYPE</div>
-                        <div class="pair-vol">Signal: 85</div>
-                    </div>
-                    <div class="change-pill up">+22</div>
-                </div>
+                <div style="padding:12px 16px;color:var(--text-secondary)">Loading coins...</div>
             </div>
         </div>
 
@@ -572,7 +545,7 @@
             </div>
             <div class="overall-signal">
                 <div class="text-label">Overall Signal</div>
-                <div class="big-price" id="overallSignal" style="color: #34C759;">+42</div>
+                <div class="big-price" id="overallSignal" style="color: var(--text-secondary);">—</div>
             </div>
             <div class="signal-grid">
                 <div class="signal-card">
@@ -635,42 +608,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bid-row">
-                        <td>ETH</td>
-                        <td>1.2</td>
-                        <td>$3,450</td>
-                        <td>+$324</td>
-                    </tr>
-                    <tr class="bid-row">
-                        <td>HYPE</td>
-                        <td>850</td>
-                        <td>$12.40</td>
-                        <td>+$187</td>
-                    </tr>
-                    <tr class="ask-row">
-                        <td>SOL</td>
-                        <td>-15</td>
-                        <td>$198</td>
-                        <td>-$45</td>
-                    </tr>
+                    <tr><td colspan="4" style="padding:20px 12px;color:var(--text-secondary);text-align:center;">Loading...</td></tr>
                 </tbody>
             </table>
-            <div class="pnl-divider" style="color: #34C759;">
-                Total Unrealized: +$466
+            <div class="pnl-divider" style="color: var(--text-secondary);">
+                Loading...
             </div>
             <div class="quick-stats">
-                <div class="stat-item">
-                    <div class="text-label">Margin Used</div>
-                    <div class="text-value">$8,250</div>
-                </div>
-                <div class="stat-item">
-                    <div class="text-label">Liq Distance</div>
-                    <div class="text-value">-24.5%</div>
-                </div>
-                <div class="stat-item">
-                    <div class="text-label">Funding Rate</div>
-                    <div class="text-value">0.0125%</div>
-                </div>
+                <div class="stat-item"><div class="text-label">Loading...</div><div class="text-value">—</div></div>
             </div>
         </div>
 
@@ -685,34 +630,7 @@
                 <div class="tab">Activity</div>
             </div>
             <div class="trades-content">
-                <div class="history-item">
-                    <div>14:32</div>
-                    <div>ETH</div>
-                    <div class="trade-direction" style="color: #34C759;">▲ Long</div>
-                    <div>0.5</div>
-                    <div class="status-badge win">WIN</div>
-                </div>
-                <div class="history-item">
-                    <div>13:18</div>
-                    <div>HYPE</div>
-                    <div class="trade-direction" style="color: #34C759;">▲ Long</div>
-                    <div>200</div>
-                    <div class="status-badge win">WIN</div>
-                </div>
-                <div class="history-item">
-                    <div>12:45</div>
-                    <div>SOL</div>
-                    <div class="trade-direction" style="color: #FF3B30;">▼ Short</div>
-                    <div>10</div>
-                    <div class="status-badge">OPEN</div>
-                </div>
-                <div class="history-item">
-                    <div>11:22</div>
-                    <div>BTC</div>
-                    <div class="trade-direction" style="color: #FF3B30;">▼ Short</div>
-                    <div>0.1</div>
-                    <div class="status-badge loss">LOSS</div>
-                </div>
+                <div style="padding:20px;color:var(--text-secondary);text-align:center;">Loading...</div>
             </div>
         </div>
 
@@ -752,136 +670,332 @@
     </div>
 
     <script>
-        // Dashboard data object with realistic trading system values
-        const dashboardData = {
-            account: {
-                totalValue: 24573.82,
-                baseUSDC: 12450.00,
-                baseETH: 2.847,
-                hlBalance: 8923.45,
-                timestamp: new Date().toLocaleTimeString('en-US', { 
-                    hour12: false, 
-                    timeZone: 'UTC',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                }) + ' UTC'
-            },
-            signals: {
-                overall: 42,
-                coins: {
-                    ETH: { score: 75, wavetrend: 0.8, rsi: 65, regime: 'Bull' },
-                    BTC: { score: 45, wavetrend: 0.4, rsi: 58, regime: 'Bull' },
-                    SOL: { score: -20, wavetrend: -0.3, rsi: 42, regime: 'Bear' },
-                    HYPE: { score: 85, wavetrend: 0.9, rsi: 72, regime: 'Bull' }
-                },
-                history: [12, 18, -5, 22, 15, 8, -12, 25, 32, 28, 15, 42, 38, 45, 52, 48, 35, 28, 42, 38, 45, 42, 38, 42]
-            },
-            positions: [
-                { coin: 'ETH', size: 1.2, entry: 3450, pnl: 324, side: 'long' },
-                { coin: 'HYPE', size: 850, entry: 12.40, pnl: 187, side: 'long' },
-                { coin: 'SOL', size: -15, entry: 198, pnl: -45, side: 'short' }
-            ],
-            stats: {
-                marginUsed: 8250,
-                liquidationDistance: -24.5,
-                fundingRate: 0.0125,
-                totalUnrealized: 466
-            },
-            engine: {
-                regime: 'BULL',
-                weights: {
-                    trend: 75,
-                    meanReversion: 45,
-                    momentum: 60
-                },
-                confidence: 87,
-                lastCalibration: '2h ago'
-            },
-            trades: [
-                { time: '14:32', coin: 'ETH', direction: 'Long', size: 0.5, status: 'WIN', side: 'long' },
-                { time: '13:18', coin: 'HYPE', direction: 'Long', size: 200, status: 'WIN', side: 'long' },
-                { time: '12:45', coin: 'SOL', direction: 'Short', size: 10, status: 'OPEN', side: 'short' },
-                { time: '11:22', coin: 'BTC', direction: 'Short', size: 0.1, status: 'LOSS', side: 'short' }
-            ]
-        };
+        // =====================================================================
+        // NOVA TERMINAL — LIVE DATA ENGINE
+        // Fetches real data from APIs + static dashboard-data.json
+        // =====================================================================
 
-        // Function to update dashboard with new data
-        function updateDashboard(data) {
-            // Update account info
-            if (data.account) {
-                document.getElementById('accountValue').textContent = `$${data.account.totalValue.toLocaleString()}`;
-                document.getElementById('baseUSDC').textContent = `$${data.account.baseUSDC.toLocaleString()}`;
-                document.getElementById('baseETH').textContent = `${data.account.baseETH} ETH`;
-                document.getElementById('hlBalance').textContent = `$${data.account.hlBalance.toLocaleString()}`;
-                document.getElementById('totalValue').textContent = `$${data.account.totalValue.toLocaleString()}`;
-                document.getElementById('timestamp').textContent = data.account.timestamp;
-            }
+        const WALLET = '0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A';
+        const USDC_ADDR = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913';
+        const DATA_URL = 'dashboard-data.json'; // Generated by generate-dashboard-data.js
 
-            // Update overall signal
-            if (data.signals) {
-                const overallEl = document.getElementById('overallSignal');
-                overallEl.textContent = data.signals.overall > 0 ? `+${data.signals.overall}` : data.signals.overall;
-                overallEl.style.color = data.signals.overall > 0 ? '#34C759' : '#FF3B30';
-            }
+        // State
+        let dashboardData = null;
+        let livePrices = {};
 
-            // Update signal history chart
-            if (data.signals && data.signals.history) {
-                const chartContainer = document.getElementById('signalChart');
-                chartContainer.innerHTML = '';
-                const maxHeight = 40; // pixels
-                const maxValue = Math.max(...data.signals.history.map(Math.abs));
-                
-                data.signals.history.forEach(value => {
-                    const bar = document.createElement('div');
-                    bar.className = 'chart-bar';
-                    const height = Math.abs(value) / maxValue * maxHeight;
-                    bar.style.height = `${height}px`;
-                    
-                    if (value > 0) {
-                        bar.classList.add('positive');
-                    } else if (value < 0) {
-                        bar.classList.add('negative');
-                    }
-                    
-                    chartContainer.appendChild(bar);
+        // ── Formatters ──
+        const fmt = (n, d=2) => n !== null && n !== undefined ? Number(n).toFixed(d) : '—';
+        const fmtUSD = (n) => n !== null && n !== undefined ? '$' + Number(n).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}) : '—';
+        const fmtSign = (n) => n > 0 ? `+${fmt(n)}` : fmt(n);
+        const fmtTime = (ts) => { try { return new Date(ts).toLocaleTimeString('en-US', {hour12:false, timeZone:'UTC', hour:'2-digit', minute:'2-digit'}); } catch(e) { return '—'; } };
+
+        // ── Live Price Fetcher (Coinbase + HL) ──
+        async function fetchLivePrices() {
+            const coins = ['ETH','BTC','SOL'];
+            const results = {};
+            await Promise.allSettled(coins.map(async coin => {
+                try {
+                    const r = await fetch(`https://api.exchange.coinbase.com/products/${coin}-USD/ticker`);
+                    const d = await r.json();
+                    results[coin] = parseFloat(d.price);
+                } catch(e) {}
+            }));
+            try {
+                const r = await fetch('https://api.hyperliquid.xyz/info', {
+                    method:'POST', headers:{'Content-Type':'application/json'},
+                    body: JSON.stringify({type:'allMids'})
                 });
+                const d = await r.json();
+                if (d.HYPE) results.HYPE = parseFloat(d.HYPE);
+            } catch(e) {}
+            livePrices = results;
+            return results;
+        }
+
+        // ── HL Account State (live) ──
+        async function fetchHLState() {
+            try {
+                const r = await fetch('https://api.hyperliquid.xyz/info', {
+                    method:'POST', headers:{'Content-Type':'application/json'},
+                    body: JSON.stringify({type:'clearinghouseState', user: WALLET})
+                });
+                return await r.json();
+            } catch(e) { return null; }
+        }
+
+        // ── Load static data (from generate-dashboard-data.js) ──
+        async function fetchDashboardData() {
+            try {
+                // Try relative path first (GitHub Pages), then absolute
+                const r = await fetch(DATA_URL + '?t=' + Date.now());
+                if (r.ok) return await r.json();
+            } catch(e) {}
+            return null;
+        }
+
+        // ── Render Functions ──
+        function renderAccount(data, hl, prices) {
+            const baseUSDC = data?.account?.baseUSDC ?? 0;
+            const ethAmt = (data?.account?.baseETH ?? 0) + (data?.account?.baseWETH ?? 0);
+            const ethPrice = prices.ETH || data?.prices?.ETH || 0;
+            const ethValue = ethAmt * ethPrice;
+            const hlValue = hl ? parseFloat(hl.marginSummary?.accountValue || 0) : (data?.account?.hlAccountValue ?? 0);
+            const total = baseUSDC + ethValue + hlValue;
+
+            document.getElementById('accountValue').textContent = fmtUSD(total);
+            document.getElementById('baseUSDC').textContent = fmtUSD(baseUSDC);
+            document.getElementById('baseETH').textContent = `${fmt(ethAmt, 4)} ETH (${fmtUSD(ethValue)})`;
+            document.getElementById('hlBalance').textContent = fmtUSD(hlValue);
+            document.getElementById('totalValue').textContent = fmtUSD(total);
+        }
+
+        function renderCoins(data, prices) {
+            const container = document.querySelector('.active-coins');
+            if (!container) return;
+            container.innerHTML = '';
+            
+            const coreCoins = ['ETH', 'BTC', 'SOL', 'HYPE'];
+            const dynamicCoins = (data?.coins?.dynamic || []).map(c => c.coin);
+            const allCoins = [...coreCoins, ...dynamicCoins];
+
+            allCoins.forEach(coin => {
+                const price = prices[coin] || data?.prices?.[coin] || 0;
+                const isDynamic = dynamicCoins.includes(coin);
+                const dynInfo = (data?.coins?.dynamic || []).find(c => c.coin === coin);
+                const signal = data?.signals?.overall ?? 0; // per-coin signals would need multi-coin snapshot
+
+                const item = document.createElement('div');
+                item.className = 'market-item';
+                item.innerHTML = `
+                    <div>
+                        <div class="pair-name">${coin}${isDynamic ? ' ⚡' : ''}</div>
+                        <div class="pair-vol">${price > 0 ? fmtUSD(price) : '—'}${isDynamic && dynInfo ? ' · ' + dynInfo.reason.split(',')[1]?.trim() : ''}</div>
+                    </div>
+                    ${isDynamic && dynInfo ? `<div class="change-pill ${dynInfo.reason.includes('+') ? 'up' : 'down'}">${dynInfo.reason.split(',')[1]?.trim() || ''}</div>` : ''}
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function renderSignals(data) {
+            const sig = data?.signals;
+            if (!sig) return;
+
+            const overallEl = document.getElementById('overallSignal');
+            overallEl.textContent = sig.overall > 0 ? `+${sig.overall}` : String(sig.overall);
+            overallEl.style.color = sig.overall > 0 ? '#34C759' : sig.overall < 0 ? '#FF3B30' : 'var(--text-secondary)';
+
+            // Update signal cards with real data
+            const cards = document.querySelectorAll('.signal-card');
+            const coinData = [
+                { name: 'ETH', wt: sig.wt1, rsi: sig.rsi, score: sig.overall, action: sig.action },
+                { name: 'BTC', wt: null, rsi: null, score: null, action: '—' },
+                { name: 'SOL', wt: null, rsi: null, score: null, action: '—' },
+                { name: 'HYPE', wt: null, rsi: null, score: null, action: '—' },
+            ];
+            cards.forEach((card, i) => {
+                const c = coinData[i];
+                if (!c) return;
+                const score = c.score;
+                const scoreClass = score > 0 ? 'up' : score < 0 ? 'down' : '';
+                card.innerHTML = `
+                    <div class="pair-name">${c.name}</div>
+                    <div class="signal-score change-pill ${scoreClass}">${score !== null ? fmtSign(score) : '—'}</div>
+                    <div class="signal-metrics">
+                        <span>WT: ${c.wt !== null ? fmt(c.wt, 1) : '—'}</span>
+                        <span>RSI: ${c.rsi !== null ? fmt(c.rsi, 1) : '—'}</span>
+                        <span>${c.action || '—'}</span>
+                    </div>
+                `;
+            });
+
+            // Signal history chart
+            if (sig.history && sig.history.length > 0) {
+                const chart = document.getElementById('signalChart');
+                chart.innerHTML = '';
+                const maxVal = Math.max(...sig.history.map(Math.abs), 1);
+                sig.history.forEach(v => {
+                    const bar = document.createElement('div');
+                    bar.className = `chart-bar ${v > 0 ? 'positive' : v < 0 ? 'negative' : ''}`;
+                    bar.style.height = `${Math.abs(v) / maxVal * 50}px`;
+                    bar.title = `Score: ${v}`;
+                    chart.appendChild(bar);
+                });
+            }
+
+            // Snapshot count
+            const snapEl = document.querySelector('.signals-panel .text-label');
+            if (snapEl) snapEl.textContent = `Signal History (${sig.totalSnapshots || 0}/200 snapshots)`;
+        }
+
+        function renderPositions(data, hl) {
+            const tbody = document.querySelector('.positions-panel tbody');
+            const pnlDiv = document.querySelector('.pnl-divider');
+            const statsDiv = document.querySelector('.quick-stats');
+            if (!tbody) return;
+
+            const positions = hl?.assetPositions || [];
+            tbody.innerHTML = '';
+
+            if (positions.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" style="padding:20px 12px;color:var(--text-secondary);text-align:center;">No open positions</td></tr>';
+                pnlDiv.textContent = 'Flat — No Positions';
+                pnlDiv.style.color = 'var(--text-secondary)';
+            } else {
+                let totalPnl = 0;
+                let totalMargin = 0;
+                positions.forEach(p => {
+                    const pos = p.position;
+                    const pnl = parseFloat(pos.unrealizedPnl || 0);
+                    totalPnl += pnl;
+                    totalMargin += parseFloat(pos.marginUsed || 0);
+                    const isLong = parseFloat(pos.szi) > 0;
+                    const rowClass = pnl >= 0 ? 'bid-row' : 'ask-row';
+                    tbody.innerHTML += `<tr class="${rowClass}">
+                        <td>${pos.coin}</td>
+                        <td>${pos.szi}</td>
+                        <td>${fmtUSD(parseFloat(pos.entryPx))}</td>
+                        <td>${fmtSign(pnl)}</td>
+                    </tr>`;
+                });
+                pnlDiv.textContent = `Unrealized: ${fmtSign(totalPnl)}`;
+                pnlDiv.style.color = totalPnl >= 0 ? '#34C759' : '#FF3B30';
+            }
+
+            // Quick stats
+            const hlMargin = hl ? parseFloat(hl.marginSummary?.totalMarginUsed || 0) : 0;
+            const hlValue = hl ? parseFloat(hl.marginSummary?.accountValue || 0) : 0;
+            if (statsDiv) {
+                statsDiv.innerHTML = `
+                    <div class="stat-item"><div class="text-label">Margin Used</div><div class="text-value">${fmtUSD(hlMargin)}</div></div>
+                    <div class="stat-item"><div class="text-label">HL Account Value</div><div class="text-value">${fmtUSD(hlValue)}</div></div>
+                    <div class="stat-item"><div class="text-label">Withdrawable</div><div class="text-value">${fmtUSD(hl ? parseFloat(hl.withdrawable || 0) : 0)}</div></div>
+                `;
             }
         }
 
-        // Initialize the dashboard
-        updateDashboard(dashboardData);
+        function renderTrades(data) {
+            const container = document.querySelector('.trades-content');
+            if (!container || !data?.journal) return;
+            container.innerHTML = '';
 
-        // Generate signal history chart on load
-        const chartContainer = document.getElementById('signalChart');
-        const maxHeight = 40;
-        const maxValue = Math.max(...dashboardData.signals.history.map(Math.abs));
-
-        dashboardData.signals.history.forEach(value => {
-            const bar = document.createElement('div');
-            bar.className = 'chart-bar';
-            const height = Math.abs(value) / maxValue * maxHeight;
-            bar.style.height = `${height}px`;
-            
-            if (value > 0) {
-                bar.classList.add('positive');
-            } else if (value < 0) {
-                bar.classList.add('negative');
+            const trades = data.journal.slice(0, 10); // last 10
+            if (trades.length === 0) {
+                container.innerHTML = '<div style="padding:20px;color:var(--text-secondary);text-align:center;">No trades yet</div>';
+                return;
             }
-            
-            chartContainer.appendChild(bar);
-        });
 
-        // Auto-update timestamp every minute
+            trades.forEach(t => {
+                const time = fmtTime(t.timestamp);
+                const action = t.action || '';
+                const coin = t.details?.coin || '—';
+                const isLong = action.includes('LONG') || action.includes('BUY');
+                const isClose = action.includes('CLOSE');
+                const isError = action.includes('ERROR');
+                const size = t.details?.sizeUsd ? fmtUSD(t.details.sizeUsd) : (t.details?.size || '—');
+                
+                let statusClass = '';
+                let statusText = action.replace('_ERROR', '').replace('OPEN_', '').replace('EXECUTE_SIGNAL', 'SIGNAL');
+                if (isError) { statusClass = 'loss'; statusText = 'ERROR'; }
+                else if (isClose) { statusClass = 'win'; statusText = 'CLOSED'; }
+                else { statusText = action.replace('OPEN_', ''); }
+
+                const dirColor = isLong ? '#34C759' : '#FF3B30';
+                const dirArrow = isLong ? '▲' : '▼';
+                const dirText = isLong ? 'Long' : isClose ? 'Close' : 'Short';
+
+                container.innerHTML += `<div class="history-item">
+                    <div>${time}</div>
+                    <div>${coin}</div>
+                    <div class="trade-direction" style="color:${dirColor}">${dirArrow} ${dirText}</div>
+                    <div>${size}</div>
+                    <div><span class="status-badge ${statusClass}">${statusText}</span></div>
+                </div>`;
+            });
+        }
+
+        function renderEngine(data) {
+            const weightsDiv = document.querySelector('.engine-weights');
+            const confDiv = document.querySelector('.confidence-score');
+            const regimePill = document.querySelector('.regime-pill');
+            if (!data?.engine) return;
+
+            // Regime based on signal
+            const sig = data.signals?.overall ?? 0;
+            const action = data.signals?.action || 'NEUTRAL';
+            if (regimePill) {
+                regimePill.textContent = action;
+                regimePill.className = 'regime-pill' + (sig < 0 ? ' bear' : '');
+            }
+
+            // Engine weights visualization
+            const w = data.engine.weights || {};
+            if (weightsDiv) {
+                const entries = Object.entries(w).slice(0, 6); // top 6 weights
+                const maxW = Math.max(...entries.map(([,v]) => Math.abs(v)), 1);
+                weightsDiv.innerHTML = '<div class="text-label" style="margin-bottom:var(--space-s)">Engine Weights (52K samples)</div>';
+                entries.forEach(([name, val]) => {
+                    const pct = Math.abs(val) / maxW * 100;
+                    const color = val >= 0 ? '#34C759' : '#FF3B30';
+                    const label = name.replace(/_/g, ' ').replace('WT ', 'WT ');
+                    weightsDiv.innerHTML += `<div class="weight-item">
+                        <span style="font-size:10px;min-width:80px">${label}</span>
+                        <div class="weight-bar"><div class="weight-fill" style="width:${pct}%;background:${color}"></div></div>
+                        <span style="font-size:11px;min-width:25px;text-align:right">${val}</span>
+                    </div>`;
+                });
+            }
+
+            // Confidence
+            if (confDiv) {
+                const cal = data.engine.lastCalibration ? new Date(data.engine.lastCalibration) : null;
+                const calText = cal ? cal.toLocaleDateString('en-US', {month:'short', day:'numeric', hour:'2-digit', minute:'2-digit', timeZone:'UTC'}) : 'unknown';
+                confDiv.innerHTML = `
+                    <div class="text-label">Data Points</div>
+                    <div class="text-value" style="font-size:18px;">${(data.engine.samplesUsed || 0).toLocaleString()}</div>
+                    <div class="text-label" style="margin-top:var(--space-xs)">Calibrated: ${calText}</div>
+                `;
+            }
+        }
+
+        // ── Main Refresh Loop ──
+        async function refresh() {
+            const [staticData, prices, hl] = await Promise.all([
+                fetchDashboardData(),
+                fetchLivePrices(),
+                fetchHLState(),
+            ]);
+            
+            dashboardData = staticData;
+            
+            renderAccount(staticData, hl, prices);
+            renderCoins(staticData, prices);
+            renderSignals(staticData);
+            renderPositions(staticData, hl);
+            renderTrades(staticData);
+            renderEngine(staticData);
+
+            // Update timestamp
+            const now = new Date();
+            document.getElementById('timestamp').textContent = now.toLocaleTimeString('en-US', { hour12:false, timeZone:'UTC', hour:'2-digit', minute:'2-digit' }) + ' UTC';
+            
+            // Last update indicator
+            const gen = staticData?.generatedAt ? new Date(staticData.generatedAt) : null;
+            if (gen) {
+                const ago = Math.round((Date.now() - gen.getTime()) / 60000);
+                document.getElementById('timestamp').title = `Data: ${ago}m ago`;
+            }
+        }
+
+        // Initial load
+        refresh();
+        // Auto-refresh every 30 seconds (prices from APIs, data from JSON)
+        setInterval(refresh, 30000);
+        // Clock update every second
         setInterval(() => {
             const now = new Date();
-            document.getElementById('timestamp').textContent = 
-                now.toLocaleTimeString('en-US', { 
-                    hour12: false, 
-                    timeZone: 'UTC',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                }) + ' UTC';
-        }, 60000);
+            document.getElementById('timestamp').textContent = now.toLocaleTimeString('en-US', { hour12:false, timeZone:'UTC', hour:'2-digit', minute:'2-digit', second:'2-digit' }) + ' UTC';
+        }, 1000);
     </script>
 </body>
 </html>
