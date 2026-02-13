@@ -474,6 +474,27 @@
             border-top: 1px solid var(--bg-app);
         }
 
+        /* View states for nav switching */
+        .layout[data-view="signals"] .portfolio-panel,
+        .layout[data-view="signals"] .positions-panel,
+        .layout[data-view="signals"] .recent-trades,
+        .layout[data-view="signals"] .engine-status { opacity: 0.3; pointer-events: none; }
+        .layout[data-view="signals"] .signals-panel { box-shadow: var(--shadow-float); z-index: 2; }
+
+        .layout[data-view="positions"] .portfolio-panel,
+        .layout[data-view="positions"] .signals-panel,
+        .layout[data-view="positions"] .recent-trades,
+        .layout[data-view="positions"] .engine-status { opacity: 0.3; pointer-events: none; }
+        .layout[data-view="positions"] .positions-panel { box-shadow: var(--shadow-float); z-index: 2; }
+
+        .layout[data-view="history"] .portfolio-panel,
+        .layout[data-view="history"] .signals-panel,
+        .layout[data-view="history"] .positions-panel,
+        .layout[data-view="history"] .engine-status { opacity: 0.3; pointer-events: none; }
+        .layout[data-view="history"] .recent-trades { box-shadow: var(--shadow-float); z-index: 2; }
+
+        .layout > .panel { transition: opacity 0.3s ease, box-shadow 0.3s ease; }
+
         ::-webkit-scrollbar {
             width: 6px;
         }
@@ -494,11 +515,11 @@
             <div class="logo-dot"></div>
             Nova Terminal
         </div>
-        <nav class="nav-pills">
-            <div class="nav-item active">Dashboard</div>
-            <div class="nav-item">Signals</div>
-            <div class="nav-item">Positions</div>
-            <div class="nav-item">History</div>
+        <nav class="nav-pills" id="navPills">
+            <div class="nav-item active" data-view="dashboard">Dashboard</div>
+            <div class="nav-item" data-view="signals">Signals</div>
+            <div class="nav-item" data-view="positions">Positions</div>
+            <div class="nav-item" data-view="history">History</div>
         </nav>
         <div class="account-info">
             <div class="account-value" id="accountValue">$24,573.82</div>
@@ -624,12 +645,18 @@
             <div class="panel-header">
                 <div class="panel-title">Activity</div>
             </div>
-            <div class="tab-row">
-                <div class="tab active">Recent Trades</div>
-                <div class="tab">Sniper Alerts</div>
-                <div class="tab">Activity</div>
+            <div class="tab-row" id="activityTabs">
+                <div class="tab active" data-tab="trades">Recent Trades</div>
+                <div class="tab" data-tab="sniper">Sniper Alerts</div>
+                <div class="tab" data-tab="activity">Activity</div>
             </div>
-            <div class="trades-content">
+            <div class="trades-content" id="tabContent-trades">
+                <div style="padding:20px;color:var(--text-secondary);text-align:center;">Loading...</div>
+            </div>
+            <div class="trades-content" id="tabContent-sniper" style="display:none">
+                <div style="padding:20px;color:var(--text-secondary);text-align:center;">Loading...</div>
+            </div>
+            <div class="trades-content" id="tabContent-activity" style="display:none">
                 <div style="padding:20px;color:var(--text-secondary);text-align:center;">Loading...</div>
             </div>
         </div>
@@ -987,11 +1014,131 @@
             }
         }
 
+        // ── Sniper Alerts Tab ──
+        function renderSniperAlerts(data) {
+            const container = document.getElementById('tabContent-sniper');
+            if (!container) return;
+            const alerts = data?.sniper?.log?.recent || [];
+            if (alerts.length === 0) {
+                container.innerHTML = '<div style="padding:20px;color:var(--text-secondary);text-align:center;">No sniper alerts yet</div>';
+                return;
+            }
+            container.innerHTML = '';
+            alerts.forEach(a => {
+                const time = fmtTime(a.timestamp);
+                const edge = a.edge ? `${fmt(a.edge,1)}%` : '—';
+                const cond = (a.edges || []).map(e => e.name).join(', ') || '—';
+                container.innerHTML += `<div class="history-item" style="grid-template-columns:1fr 1fr 1fr 1fr">
+                    <div>${time}</div>
+                    <div style="color:${a.prediction === 'UP' ? '#34C759' : '#FF3B30'}">${a.prediction || '—'}</div>
+                    <div>Edge: ${edge}</div>
+                    <div style="font-size:10px;color:var(--text-secondary)">${cond}</div>
+                </div>`;
+            });
+            // Summary at top
+            const log = data?.sniper?.log || {};
+            container.insertAdjacentHTML('afterbegin', `<div style="padding:12px var(--space-m);border-bottom:1px solid var(--bg-app);display:flex;gap:20px">
+                <div><span class="text-label">Total Scans</span> <span class="text-value">${log.total || 0}</span></div>
+                <div><span class="text-label">Snipe-Worthy</span> <span class="text-value">${log.snipeWorthy || 0}</span></div>
+            </div>`);
+        }
+
+        // ── Activity Tab ──
+        function renderActivity(data) {
+            const container = document.getElementById('tabContent-activity');
+            if (!container) return;
+            const items = [];
+            // Mix journal + sniper into a timeline
+            (data?.journal || []).slice(0, 5).forEach(t => {
+                items.push({ time: t.timestamp, text: `${t.action} ${t.details?.coin || ''} ${t.details?.sizeUsd ? fmtUSD(t.details.sizeUsd) : t.details?.size || ''}`, type: 'trade' });
+            });
+            if (data?.signals?.lastUpdate) {
+                items.push({ time: data.signals.lastUpdate, text: `Signal: ${data.signals.action} (score: ${data.signals.overall})`, type: 'signal' });
+            }
+            items.sort((a, b) => new Date(b.time) - new Date(a.time));
+            if (items.length === 0) {
+                container.innerHTML = '<div style="padding:20px;color:var(--text-secondary);text-align:center;">No activity</div>';
+                return;
+            }
+            container.innerHTML = '';
+            items.forEach(item => {
+                const colors = { trade: '#4FA3FF', signal: '#6BF3D6', sniper: '#FF6B95' };
+                container.innerHTML += `<div style="padding:10px var(--space-m);border-bottom:1px solid var(--bg-app);display:flex;gap:12px;align-items:center;font-size:12px">
+                    <div style="width:6px;height:6px;border-radius:50%;background:${colors[item.type] || '#8E8E93'};flex-shrink:0"></div>
+                    <div style="color:var(--text-secondary);min-width:45px">${fmtTime(item.time)}</div>
+                    <div>${item.text}</div>
+                </div>`;
+            });
+        }
+
+        // ── Nav Pill Switching ──
+        document.getElementById('navPills').addEventListener('click', (e) => {
+            const item = e.target.closest('.nav-item');
+            if (!item) return;
+            const view = item.dataset.view;
+            // Update active pill
+            document.querySelectorAll('#navPills .nav-item').forEach(n => n.classList.remove('active'));
+            item.classList.add('active');
+            // Update layout view
+            const layout = document.querySelector('.layout');
+            if (view === 'dashboard') {
+                layout.removeAttribute('data-view');
+            } else {
+                layout.setAttribute('data-view', view);
+            }
+        });
+
+        // ── Tab Switching ──
+        document.getElementById('activityTabs').addEventListener('click', (e) => {
+            const tab = e.target.closest('.tab');
+            if (!tab) return;
+            const tabName = tab.dataset.tab;
+            // Update active tab
+            document.querySelectorAll('#activityTabs .tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            // Show/hide content
+            ['trades', 'sniper', 'activity'].forEach(name => {
+                const el = document.getElementById('tabContent-' + name);
+                if (el) el.style.display = name === tabName ? '' : 'none';
+            });
+        });
+
+        // ── Main Refresh Loop ──
+        async function refresh() {
+            const [staticData, prices, hl] = await Promise.all([
+                fetchDashboardData(),
+                fetchLivePrices(),
+                fetchHLState(),
+            ]);
+            
+            dashboardData = staticData;
+            
+            renderAccount(staticData, hl, prices);
+            renderCoins(staticData, prices);
+            renderSignals(staticData);
+            renderPositions(staticData, hl);
+            renderTrades(staticData);
+            renderEngine(staticData);
+            renderSniperAlerts(staticData);
+            renderActivity(staticData);
+
+            // Update timestamp
+            const now = new Date();
+            document.getElementById('timestamp').textContent = now.toLocaleTimeString('en-US', { hour12:false, timeZone:'UTC', hour:'2-digit', minute:'2-digit' }) + ' UTC';
+            
+            // Last update indicator
+            const gen = staticData?.generatedAt ? new Date(staticData.generatedAt) : null;
+            if (gen) {
+                const ago = Math.round((Date.now() - gen.getTime()) / 60000);
+                document.getElementById('timestamp').title = `Data: ${ago}m ago`;
+            }
+        }
+
         // Initial load
         refresh();
-        // Auto-refresh every 30 seconds (prices from APIs, data from JSON)
+        // Auto-refresh every 30 seconds
         setInterval(refresh, 30000);
-        // Clock update every second
+        // Clock every second
         setInterval(() => {
             const now = new Date();
             document.getElementById('timestamp').textContent = now.toLocaleTimeString('en-US', { hour12:false, timeZone:'UTC', hour:'2-digit', minute:'2-digit', second:'2-digit' }) + ' UTC';
