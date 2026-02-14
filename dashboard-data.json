@@ -1,30 +1,29 @@
 {
-  "generatedAt": "2026-02-14T14:31:10.283Z",
+  "generatedAt": "2026-02-14T14:47:59.513Z",
   "account": {
     "baseUSDC": 58.4803,
     "baseETH": 0.000379880318003408,
     "baseWETH": 0.002557478556195106,
-    "baseETHValue": 6.089879285932069,
+    "baseETHValue": 6.097163935940082,
     "hlAccountValue": 21.968361,
     "hlMarginUsed": 0,
     "hlWithdrawable": 21.968361,
-    "totalValue": 86.53854028593207
+    "totalValue": 86.54582493594009
   },
   "prices": {
-    "ETH": 2073.25,
-    "BTC": 69504.11,
-    "SOL": 86.85,
-    "HYPE": 31.2315
+    "ETH": 2075.73,
+    "BTC": 69585.43,
+    "SOL": 86.96,
+    "HYPE": 31.3755
   },
   "positions": [],
   "signals": {
-    "overall": 2,
+    "overall": 18,
     "action": "NEUTRAL",
-    "wt1": -9.16260471558044,
-    "rsi": 38.93061384484563,
+    "wt1": 34.55517750938198,
+    "rsi": 61.15677548471714,
     "mfi": 0,
     "history": [
-      6,
       -14,
       18,
       -2,
@@ -47,10 +46,11 @@
       -18,
       2,
       18,
-      2
+      2,
+      18
     ],
-    "totalSnapshots": 177,
-    "lastUpdate": "2026-02-14T14:30:33.550Z"
+    "totalSnapshots": 178,
+    "lastUpdate": "2026-02-14T14:47:25.063Z"
   },
   "journal": [
     {
@@ -378,8 +378,8 @@
         "minTrade": 10,
         "maxTrade": 11,
         "addedBy": "volume-scanner",
-        "addedAt": "2026-02-14T02:05:56.489Z",
-        "reason": "Vol $58.6M, +3.6%, OI $79.3M"
+        "addedAt": "2026-02-14T14:40:25.920Z",
+        "reason": "Vol $56.2M, +6.0%, OI $82.0M"
       },
       {
         "coin": "ZEC",
@@ -387,8 +387,8 @@
         "minTrade": 10,
         "maxTrade": 11,
         "addedBy": "volume-scanner",
-        "addedAt": "2026-02-14T02:05:56.489Z",
-        "reason": "Vol $33.7M, +19.5%, OI $61.4M"
+        "addedAt": "2026-02-14T14:40:25.920Z",
+        "reason": "Vol $44.3M, +18.9%, OI $61.7M"
       },
       {
         "coin": "LIT",
@@ -396,17 +396,17 @@
         "minTrade": 10,
         "maxTrade": 11,
         "addedBy": "volume-scanner",
-        "addedAt": "2026-02-14T02:05:56.489Z",
-        "reason": "Vol $22.3M, +14.4%, OI $56.9M"
+        "addedAt": "2026-02-14T14:40:25.920Z",
+        "reason": "Vol $19.7M, +4.7%, OI $54.1M"
       },
       {
-        "coin": "ZRO",
-        "symbol": "ZRO-USD",
+        "coin": "AAVE",
+        "symbol": "AAVE-USD",
         "minTrade": 10,
         "maxTrade": 11,
         "addedBy": "volume-scanner",
-        "addedAt": "2026-02-14T02:05:56.489Z",
-        "reason": "Vol $16.0M, -8.0%, OI $47.0M"
+        "addedAt": "2026-02-14T14:40:25.920Z",
+        "reason": "Vol $16.0M, +12.3%, OI $33.0M"
       }
     ]
   },
