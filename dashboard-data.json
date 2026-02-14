@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-02-14T22:16:00.574Z",
+  "generatedAt": "2026-02-14T22:30:53.804Z",
   "account": {
     "baseUSDC": 58.4803,
     "baseETH": 0.000379880318003408,
     "baseWETH": 0.002557478556195106,
-    "baseETHValue": 6.138521948888797,
+    "baseETHValue": 6.134967744651016,
     "hlAccountValue": 21.968361,
     "hlMarginUsed": 0,
     "hlWithdrawable": 21.968361,
-    "totalValue": 86.5871829488888
+    "totalValue": 86.58362874465102
   },
   "prices": {
-    "ETH": 2089.81,
-    "BTC": 69925.7,
-    "SOL": 88.19,
-    "HYPE": 31.6535
+    "ETH": 2088.6,
+    "BTC": 69941.16,
+    "SOL": 88.14,
+    "HYPE": 31.5785
   },
   "positions": [],
   "signals": {
