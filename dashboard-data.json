@@ -1,61 +1,75 @@
 {
-  "generatedAt": "2026-02-14T01:46:29.799Z",
+  "generatedAt": "2026-02-14T02:16:50.976Z",
   "account": {
     "baseUSDC": 58.4803,
     "baseETH": 0.000379880318003408,
     "baseWETH": 0.002557478556195106,
-    "baseETHValue": 6.033335127603748,
-    "hlAccountValue": 22.134503,
-    "hlMarginUsed": 16.888385,
-    "hlWithdrawable": 5.246118,
-    "totalValue": 86.64813812760374
+    "baseETHValue": 6.026491081426865,
+    "hlAccountValue": 22.00287,
+    "hlMarginUsed": 21.958724,
+    "hlWithdrawable": 0.044146,
+    "totalValue": 86.50966108142687
   },
   "prices": {
-    "ETH": 2054,
-    "BTC": 68972.49,
-    "SOL": 84.91,
-    "HYPE": 32.1325
+    "ETH": 2051.67,
+    "BTC": 68927.65,
+    "SOL": 84.87,
+    "HYPE": 32.1065
   },
   "positions": [
     {
+      "coin": "ETH",
+      "size": 0.0054,
+      "entryPrice": 2053.1,
+      "unrealizedPnl": -0.00648,
+      "liquidationPrice": 1048.3407029478,
+      "marginUsed": 5.532441,
+      "leverage": 2
+    },
+    {
       "coin": "XRP",
       "size": 8,
-      "entryPrice": 1.4151,
-      "unrealizedPnl": -0.0112,
-      "liquidationPrice": 0.7263453846,
-      "marginUsed": 5.644106,
+      "entryPrice": 1.4139,
+      "unrealizedPnl": -0.0072,
+      "liquidationPrice": 0.7257294872,
+      "marginUsed": 5.64331,
       "leverage": 2
     },
     {
       "coin": "ZRO",
-      "size": -6.1,
-      "entryPrice": 1.7978,
-      "unrealizedPnl": -0.01647,
-      "liquidationPrice": 2.4508101341,
-      "marginUsed": 5.461886,
+      "size": -0.4,
+      "entryPrice": 1.8,
+      "unrealizedPnl": 0.00112,
+      "liquidationPrice": 2.4538090909,
+      "marginUsed": 0.360796,
+      "leverage": 2
+    },
+    {
+      "coin": "HYPE",
+      "size": 0.34,
+      "entryPrice": 32.122,
+      "unrealizedPnl": -0.0051,
+      "liquidationPrice": 16.918371517,
+      "marginUsed": 5.451746,
       "leverage": 2
     },
     {
       "coin": "LIT",
-      "size": -7,
-      "entryPrice": 1.6533,
-      "unrealizedPnl": -0.0021,
-      "liquidationPrice": 2.2542328571,
-      "marginUsed": 5.782393,
+      "size": -6,
+      "entryPrice": 1.6553,
+      "unrealizedPnl": 0.009,
+      "liquidationPrice": 2.2565501515,
+      "marginUsed": 4.970431,
       "leverage": 2
     }
   ],
   "signals": {
-    "overall": 2,
+    "overall": 5,
     "action": "NEUTRAL",
-    "wt1": 46.683083897807016,
-    "rsi": 64.7749508045402,
+    "wt1": 8.518187050104721,
+    "rsi": 51.43251815330228,
     "mfi": 0,
     "history": [
-      14,
-      14,
-      4,
-      1,
       -5,
       -14,
       -14,
@@ -75,233 +89,247 @@
       -2,
       -8,
       2,
-      2
+      2,
+      2,
+      -7,
+      -7,
+      5
     ],
-    "totalSnapshots": 124,
-    "lastUpdate": "2026-02-14T01:45:50.926Z"
+    "totalSnapshots": 128,
+    "lastUpdate": "2026-02-14T02:16:15.666Z"
   },
   "journal": [
     {
-      "timestamp": "2026-02-14T01:45:38.403Z",
+      "timestamp": "2026-02-14T02:15:55.164Z",
+      "action": "OPEN_SHORT_ERROR",
+      "details": {
+        "coin": "ZRO",
+        "sizeUsd": 11,
+        "leverage": 2,
+        "error": "Position verification failed for SHORT ZRO"
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-14T02:15:55.163Z",
+      "action": "OPEN_SHORT_VERIFICATION_FAILED",
+      "details": {
+        "coin": "ZRO",
+        "size": "6.1",
+        "sizeUsd": 11,
+        "leverage": 2,
+        "orderPrice": 1.7910995,
+        "error": "Position verification failed for SHORT ZRO"
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-14T02:15:55.163Z",
+      "action": "VERIFICATION_FAILED",
+      "details": {
+        "coin": "ZRO",
+        "expected": "SHORT",
+        "expectedSize": 6.1,
+        "actual": "SHORT",
+        "actualSize": 0.4,
+        "sizeDiff": 93.44262295081967,
+        "error": "Position size mismatch: expected 6.1, got 0.4 (93.4% diff)"
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-14T02:15:52.971Z",
       "action": "OPEN_SHORT",
       "details": {
         "coin": "ZRO",
         "size": "6.1",
         "sizeUsd": 11,
         "leverage": 2,
-        "orderPrice": 1.7894577500000002
+        "orderPrice": 1.7910995
       },
       "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
     },
     {
-      "timestamp": "2026-02-14T01:45:37.246Z",
-      "action": "SET_TAKE_PROFIT_ERROR",
+      "timestamp": "2026-02-14T02:15:49.263Z",
+      "action": "OPEN_SHORT_ERROR",
       "details": {
         "coin": "LIT",
-        "triggerPrice": 0.46304850000000003,
-        "error": "422 Unprocessable Entity - Failed to deserialize the JSON body into the target type"
+        "sizeUsd": 11,
+        "leverage": 2,
+        "error": "Position verification failed for SHORT LIT"
       },
       "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
     },
     {
-      "timestamp": "2026-02-14T01:45:32.213Z",
+      "timestamp": "2026-02-14T02:15:49.262Z",
+      "action": "OPEN_SHORT_VERIFICATION_FAILED",
+      "details": {
+        "coin": "LIT",
+        "size": "7",
+        "sizeUsd": 11,
+        "leverage": 2,
+        "orderPrice": 1.647322,
+        "error": "Position verification failed for SHORT LIT"
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-14T02:15:49.262Z",
+      "action": "VERIFICATION_FAILED",
+      "details": {
+        "coin": "LIT",
+        "expected": "SHORT",
+        "expectedSize": 7,
+        "actual": "SHORT",
+        "actualSize": 6,
+        "sizeDiff": 14.285714285714285,
+        "error": "Position size mismatch: expected 7, got 6 (14.3% diff)"
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-14T02:15:46.684Z",
       "action": "OPEN_SHORT",
       "details": {
         "coin": "LIT",
         "size": "7",
         "sizeUsd": 11,
         "leverage": 2,
-        "orderPrice": 1.645332
+        "orderPrice": 1.647322
       },
       "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
     },
     {
-      "timestamp": "2026-02-14T01:45:30.303Z",
+      "timestamp": "2026-02-14T02:15:44.578Z",
       "action": "SET_TAKE_PROFIT_ERROR",
       "details": {
         "coin": "XRP",
-        "triggerPrice": 1.437037,
-        "error": "Order 0: Invalid TP/SL price. asset=25"
-      },
-      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
-    },
-    {
-      "timestamp": "2026-02-14T01:45:24.651Z",
-      "action": "OPEN_LONG",
-      "details": {
-        "coin": "XRP",
-        "size": "8",
-        "sizeUsd": 11,
-        "leverage": 2,
-        "orderPrice": 1.4221252499999997
-      },
-      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
-    },
-    {
-      "timestamp": "2026-02-14T01:40:13.185Z",
-      "action": "CLOSE_POSITION",
-      "details": {
-        "coin": "HYPE",
-        "positionSize": 0.35,
-        "isLong": true,
-        "orderPrice": 31.9380075
-      },
-      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
-    },
-    {
-      "timestamp": "2026-02-14T01:36:17.524Z",
-      "action": "OPEN_LONG",
-      "details": {
-        "coin": "HYPE",
-        "size": "0.35",
-        "sizeUsd": 11.0832555,
-        "leverage": 2,
-        "orderPrice": 32.203717499999996
-      },
-      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
-    },
-    {
-      "timestamp": "2026-02-14T01:35:20.344Z",
-      "action": "CLOSE_POSITION",
-      "details": {
-        "coin": "HYPE",
-        "positionSize": 0.35,
-        "isLong": true,
-        "orderPrice": 31.860895
-      },
-      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
-    },
-    {
-      "timestamp": "2026-02-14T01:35:15.423Z",
-      "action": "CLOSE_POSITION",
-      "details": {
-        "coin": "XRP",
-        "positionSize": 8,
-        "isLong": true,
-        "orderPrice": 1.40847225
-      },
-      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
-    },
-    {
-      "timestamp": "2026-02-14T01:31:57.222Z",
-      "action": "CLOSE_POSITION",
-      "details": {
-        "coin": "LIT",
-        "positionSize": 7,
-        "isLong": false,
-        "orderPrice": 1.6433759999999997
-      },
-      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
-    },
-    {
-      "timestamp": "2026-02-14T01:30:28.501Z",
-      "action": "OPEN_SHORT",
-      "details": {
-        "coin": "LIT",
-        "size": "7",
-        "sizeUsd": 11,
-        "leverage": 2,
-        "orderPrice": 1.625432
-      },
-      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
-    },
-    {
-      "timestamp": "2026-02-14T01:30:26.697Z",
-      "action": "SET_TAKE_PROFIT_ERROR",
-      "details": {
-        "coin": "XRP",
-        "triggerPrice": 1.4365294999999998,
-        "error": "422 Unprocessable Entity - Failed to deserialize the JSON body into the target type"
-      },
-      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
-    },
-    {
-      "timestamp": "2026-02-14T01:30:23.879Z",
-      "action": "OPEN_LONG",
-      "details": {
-        "coin": "XRP",
-        "size": "8",
-        "sizeUsd": 11,
-        "leverage": 2,
-        "orderPrice": 1.4223262499999998
-      },
-      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
-    },
-    {
-      "timestamp": "2026-02-14T01:30:22.767Z",
-      "action": "SET_TAKE_PROFIT_ERROR",
-      "details": {
-        "coin": "HYPE",
-        "triggerPrice": 32.48,
+        "triggerPrice": 1.4348039999999997,
         "error": "Order 0: Main order cannot be trigger order."
       },
       "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
     },
     {
-      "timestamp": "2026-02-14T01:30:18.447Z",
+      "timestamp": "2026-02-14T02:15:39.827Z",
+      "action": "SET_TAKE_PROFIT_ERROR",
+      "details": {
+        "coin": "HYPE",
+        "triggerPrice": 32.5815,
+        "error": "Order 0: Main order cannot be trigger order."
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-14T02:15:38.802Z",
+      "action": "OPEN_LONG",
+      "details": {
+        "coin": "XRP",
+        "size": "8",
+        "sizeUsd": 11,
+        "leverage": 2,
+        "orderPrice": 1.42101975
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-14T02:15:33.161Z",
       "action": "OPEN_LONG",
       "details": {
         "coin": "HYPE",
-        "size": "0.35",
-        "sizeUsd": 11.117322,
+        "size": "0.34",
+        "sizeUsd": 11.015658,
         "leverage": 2,
-        "orderPrice": 32.21627999999999
+        "orderPrice": 32.2780875
       },
       "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
     },
     {
-      "timestamp": "2026-02-14T01:16:59.840Z",
-      "action": "CLOSE_POSITION",
-      "details": {
-        "coin": "LIT",
-        "positionSize": 7,
-        "isLong": false,
-        "orderPrice": 1.6389037499999997
-      },
-      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
-    },
-    {
-      "timestamp": "2026-02-14T01:16:57.125Z",
-      "action": "CLOSE_POSITION",
-      "details": {
-        "coin": "ZRO",
-        "positionSize": 6,
-        "isLong": false,
-        "orderPrice": 1.8409589999999998
-      },
-      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
-    },
-    {
-      "timestamp": "2026-02-14T01:15:29.464Z",
-      "action": "OPEN_SHORT",
-      "details": {
-        "coin": "ZRO",
-        "size": "6.0",
-        "sizeUsd": 11,
-        "leverage": 2,
-        "orderPrice": 1.8238847500000002
-      },
-      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
-    },
-    {
-      "timestamp": "2026-02-14T01:15:27.496Z",
+      "timestamp": "2026-02-14T02:15:31.537Z",
       "action": "SET_TAKE_PROFIT_ERROR",
       "details": {
-        "coin": "LIT",
-        "triggerPrice": 0.46304850000000003,
-        "error": "422 Unprocessable Entity - Failed to deserialize the JSON body into the target type"
+        "coin": "ETH",
+        "triggerPrice": 2083.7544,
+        "error": "Order 0: Main order cannot be trigger order."
       },
       "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
     },
     {
-      "timestamp": "2026-02-14T01:15:24.703Z",
-      "action": "OPEN_SHORT",
+      "timestamp": "2026-02-14T02:15:25.877Z",
+      "action": "OPEN_LONG",
       "details": {
-        "coin": "LIT",
-        "size": "7",
+        "coin": "ETH",
+        "size": "0.0054",
+        "sizeUsd": 11.015658,
+        "leverage": 2,
+        "orderPrice": 2063.2147499999996
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-14T02:05:20.788Z",
+      "action": "CLOSE_POSITION",
+      "details": {
+        "coin": "HYPE",
+        "positionSize": 0.34,
+        "isLong": true,
+        "orderPrice": 32.024075
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-14T02:05:15.798Z",
+      "action": "CLOSE_POSITION",
+      "details": {
+        "coin": "XRP",
+        "positionSize": 8,
+        "isLong": true,
+        "orderPrice": 1.40518875
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-14T02:04:37.351Z",
+      "action": "OPEN_LONG",
+      "details": {
+        "coin": "XRP",
+        "size": "8",
         "sizeUsd": 11,
         "leverage": 2,
-        "orderPrice": 1.62040725
+        "orderPrice": 1.4190097499999998
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-14T02:04:31.494Z",
+      "action": "OPEN_LONG",
+      "details": {
+        "coin": "HYPE",
+        "size": "0.34",
+        "sizeUsd": 11.023284,
+        "leverage": 2,
+        "orderPrice": 32.33336249999999
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-14T02:02:55.491Z",
+      "action": "CLOSE_POSITION",
+      "details": {
+        "coin": "LIT",
+        "positionSize": 1,
+        "isLong": false,
+        "orderPrice": 1.6663402499999997
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-14T02:02:50.686Z",
+      "action": "CLOSE_POSITION",
+      "details": {
+        "coin": "ZEC",
+        "positionSize": 0.03,
+        "isLong": true,
+        "orderPrice": 276.117475
       },
       "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
     }
@@ -398,8 +426,8 @@
         "minTrade": 10,
         "maxTrade": 11,
         "addedBy": "volume-scanner",
-        "addedAt": "2026-02-13T20:13:41.075Z",
-        "reason": "Vol $79.9M, +3.2%, OI $80.2M"
+        "addedAt": "2026-02-14T02:05:56.489Z",
+        "reason": "Vol $58.6M, +3.6%, OI $79.3M"
       },
       {
         "coin": "ZEC",
@@ -407,8 +435,8 @@
         "minTrade": 10,
         "maxTrade": 11,
         "addedBy": "volume-scanner",
-        "addedAt": "2026-02-13T20:13:41.075Z",
-        "reason": "Vol $31.6M, +19.6%, OI $60.2M"
+        "addedAt": "2026-02-14T02:05:56.489Z",
+        "reason": "Vol $33.7M, +19.5%, OI $61.4M"
       },
       {
         "coin": "LIT",
@@ -416,8 +444,8 @@
         "minTrade": 10,
         "maxTrade": 11,
         "addedBy": "volume-scanner",
-        "addedAt": "2026-02-13T20:13:41.075Z",
-        "reason": "Vol $19.7M, +14.2%, OI $54.2M"
+        "addedAt": "2026-02-14T02:05:56.489Z",
+        "reason": "Vol $22.3M, +14.4%, OI $56.9M"
       },
       {
         "coin": "ZRO",
@@ -425,8 +453,8 @@
         "minTrade": 10,
         "maxTrade": 11,
         "addedBy": "volume-scanner",
-        "addedAt": "2026-02-13T20:13:41.075Z",
-        "reason": "Vol $18.9M, -3.5%, OI $50.5M"
+        "addedAt": "2026-02-14T02:05:56.489Z",
+        "reason": "Vol $16.0M, -8.0%, OI $47.0M"
       }
     ]
   },
