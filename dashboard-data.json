@@ -1,30 +1,29 @@
 {
-  "generatedAt": "2026-02-14T15:01:11.790Z",
+  "generatedAt": "2026-02-14T15:15:57.682Z",
   "account": {
     "baseUSDC": 58.4803,
     "baseETH": 0.000379880318003408,
     "baseWETH": 0.002557478556195106,
-    "baseETHValue": 6.12377640734032,
+    "baseETHValue": 6.11681486680847,
     "hlAccountValue": 21.968361,
     "hlMarginUsed": 0,
     "hlWithdrawable": 21.968361,
-    "totalValue": 86.57243740734032
+    "totalValue": 86.56547586680847
   },
   "prices": {
-    "ETH": 2084.79,
-    "BTC": 69670.75,
-    "SOL": 87.21,
-    "HYPE": 31.4135
+    "ETH": 2082.42,
+    "BTC": 69609.95,
+    "SOL": 87.19,
+    "HYPE": 31.3455
   },
   "positions": [],
   "signals": {
-    "overall": 7,
+    "overall": -2,
     "action": "NEUTRAL",
-    "wt1": 64.71407662601449,
-    "rsi": 75.75175357884513,
+    "wt1": 64.5980200022391,
+    "rsi": 61.22047487099901,
     "mfi": 0,
     "history": [
-      18,
       -2,
       18,
       -2,
@@ -47,10 +46,11 @@
       18,
       2,
       18,
-      7
+      7,
+      -2
     ],
-    "totalSnapshots": 179,
-    "lastUpdate": "2026-02-14T15:00:33.704Z"
+    "totalSnapshots": 180,
+    "lastUpdate": "2026-02-14T15:15:32.470Z"
   },
   "journal": [
     {
