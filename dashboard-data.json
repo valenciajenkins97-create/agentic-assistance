@@ -1,40 +1,48 @@
 {
-  "generatedAt": "2026-02-14T01:01:08.096Z",
+  "generatedAt": "2026-02-14T01:16:17.314Z",
   "account": {
     "baseUSDC": 58.4803,
     "baseETH": 0.000379880318003408,
     "baseWETH": 0.002557478556195106,
-    "baseETHValue": 6.023318733842731,
-    "hlAccountValue": 22.291471,
-    "hlMarginUsed": 5.71664,
-    "hlWithdrawable": 16.574831,
-    "totalValue": 86.79508973384273
+    "baseETHValue": 6.026755443725544,
+    "hlAccountValue": 22.264227,
+    "hlMarginUsed": 11.189026,
+    "hlWithdrawable": 11.075201,
+    "totalValue": 86.77128244372555
   },
   "prices": {
-    "ETH": 2050.59,
-    "BTC": 69000.01,
-    "SOL": 84.79,
-    "HYPE": 31.9205
+    "ETH": 2051.76,
+    "BTC": 68999.57,
+    "SOL": 84.93,
+    "HYPE": 31.9595
   },
   "positions": [
     {
+      "coin": "ZRO",
+      "size": -6,
+      "entryPrice": 1.8321,
+      "unrealizedPnl": 0.0048,
+      "liquidationPrice": 2.4975687879,
+      "marginUsed": 5.496154,
+      "leverage": 2
+    },
+    {
       "coin": "LIT",
       "size": -7,
-      "entryPrice": 1.6382,
-      "unrealizedPnl": -0.0119,
-      "liquidationPrice": 2.233238961,
-      "marginUsed": 5.71664,
+      "entryPrice": 1.6281,
+      "unrealizedPnl": -0.0056,
+      "liquidationPrice": 2.2201522078,
+      "marginUsed": 5.692872,
       "leverage": 2
     }
   ],
   "signals": {
-    "overall": -2,
+    "overall": -8,
     "action": "NEUTRAL",
-    "wt1": 28.04657535506381,
-    "rsi": 73.12270184457935,
+    "wt1": 26.17782593639377,
+    "rsi": 50.58607793480762,
     "mfi": 0,
     "history": [
-      15,
       15,
       15,
       14,
@@ -57,12 +65,69 @@
       -4,
       3,
       -13,
-      -2
+      -2,
+      -8
     ],
-    "totalSnapshots": 121,
-    "lastUpdate": "2026-02-14T01:00:32.110Z"
+    "totalSnapshots": 122,
+    "lastUpdate": "2026-02-14T01:15:38.320Z"
   },
   "journal": [
+    {
+      "timestamp": "2026-02-14T01:15:29.464Z",
+      "action": "OPEN_SHORT",
+      "details": {
+        "coin": "ZRO",
+        "size": "6.0",
+        "sizeUsd": 11,
+        "leverage": 2,
+        "orderPrice": 1.8238847500000002
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-14T01:15:27.496Z",
+      "action": "SET_TAKE_PROFIT_ERROR",
+      "details": {
+        "coin": "LIT",
+        "triggerPrice": 0.46304850000000003,
+        "error": "422 Unprocessable Entity - Failed to deserialize the JSON body into the target type"
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-14T01:15:24.703Z",
+      "action": "OPEN_SHORT",
+      "details": {
+        "coin": "LIT",
+        "size": "7",
+        "sizeUsd": 11,
+        "leverage": 2,
+        "orderPrice": 1.62040725
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-14T01:15:19.012Z",
+      "action": "OPEN_LONG_ERROR",
+      "details": {
+        "coin": "HYPE",
+        "sizeUsd": 10,
+        "leverage": 2,
+        "error": "Order 0: Order must have minimum value of $10. asset=159"
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-14T01:01:43.199Z",
+      "action": "CLOSE_POSITION",
+      "details": {
+        "coin": "LIT",
+        "positionSize": 7,
+        "isLong": false,
+        "orderPrice": 1.6503104999999998
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
     {
       "timestamp": "2026-02-14T01:00:22.496Z",
       "action": "OPEN_SHORT",
@@ -230,30 +295,6 @@
         "sizeUsd": 5,
         "leverage": 2,
         "error": "Invalid key: Expected \"orders\" but received undefined"
-      },
-      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
-    },
-    {
-      "timestamp": "2026-02-13T06:53:34.215Z",
-      "action": "EXECUTE_SIGNAL_ERROR",
-      "details": {
-        "signal": {
-          "action": "STRONG_BUY",
-          "price": 1934
-        },
-        "score": 60,
-        "error": "Cannot read properties of undefined (reading 'updateLeverage')"
-      },
-      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
-    },
-    {
-      "timestamp": "2026-02-13T06:53:34.215Z",
-      "action": "OPEN_LONG_ERROR",
-      "details": {
-        "coin": "ETH",
-        "sizeUsd": 5,
-        "leverage": 2,
-        "error": "Cannot read properties of undefined (reading 'updateLeverage')"
       },
       "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
     }
