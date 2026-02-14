@@ -1,30 +1,39 @@
 {
-  "generatedAt": "2026-02-14T00:30:48.679Z",
+  "generatedAt": "2026-02-14T00:46:09.631Z",
   "account": {
     "baseUSDC": 58.4803,
     "baseETH": 0.000379880318003408,
     "baseWETH": 0.002557478556195106,
-    "baseETHValue": 6.008543818705513,
-    "hlAccountValue": 22.385413,
-    "hlMarginUsed": 0,
-    "hlWithdrawable": 22.385413,
-    "totalValue": 86.87425681870552
+    "baseETHValue": 6.022936877189085,
+    "hlAccountValue": 22.359937,
+    "hlMarginUsed": 5.725724,
+    "hlWithdrawable": 16.634213,
+    "totalValue": 86.86317387718908
   },
   "prices": {
-    "ETH": 2045.56,
-    "BTC": 68874.61,
-    "SOL": 84.41,
-    "HYPE": 31.5565
+    "ETH": 2050.46,
+    "BTC": 68993.11,
+    "SOL": 84.81,
+    "HYPE": 31.7865
   },
-  "positions": [],
+  "positions": [
+    {
+      "coin": "LIT",
+      "size": -7,
+      "entryPrice": 1.6432,
+      "unrealizedPnl": -0.0203,
+      "liquidationPrice": 2.2400550649,
+      "marginUsed": 5.725724,
+      "leverage": 2
+    }
+  ],
   "signals": {
-    "overall": 3,
-    "action": "NEUTRAL",
-    "wt1": -75.23764636650527,
-    "rsi": 24.766733989264424,
+    "overall": -13,
+    "action": "SELL",
+    "wt1": -23.497192919663718,
+    "rsi": 59.32943264751044,
     "mfi": 0,
     "history": [
-      -15,
       0,
       15,
       15,
@@ -47,12 +56,80 @@
       -4,
       12,
       -4,
-      3
+      3,
+      -13
     ],
-    "totalSnapshots": 119,
-    "lastUpdate": "2026-02-14T00:30:16.086Z"
+    "totalSnapshots": 120,
+    "lastUpdate": "2026-02-14T00:45:33.846Z"
   },
   "journal": [
+    {
+      "timestamp": "2026-02-14T00:45:23.465Z",
+      "action": "OPEN_SHORT",
+      "details": {
+        "coin": "LIT",
+        "size": "7",
+        "sizeUsd": 11,
+        "leverage": 2,
+        "orderPrice": 1.635183
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-14T00:45:18.273Z",
+      "action": "OPEN_LONG_ERROR",
+      "details": {
+        "coin": "HYPE",
+        "sizeUsd": 10,
+        "leverage": 2,
+        "error": "Order 0: Order must have minimum value of $10. asset=159"
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-14T00:42:11.457Z",
+      "action": "OPEN_SHORT_ERROR",
+      "details": {
+        "coin": "LIT",
+        "sizeUsd": 8,
+        "leverage": 2,
+        "error": "Order 0: Order must have minimum value of $10. asset=223"
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-14T00:42:05.495Z",
+      "action": "OPEN_LONG_ERROR",
+      "details": {
+        "coin": "HYPE",
+        "sizeUsd": 10,
+        "leverage": 2,
+        "error": "Order 0: Order must have minimum value of $10. asset=159"
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-14T00:42:00.036Z",
+      "action": "OPEN_LONG_ERROR",
+      "details": {
+        "coin": "BTC",
+        "sizeUsd": 11.1927065,
+        "leverage": 2,
+        "error": "Order 0: Price must be divisible by tick size. asset=0"
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-14T00:41:51.341Z",
+      "action": "OPEN_LONG_ERROR",
+      "details": {
+        "coin": "BTC",
+        "sizeUsd": 11.1927065,
+        "leverage": 2,
+        "error": "Order 0: Price must be divisible by tick size. asset=0"
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
     {
       "timestamp": "2026-02-13T20:29:59.139Z",
       "action": "CLOSE_POSITION",
@@ -247,8 +324,8 @@
       {
         "coin": "XRP",
         "symbol": "XRP-USD",
-        "minTrade": 5,
-        "maxTrade": 8,
+        "minTrade": 10,
+        "maxTrade": 11,
         "addedBy": "volume-scanner",
         "addedAt": "2026-02-13T20:13:41.075Z",
         "reason": "Vol $79.9M, +3.2%, OI $80.2M"
@@ -256,8 +333,8 @@
       {
         "coin": "ZEC",
         "symbol": "ZEC-USD",
-        "minTrade": 5,
-        "maxTrade": 8,
+        "minTrade": 10,
+        "maxTrade": 11,
         "addedBy": "volume-scanner",
         "addedAt": "2026-02-13T20:13:41.075Z",
         "reason": "Vol $31.6M, +19.6%, OI $60.2M"
@@ -265,8 +342,8 @@
       {
         "coin": "LIT",
         "symbol": "LIT-USD",
-        "minTrade": 5,
-        "maxTrade": 8,
+        "minTrade": 10,
+        "maxTrade": 11,
         "addedBy": "volume-scanner",
         "addedAt": "2026-02-13T20:13:41.075Z",
         "reason": "Vol $19.7M, +14.2%, OI $54.2M"
@@ -274,8 +351,8 @@
       {
         "coin": "ZRO",
         "symbol": "ZRO-USD",
-        "minTrade": 5,
-        "maxTrade": 8,
+        "minTrade": 10,
+        "maxTrade": 11,
         "addedBy": "volume-scanner",
         "addedAt": "2026-02-13T20:13:41.075Z",
         "reason": "Vol $18.9M, -3.5%, OI $50.5M"
