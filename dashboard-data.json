@@ -1,40 +1,39 @@
 {
-  "generatedAt": "2026-02-14T00:46:09.631Z",
+  "generatedAt": "2026-02-14T01:01:08.096Z",
   "account": {
     "baseUSDC": 58.4803,
     "baseETH": 0.000379880318003408,
     "baseWETH": 0.002557478556195106,
-    "baseETHValue": 6.022936877189085,
-    "hlAccountValue": 22.359937,
-    "hlMarginUsed": 5.725724,
-    "hlWithdrawable": 16.634213,
-    "totalValue": 86.86317387718908
+    "baseETHValue": 6.023318733842731,
+    "hlAccountValue": 22.291471,
+    "hlMarginUsed": 5.71664,
+    "hlWithdrawable": 16.574831,
+    "totalValue": 86.79508973384273
   },
   "prices": {
-    "ETH": 2050.46,
-    "BTC": 68993.11,
-    "SOL": 84.81,
-    "HYPE": 31.7865
+    "ETH": 2050.59,
+    "BTC": 69000.01,
+    "SOL": 84.79,
+    "HYPE": 31.9205
   },
   "positions": [
     {
       "coin": "LIT",
       "size": -7,
-      "entryPrice": 1.6432,
-      "unrealizedPnl": -0.0203,
-      "liquidationPrice": 2.2400550649,
-      "marginUsed": 5.725724,
+      "entryPrice": 1.6382,
+      "unrealizedPnl": -0.0119,
+      "liquidationPrice": 2.233238961,
+      "marginUsed": 5.71664,
       "leverage": 2
     }
   ],
   "signals": {
-    "overall": -13,
-    "action": "SELL",
-    "wt1": -23.497192919663718,
-    "rsi": 59.32943264751044,
+    "overall": -2,
+    "action": "NEUTRAL",
+    "wt1": 28.04657535506381,
+    "rsi": 73.12270184457935,
     "mfi": 0,
     "history": [
-      0,
       15,
       15,
       15,
@@ -57,12 +56,36 @@
       12,
       -4,
       3,
-      -13
+      -13,
+      -2
     ],
-    "totalSnapshots": 120,
-    "lastUpdate": "2026-02-14T00:45:33.846Z"
+    "totalSnapshots": 121,
+    "lastUpdate": "2026-02-14T01:00:32.110Z"
   },
   "journal": [
+    {
+      "timestamp": "2026-02-14T01:00:22.496Z",
+      "action": "OPEN_SHORT",
+      "details": {
+        "coin": "LIT",
+        "size": "7",
+        "sizeUsd": 11,
+        "leverage": 2,
+        "orderPrice": 1.62936225
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
+    {
+      "timestamp": "2026-02-14T00:47:09.364Z",
+      "action": "CLOSE_POSITION",
+      "details": {
+        "coin": "LIT",
+        "positionSize": 7,
+        "isLong": false,
+        "orderPrice": 1.6606117499999997
+      },
+      "wallet": "0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A"
+    },
     {
       "timestamp": "2026-02-14T00:45:23.465Z",
       "action": "OPEN_SHORT",
