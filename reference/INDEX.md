@@ -23,4 +23,24 @@ Each file is a Variant UI export. When building a new page, pick the closest sty
 
 ---
 
+### 3. gym.html
+- **Vibe:** Raw, aggressive, punk/industrial
+- **Best for:** Gyms, fitness studios, combat sports, extreme brands
+- **Key features:** SVG rough-edge filters, scribble text effects, jitter animations, scratch overlays, inverted membership section with clip-path, scroll-based card rotation
+- **Colors:** Black (#050505), white, inverted white membership section
+- **Fonts:** Permanent Marker + Special Elite
+- **Layout:** Multi-section scroll, brutalist design
+
+---
+
+### 4. terminal.html
+- **Vibe:** Apple-clean, SF Pro, light trading terminal
+- **Best for:** Trading dashboards, fintech apps, data-dense tools, crypto platforms
+- **Key features:** 3-column grid layout, pill navigation, order book, chart area with gradient fill, slider controls, monospace data tables, status badges
+- **Colors:** Light (#F2F2F7 bg), white cards, green (#34C759) / red (#FF3B30) accents, teal-blue gradient for bull
+- **Fonts:** SF Pro Display (system) + SF Mono
+- **Layout:** Fixed viewport grid (sidebar + main + right panel), no scroll on body
+
+---
+
 *Add new entries as Matt exports more Variant designs.*

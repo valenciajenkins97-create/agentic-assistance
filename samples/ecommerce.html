@@ -1,516 +1,518 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NovaTech - Premium Tech Accessories</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
+        * { font-family: 'Inter', sans-serif; }
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+        .glassmorphism-dark {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(147, 51, 234, 0.1);
         }
-        
-        @keyframes glow {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 1; }
+        .glassmorphism-purple {
+            background: rgba(147, 51, 234, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(147, 51, 234, 0.2);
         }
-        
-        @keyframes slideInUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out;
         }
-        
+        .animate-slide-up {
+            animation: slideUp 0.8s ease-out;
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        .animate-glow {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        .animate-bounce-subtle {
+            animation: bounceSubtle 3s ease-in-out infinite;
+        }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-        
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        
-        .animate-glow {
-            animation: glow 2s ease-in-out infinite;
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
-        
-        .animate-slide-up {
-            animation: slideInUp 0.8s ease-out;
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(147, 51, 234, 0.5); }
+            to { box-shadow: 0 0 40px rgba(147, 51, 234, 0.8); }
         }
-        
-        .animate-fade-in {
-            animation: fadeIn 1s ease-out;
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .gradient-border {
-            position: relative;
-            background: linear-gradient(45deg, #8b5cf6, #ec4899, #f59e0b);
-            padding: 2px;
-            border-radius: 16px;
-        }
-        
-        .gradient-border::before {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            right: 2px;
-            bottom: 2px;
-            background: #0a0a0a;
-            border-radius: 14px;
-            z-index: -1;
-        }
-        
-        .hero-gradient {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #8b5cf6 50%, #ec4899 75%, #f59e0b 100%);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-        }
-        
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        @keyframes bounceSubtle {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
         }
     </style>
 </head>
-<body class="bg-gray-900" style="background-color: #0a0a0a;">
+<body class="bg-slate-950 text-white overflow-x-hidden">
     
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glassmorphism">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <div class="text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-500 bg-clip-text text-transparent">
+                        NovaTech
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#products" class="text-slate-300 hover:text-purple-400 transition-colors duration-300">Products</a>
+                    <a href="#features" class="text-slate-300 hover:text-purple-400 transition-colors duration-300">Features</a>
+                    <a href="#reviews" class="text-slate-300 hover:text-purple-400 transition-colors duration-300">Reviews</a>
+                    <a href="#newsletter" class="text-slate-300 hover:text-purple-400 transition-colors duration-300">Newsletter</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-slate-300 hover:text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6.5M7 13l-1.5-6.5m0 0h15.5M9 19.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm10 0a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/>
+                        </svg>
+                    </button>
+                    <button class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 px-6 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105">
+                        Shop Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center py-24 px-4 overflow-hidden">
-        <!-- Background Gradients -->
-        <div class="absolute inset-0 opacity-20">
-            <div class="absolute top-0 left-1/4 w-96 h-96 bg-purple-500 rounded-full blur-3xl animate-float"></div>
-            <div class="absolute top-1/3 right-1/4 w-80 h-80 bg-pink-500 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
-            <div class="absolute bottom-1/4 left-1/2 w-72 h-72 bg-violet-500 rounded-full blur-3xl animate-float" style="animation-delay: 4s;"></div>
+    <section class="min-h-screen flex items-center justify-center relative overflow-hidden py-24 px-6">
+        <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-950 to-pink-950"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-800/20 via-transparent to-transparent"></div>
+        
+        <div class="relative z-10 max-w-6xl mx-auto text-center animate-fade-in">
+            <h1 class="text-5xl md:text-7xl font-black mb-8 leading-tight">
+                <span class="bg-gradient-to-r from-purple-300 via-pink-300 to-purple-400 bg-clip-text text-transparent">
+                    Tech That
+                </span>
+                <br>
+                <span class="bg-gradient-to-r from-pink-400 via-purple-400 to-pink-500 bg-clip-text text-transparent">
+                    Inspires
+                </span>
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+                Premium accessories engineered for creators, innovators, and tech enthusiasts who demand excellence in every detail.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                <button class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl animate-glow">
+                    Explore Collection
+                </button>
+                <button class="glassmorphism-purple px-8 py-4 rounded-lg text-lg font-semibold hover:bg-purple-500/20 transition-all duration-300">
+                    Watch Demo
+                </button>
+            </div>
         </div>
         
-        <div class="relative z-10 text-center max-w-7xl mx-auto">
-            <div class="animate-slide-up">
-                <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 leading-tight">
-                    <span class="hero-gradient bg-clip-text text-transparent">NovaTech</span>
-                </h1>
-                <p class="text-xl md:text-2xl lg:text-3xl text-gray-300 mb-4 font-light">Premium Tech Accessories</p>
-                <p class="text-lg md:text-xl text-gray-400 mb-12 max-w-3xl mx-auto font-light">
-                    Elevate your digital lifestyle with our cutting-edge collection of premium tech accessories. 
-                    Designed for innovators, built for perfection.
-                </p>
-            </div>
-            
-            <div class="animate-fade-in" style="animation-delay: 0.5s;">
-                <button class="group relative px-12 py-6 text-xl font-semibold text-white rounded-2xl transition-all duration-300 hover:scale-105">
-                    <div class="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 rounded-2xl animate-glow"></div>
-                    <div class="relative z-10 flex items-center gap-3">
-                        Shop Collection
-                        <svg class="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                    </div>
-                </button>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-float">
+            <div class="w-6 h-10 border-2 border-purple-400 rounded-full flex justify-center">
+                <div class="w-1 h-3 bg-purple-400 rounded-full mt-2 animate-pulse"></div>
             </div>
         </div>
     </section>
 
     <!-- Product Showcase -->
-    <section class="py-32 px-4">
+    <section id="products" class="py-24 px-6">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-20">
-                <h2 class="text-4xl md:text-6xl font-bold text-white mb-6">
-                    <span class="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                        Featured Products
-                    </span>
+            <div class="text-center mb-20 animate-slide-up">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-300 via-pink-300 to-purple-400 bg-clip-text text-transparent">
+                    Premium Collection
                 </h2>
-                <p class="text-xl text-gray-400 max-w-2xl mx-auto">
-                    Discover our handpicked selection of premium accessories that redefine excellence
+                <p class="text-xl text-slate-400 max-w-3xl mx-auto">
+                    Meticulously crafted accessories that elevate your tech experience
                 </p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Product 1 -->
-                <div class="glass-card rounded-3xl p-8 group hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/20">
-                    <div class="aspect-square bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl mb-6 flex items-center justify-center">
-                        <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                        </svg>
+                <div class="glassmorphism-dark rounded-2xl overflow-hidden hover:scale-105 transition-all duration-300 group">
+                    <div class="h-64 bg-gradient-to-br from-purple-800 to-pink-800 relative flex items-center justify-center">
+                        <div class="w-24 h-16 bg-gradient-to-r from-purple-300 to-pink-300 rounded-lg animate-bounce-subtle"></div>
+                        <div class="absolute top-4 right-4 bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                            Bestseller
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-3">Quantum Case Pro</h3>
-                    <p class="text-gray-400 mb-6">Ultra-slim protection with quantum-engineered materials</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-3xl font-bold text-white">$299</span>
-                        <button class="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl hover:shadow-lg transition-all duration-300">
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Product 2 -->
-                <div class="glass-card rounded-3xl p-8 group hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:shadow-pink-500/20">
-                    <div class="aspect-square bg-gradient-to-br from-pink-500 to-orange-500 rounded-2xl mb-6 flex items-center justify-center">
-                        <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-3">HyperStand Elite</h3>
-                    <p class="text-gray-400 mb-6">Magnetic laptop stand with wireless charging</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-3xl font-bold text-white">$449</span>
-                        <button class="px-6 py-3 bg-gradient-to-r from-pink-600 to-orange-600 text-white rounded-xl hover:shadow-lg transition-all duration-300">
-                            Add to Cart
-                        </button>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">AeroCharge Pro</h3>
+                        <p class="text-slate-400 text-sm mb-4">Wireless charging pad with 15W fast charging and premium aluminum finish</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">$149</span>
+                            <button class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300">
+                                Add to Cart
+                            </button>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Product 3 -->
-                <div class="glass-card rounded-3xl p-8 group hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:shadow-violet-500/20">
-                    <div class="aspect-square bg-gradient-to-br from-violet-500 to-purple-500 rounded-2xl mb-6 flex items-center justify-center">
-                        <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m0 0V1a1 1 0 011-1h2a1 1 0 011 1v18a1 1 0 01-1 1H4a1 1 0 01-1-1V4a1 1 0 011-1h2a1 1 0 011 1z" />
-                        </svg>
+                <div class="glassmorphism-dark rounded-2xl overflow-hidden hover:scale-105 transition-all duration-300 group">
+                    <div class="h-64 bg-gradient-to-br from-pink-800 to-purple-800 relative flex items-center justify-center">
+                        <div class="w-20 h-20 bg-gradient-to-r from-pink-300 to-purple-300 rounded-full animate-bounce-subtle"></div>
+                        <div class="absolute top-4 right-4 bg-pink-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                            New
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-3">PowerCore Infinity</h3>
-                    <p class="text-gray-400 mb-6">50,000mAh wireless power bank with solar charging</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-3xl font-bold text-white">$179</span>
-                        <button class="px-6 py-3 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-xl hover:shadow-lg transition-all duration-300">
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Product 4 -->
-                <div class="glass-card rounded-3xl p-8 group hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/20">
-                    <div class="aspect-square bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl mb-6 flex items-center justify-center">
-                        <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-3">AeroHub Max</h3>
-                    <p class="text-gray-400 mb-6">12-in-1 USB-C hub with 8K display support</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-3xl font-bold text-white">$329</span>
-                        <button class="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:shadow-lg transition-all duration-300">
-                            Add to Cart
-                        </button>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">SonicWave Buds</h3>
+                        <p class="text-slate-400 text-sm mb-4">Premium true wireless earbuds with active noise cancellation</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">$299</span>
+                            <button class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300">
+                                Add to Cart
+                            </button>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Product 5 -->
-                <div class="glass-card rounded-3xl p-8 group hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:shadow-emerald-500/20">
-                    <div class="aspect-square bg-gradient-to-br from-emerald-500 to-blue-500 rounded-2xl mb-6 flex items-center justify-center">
-                        <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
-                        </svg>
+                <div class="glassmorphism-dark rounded-2xl overflow-hidden hover:scale-105 transition-all duration-300 group">
+                    <div class="h-64 bg-gradient-to-br from-purple-700 to-pink-700 relative flex items-center justify-center">
+                        <div class="w-28 h-20 bg-gradient-to-r from-purple-300 to-pink-300 rounded-lg animate-bounce-subtle"></div>
+                        <div class="absolute top-4 right-4 bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                            Pro
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-3">WiFi Nexus 7</h3>
-                    <p class="text-gray-400 mb-6">Next-gen mesh router with AI optimization</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-3xl font-bold text-white">$599</span>
-                        <button class="px-6 py-3 bg-gradient-to-r from-emerald-600 to-blue-600 text-white rounded-xl hover:shadow-lg transition-all duration-300">
-                            Add to Cart
-                        </button>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">MagDock Elite</h3>
+                        <p class="text-slate-400 text-sm mb-4">Magnetic laptop stand with adjustable height and cooling design</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">$199</span>
+                            <button class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300">
+                                Add to Cart
+                            </button>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Product 6 -->
-                <div class="glass-card rounded-3xl p-8 group hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:shadow-yellow-500/20">
-                    <div class="aspect-square bg-gradient-to-br from-yellow-500 to-orange-500 rounded-2xl mb-6 flex items-center justify-center">
-                        <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                        </svg>
+                <div class="glassmorphism-dark rounded-2xl overflow-hidden hover:scale-105 transition-all duration-300 group">
+                    <div class="h-64 bg-gradient-to-br from-pink-700 to-purple-800 relative flex items-center justify-center">
+                        <div class="w-16 h-24 bg-gradient-to-r from-pink-300 to-purple-300 rounded-lg animate-bounce-subtle"></div>
+                        <div class="absolute top-4 right-4 bg-pink-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                            Limited
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-3">Stylus Pro X</h3>
-                    <p class="text-gray-400 mb-6">Precision stylus with haptic feedback and tilt detection</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-3xl font-bold text-white">$199</span>
-                        <button class="px-6 py-3 bg-gradient-to-r from-yellow-600 to-orange-600 text-white rounded-xl hover:shadow-lg transition-all duration-300">
-                            Add to Cart
-                        </button>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">FlexiPhone Mount</h3>
+                        <p class="text-slate-400 text-sm mb-4">Ultra-flexible phone mount with 360° rotation and strong grip</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">$79</span>
+                            <button class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glassmorphism-dark rounded-2xl overflow-hidden hover:scale-105 transition-all duration-300 group">
+                    <div class="h-64 bg-gradient-to-br from-purple-800 to-pink-700 relative flex items-center justify-center">
+                        <div class="w-32 h-8 bg-gradient-to-r from-purple-300 to-pink-300 rounded-full animate-bounce-subtle"></div>
+                        <div class="absolute top-4 right-4 bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                            Featured
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">PowerHub Max</h3>
+                        <p class="text-slate-400 text-sm mb-4">100W USB-C hub with multiple ports and fast data transfer</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">$249</span>
+                            <button class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glassmorphism-dark rounded-2xl overflow-hidden hover:scale-105 transition-all duration-300 group">
+                    <div class="h-64 bg-gradient-to-br from-pink-800 to-purple-700 relative flex items-center justify-center">
+                        <div class="w-20 h-12 bg-gradient-to-r from-pink-300 to-purple-300 rounded-lg animate-bounce-subtle"></div>
+                        <div class="absolute top-4 right-4 bg-pink-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                            Eco
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">EcoCase Pro</h3>
+                        <p class="text-slate-400 text-sm mb-4">Sustainable phone case made from recycled ocean plastic</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">$59</span>
+                            <button class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300">
+                                Add to Cart
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="py-32 px-4">
-        <div class="max-w-7xl mx-auto">
+    <!-- Features & Benefits -->
+    <section id="features" class="py-24 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-purple-900/20 to-pink-900/20"></div>
+        <div class="relative z-10 max-w-7xl mx-auto">
             <div class="text-center mb-20">
-                <h2 class="text-4xl md:text-6xl font-bold text-white mb-6">
-                    <span class="bg-gradient-to-r from-violet-400 to-purple-400 bg-clip-text text-transparent">
-                        Why Choose NovaTech?
-                    </span>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-300 via-pink-300 to-purple-400 bg-clip-text text-transparent">
+                    Why Choose NovaTech?
                 </h2>
+                <p class="text-xl text-slate-400 max-w-3xl mx-auto">
+                    Engineering excellence meets innovative design
+                </p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="glass-card rounded-3xl p-8 text-center group hover:scale-105 transition-all duration-500">
-                    <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:rotate-12 transition-transform duration-500">
-                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glassmorphism-purple p-8 rounded-2xl text-center hover:bg-purple-500/20 transition-all duration-300">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full mx-auto mb-6 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                         </svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-4">Lightning Fast</h3>
-                    <p class="text-gray-400">Experience blazing-fast performance with our cutting-edge technology and optimized design.</p>
+                    <h3 class="text-xl font-bold mb-4">Lightning Fast</h3>
+                    <p class="text-slate-400">Advanced charging technology delivers power at unprecedented speeds</p>
                 </div>
                 
-                <div class="glass-card rounded-3xl p-8 text-center group hover:scale-105 transition-all duration-500">
-                    <div class="w-20 h-20 bg-gradient-to-br from-pink-500 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:rotate-12 transition-transform duration-500">
-                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                <div class="glassmorphism-purple p-8 rounded-2xl text-center hover:bg-purple-500/20 transition-all duration-300">
+                    <div class="w-16 h-16 bg-gradient-to-br from-pink-600 to-purple-600 rounded-full mx-auto mb-6 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-4">Premium Quality</h3>
-                    <p class="text-gray-400">Built with premium materials and rigorous quality control for lasting durability.</p>
+                    <h3 class="text-xl font-bold mb-4">Premium Quality</h3>
+                    <p class="text-slate-400">Aerospace-grade materials and precision manufacturing standards</p>
                 </div>
                 
-                <div class="glass-card rounded-3xl p-8 text-center group hover:scale-105 transition-all duration-500">
-                    <div class="w-20 h-20 bg-gradient-to-br from-violet-500 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:rotate-12 transition-transform duration-500">
-                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                <div class="glassmorphism-purple p-8 rounded-2xl text-center hover:bg-purple-500/20 transition-all duration-300">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full mx-auto mb-6 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"/>
                         </svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-4">Loved by Users</h3>
-                    <p class="text-gray-400">Join thousands of satisfied customers who trust NovaTech for their tech needs.</p>
+                    <h3 class="text-xl font-bold mb-4">Smart Design</h3>
+                    <p class="text-slate-400">Intuitive functionality that adapts to your workflow seamlessly</p>
+                </div>
+                
+                <div class="glassmorphism-purple p-8 rounded-2xl text-center hover:bg-purple-500/20 transition-all duration-300">
+                    <div class="w-16 h-16 bg-gradient-to-br from-pink-600 to-purple-600 rounded-full mx-auto mb-6 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Eco-Friendly</h3>
+                    <p class="text-slate-400">Sustainable materials and carbon-neutral manufacturing process</p>
+                </div>
+                
+                <div class="glassmorphism-purple p-8 rounded-2xl text-center hover:bg-purple-500/20 transition-all duration-300">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full mx-auto mb-6 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">24/7 Support</h3>
+                    <p class="text-slate-400">Expert technical support whenever you need assistance</p>
+                </div>
+                
+                <div class="glassmorphism-purple p-8 rounded-2xl text-center hover:bg-purple-500/20 transition-all duration-300">
+                    <div class="w-16 h-16 bg-gradient-to-br from-pink-600 to-purple-600 rounded-full mx-auto mb-6 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Lifetime Warranty</h3>
+                    <p class="text-slate-400">Comprehensive protection with hassle-free replacement guarantee</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Social Proof Section -->
-    <section class="py-32 px-4">
-        <div class="max-w-7xl mx-auto">
+    <!-- Social Proof -->
+    <section id="reviews" class="py-24 px-6">
+        <div class="max-w-6xl mx-auto">
             <div class="text-center mb-20">
-                <h2 class="text-4xl md:text-6xl font-bold text-white mb-6">
-                    <span class="bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">
-                        Trusted by Innovators
-                    </span>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-300 via-pink-300 to-purple-400 bg-clip-text text-transparent">
+                    What Creators Say
                 </h2>
-                <div class="flex justify-center items-center gap-4 mb-8">
-                    <div class="flex text-yellow-400">
-                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                        </svg>
-                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                        </svg>
-                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                        </svg>
-                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                        </svg>
-                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                        </svg>
+                <p class="text-xl text-slate-400">Join thousands of satisfied customers worldwide</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glassmorphism-dark p-8 rounded-2xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full mr-4"></div>
+                        <div>
+                            <h4 class="font-bold">Alex Chen</h4>
+                            <p class="text-slate-400 text-sm">Tech Reviewer</p>
+                        </div>
                     </div>
-                    <span class="text-2xl font-semibold text-white">4.9/5 from 10,000+ reviews</span>
+                    <div class="flex mb-4">
+                        <span class="text-purple-400">★★★★★</span>
+                    </div>
+                    <p class="text-slate-300">"The AeroCharge Pro is incredible. Fast charging and beautiful design. My new go-to recommendation."</p>
+                </div>
+                
+                <div class="glassmorphism-dark p-8 rounded-2xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full mr-4"></div>
+                        <div>
+                            <h4 class="font-bold">Sarah Johnson</h4>
+                            <p class="text-slate-400 text-sm">Creative Director</p>
+                        </div>
+                    </div>
+                    <div class="flex mb-4">
+                        <span class="text-purple-400">★★★★★</span>
+                    </div>
+                    <p class="text-slate-300">"NovaTech products have completely transformed my workspace. Quality is outstanding and design is flawless."</p>
+                </div>
+                
+                <div class="glassmorphism-dark p-8 rounded-2xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full mr-4"></div>
+                        <div>
+                            <h4 class="font-bold">Marcus Rivera</h4>
+                            <p class="text-slate-400 text-sm">Software Engineer</p>
+                        </div>
+                    </div>
+                    <div class="flex mb-4">
+                        <span class="text-purple-400">★★★★★</span>
+                    </div>
+                    <p class="text-slate-300">"Best tech accessories I've ever owned. The attention to detail and build quality is exceptional."</p>
                 </div>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="glass-card rounded-3xl p-8">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg mr-4">
-                            S
-                        </div>
-                        <div>
-                            <h4 class="text-white font-semibold">Sarah Chen</h4>
-                            <p class="text-gray-400 text-sm">Product Designer</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-300 mb-4">"The Quantum Case Pro has been a game-changer for my workflow. The build quality is exceptional and the design is simply beautiful."</p>
-                    <div class="flex text-yellow-400">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                        </svg>
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                        </svg>
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                        </svg>
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                        </svg>
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                        </svg>
-                    </div>
+            <div class="flex justify-center items-center mt-16 space-x-12 text-slate-500">
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-purple-400">50K+</div>
+                    <div>Happy Customers</div>
                 </div>
-                
-                <div class="glass-card rounded-3xl p-8">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 bg-gradient-to-r from-pink-500 to-orange-500 rounded-full flex items-center justify-center text-white font-bold text-lg mr-4">
-                            M
-                        </div>
-                        <div>
-                            <h4 class="text-white font-semibold">Marcus Rodriguez</h4>
-                            <p class="text-gray-400 text-sm">Software Engineer</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-300 mb-4">"The AeroHub Max completely transformed my home office setup. All my devices connect seamlessly and the 8K support is incredible."</p>
-                    <div class="flex text-yellow-400">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                        </svg>
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                        </svg>
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                        </svg>
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                        </svg>
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                        </svg>
-                    </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-purple-400">4.9</div>
+                    <div>Average Rating</div>
                 </div>
-                
-                <div class="glass-card rounded-3xl p-8">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 bg-gradient-to-r from-violet-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold text-lg mr-4">
-                            A
-                        </div>
-                        <div>
-                            <h4 class="text-white font-semibold">Aisha Patel</h4>
-                            <p class="text-gray-400 text-sm">Creative Director</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-300 mb-4">"NovaTech's attention to detail is unmatched. Every product feels premium and performs beyond expectations. Absolutely love my PowerCore Infinity!"</p>
-                    <div class="flex text-yellow-400">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                        </svg>
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                        </svg>
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                        </svg>
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                        </svg>
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                        </svg>
-                    </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-purple-400">99%</div>
+                    <div>Would Recommend</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Newsletter Section -->
-    <section class="py-32 px-4">
-        <div class="max-w-4xl mx-auto text-center">
-            <div class="glass-card rounded-3xl p-12">
-                <h2 class="text-4xl md:text-6xl font-bold text-white mb-6">
-                    <span class="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                        Stay Connected
-                    </span>
+    <!-- Newsletter Signup -->
+    <section id="newsletter" class="py-24 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="glassmorphism-purple p-12 rounded-3xl text-center">
+                <h2 class="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-purple-300 via-pink-300 to-purple-400 bg-clip-text text-transparent">
+                    Stay Ahead of Innovation
                 </h2>
-                <p class="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
-                    Be the first to know about new products, exclusive offers, and tech insights from NovaTech
+                <p class="text-xl text-slate-300 mb-12 max-w-2xl mx-auto">
+                    Be the first to discover new products, exclusive offers, and tech insights from our expert team.
                 </p>
                 
-                <div class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
-                    <input 
-                        type="email" 
-                        placeholder="Enter your email" 
-                        class="flex-1 px-6 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 backdrop-blur-sm"
-                    >
-                    <button class="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl hover:shadow-lg transition-all duration-300 font-semibold">
-                        Subscribe
+                <div class="max-w-md mx-auto flex gap-4">
+                    <input type="email" placeholder="Enter your email address" class="flex-1 px-6 py-4 bg-slate-800 border border-slate-700 rounded-lg focus:border-purple-500 focus:outline-none transition-colors">
+                    <button class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl whitespace-nowrap">
+                        Join Now
                     </button>
                 </div>
                 
-                <p class="text-gray-500 text-sm mt-4">
-                    No spam, ever. Unsubscribe anytime.
-                </p>
+                <p class="text-sm text-slate-500 mt-6">No spam, unsubscribe anytime • 25% off your first order</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-24 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-purple-300 via-pink-300 to-purple-400 bg-clip-text text-transparent">
+                Ready to Upgrade Your Tech?
+            </h2>
+            <p class="text-xl text-slate-300 mb-12 max-w-2xl mx-auto">
+                Experience the perfect fusion of innovation, design, and performance.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                <button class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 px-12 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+                    Shop Collection
+                </button>
+                <button class="glassmorphism-purple px-12 py-4 rounded-lg text-lg font-semibold hover:bg-purple-500/20 transition-all duration-300">
+                    Learn More
+                </button>
+            </div>
+            
+            <div class="flex justify-center items-center mt-12 space-x-8 text-sm text-slate-500">
+                <div class="flex items-center">
+                    <div class="w-2 h-2 bg-purple-400 rounded-full mr-2"></div>
+                    Free Shipping Worldwide
+                </div>
+                <div class="flex items-center">
+                    <div class="w-2 h-2 bg-pink-400 rounded-full mr-2"></div>
+                    30-Day Returns
+                </div>
+                <div class="flex items-center">
+                    <div class="w-2 h-2 bg-purple-400 rounded-full mr-2"></div>
+                    Lifetime Support
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-24 px-4 border-t border-white/10">
+    <footer class="py-12 px-6 border-t border-slate-800">
         <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-                <div class="col-span-1 md:col-span-2">
-                    <h3 class="text-3xl font-bold text-white mb-4">
-                        <span class="hero-gradient bg-clip-text text-transparent">NovaTech</span>
-                    </h3>
-                    <p class="text-gray-400 mb-6 max-w-md">
-                        Elevating your digital lifestyle with premium tech accessories designed for innovators and built for perfection.
-                    </p>
-                    <div class="flex gap-4">
-                        <a href="#" class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-white hover:bg-purple-600 transition-colors duration-300">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-white hover:bg-purple-600 transition-colors duration-300">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-white hover:bg-purple-600 transition-colors duration-300">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-white hover:bg-purple-600 transition-colors duration-300">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.746-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24c6.624 0 11.99-5.367 11.99-12C24.007 5.367 18.641.001 12.017.001z" />
-                            </svg>
-                        </a>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="text-xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-500 bg-clip-text text-transparent">
+                        NovaTech
                     </div>
+                    <p class="text-slate-400 text-sm">
+                        Premium tech accessories for creators and innovators who demand excellence.
+                    </p>
                 </div>
                 
                 <div>
-                    <h4 class="text-white font-semibold mb-4">Products</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors duration-300">Cases & Protection</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors duration-300">Charging Solutions</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors duration-300">Stands & Mounts</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors duration-300">Connectivity</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors duration-300">Audio Accessories</a></li>
+                    <h3 class="font-semibold mb-4">Products</h3>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li>Charging Solutions</li>
+                        <li>Audio Accessories</li>
+                        <li>Stands & Mounts</li>
+                        <li>Cases & Protection</li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h4 class="text-white font-semibold mb-4">Support</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors duration-300">Help Center</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors duration-300">Contact Us</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors duration-300">Shipping & Returns</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors duration-300">Warranty</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors duration-300">Track Your Order</a></li>
+                    <h3 class="font-semibold mb-4">Support</h3>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li>Customer Service</li>
+                        <li>Product Guides</li>
+                        <li>Warranty Claims</li>
+                        <li>1-800-NOVATECH</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold mb-4">Company</h3>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li>About Us</li>
+                        <li>Careers</li>
+                        <li>Press Kit</li>
+                        <li>Sustainability</li>
                     </ul>
                 </div>
             </div>
             
-            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-gray-400 text-center md:text-left">
-                    © 2024 NovaTech. All rights reserved.
-                </p>
-                <p class="text-gray-400 text-center md:text-right">
-                    Built by <a href="https://agentic-assistance.com" class="text-purple-400 hover:text-purple-300 transition-colors duration-300">Agentic Assistance</a> — agentic-assistance.com
-                </p>
+            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500">
+                <p>&copy; 2024 NovaTech. All rights reserved.</p>
+                <p>Built by <a href="https://agentic-assistance.com" class="text-purple-400 hover:text-purple-300 transition-colors">Agentic Assistance</a> — agentic-assistance.com</p>
             </div>
         </div>
     </footer>
-
+    
 </body>
 </html>

@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Audit Report | Discover What's Holding Your Website Back</title>
+    <meta name="description" content="Get actionable SEO insights and a prioritized roadmap to improve your search rankings. Comprehensive technical analysis, content assessment, and performance optimization tips.">
+    <meta name="keywords" content="seo audit, website analysis, search engine optimization, technical seo, seo report, website performance">
+    <meta property="og:title" content="SEO Audit Report | Discover What's Holding Your Website Back">
+    <meta property="og:description" content="Get actionable SEO insights and a prioritized roadmap to improve your search rankings.">
+    <meta property="og:type" content="product">
+    <meta property="og:url" content="https://valenciajenkins97-create.github.io/agentic-assistance/store/seo-audit.html">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --c-bg-base: #0f0f1a;
+            --c-bg-overlay: rgba(15, 15, 26, 0.92);
+            --c-bg-card: rgba(255, 255, 255, 0.05);
+            --c-bg-card-hover: rgba(255, 255, 255, 0.08);
+            --c-text-main: #ffffff;
+            --c-text-muted: rgba(255, 255, 255, 0.7);
+            --c-text-dimmed: rgba(255, 255, 255, 0.5);
+            --c-accent: #f59e0b;
+            --c-accent-hover: #d97706;
+            --c-border: rgba(255, 255, 255, 0.1);
+            --c-border-light: rgba(255, 255, 255, 0.05);
+            --ease-fluid: cubic-bezier(0.25, 1, 0.5, 1);
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Manrope', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            cursor: none;
+        }
+
+        body {
+            background-color: var(--c-bg-base);
+            font-family: var(--font-sans);
+            color: var(--c-text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Background Layers */
+        .bg-layers {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+        }
+
+        .layer-sharp {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            background-attachment: fixed;
+            z-index: 1;
+        }
+
+        .layer-blur {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), 
+                rgba(245, 158, 11, 0.15) 0%, 
+                rgba(245, 158, 11, 0.05) 35%,
+                transparent 70%);
+            z-index: 2;
+        }
+
+        .noise-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            opacity: 0.08;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .noise-overlay::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--c-bg-overlay);
+            mix-blend-mode: multiply;
+        }
+
+        /* Custom Cursor */
+        .cursor-dot, .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .cursor-dot {
+            width: 4px;
+            height: 4px;
+            background-color: white;
+        }
+
+        .cursor-outline {
+            width: 32px;
+            height: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.2s var(--ease-fluid);
+        }
+
+        /* Layout */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .header {
+            position: relative;
+            z-index: 100;
+            padding: 2rem 0;
+            pointer-events: auto;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--c-border);
+            padding-bottom: 1.5rem;
+        }
+
+        .brand {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--c-text-main);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .brand:hover {
+            opacity: 0.7;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .nav-link {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 500;
+            color: var(--c-text-main);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-link:hover {
+            opacity: 0.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 6rem 0 8rem 0;
+            pointer-events: auto;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            line-height: 1.1;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+            color: var(--c-text-main);
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: var(--c-text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .price-display {
+            background: var(--c-bg-card);
+            border: 1px solid var(--c-border);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+            margin-bottom: 2rem;
+        }
+
+        .price {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            font-weight: 500;
+            color: var(--c-text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .price-subtitle {
+            color: var(--c-text-muted);
+            font-size: 0.9rem;
+        }
+
+        .hero-visual {
+            background: var(--c-bg-card);
+            border: 1px solid var(--c-border);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+            text-align: center;
+        }
+
+        .visual-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, var(--c-accent), var(--c-accent-hover));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Problem Section */
+        .problem-section {
+            padding: 4rem 0;
+            pointer-events: auto;
+        }
+
+        .problem-card {
+            background: var(--c-bg-card);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 16px;
+            padding: 3rem;
+            backdrop-filter: blur(20px);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .problem-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Audit Categories Section */
+        .audit-categories {
+            padding: 4rem 0;
+            pointer-events: auto;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .category-card {
+            background: var(--c-bg-card);
+            border: 1px solid var(--c-border);
+            border-radius: 12px;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+            text-align: center;
+        }
+
+        .category-score {
+            width: 80px;
+            height: 80px;
+            background: var(--c-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem auto;
+        }
+
+        .category-title {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 0;
+            pointer-events: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--c-bg-card);
+            border: 1px solid var(--c-border);
+            border-radius: 12px;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--c-accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s var(--ease-fluid);
+            cursor: none;
+            border: none;
+            background: none;
+        }
+
+        .btn-primary {
+            background: var(--c-accent);
+            color: white;
+            border: 1px solid var(--c-accent);
+        }
+
+        .btn-primary:hover {
+            background: var(--c-accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.2);
+        }
+
+        .btn-waitlist {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--c-text-main);
+            border: 1px solid var(--c-border);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        .btn-waitlist:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Report Preview Section */
+        .report-preview {
+            padding: 4rem 0;
+            pointer-events: auto;
+        }
+
+        .report-card {
+            background: var(--c-bg-card);
+            border: 1px solid var(--c-border);
+            border-radius: 16px;
+            padding: 3rem;
+            backdrop-filter: blur(20px);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .report-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .overall-score {
+            width: 120px;
+            height: 120px;
+            background: var(--c-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem auto;
+        }
+
+        .score-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+
+        .score-table th,
+        .score-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--c-border);
+        }
+
+        .score-table th {
+            color: var(--c-text-main);
+            font-weight: 600;
+        }
+
+        .score-table td {
+            color: var(--c-text-muted);
+        }
+
+        .status-good { color: #10b981; }
+        .status-warning { color: #f59e0b; }
+        .status-critical { color: #ef4444; }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 4rem 0;
+            text-align: center;
+            pointer-events: auto;
+        }
+
+        .cta-card {
+            background: var(--c-bg-card);
+            border: 1px solid var(--c-border);
+            border-radius: 16px;
+            padding: 4rem 2rem;
+            backdrop-filter: blur(20px);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--c-bg-card);
+            border: 1px solid var(--c-border);
+            border-radius: 16px;
+            padding: 3rem;
+            max-width: 500px;
+            width: 90%;
+            backdrop-filter: blur(20px);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--c-text-muted);
+            font-size: 1.5rem;
+            cursor: none;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--c-text-main);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--c-border);
+            border-radius: 8px;
+            color: var(--c-text-main);
+            font-family: var(--font-sans);
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--c-accent);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .categories-grid,
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Layers -->
+    <div class="bg-layers">
+        <div class="layer-sharp"></div>
+        <div class="layer-blur"></div>
+        <div class="noise-overlay"></div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Main Content -->
+    <div class="content-wrapper">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <nav class="nav-container">
+                    <a href="../" class="brand">Agentic Assistance</a>
+                    <div class="nav-links">
+                        <a href="./" class="nav-link">Store</a>
+                        <a href="../" class="nav-link">Portfolio</a>
+                        <a href="mailto:nova@agentic-assistance.com" class="nav-link">Contact</a>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-content">
+                        <h1>Rank <em>Higher</em></h1>
+                        <p>
+                            Stop guessing why your website isn't ranking. Get a comprehensive SEO audit 
+                            that reveals exactly what's holding you back—and a clear roadmap to fix it.
+                        </p>
+                        
+                        <div class="price-display">
+                            <div class="price">$39</div>
+                            <div class="price-subtitle">per audit • instant analysis</div>
+                        </div>
+                        
+                        <button class="btn btn-waitlist" onclick="openWaitlistModal('SEO Audit Report')">
+                            Coming Soon — Join Waitlist
+                        </button>
+                    </div>
+                    
+                    <div class="hero-visual">
+                        <div class="visual-placeholder">📊</div>
+                        <h3 style="color: var(--c-text-main); margin-bottom: 0.5rem;">Comprehensive Analysis</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem;">
+                            Deep insights into what search engines see
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Problem Section -->
+        <section class="problem-section">
+            <div class="container">
+                <div class="problem-card">
+                    <div class="problem-icon">😵</div>
+                    <h2 style="font-family: var(--font-serif); font-size: 2rem; margin-bottom: 1rem;">
+                        Invisible to Search Engines?
+                    </h2>
+                    <p style="color: var(--c-text-muted); font-size: 1.1rem; line-height: 1.6;">
+                        You've built a great website, but Google ignores it. Competitors rank higher 
+                        with worse content. Your organic traffic is stuck at zero. Without knowing 
+                        what's wrong, you're throwing money at solutions that don't work.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Audit Categories Section -->
+        <section class="audit-categories">
+            <div class="container">
+                <h2 class="section-title">Complete SEO Analysis</h2>
+                <div class="categories-grid">
+                    <div class="category-card">
+                        <div class="category-score">78</div>
+                        <h3 class="category-title">Meta & Head</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem;">
+                            Title tags, meta descriptions, Open Graph, and technical head elements
+                        </p>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-score">85</div>
+                        <h3 class="category-title">Content Quality</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem;">
+                            Heading structure, word count, images, and internal linking
+                        </p>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-score">42</div>
+                        <h3 class="category-title">Technical SEO</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem;">
+                            Mobile optimization, HTTPS, structured data, and crawlability
+                        </p>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-score">91</div>
+                        <h3 class="category-title">Performance</h3>
+                        <p style="color: var(--c-text-muted); font-size: 0.9rem;">
+                            Page speed indicators, resource optimization, and loading efficiency
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Report Preview -->
+        <section class="report-preview">
+            <div class="container">
+                <h2 class="section-title">Sample Report</h2>
+                <div class="report-card">
+                    <div class="report-header">
+                        <div class="overall-score">74</div>
+                        <h3 style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 0.5rem;">
+                            Overall SEO Score
+                        </h3>
+                        <p style="color: var(--c-text-muted);">Your website needs improvement in technical areas</p>
+                    </div>
+                    
+                    <table class="score-table">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Score</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Meta & Head</td>
+                                <td>22/25</td>
+                                <td class="status-good">✅ Good</td>
+                            </tr>
+                            <tr>
+                                <td>Content</td>
+                                <td>19/25</td>
+                                <td class="status-warning">⚠️ Needs Work</td>
+                            </tr>
+                            <tr>
+                                <td>Technical</td>
+                                <td>11/25</td>
+                                <td class="status-critical">❌ Critical</td>
+                            </tr>
+                            <tr>
+                                <td>Performance</td>
+                                <td>22/25</td>
+                                <td class="status-good">✅ Good</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div style="text-align: left;">
+                        <h4 style="color: var(--c-text-main); margin-bottom: 1rem;">Critical Issues</h4>
+                        <ul style="color: var(--c-text-muted); margin-left: 1rem;">
+                            <li>Missing mobile viewport meta tag</li>
+                            <li>No structured data found</li>
+                            <li>Images missing alt text (8 images)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title">What You Get</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3 class="feature-title">Actionable Insights</h3>
+                        <p class="feature-description">
+                            No fluff or jargon. Clear, specific recommendations you can implement 
+                            today to improve your rankings.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3 class="feature-title">Instant Analysis</h3>
+                        <p class="feature-description">
+                            Get your complete SEO report in minutes, not weeks. No waiting for 
+                            manual analysis or back-and-forth emails.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🔍</div>
+                        <h3 class="feature-title">Technical Deep Dive</h3>
+                        <p class="feature-description">
+                            Comprehensive analysis of meta tags, headings, mobile optimization, 
+                            structured data, and performance factors.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📈</div>
+                        <h3 class="feature-title">Prioritized Fixes</h3>
+                        <p class="feature-description">
+                            Issues ranked by impact. Focus on the changes that will move the 
+                            needle most for your search rankings.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📄</div>
+                        <h3 class="feature-title">Detailed Report</h3>
+                        <p class="feature-description">
+                            Professional markdown report with scores, findings, and specific 
+                            instructions for each improvement.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">💡</div>
+                        <h3 class="feature-title">Content Recommendations</h3>
+                        <p class="feature-description">
+                            Word count analysis, heading structure review, and suggestions 
+                            for better content optimization.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-card">
+                    <h2 style="font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 1rem;">
+                        Ready to Rank Higher?
+                    </h2>
+                    <p style="color: var(--c-text-muted); font-size: 1.1rem; margin-bottom: 2rem;">
+                        Join hundreds of website owners who've discovered exactly what was 
+                        holding their sites back from top rankings.
+                    </p>
+                    <button class="btn btn-waitlist" onclick="openWaitlistModal('SEO Audit Report')">
+                        Join Waitlist — Be First to Know
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Waitlist Modal -->
+    <div id="waitlistModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeWaitlistModal()">&times;</button>
+            <h2 style="font-family: var(--font-serif); margin-bottom: 1rem; color: var(--c-text-main);">
+                Join the Waitlist
+            </h2>
+            <p style="color: var(--c-text-muted); margin-bottom: 2rem;">
+                Be the first to know when SEO Audit Report launches. No spam, just product updates.
+            </p>
+            <form id="waitlistForm">
+                <div class="form-group">
+                    <label class="form-label" for="email">Email Address</label>
+                    <input type="email" id="email" name="email" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="name">Name (Optional)</label>
+                    <input type="text" id="name" name="name" class="form-input">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    Join Waitlist
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Custom Cursor
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        const blurLayer = document.querySelector('.layer-blur');
+        
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let cursorX = window.innerWidth / 2;
+        let cursorY = window.innerHeight / 2;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursorDot.style.left = `${mouseX}px`;
+            cursorDot.style.top = `${mouseY}px`;
+        });
+
+        function animate() {
+            const ease = 0.1;
+            cursorX += (mouseX - cursorX) * ease;
+            cursorY += (mouseY - cursorY) * ease;
+
+            cursorOutline.style.left = `${cursorX}px`;
+            cursorOutline.style.top = `${cursorY}px`;
+
+            const xPercent = (cursorX / window.innerWidth) * 100;
+            const yPercent = (cursorY / window.innerHeight) * 100;
+            blurLayer.style.setProperty('--x', `${xPercent}%`);
+            blurLayer.style.setProperty('--y', `${yPercent}%`);
+
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Modal Functions
+        function openWaitlistModal(productName) {
+            document.getElementById('waitlistModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeWaitlistModal() {
+            document.getElementById('waitlistModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Form Submission
+        document.getElementById('waitlistForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const name = document.getElementById('name').value;
+
+            try {
+                const response = await fetch('https://api.resend.com/emails', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer re_NxJ8hktG_KRgzNyTDNLHhVqwwV6xCcJSe',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        from: 'onboarding@resend.dev',
+                        to: ['nova@agentic-assistance.com'],
+                        subject: 'New Waitlist Signup - SEO Audit Report',
+                        html: `
+                            <h3>New Waitlist Signup</h3>
+                            <p><strong>Product:</strong> SEO Audit Report</p>
+                            <p><strong>Email:</strong> ${email}</p>
+                            <p><strong>Name:</strong> ${name || 'Not provided'}</p>
+                            <p><strong>Time:</strong> ${new Date().toISOString()}</p>
+                        `,
+                    }),
+                });
+
+                if (response.ok) {
+                    alert('Successfully joined the waitlist! You\'ll be notified when SEO Audit Report launches.');
+                    closeWaitlistModal();
+                    document.getElementById('waitlistForm').reset();
+                } else {
+                    throw new Error('Failed to join waitlist');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Thanks for your interest! We\'ll be in touch soon.');
+                closeWaitlistModal();
+                document.getElementById('waitlistForm').reset();
+            }
+        });
+
+        // Close modal on outside click
+        document.getElementById('waitlistModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('waitlistModal')) {
+                closeWaitlistModal();
+            }
+        });
+    </script>
+</body>
+</html>
