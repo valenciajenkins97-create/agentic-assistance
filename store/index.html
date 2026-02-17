@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agentic Assistance | AI Business Tools</title>
+    <title>Agentic Assistance | AI Business Services</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiIHN0cm9rZT0iIzlDQTNBRiIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxwYXRoIGQ9Im0xMiA2IDQgNi00IDZ2LTQgNHoiIGZpbGw9IiM5Q0EzQUYiLz4KPC9zdmc+">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -180,6 +180,39 @@
             animation: fade-in-up 1s ease-out 0.4s forwards; opacity: 0;
         }
         
+        /* How It Works Section */
+        .how-it-works {
+            padding: 4rem 0;
+            background: rgba(255,255,255,0.02);
+            border-radius: 32px;
+            border: 1px solid rgba(255,255,255,0.05);
+            margin: 4rem 0;
+        }
+        .how-it-works h2 {
+            font-size: 2rem; font-weight: 500; text-align: center;
+            margin-bottom: 3rem; color: var(--text-main);
+        }
+        .steps-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem; max-width: 60rem; margin: 0 auto;
+        }
+        .step {
+            text-align: center; padding: 1.5rem;
+        }
+        .step-number {
+            display: inline-block; width: 3rem; height: 3rem;
+            background: var(--accent-mauve); color: white;
+            border-radius: 50%; font-size: 1.25rem; font-weight: 600;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1rem;
+        }
+        .step-title {
+            font-size: 1.125rem; font-weight: 500; margin-bottom: 0.5rem;
+        }
+        .step-description {
+            color: var(--text-muted); font-size: 0.875rem; line-height: 1.5;
+        }
+        
         /* Product Grid */
         .products-header {
             display: flex; align-items: end; justify-content: space-between; 
@@ -239,6 +272,19 @@
             border: 1px solid rgba(255,255,255,0.1);
             font-size: 0.75rem; font-weight: 500; color: white;
         }
+        .delivery-badge {
+            position: absolute; bottom: 1rem; left: 1rem; z-index: 2;
+            background: var(--accent-mauve); color: white;
+            padding: 4px 12px; border-radius: 999px;
+            font-size: 0.7rem; font-weight: 600;
+        }
+        .inbox-badge {
+            position: absolute; top: 1rem; left: 1rem; z-index: 2;
+            background: rgba(40, 180, 40, 0.8); color: white;
+            padding: 4px 12px; border-radius: 999px;
+            font-size: 0.7rem; font-weight: 600;
+            backdrop-filter: blur(12px);
+        }
         
         /* Product card content */
         .product-content {
@@ -250,6 +296,17 @@
         .product-title {
             font-size: 1.25rem; font-weight: 500; margin-bottom: 0.5rem;
             color: var(--text-main);
+        }
+        .product-pricing {
+            display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;
+        }
+        .product-price {
+            font-size: 1.5rem; font-weight: 600; color: var(--accent-mauve);
+        }
+        .price-label {
+            font-size: 0.75rem; color: var(--text-muted);
+            padding: 2px 8px; background: rgba(255,255,255,0.05);
+            border-radius: 4px;
         }
         .product-description {
             font-size: 0.875rem; color: var(--text-muted);
@@ -329,6 +386,32 @@
         .bundle-save {
             background: rgba(255,255,255,0.1); padding: 4px 8px;
             border-radius: 8px; font-size: 0.75rem; font-weight: 500;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            margin-top: 6rem; padding: 4rem 0;
+            background: rgba(255,255,255,0.02);
+            border-radius: 32px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .faq-title {
+            font-size: 2rem; font-weight: 500; text-align: center;
+            margin-bottom: 3rem; color: var(--text-main);
+        }
+        .faq-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem; max-width: 60rem; margin: 0 auto;
+        }
+        .faq-item {
+            padding: 1.5rem;
+        }
+        .faq-question {
+            font-size: 1rem; font-weight: 500; margin-bottom: 0.75rem;
+            color: var(--text-main);
+        }
+        .faq-answer {
+            color: var(--text-muted); font-size: 0.875rem; line-height: 1.5;
         }
         
         /* Footer */
@@ -452,6 +535,27 @@
             color: var(--text-main);
         }
         
+        /* Updates Section */
+        .updates-section {
+            margin-top: 2rem; padding: 2rem;
+            background: rgba(255,255,255,0.02);
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .updates-title {
+            font-size: 1.25rem; font-weight: 500; margin-bottom: 1rem;
+            text-align: center; color: var(--text-muted);
+        }
+        .updates-list {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;
+        }
+        .update-item {
+            background: rgba(255,255,255,0.05);
+            padding: 8px 16px; border-radius: 999px;
+            font-size: 0.8rem; color: var(--text-muted);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
         /* Animations */
         @keyframes fade-in-up {
             from { opacity: 0; transform: translateY(20px); }
@@ -498,6 +602,12 @@
             .products-grid {
                 grid-template-columns: 1fr; gap: 1.5rem;
             }
+            .steps-grid {
+                grid-template-columns: 1fr; gap: 1.5rem;
+            }
+            .faq-grid {
+                grid-template-columns: 1fr; gap: 1.5rem;
+            }
             .bundle-card { padding: 1.5rem; }
             .bundle-pricing { flex-direction: column; gap: 0.5rem; }
             .footer-links { flex-direction: column; gap: 1rem; }
@@ -521,9 +631,10 @@
     <!-- Navigation -->
     <nav class="nav-pill">
         <div class="nav-item active" data-target="hero">Store</div>
-        <div class="nav-item" data-target="products">Products</div>
+        <div class="nav-item" data-target="products">Services</div>
+        <div class="nav-item" data-target="how-it-works">How It Works</div>
         <div class="nav-item" data-target="bundle">Bundle</div>
-        <div class="nav-item" data-target="footer">Contact</div>
+        <div class="nav-item" data-target="faq">FAQ</div>
         <div style="height: 100%; width: 1px; background: rgba(255,255,255,0.1); margin: 0 0.25rem;"></div>
         <div class="cart-pill" id="cartToggle">
             <span class="cart-count" id="cartCount">0</span>
@@ -535,14 +646,14 @@
     <main class="container">
         <!-- Hero Section -->
         <section id="hero" class="hero">
-            <div class="hero-badge">AI-Powered Business Ecosystem</div>
+            <div class="hero-badge">Done-For-You AI Business Services</div>
             <h1 class="hero-title">
-                Intelligence, <span class="serif-font" style="font-style: italic; color: var(--accent-mauve);">Refined</span>.<br>
-                For Modern Business.
+                Intelligence, <span class="serif-font" style="font-style: italic; color: var(--accent-mauve);">Delivered</span>.<br>
+                Straight to Your Inbox.
             </h1>
             <p class="hero-subtitle">
-                Deploy enterprise-grade AI tools instantly. Minimalist architecture for maximizing output. 
-                Designed for the next generation of founders and business builders.
+                Pay once, submit your requirements, and receive professionally crafted deliverables within hours. 
+                Custom landing pages, invoices, and SEO audits built by AI and delivered direct to your email.
             </p>
             <div class="hero-search glass-input-container">
                 <div style="padding-left: 1rem; padding-right: 0.5rem; color: rgba(255,255,255,0.4);">
@@ -550,7 +661,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>
                 </div>
-                <input type="text" id="searchInput" class="search-input" placeholder="Find the perfect tool...">
+                <input type="text" id="searchInput" class="search-input" placeholder="Find the perfect service...">
                 <button class="search-btn" onclick="performSearch()">
                     <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
@@ -559,14 +670,36 @@
             </div>
         </section>
         
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="how-it-works">
+            <h2 class="serif-font">How It Works</h2>
+            <div class="steps-grid">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Purchase</h3>
+                    <p class="step-description">Choose your service and pay once. No subscriptions, no hidden fees.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Fill Intake Form</h3>
+                    <p class="step-description">Provide your specifications through a quick and simple intake form.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Receive Deliverable</h3>
+                    <p class="step-description">Get your professionally crafted deliverable sent directly to your email.</p>
+                </div>
+            </div>
+        </section>
+        
         <!-- Products Section -->
         <section id="products" class="section-spacing">
             <div class="products-header">
                 <div>
-                    <h2 style="font-size: 1.5rem; font-weight: 500; margin-bottom: 0.25rem;">Curated Tools</h2>
-                    <p class="serif-font" style="font-style: italic; color: var(--text-muted); font-size: 0.875rem;">Upgrade your workflow today</p>
+                    <h2 style="font-size: 1.5rem; font-weight: 500; margin-bottom: 0.25rem;">Done-For-You Services</h2>
+                    <p class="serif-font" style="font-style: italic; color: var(--text-muted); font-size: 0.875rem;">One-time payments, professional results</p>
                 </div>
-                <button class="btn-glass">View All Collection</button>
+                <button class="btn-glass">View All Services</button>
             </div>
             
             <div class="products-grid" id="productsGrid">
@@ -575,27 +708,34 @@
                     <div class="product-image">
                         <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop" 
                              alt="Landing Page Builder" loading="lazy">
-                        <div class="product-price-badge">$29</div>
+                        <div class="inbox-badge">📧 Delivered to your inbox</div>
+                        <div class="delivery-badge">Within 24 hours</div>
                     </div>
                     <div class="product-content">
                         <div class="product-header">
                             <h3 class="product-title">Landing Page Builder</h3>
+                            <div class="product-pricing">
+                                <span class="product-price">$29</span>
+                                <span class="price-label">one-time</span>
+                            </div>
                             <p class="product-description">
-                                AI-powered landing page generator. From text prompt to deployed site in seconds.
+                                <strong>What You Get:</strong> A custom-designed, mobile-responsive landing page built from your specifications. Delivered as a ready-to-deploy HTML file straight to your inbox within 24 hours.
+                                <br><br>
+                                <strong>How It Works:</strong> Purchase → Fill out a quick intake form (your business name, what you do, target audience, preferred style) → We build your page with AI-powered design → Delivered to your email as a self-contained HTML file.
                             </p>
                         </div>
                         <div class="product-specs">
                             <div class="spec-item">
                                 <span class="spec-dot"></span>
-                                Custom Components
+                                Custom design, mobile-responsive layout
                             </div>
                             <div class="spec-item">
                                 <span class="spec-dot"></span>
-                                Auto-SEO Optimization
+                                SEO-optimized structure
                             </div>
                             <div class="spec-item">
                                 <span class="spec-dot"></span>
-                                Mobile-First Design
+                                Ready to deploy on any hosting platform
                             </div>
                         </div>
                         <div class="product-footer">
@@ -603,8 +743,8 @@
                                 <div class="rating-star">★</div>
                                 <span class="rating-text">4.9/5 Rating</span>
                             </div>
-                            <button class="btn-primary" onclick="purchaseProduct('Landing Page Builder', '$29', '/store/landing-page-builder.html')">
-                                Acquire
+                            <button class="btn-primary" onclick="showWaitlistModal('Landing Page Builder — $29')">
+                                Get Started — $29
                             </button>
                         </div>
                     </div>
@@ -615,27 +755,34 @@
                     <div class="product-image">
                         <img src="https://images.unsplash.com/photo-1634152962476-4b8a00e1915c?q=80&w=2576&auto=format&fit=crop" 
                              alt="Invoice Generator" loading="lazy">
-                        <div class="product-price-badge">$19</div>
+                        <div class="inbox-badge">📧 Delivered to your inbox</div>
+                        <div class="delivery-badge">Within 1 hour</div>
                     </div>
                     <div class="product-content">
                         <div class="product-header">
                             <h3 class="product-title">Invoice Generator</h3>
+                            <div class="product-pricing">
+                                <span class="product-price">$19</span>
+                                <span class="price-label">one-time</span>
+                            </div>
                             <p class="product-description">
-                                Professional invoices from natural language. Smart tax detection and multi-format export.
+                                <strong>What You Get:</strong> A professionally designed invoice generated from your details. Delivered as a print-ready HTML file to your inbox within 1 hour.
+                                <br><br>
+                                <strong>How It Works:</strong> Purchase → Fill out the intake form (your business info, client details, line items) → We generate your invoice → Delivered to your email.
                             </p>
                         </div>
                         <div class="product-specs">
                             <div class="spec-item">
                                 <span class="spec-dot"></span>
-                                Multi-currency Support
+                                Professional layout, automatic calculations
                             </div>
                             <div class="spec-item">
                                 <span class="spec-dot"></span>
-                                PDF & HTML Export
+                                Print-ready format
                             </div>
                             <div class="spec-item">
                                 <span class="spec-dot"></span>
-                                Smart Tax Detection
+                                Customizable branding
                             </div>
                         </div>
                         <div class="product-footer">
@@ -643,8 +790,8 @@
                                 <div class="rating-star">★</div>
                                 <span class="rating-text">4.8/5 Rating</span>
                             </div>
-                            <button class="btn-primary" onclick="purchaseProduct('Invoice Generator', '$19', '/store/invoice-generator.html')">
-                                Acquire
+                            <button class="btn-primary" onclick="showWaitlistModal('Invoice Generator — $19')">
+                                Get Started — $19
                             </button>
                         </div>
                     </div>
@@ -655,27 +802,34 @@
                     <div class="product-image">
                         <img src="https://images.unsplash.com/photo-1614850523060-8da1d56ae167?q=80&w=2670&auto=format&fit=crop" 
                              alt="SEO Audit Report" loading="lazy">
-                        <div class="product-price-badge">$39</div>
+                        <div class="inbox-badge">📧 Delivered to your inbox</div>
+                        <div class="delivery-badge">Within 24 hours</div>
                     </div>
                     <div class="product-content">
                         <div class="product-header">
                             <h3 class="product-title">SEO Audit Report</h3>
+                            <div class="product-pricing">
+                                <span class="product-price">$39</span>
+                                <span class="price-label">one-time</span>
+                            </div>
                             <p class="product-description">
-                                Deep-dive SEO analysis with competitor mapping and keyword strategy.
+                                <strong>What You Get:</strong> A comprehensive SEO audit of your website with a scored report (0-100), category breakdowns, and prioritized recommendations. Delivered as a detailed report to your inbox within 24 hours.
+                                <br><br>
+                                <strong>How It Works:</strong> Purchase → Submit your URL and target keywords → We run a deep analysis → Full report delivered to your email.
                             </p>
                         </div>
                         <div class="product-specs">
                             <div class="spec-item">
                                 <span class="spec-dot"></span>
-                                Competitor Analysis
+                                Overall score, meta/content/technical analysis
                             </div>
                             <div class="spec-item">
                                 <span class="spec-dot"></span>
-                                Actionable Fixes
+                                Performance analysis, competitor insights
                             </div>
                             <div class="spec-item">
                                 <span class="spec-dot"></span>
-                                Keyword Strategy
+                                Actionable fix list
                             </div>
                         </div>
                         <div class="product-footer">
@@ -683,8 +837,8 @@
                                 <div class="rating-star">★</div>
                                 <span class="rating-text">5.0/5 Rating</span>
                             </div>
-                            <button class="btn-primary" onclick="purchaseProduct('SEO Audit Report', '$39', '/store/seo-audit.html')">
-                                Acquire
+                            <button class="btn-primary" onclick="showWaitlistModal('SEO Audit Report — $39')">
+                                Get Started — $39
                             </button>
                         </div>
                     </div>
@@ -696,23 +850,65 @@
         <section id="bundle" class="bundle-section">
             <div class="bundle-card">
                 <div class="bundle-badge">Save 44%</div>
-                <h2 class="bundle-title serif-font">Complete Toolkit</h2>
+                <h2 class="bundle-title serif-font">Complete Toolkit Bundle</h2>
                 <p class="bundle-description">
-                    Get all three premium tools in one comprehensive package. Perfect for agencies and growing businesses.
+                    All 3 services for one price. Fill out one combined intake form, get all deliverables.
                 </p>
                 <div class="bundle-pricing">
                     <span class="bundle-price">$49</span>
                     <span class="bundle-original">was $87</span>
                     <span class="bundle-save">Save $38</span>
                 </div>
-                <button class="btn-primary" style="font-size: 1rem; padding: 1rem 2rem;" onclick="purchaseProduct('Complete Toolkit', '$49', '#bundle')">
-                    Get Complete Bundle
+                <button class="btn-primary" style="font-size: 1rem; padding: 1rem 2rem;" onclick="showWaitlistModal('Complete Toolkit Bundle — $49')">
+                    Get Started — $49
                 </button>
                 <div style="margin-top: 1.5rem; font-size: 0.75rem; color: var(--text-tertiary);">
-                    Includes: Landing Page Builder + Invoice Generator + SEO Audit Report
+                    <strong>one-time</strong> • Includes: Landing Page Builder + Invoice Generator + SEO Audit Report
                 </div>
             </div>
         </section>
+        
+        <!-- FAQ Section -->
+        <section id="faq" class="faq-section">
+            <h2 class="faq-title serif-font">Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3 class="faq-question">What do I receive?</h3>
+                    <p class="faq-answer">You receive professionally crafted deliverables as HTML files sent directly to your email. Landing pages are self-contained and ready to deploy, invoices are print-ready, and SEO reports are detailed PDF-style reports.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">How long does delivery take?</h3>
+                    <p class="faq-answer">Invoice Generator: Within 1 hour. Landing Page Builder and SEO Audit Report: Within 24 hours. All deliverables are sent to your email automatically upon completion.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">What format are the files?</h3>
+                    <p class="faq-answer">All deliverables are HTML files that work instantly when opened in any web browser. Landing pages are self-contained with all code included. No external dependencies required.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Can I request revisions?</h3>
+                    <p class="faq-answer">Yes! One free revision is included with each service. Simply reply to your delivery email with your feedback and we'll make the adjustments within the same timeframe.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">How do I deploy my landing page?</h3>
+                    <p class="faq-answer">Your landing page works instantly when opened in any browser. To make it live on the web, simply upload the HTML file to any hosting platform (GitHub Pages, Netlify, your web host, etc.).</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Are these AI-generated?</h3>
+                    <p class="faq-answer">Yes, all deliverables are created using advanced AI systems, then reviewed and refined to ensure professional quality. You get the speed of AI with the polish of human oversight.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Incoming Updates -->
+        <div class="updates-section">
+            <h3 class="updates-title">Bundle Pack — Coming Soon</h3>
+            <div class="updates-list">
+                <span class="update-item">Enhanced Landing Page Templates</span>
+                <span class="update-item">Multi-Language Support</span>
+                <span class="update-item">Advanced SEO Analytics</span>
+                <span class="update-item">Custom Branding Options</span>
+            </div>
+        </div>
     </main>
     
     <!-- Footer -->
@@ -751,7 +947,7 @@
         </div>
         <div class="cart-empty">
             Your cart is empty.<br>
-            <span style="font-size: 0.75rem; color: var(--text-tertiary);">Add some tools to get started!</span>
+            <span style="font-size: 0.75rem; color: var(--text-tertiary);">Add some services to get started!</span>
         </div>
     </div>
     
@@ -759,8 +955,8 @@
     <div class="modal-overlay" id="waitlistModal">
         <div class="modal">
             <div class="modal-header">
-                <h3 class="modal-title">Join Our Waitlist</h3>
-                <p class="modal-subtitle">Be the first to access our premium AI tools when they launch.</p>
+                <h3 class="modal-title">We're launching soon!</h3>
+                <p class="modal-subtitle">Leave your email to be first in line when we go live.</p>
             </div>
             <form action="mailto:nova@agentic-assistance.com" method="post" enctype="text/plain">
                 <div class="form-group">
@@ -840,13 +1036,7 @@
         // Real-time search as user types
         document.getElementById('searchInput').addEventListener('input', performSearch);
         
-        // Purchase functionality
-        function purchaseProduct(name, price, url) {
-            // For demo purposes, show waitlist modal
-            // In production, this could redirect to individual product pages
-            showWaitlistModal(name);
-        }
-        
+        // Waitlist modal functionality
         function showWaitlistModal(productName) {
             document.getElementById('modalProductName').value = productName;
             document.getElementById('waitlistModal').classList.add('open');
