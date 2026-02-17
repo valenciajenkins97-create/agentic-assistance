@@ -1,0 +1,363 @@
+<html lang="en" vid="0"><head vid="1">
+    <meta charset="UTF-8" vid="2">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" vid="3">
+    <title vid="4">Aura | AI Business Tools</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" vid="5">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" vid="6">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet" vid="7">
+    <style vid="9">
+        :root {
+            --bg-deep: #030303;
+            --glass-surface: rgba(20, 20, 20, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-highlight: rgba(255, 255, 255, 0.15);
+            --accent-mauve: #D4A5A5;
+            --accent-mauve-dim: #8A6A6A;
+            --text-main: #F0F0F0;
+            --text-muted: #9CA3AF;
+        }
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        h1, h2, h3, .serif-font {
+            font-family: 'Playfair Display', serif;
+        }
+        .ambient-glow {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
+            background: radial-gradient(circle at 15% 20%, rgba(60, 40, 50, 0.25) 0%, transparent 40%),
+                radial-gradient(circle at 85% 60%, rgba(40, 30, 45, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(10, 10, 12, 1) 0%, transparent 100%);
+            pointer-events: none;
+        }
+        .glass-panel {
+            background: linear-gradient(145deg, rgba(30, 30, 35, 0.6) 0%, rgba(15, 15, 18, 0.8) 100%);
+            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            border-top: 1px solid var(--glass-highlight);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5), inset 0 1px 0 0 rgba(255,255,255,0.05);
+            border-radius: 32px;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+        }
+        .glass-panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px -12px rgba(0,0,0,0.7), inset 0 1px 0 0 rgba(255,255,255,0.1);
+            border-top-color: rgba(255,255,255,0.25);
+        }
+        .glass-input-container {
+            background: rgba(10, 10, 12, 0.6); border-radius: 20px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.03);
+            display: flex; align-items: center; padding: 4px;
+        }
+        .btn-glass {
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 999px; color: var(--accent-mauve);
+            font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em;
+            text-transform: uppercase; padding: 8px 16px; transition: all 0.3s ease;
+        }
+        .btn-glass:hover {
+            background: rgba(212, 165, 165, 0.1); border-color: var(--accent-mauve);
+            box-shadow: 0 0 15px rgba(212, 165, 165, 0.2);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #2a2a2e 0%, #1a1a1c 100%);
+            border: 1px solid var(--glass-border); border-radius: 16px; color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+            transition: all 0.2s ease;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #35353a 0%, #252528 100%);
+            border-color: rgba(255,255,255,0.2);
+        }
+        .image-container { border-radius: 24px; overflow: hidden; position: relative; }
+        .image-container::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
+        }
+        .nav-pill {
+            position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
+            background: rgba(15, 15, 18, 0.7); backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.08); border-radius: 24px;
+            padding: 8px 12px; z-index: 100;
+            box-shadow: 0 10px 30px -5px rgba(0,0,0,0.5); display: flex; gap: 8px;
+        }
+        .nav-item {
+            padding: 8px 16px; border-radius: 16px; color: var(--text-muted);
+            font-size: 0.85rem; font-weight: 500; transition: all 0.3s ease; cursor: pointer;
+        }
+        .nav-item.active { background: rgba(255,255,255,0.1); color: white; box-shadow: inset 0 1px 0 rgba(255,255,255,0.05); }
+        .nav-item:hover:not(.active) { color: white; }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+        .float-delay-1 { animation: float 6s ease-in-out infinite; }
+        .float-delay-2 { animation: float 7s ease-in-out infinite 1s; }
+        .float-delay-3 { animation: float 8s ease-in-out infinite 2s; }
+        *, *:before, *:after { box-sizing: border-box; margin: 0; padding: 0; }
+        a { color: inherit; text-decoration: none; }
+        button { cursor: pointer; font-family: inherit; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .max-w-7xl { max-width: 80rem; }
+        .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+        .pt-32 { padding-top: 8rem; }
+        .pb-20 { padding-bottom: 5rem; }
+        .mb-24 { margin-bottom: 6rem; }
+        .mb-10 { margin-bottom: 2.5rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mb-5 { margin-bottom: 1.25rem; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-1 { margin-bottom: 0.25rem; }
+        .mt-24 { margin-top: 6rem; }
+        .mt-auto { margin-top: auto; }
+        .pt-10 { padding-top: 2.5rem; }
+        .pt-4 { padding-top: 1rem; }
+        .p-4 { padding: 1rem; }
+        .px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+        .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+        .px-4 { padding-left: 1rem; padding-right: 1rem; }
+        .px-5 { padding-left: 1.25rem; padding-right: 1.25rem; }
+        .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+        .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+        .pb-2 { padding-bottom: 0.5rem; }
+        .text-center { text-align: center; }
+        .text-5xl { font-size: 3rem; line-height: 1; }
+        .text-2xl { font-size: 1.5rem; line-height: 2rem; }
+        .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+        .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+        .text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+        .text-xs { font-size: 0.75rem; line-height: 1rem; }
+        .font-medium { font-weight: 500; }
+        .font-light { font-weight: 300; }
+        .tracking-tight { letter-spacing: -0.025em; }
+        .tracking-wider { letter-spacing: 0.05em; }
+        .tracking-widest { letter-spacing: 0.1em; }
+        .leading-tight { line-height: 1.25; }
+        .leading-relaxed { line-height: 1.625; }
+        .uppercase { text-transform: uppercase; }
+        .italic { font-style: italic; }
+        .inline-block { display: inline-block; }
+        .flex { display: flex; }
+        .grid { display: grid; }
+        .hidden { display: none; }
+        .flex-col { flex-direction: column; }
+        .flex-1 { flex: 1 1 0%; }
+        .items-start { align-items: flex-start; }
+        .items-end { align-items: flex-end; }
+        .items-center { align-items: center; }
+        .justify-center { justify-content: center; }
+        .justify-between { justify-content: space-between; }
+        .justify-around { justify-content: space-around; }
+        .gap-1 { gap: 0.25rem; }
+        .gap-2 { gap: 0.5rem; }
+        .gap-8 { gap: 2rem; }
+        .overflow-hidden { overflow: hidden; }
+        .rounded-full { border-radius: 9999px; }
+        .rounded-xl { border-radius: 0.75rem; }
+        .border { border-width: 1px; }
+        .border-t { border-top-width: 1px; }
+        .w-2 { width: 0.5rem; }
+        .h-2 { height: 0.5rem; }
+        .w-6 { width: 1.5rem; }
+        .h-6 { height: 1.5rem; }
+        .w-10 { width: 2.5rem; }
+        .h-10 { height: 2.5rem; }
+        .h-24 { height: 6rem; }
+        .h-40 { height: 10rem; }
+        .h-64 { height: 16rem; }
+        .w-64 { width: 16rem; }
+        .w-full { width: 100%; }
+        .h-full { height: 100%; }
+        .w-px { width: 1px; }
+        .max-w-2xl { max-width: 42rem; }
+        .max-w-md { max-width: 28rem; }
+        .relative { position: relative; }
+        .absolute { position: absolute; }
+        .fixed { position: fixed; }
+        .inset-0 { inset: 0; }
+        .top-4 { top: 1rem; }
+        .right-4 { right: 1rem; }
+        .z-10 { z-index: 10; }
+        .z-20 { z-index: 20; }
+        .opacity-30 { opacity: 0.3; }
+        .opacity-80 { opacity: 0.8; }
+        .blur { filter: blur(8px); }
+        .blur-sm { filter: blur(4px); }
+        .bg-transparent { background-color: transparent; }
+        .border-none { border-style: none; }
+        .outline-none { outline: 2px solid transparent; outline-offset: 2px; }
+        .cursor-pointer { cursor: pointer; }
+        .transition { transition-duration: 0.15s; transition-property: all; }
+        .transition-colors { transition-property: color, background-color, border-color; transition-duration: 0.15s; }
+        .transition-transform { transition-property: transform; transition-duration: 0.15s; }
+        .duration-700 { transition-duration: 0.7s; }
+        .ease-in-out { transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+        .antialiased { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        .bg-cover { background-size: cover; }
+        .bg-center { background-position: 50%; }
+        .transform { transform: translate(var(--tw-translate-x, 0), var(--tw-translate-y, 0)); }
+        .group:hover .group-hover\:scale-105 { transform: scale(1.05); }
+        @media (min-width: 768px) {
+            .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .md\:text-7xl { font-size: 4.5rem; line-height: 1; }
+        }
+        * { -ms-overflow-style: none !important; scrollbar-width: none !important; }
+        *::-webkit-scrollbar { display: none !important; }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="ambient-glow"></div>
+    <nav class="nav-pill">
+        <div class="nav-item active">Store</div>
+        <div class="nav-item">Products</div>
+        <div class="nav-item">Enterprise</div>
+        <div class="nav-item">Account</div>
+        <div class="h-full w-px bg-white/10 mx-1" style="background:rgba(255,255,255,0.1)"></div>
+        <div class="nav-item flex items-center gap-2" style="color:white;display:flex;align-items:center;gap:0.5rem">
+            <span class="text-xs" style="font-size:0.75rem;color:var(--accent-mauve)">0</span> Cart
+        </div>
+    </nav>
+    <main class="max-w-7xl mx-auto px-6 pt-32 pb-20">
+        <header class="mb-24 text-center relative">
+            <div class="inline-block mb-6 px-4 rounded-full border" style="padding:6px 16px;border-radius:9999px;border:1px solid rgba(138,106,106,0.3);background:rgba(212,165,165,0.05);backdrop-filter:blur(12px)">
+                <span style="color:var(--accent-mauve);font-size:0.75rem;font-weight:500;letter-spacing:0.05em;text-transform:uppercase">AI-Powered Ecosystem</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-medium tracking-tight mb-6 leading-tight">
+                Refining the <span class="serif-font italic" style="color:var(--accent-mauve)">Art</span><br>
+                of Modern Business.
+            </h1>
+            <p style="color:var(--text-muted);font-size:1.125rem;max-width:42rem;margin:0 auto;font-weight:300;line-height:1.625;margin-bottom:2.5rem">
+                Deploy intelligent tools instantly. Minimalist architecture for maximizing output. 
+                Designed for the next generation of founders.
+            </p>
+            <div class="max-w-md mx-auto glass-input-container" style="padding:6px">
+                <div style="padding-left:1rem;padding-right:0.5rem;color:rgba(255,255,255,0.4)">
+                    <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+                <input type="text" placeholder="Find a tool..." style="background:transparent;border:none;outline:none;color:white;width:100%;font-size:0.875rem;height:2.5rem" class="w-full">
+                <button style="height:2.5rem;width:2.5rem;background:rgba(212,165,165,0.2);border-radius:0.75rem;display:flex;align-items:center;justify-content:center;color:var(--accent-mauve);border:none;cursor:pointer">
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </button>
+            </div>
+        </header>
+        <section>
+            <div class="flex items-end justify-between mb-10 px-2">
+                <div>
+                    <h2 class="text-2xl font-medium mb-1">Curated Tools</h2>
+                    <p class="text-sm serif-font italic" style="color:var(--text-muted)">Upgrade your workflow today</p>
+                </div>
+                <button class="btn-glass">View All Collection</button>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <article class="glass-panel p-4 flex flex-col h-full float-delay-1 group cursor-pointer">
+                    <div class="image-container h-64 mb-5 relative" style="background:#111827">
+                        <div class="absolute inset-0 bg-cover bg-center opacity-80 transition-transform duration-700 group-hover:scale-105" style="background-image:url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop')"></div>
+                        <div class="absolute top-4 right-4" style="background:rgba(0,0,0,0.6);backdrop-filter:blur(12px);padding:4px 12px;border-radius:9999px;border:1px solid rgba(255,255,255,0.1)">
+                            <span style="font-size:0.75rem;font-weight:500;color:white">$29</span>
+                        </div>
+                    </div>
+                    <div class="px-2 pb-2 flex-1 flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-medium">Lander AI</h3>
+                            <div class="flex gap-1"><span class="w-2 h-2 rounded-full" style="background:var(--accent-mauve)"></span></div>
+                        </div>
+                        <p class="text-sm serif-font leading-relaxed mb-6" style="color:var(--text-muted)">
+                            Generative landing page builder. From prompt to deployed site in seconds.
+                        </p>
+                        <div class="mt-auto flex items-center justify-between pt-4 border-t" style="border-color:rgba(255,255,255,0.05)">
+                            <div class="flex items-center gap-2">
+                                <div class="w-6 h-6 rounded-full flex items-center justify-center" style="background:rgba(255,255,255,0.1);font-size:10px">★</div>
+                                <span style="font-size:0.75rem;color:rgba(255,255,255,0.6)">4.9/5 Rating</span>
+                            </div>
+                            <button class="btn-primary px-5 py-2 text-sm font-medium">Acquire</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="glass-panel p-4 flex flex-col h-full float-delay-2 group cursor-pointer">
+                    <div class="image-container h-64 mb-5 relative" style="background:#111827">
+                        <div class="absolute inset-0 bg-cover bg-center opacity-80 transition-transform duration-700 group-hover:scale-105" style="background-image:url('https://images.unsplash.com/photo-1634152962476-4b8a00e1915c?q=80&w=2576&auto=format&fit=crop')"></div>
+                        <div class="absolute top-4 right-4" style="background:rgba(0,0,0,0.6);backdrop-filter:blur(12px);padding:4px 12px;border-radius:9999px;border:1px solid rgba(255,255,255,0.1)">
+                            <span style="font-size:0.75rem;font-weight:500;color:white">$19</span>
+                        </div>
+                    </div>
+                    <div class="px-2 pb-2 flex-1 flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-medium">Ledger Flow</h3>
+                            <div class="flex gap-1"><span class="w-2 h-2 rounded-full" style="background:#4B5563"></span></div>
+                        </div>
+                        <p class="text-sm serif-font leading-relaxed mb-6" style="color:var(--text-muted)">
+                            Automated invoicing logic. Connects directly to your bank API for seamless reconciliation.
+                        </p>
+                        <div class="mt-auto flex items-center justify-between pt-4 border-t" style="border-color:rgba(255,255,255,0.05)">
+                            <div class="flex items-center gap-2">
+                                <div class="w-6 h-6 rounded-full flex items-center justify-center" style="background:rgba(255,255,255,0.1);font-size:10px">★</div>
+                                <span style="font-size:0.75rem;color:rgba(255,255,255,0.6)">4.8/5 Rating</span>
+                            </div>
+                            <button class="btn-primary px-5 py-2 text-sm font-medium">Acquire</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="glass-panel p-4 flex flex-col h-full float-delay-3 group cursor-pointer">
+                    <div class="image-container h-64 mb-5 relative" style="background:#111827">
+                        <div class="absolute inset-0 bg-cover bg-center opacity-80 transition-transform duration-700 group-hover:scale-105" style="background-image:url('https://images.unsplash.com/photo-1614850523060-8da1d56ae167?q=80&w=2670&auto=format&fit=crop')"></div>
+                        <div class="absolute top-4 right-4" style="background:rgba(0,0,0,0.6);backdrop-filter:blur(12px);padding:4px 12px;border-radius:9999px;border:1px solid rgba(255,255,255,0.1)">
+                            <span style="font-size:0.75rem;font-weight:500;color:white">$39</span>
+                        </div>
+                    </div>
+                    <div class="px-2 pb-2 flex-1 flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-medium">Rank Engine</h3>
+                            <div class="flex gap-1"><span class="w-2 h-2 rounded-full" style="background:#4B5563"></span></div>
+                        </div>
+                        <p class="text-sm serif-font leading-relaxed mb-6" style="color:var(--text-muted)">
+                            Deep-dive SEO audits powered by NLP. Understand semantic gaps in your content strategy.
+                        </p>
+                        <div class="mt-auto flex items-center justify-between pt-4 border-t" style="border-color:rgba(255,255,255,0.05)">
+                            <div class="flex items-center gap-2">
+                                <div class="w-6 h-6 rounded-full flex items-center justify-center" style="background:rgba(255,255,255,0.1);font-size:10px">★</div>
+                                <span style="font-size:0.75rem;color:rgba(255,255,255,0.6)">5.0/5 Rating</span>
+                            </div>
+                            <button class="btn-primary px-5 py-2 text-sm font-medium">Acquire</button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <section class="mt-24 pt-10 border-t" style="border-color:rgba(255,255,255,0.05)">
+            <div class="flex justify-between items-center mb-8 px-2">
+                <h3 style="font-size:1.125rem;font-weight:500;color:rgba(255,255,255,0.8)">Incoming Updates <span style="margin-left:0.5rem;font-size:0.75rem;background:rgba(255,255,255,0.1);padding:2px 8px;border-radius:4px;color:rgba(255,255,255,0.5)">3</span></h3>
+            </div>
+            <div class="relative h-40 glass-panel overflow-hidden flex items-center justify-center">
+                <div class="absolute inset-0 z-10" style="background:linear-gradient(to right, var(--bg-deep), transparent)"></div>
+                <div class="absolute inset-0 flex items-center justify-around opacity-30 blur-sm">
+                    <div class="w-64 h-24 rounded-xl border" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);transform:rotate(-6deg) translateY(1rem)"></div>
+                    <div class="w-64 h-24 rounded-xl border" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);transform:rotate(3deg) translateY(-0.5rem)"></div>
+                    <div class="w-64 h-24 rounded-xl border" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);transform:rotate(-3deg) translateY(1.5rem)"></div>
+                </div>
+                <div class="z-20 text-center">
+                    <p class="serif-font text-xl italic mb-2" style="color:var(--accent-mauve)">Coming Q1 2026</p>
+                    <p class="text-sm uppercase tracking-widest" style="color:rgba(255,255,255,0.4)">Enterprise Suite</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>
+        const cards = document.querySelectorAll('.glass-panel');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const xRotation = ((y - rect.height / 2) / rect.height) * -2;
+                const yRotation = ((x - rect.width / 2) / rect.width) * 2;
+                card.style.transform = `perspective(1000px) rotateX(${xRotation}deg) rotateY(${yRotation}deg) translateY(-5px)`;
+            });
+            card.addEventListener('mouseleave', () => { card.style.transform = 'translateY(0)'; });
+        });
+    </script>
+</body></html>

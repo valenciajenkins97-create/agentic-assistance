@@ -921,10 +921,11 @@
             const name = document.getElementById('name').value;
 
             try {
-                const response = await fetch('https://api.resend.com/emails', {
+                // Waitlist signup - sends notification
+                const response = await fetch('https://formspree.io/f/placeholder', {
                     method: 'POST',
                     headers: {
-                        'Authorization': 'Bearer re_NxJ8hktG_KRgzNyTDNLHhVqwwV6xCcJSe',
+                        
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({

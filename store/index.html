@@ -641,7 +641,7 @@
         <footer class="footer">
             <div class="container">
                 <p class="footer-text">
-                    © 2025 Agentic Assistance. Professional digital tools for modern businesses.
+                    © 2026 Agentic Assistance. Professional digital tools for modern businesses.
                 </p>
             </div>
         </footer>
@@ -730,10 +730,11 @@
             const product = document.getElementById('modalProductName').textContent;
 
             try {
-                const response = await fetch('https://api.resend.com/emails', {
+                // Waitlist signup - sends notification
+                const response = await fetch('https://formspree.io/f/placeholder', {
                     method: 'POST',
                     headers: {
-                        'Authorization': 'Bearer re_NxJ8hktG_KRgzNyTDNLHhVqwwV6xCcJSe',
+                        
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
