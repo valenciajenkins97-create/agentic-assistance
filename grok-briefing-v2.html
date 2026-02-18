@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nova Trading System — Complete Grok Briefing v2</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: #0a0a0f; color: #e0e0e8; line-height: 1.65; padding: 40px 20px; }
+  .container { max-width: 960px; margin: 0 auto; }
+  h1 { font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 4px; letter-spacing: -0.5px; }
+  .subtitle { color: #888; font-size: 0.95rem; margin-bottom: 40px; border-bottom: 1px solid #1a1a2e; padding-bottom: 20px; }
+  h2 { font-size: 1.3rem; font-weight: 600; color: #fff; margin: 44px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #1a1a2e; }
+  h3 { font-size: 1.05rem; font-weight: 600; color: #c0c0d0; margin: 24px 0 10px; }
+  p, li { font-size: 0.92rem; color: #b8b8c8; }
+  p { margin: 8px 0; }
+  ul, ol { padding-left: 20px; margin: 8px 0; }
+  li { margin: 4px 0; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 0.88rem; }
+  th { background: #12121e; color: #a0a0b8; font-weight: 600; text-align: left; padding: 10px 14px; border-bottom: 2px solid #2a2a3e; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+  td { padding: 9px 14px; border-bottom: 1px solid #16162a; color: #c8c8d8; }
+  tr:hover td { background: #0e0e1a; }
+  .g { color: #4ade80; } .r { color: #f87171; } .y { color: #fbbf24; } .dim { color: #666; } .b { color: #60a5fa; }
+  code, .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; }
+  .code-block { background: #0e0e1a; border: 1px solid #1a1a2e; border-radius: 8px; padding: 16px 20px; margin: 12px 0; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.7; color: #a0a0c0; white-space: pre; }
+  .card { background: #0e0e1a; border: 1px solid #1a1a2e; border-radius: 10px; padding: 20px 24px; margin: 16px 0; }
+  .card.alert { border-left: 3px solid #f87171; }
+  .card.success { border-left: 3px solid #4ade80; }
+  .card.warning { border-left: 3px solid #fbbf24; }
+  .card.info { border-left: 3px solid #60a5fa; }
+  .card.purple { border-left: 3px solid #a855f7; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
+  .badge.fixed { background: #064e3b; color: #4ade80; }
+  .badge.open { background: #7f1d1d; color: #f87171; }
+  .badge.warn { background: #78350f; color: #fbbf24; }
+  .kf { background: linear-gradient(135deg, #1a0a2e, #0e0e1a); border: 1px solid #3b1d6e; border-radius: 10px; padding: 20px 24px; margin: 20px 0; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+  @media print {
+    body { background: #fff; color: #111; padding: 20px; font-size: 11pt; }
+    h1, h2, h3 { color: #000; } p, li, td { color: #333; }
+    th { background: #f0f0f0; color: #333; border-bottom: 2px solid #ccc; }
+    td { border-bottom: 1px solid #ddd; }
+    .card { border: 1px solid #ddd; background: #fafafa; }
+    .card.alert { border-left: 3px solid #dc2626; }
+    .card.success { border-left: 3px solid #16a34a; }
+    .code-block { background: #f5f5f5; border: 1px solid #ddd; }
+    .g { color: #16a34a; } .r { color: #dc2626; } .y { color: #ca8a04; }
+    .kf { background: #f8f0ff; border: 1px solid #a855f7; }
+  }
+  @page { margin: 0.6in; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>🧠 Nova Trading System — Complete Diagnostic Briefing</h1>
+<p class="subtitle">Compiled February 18, 2026 01:50 UTC • For Grok Socratic Master Prompt • v2 (expanded with granular execution data)</p>
+
+<!-- ============================================================ -->
+<h2>1. WHAT WE'RE TRADING</h2>
+
+<h3>Exchange & Account</h3>
+<table>
+  <tr><th style="width:200px">Parameter</th><th>Value</th></tr>
+  <tr><td>Exchange</td><td><strong>Hyperliquid (HL)</strong> — on-chain perpetual futures DEX</td></tr>
+  <tr><td>Wallet</td><td class="mono">0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A</td></tr>
+  <tr><td>Account Balance</td><td>$49.43 USDC</td></tr>
+  <tr><td>Open Positions</td><td>0 (system paused post-audit)</td></tr>
+  <tr><td>Order Types</td><td>Market orders for entry, trigger (limit) orders for TP/SL</td></tr>
+  <tr><td>Fee Rate</td><td><strong>0.045%</strong> per fill (taker, from actual data)</td></tr>
+</table>
+
+<h3>Pairs Traded</h3>
+<p><strong>52 coins scanned</strong> every 10 minutes, but only top 4 get full 6-component engine analysis (rate limit constraint). Rest use lightweight scanner data.</p>
+<p><strong>Most traded (by fills):</strong> ZRO (24 fills), SOL (20), AXS (19), HYPE (18), LIT (14), XRP (10), SUI (8)</p>
+<p><strong>Blacklisted:</strong> AXS (0% win rate in live trades — ironically, signal data shows 100% accuracy on AXS BUY signals. This discrepancy is a red flag.)</p>
+
+<h3>Timeframes</h3>
+<ul>
+  <li><strong>Signal generation:</strong> 1h candles from Coinbase (RSI, EMA), real-time HL orderbook, real-time funding rates</li>
+  <li><strong>Execution interval:</strong> Every 10 minutes via cron</li>
+  <li><strong>Hold times:</strong> Scalp 15min, Momentum 45min, Mean Reversion 25min (max)</li>
+  <li><strong>Outcome tracking:</strong> 5-minute post-entry price change</li>
+</ul>
+
+<!-- ============================================================ -->
+<h2>2. SIGNAL ENGINE ARCHITECTURE</h2>
+
+<h3>6-Component Weighted Score (-100 to +100)</h3>
+<table>
+  <tr><th>Component</th><th>Weight</th><th>Source</th><th>Directional Agreement</th><th>Assessment</th></tr>
+  <tr><td class="mono">orderbook</td><td><strong>0.36</strong></td><td>HL bid/ask imbalance</td><td class="r">49.4% (n=1009)</td><td class="r">❌ Coin flip</td></tr>
+  <tr><td class="mono">momentum</td><td><strong>0.34</strong></td><td>Coinbase RSI/EMA</td><td class="r">47.5% (n=1009)</td><td class="r">❌ Worse than random</td></tr>
+  <tr><td class="mono">funding</td><td>0.19</td><td>HL funding rate</td><td class="g">53.9% (n=1009)</td><td class="y">⚠️ Slight edge</td></tr>
+  <tr><td class="mono">context</td><td>0.06</td><td>Market Cipher B</td><td class="r">37.3% (n=126)</td><td class="r">❌ Anti-predictive</td></tr>
+  <tr><td class="mono">oiRegime</td><td>0.03</td><td>Coinglass OI</td><td class="g">60.3% (n=126)</td><td class="g">✅ Best component</td></tr>
+  <tr><td class="mono">crossExchange</td><td>0.02</td><td>Coinglass spreads</td><td class="r">38.1% (n=126)</td><td class="r">❌ Anti-predictive</td></tr>
+</table>
+
+<div class="kf">
+  <h3>🚨 Component Weighting Is Inverted</h3>
+  <p>The <strong>two highest-weighted components</strong> (orderbook 0.36, momentum 0.34 = 70% of score) have <strong>no predictive power</strong> (49.4% and 47.5% directional agreement). Meanwhile, <strong>oiRegime</strong> (60.3% — the best predictor) is weighted at only <strong>0.03</strong> (3%). The system's edge is buried under noise.</p>
+  <p>Additionally: <strong>context</strong> (37.3%) and <strong>crossExchange</strong> (38.1%) are actively <em>anti-predictive</em> — doing the opposite of what they predict. These should either be inverted or removed.</p>
+</div>
+
+<h3>Signal Thresholds</h3>
+<div class="code-block">Score ≥ +38  → STRONG_BUY  (trade long)
+Score ≥ +20  → BUY         (no trade, just label)
+Score -20→+20 → NEUTRAL     (no trade)
+Score ≤ -20  → SELL        (no trade, just label)
+Score ≤ -38  → STRONG_SELL (trade short)
+Score > +55  → CAPPED      (historically = overfitting noise)</div>
+
+<h3>Score Distribution (10,000 snapshots)</h3>
+<table>
+  <tr><th>Bucket</th><th>Count</th><th>% of Total</th><th>Accuracy</th><th>Avg 5m Δ</th><th>Median 5m Δ</th></tr>
+  <tr><td>[-100, -50)</td><td>2</td><td>0.02%</td><td class="r">0.0%</td><td>+0.151%</td><td>+0.244%</td></tr>
+  <tr><td>[-50, -38)</td><td>36</td><td>0.36%</td><td class="y">55.6%</td><td>+0.033%</td><td>-0.009%</td></tr>
+  <tr><td>[-38, -20)</td><td>535</td><td>5.35%</td><td class="r">46.9%</td><td>+0.008%</td><td>+0.016%</td></tr>
+  <tr><td>[-20, 0)</td><td>1,392</td><td>13.9%</td><td class="r">45.1%</td><td>+0.036%</td><td>+0.022%</td></tr>
+  <tr><td>[0, +20)</td><td>1,169</td><td>11.7%</td><td class="y">53.0%</td><td>+0.155%</td><td>+0.041%</td></tr>
+  <tr><td>[+20, +38)</td><td>387</td><td>3.87%</td><td class="g"><strong>64.9%</strong></td><td class="g">+0.398%</td><td>+0.154%</td></tr>
+  <tr><td class="g">[+38, +50)</td><td class="g">52</td><td>0.52%</td><td class="g"><strong>69.2%</strong></td><td class="g"><strong>+0.998%</strong></td><td class="g">+0.363%</td></tr>
+  <tr><td class="g">[+50, +100]</td><td class="g">6</td><td>0.06%</td><td class="g"><strong>100%</strong></td><td class="g"><strong>+2.874%</strong></td><td class="g">+0.411%</td></tr>
+</table>
+
+<div class="kf">
+  <h3>🔑 The Edge Is Real — But Only on the Long Side</h3>
+  <p>Positive scores show a <strong>monotonically increasing accuracy curve</strong>: 53% → 65% → 69% → 100% as score increases. Negative scores show <strong>no pattern at all</strong> — the short side is broken. Scores -100 to -38 cluster around 46-56% accuracy with <em>positive</em> average returns (meaning shorts lose money).</p>
+  <p>The 38+ threshold captures a real edge: <strong>69.2% accuracy, +1.0% avg 5m move</strong>. That's tradeable.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2>3. ENTRY/EXIT LOGIC</h2>
+
+<h3>Entry Logic (multi-pipeline.js)</h3>
+<ol>
+  <li>Every 10 min: scan 52 coins, score each with 6-component engine</li>
+  <li>Filter: score must be ≥ 38 (long) or ≤ -38 (short)</li>
+  <li>Filter: score must be ≤ 55 (cap — higher scores are noise)</li>
+  <li>Filter: not in cooldown (30min per coin after last trade)</li>
+  <li>Filter: not in quiet hours (0-6 UTC)</li>
+  <li>Filter: not blacklisted (AXS)</li>
+  <li>Filter: max 2 concurrent positions</li>
+  <li>Filter: daily loss &lt; $5</li>
+  <li>Filter: margin usage &lt; 60%</li>
+  <li>Filter: 1h volatility &gt; 0.5%</li>
+  <li>Strategy router selects: Scalp / Momentum / Mean Reversion</li>
+  <li>Position size: Quarter-Kelly formula, $2 floor, 15% account cap</li>
+  <li>Execute: market order on HL</li>
+</ol>
+
+<h3>Strategy Profiles (strategy-router.js)</h3>
+<table>
+  <tr><th>Strategy</th><th>Trigger</th><th>TP %</th><th>SL %</th><th>Max Hold</th><th>Leverage</th></tr>
+  <tr><td><strong>Scalp</strong> (default)</td><td>Score 38-49</td><td>0.5%</td><td>0.3%</td><td>15 min</td><td>2.5x</td></tr>
+  <tr><td><strong>Momentum</strong></td><td>Score 50+ OR breaking 1h high/low</td><td>1.2%</td><td>0.7%</td><td>45 min</td><td>3.0x</td></tr>
+  <tr><td><strong>Mean Reversion</strong></td><td>RSI extreme + WT extreme</td><td>0.8%</td><td>0.4%</td><td>25 min</td><td>2.0x</td></tr>
+</table>
+<p><em>Dynamic adjustments:</em> TP/SL widened 30% in high volatility (&gt;3%), tightened 10% in low volatility (&lt;1%). Leverage reduced 20% on low confidence.</p>
+
+<h3>Exit Logic</h3>
+<ul>
+  <li><strong>TP/SL trigger orders</strong> placed immediately after entry (limit orders, not market)</li>
+  <li><strong>Signal degradation exit</strong>: if signal drops 70%+ from entry while in loss &gt;$0.05 → close</li>
+  <li><strong>Max hold time</strong>: force close after strategy's hold time expires</li>
+  <li><strong>Emergency close</strong>: if TP/SL orders go missing for &gt;2 min → market close</li>
+  <li><strong>Position monitor</strong>: runs every 5 min, checks all positions against current signals</li>
+</ul>
+
+<div class="card alert">
+  <h3>⚠️ Exit Logic Was Never Tested</h3>
+  <p>TP/SL orders were silently rejected for all 56 trades (<code>isMarket: true</code> bug). Every single exit was either a manual close, a journal cleanup, or an emergency close. The TP/SL percentages (0.3-1.2%) have <strong>zero empirical validation</strong>.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2>4. ACTUAL EXECUTION DATA (from Hyperliquid)</h2>
+
+<h3>Fill Statistics</h3>
+<table>
+  <tr><th>Metric</th><th>Value</th></tr>
+  <tr><td>Total fills</td><td>139</td></tr>
+  <tr><td>Total notional traded</td><td>$2,629.00</td></tr>
+  <tr><td>Avg fill size</td><td>$18.91</td></tr>
+  <tr><td>Fee rate</td><td>0.045% (taker)</td></tr>
+  <tr><td>Total fees paid</td><td>$1.18</td></tr>
+  <tr><td>Direction split</td><td>70 LONG / 69 SHORT</td></tr>
+  <tr><td>Trading span</td><td>91.3 hours (Feb 13-17)</td></tr>
+  <tr><td>Avg time between fills</td><td>39.7 minutes</td></tr>
+  <tr><td>Min gap between fills</td><td>0.0 seconds (simultaneous!)</td></tr>
+  <tr><td>Max gap</td><td>27.7 hours</td></tr>
+</table>
+
+<h3>P&L Performance (Actual HL Data)</h3>
+<table>
+  <tr><th>Metric</th><th>Value</th></tr>
+  <tr><td>Closing fills with PnL</td><td>65</td></tr>
+  <tr><td>Wins</td><td class="g">27 (41.5%)</td></tr>
+  <tr><td>Losses</td><td class="r">38 (58.5%)</td></tr>
+  <tr><td>Gross wins</td><td class="g">+$0.9126</td></tr>
+  <tr><td>Gross losses</td><td class="r">-$1.7964</td></tr>
+  <tr><td>Avg win</td><td>$0.0338</td></tr>
+  <tr><td>Avg loss</td><td>-$0.0473</td></tr>
+  <tr><td>Win/Loss size ratio</td><td class="r"><strong>0.715</strong> (losses 40% bigger than wins)</td></tr>
+  <tr><td>Profit factor</td><td class="r"><strong>0.508</strong> (need &gt;1.0 to be profitable)</td></tr>
+  <tr><td>Net PnL (before fees)</td><td class="r">-$0.88</td></tr>
+  <tr><td>Total fees</td><td>-$1.18</td></tr>
+  <tr><td>Net PnL (after fees)</td><td class="r"><strong>-$2.07</strong></td></tr>
+  <tr><td>Max drawdown</td><td class="r">$1.45</td></tr>
+</table>
+
+<div class="kf">
+  <h3>🚨 The Numbers Tell the Story</h3>
+  <ul>
+    <li><strong>Profit factor 0.508</strong> — the system loses $2 for every $1 it makes</li>
+    <li><strong>Win rate 41.5%</strong> could work IF wins were bigger than losses, but they're 40% smaller</li>
+    <li><strong>Fees ($1.18) exceed gross wins ($0.91)</strong> — even if we broke even on trades, fees would make us negative</li>
+    <li><strong>$2.07 total loss on $2,629 notional</strong> = -0.079% return. Small in absolute terms, but the <em>structure</em> is deeply unprofitable</li>
+  </ul>
+</div>
+
+<h3>Position Sizing Progression</h3>
+<p>A dangerous pattern emerged over 56 trades:</p>
+<div class="card alert">
+  <ul>
+    <li>Trades #1-22: <strong>$10 each</strong> (conservative, correct)</li>
+    <li>Trades #23-25: jumped to <strong>$34</strong> (3.4x increase)</li>
+    <li>Trades #26-27: jumped to <strong>$40.75</strong> (4x original)</li>
+    <li>Trades #53-56: <strong>$46-$50</strong> (using nearly entire account on single trades)</li>
+  </ul>
+  <p class="r"><strong>The bot escalated from $10 positions to $50 positions (entire account) — with no winning track record to justify the increase.</strong> This is textbook risk of ruin behavior.</p>
+</div>
+
+<h3>Individual Fill P&L (Last 30 Actual HL Fills)</h3>
+<table>
+  <tr><th>Coin</th><th>PnL</th><th>Fee</th><th>Net</th><th>Price</th><th>Time (UTC)</th></tr>
+  <tr><td>BERA</td><td class="r">-$0.039</td><td>$0.005</td><td class="r">-$0.043</td><td>0.6507</td><td>Feb 16 19:26</td></tr>
+  <tr><td>BERA</td><td class="g">+$0.015</td><td>$0.005</td><td class="g">+$0.010</td><td>0.6511</td><td>Feb 16 19:55</td></tr>
+  <tr><td>SUI</td><td class="g">+$0.053</td><td>$0.005</td><td class="g">+$0.048</td><td>0.9823</td><td>Feb 16 21:09</td></tr>
+  <tr><td>AXS</td><td class="g">+$0.020</td><td>$0.005</td><td class="g">+$0.015</td><td>1.3673</td><td>Feb 16 22:00</td></tr>
+  <tr><td>AXS</td><td class="r">-$0.037</td><td>$0.005</td><td class="r">-$0.042</td><td>1.3644</td><td>Feb 16 22:22</td></tr>
+  <tr><td>SOL</td><td class="g">+$0.052</td><td>$0.005</td><td class="g">+$0.047</td><td>86.516</td><td>Feb 16 23:52</td></tr>
+  <tr><td>AXS</td><td class="g">+$0.058</td><td>$0.005</td><td class="g">+$0.054</td><td>1.3686</td><td>Feb 17 00:09</td></tr>
+  <tr><td>ZRO</td><td class="r">-$0.051</td><td>$0.005</td><td class="r">-$0.055</td><td>1.7279</td><td>Feb 17 00:21</td></tr>
+  <tr><td>AVAX</td><td class="g">+$0.049</td><td>$0.005</td><td class="g">+$0.044</td><td>9.2003</td><td>Feb 17 02:02</td></tr>
+  <tr><td>AXS</td><td class="r">-$0.036</td><td>$0.005</td><td class="r">-$0.040</td><td>1.3736</td><td>Feb 17 02:18</td></tr>
+  <tr><td>AXS</td><td class="r"><strong>-$0.092</strong></td><td>$0.015</td><td class="r">-$0.108</td><td>1.3741</td><td>Feb 17 07:16</td></tr>
+  <tr><td>ZEC</td><td class="g">+$0.010</td><td>$0.016</td><td class="r">-$0.006</td><td>287.14</td><td>Feb 17 07:21</td></tr>
+  <tr><td>AXS</td><td class="r">-$0.003</td><td>$0.018</td><td class="r">-$0.021</td><td>1.3681</td><td>Feb 17 07:35</td></tr>
+  <tr><td>AXS</td><td class="r"><strong>-$0.124</strong></td><td>$0.015</td><td class="r">-$0.139</td><td>1.3759</td><td>Feb 17 07:52</td></tr>
+  <tr><td>SOL</td><td class="r"><strong>-$0.151</strong></td><td>$0.021</td><td class="r">-$0.172</td><td>86.634</td><td>Feb 17 08:01</td></tr>
+  <tr><td>ZRO</td><td class="r"><strong>-$0.121</strong></td><td>$0.015</td><td class="r">-$0.136</td><td>1.6597</td><td>Feb 17 08:09</td></tr>
+  <tr><td>SOL</td><td class="g">+$0.054</td><td>$0.021</td><td class="g">+$0.033</td><td>85.98</td><td>Feb 17 08:55</td></tr>
+  <tr><td>ZRO</td><td class="g">+$0.012</td><td>$0.015</td><td class="r">-$0.003</td><td>1.6551</td><td>Feb 17 09:06</td></tr>
+  <tr><td>SOL</td><td class="g">+$0.111</td><td>$0.021</td><td class="g">+$0.090</td><td>85.791</td><td>Feb 17 09:10</td></tr>
+  <tr><td>ZRO</td><td class="r">-$0.002</td><td>$0.015</td><td class="r">-$0.017</td><td>1.6509</td><td>Feb 17 09:40</td></tr>
+  <tr><td>ZRO</td><td class="r">-$0.024</td><td>$0.015</td><td class="r">-$0.040</td><td>1.6555</td><td>Feb 17 09:51</td></tr>
+  <tr><td>SOL</td><td class="g">+$0.010</td><td>$0.021</td><td class="r">-$0.011</td><td>85.86</td><td>Feb 17 10:11</td></tr>
+  <tr><td>ZRO</td><td class="r">-$0.020</td><td>$0.015</td><td class="r">-$0.035</td><td>1.6574</td><td>Feb 17 10:11</td></tr>
+  <tr><td>AXS</td><td class="r">-$0.018</td><td>$0.018</td><td class="r">-$0.036</td><td>1.3695</td><td>Feb 17 10:16</td></tr>
+  <tr><td>ZRO</td><td class="r">-$0.008</td><td>$0.015</td><td class="r">-$0.023</td><td>1.652</td><td>Feb 17 10:31</td></tr>
+  <tr><td>AXS</td><td class="r">-$0.012</td><td>$0.015</td><td class="r">-$0.027</td><td>1.3605</td><td>Feb 17 10:35</td></tr>
+  <tr><td>AVAX</td><td class="r"><strong>-$0.197</strong></td><td>$0.021</td><td class="r">-$0.218</td><td>9.1201</td><td>Feb 17 11:21</td></tr>
+  <tr><td>SOL</td><td class="g">+$0.075</td><td>$0.021</td><td class="g">+$0.054</td><td>84.776</td><td>Feb 17 11:26</td></tr>
+  <tr><td>ZEC</td><td class="r"><strong>-$0.220</strong></td><td>$0.024</td><td class="r">-$0.243</td><td>293.78</td><td>Feb 17 11:56</td></tr>
+  <tr><td>SUI</td><td class="r"><strong>-$0.184</strong></td><td>$0.022</td><td class="r">-$0.207</td><td>0.9717</td><td>Feb 17 12:07</td></tr>
+</table>
+
+<div class="card alert">
+  <h3>Pattern: Losses Get Bigger Over Time</h3>
+  <p>Early trades (Feb 16): losses around $0.03-$0.05. Later trades (Feb 17): losses of $0.09, $0.12, $0.15, $0.20, $0.22. <strong>The system increased position sizes while losing</strong>, turning small losses into bigger ones. This is anti-Martingale in reverse — the worst possible sizing behavior.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2>5. DIRECTIONAL ACCURACY (Deep Dive)</h2>
+
+<h3>By Signal Type (3,557 outcomes)</h3>
+<table>
+  <tr><th>Signal</th><th>Accuracy</th><th>n</th><th>Avg 5m Δ</th><th>Verdict</th></tr>
+  <tr><td>STRONG_BUY</td><td class="g"><strong>73.2%</strong></td><td>41</td><td class="g"><strong>+1.53%</strong></td><td class="g">Real edge — tradeable</td></tr>
+  <tr><td>BUY</td><td class="g"><strong>65.9%</strong></td><td>217</td><td class="g">+0.38%</td><td class="g">Useful signal</td></tr>
+  <tr><td>NEUTRAL</td><td>49.4%</td><td>2943</td><td>+0.11%</td><td class="dim">Random</td></tr>
+  <tr><td>SELL</td><td class="y">48.5%</td><td>332</td><td>-0.004%</td><td class="r">No edge</td></tr>
+  <tr><td>STRONG_SELL</td><td class="r">50.0%</td><td>24</td><td class="r">+0.06%</td><td class="r">Broken (positive returns on short signal!)</td></tr>
+</table>
+
+<h3>By Hour (UTC) — When Does the System Work?</h3>
+<table>
+  <tr><th>Hour</th><th>Accuracy</th><th>n</th><th>Avg |Move|</th><th>Assessment</th></tr>
+  <tr><td class="r">07:00</td><td class="r"><strong>31.0%</strong></td><td>29</td><td>0.294%</td><td class="r">❌ Anti-signal hour</td></tr>
+  <tr><td class="r">15:00</td><td class="r"><strong>14.8%</strong></td><td>27</td><td>0.323%</td><td class="r">❌ Worst hour — US market open chaos</td></tr>
+  <tr><td>19:00</td><td class="y">45.5%</td><td>22</td><td>0.472%</td><td class="y">⚠️ Below random</td></tr>
+  <tr><td class="dim">—</td><td colspan="4"><em>... middle of the pack omitted ...</em></td></tr>
+  <tr><td>04:00</td><td class="g">65.8%</td><td>38</td><td>0.251%</td><td class="g">✅ Early Asia</td></tr>
+  <tr><td>08:00</td><td class="g"><strong>72.7%</strong></td><td>33</td><td>0.374%</td><td class="g">✅ London open</td></tr>
+  <tr><td>14:00</td><td class="g"><strong>78.3%</strong></td><td>23</td><td>0.572%</td><td class="g">✅ Pre-US open</td></tr>
+  <tr><td>18:00</td><td class="g"><strong>80.0%</strong></td><td>20</td><td>0.516%</td><td class="g">✅ Best hour</td></tr>
+  <tr><td>21:00</td><td class="g">71.4%</td><td>21</td><td>0.249%</td><td class="g">✅ Late US</td></tr>
+  <tr><td>22:00</td><td class="g">73.7%</td><td>19</td><td>0.379%</td><td class="g">✅ Pre-Asia</td></tr>
+</table>
+
+<div class="kf">
+  <h3>🚨 15:00 UTC = 14.8% Accuracy</h3>
+  <p>This is <strong>actively destructive</strong>. At 15:00 UTC (10 AM EST, US equity open), our signals are correct only 14.8% of the time on a sample of 27. The system is configured with quiet hours 0-6 UTC, but the actually dangerous hours are <strong>07:00 and 15:00</strong> — both are currently active trading hours.</p>
+</div>
+
+<h3>By Coin (Actionable Signals Only)</h3>
+<table>
+  <tr><th>Coin</th><th>Accuracy</th><th>n</th><th>Avg 5m Δ</th><th>Primary Signal</th></tr>
+  <tr><td class="g">AXS</td><td class="g"><strong>100%</strong></td><td>24</td><td class="g">+0.78%</td><td>BUY (20), STRONG_BUY (4)</td></tr>
+  <tr><td class="g">JTO</td><td class="g"><strong>96.0%</strong></td><td>25</td><td class="g">+4.06%</td><td>BUY (15), STRONG_BUY (10)</td></tr>
+  <tr><td class="g">BERA</td><td class="g"><strong>82.0%</strong></td><td>50</td><td class="g">+0.41%</td><td>BUY (36), STRONG_BUY (14)</td></tr>
+  <tr><td class="g">HYPE</td><td class="g">64.0%</td><td>25</td><td>-0.13%</td><td>SELL (19), STRONG_BUY (4)</td></tr>
+  <tr><td class="g">SOL</td><td class="g">63.0%</td><td>46</td><td>-0.02%</td><td>SELL (23), BUY (17)</td></tr>
+  <tr><td class="dim">...</td><td colspan="4"></td></tr>
+  <tr><td class="r">XRP</td><td class="r"><strong>26.1%</strong></td><td>23</td><td>+0.03%</td><td>SELL (16), BUY (5)</td></tr>
+  <tr><td class="r">TRUMP</td><td class="r">20.0%</td><td>5</td><td>+0.28%</td><td>SELL (5)</td></tr>
+  <tr><td class="r">IP</td><td class="r">16.7%</td><td>6</td><td>+0.03%</td><td>SELL (2), BUY (4)</td></tr>
+</table>
+
+<div class="card warning">
+  <h3>AXS Paradox</h3>
+  <p>AXS signal data shows <strong>100% accuracy on BUY signals</strong> — yet AXS was blacklisted for "0% win rate in live trades." This means the execution layer was failing on a coin where the signal was perfect. The double-negation bug (funding) was inverting AXS BUY signals into SHORT trades, which then lost money. This is the clearest evidence the short-side bug was the primary failure.</p>
+</div>
+
+<h3>By Regime</h3>
+<table>
+  <tr><th>Regime</th><th>Snapshots</th><th>Accuracy (actionable)</th></tr>
+  <tr><td>Trending</td><td>5,467</td><td class="g">55.9% (310/555)</td></tr>
+  <tr><td>Ranging</td><td>626</td><td class="g"><strong>62.9%</strong> (39/62)</td></tr>
+  <tr><td>Pipeline (uncategorized)</td><td>3,907</td><td class="dim">N/A (no outcomes tracked)</td></tr>
+</table>
+
+<!-- ============================================================ -->
+<h2>6. RISK MANAGEMENT</h2>
+
+<h3>Current Rules</h3>
+<table>
+  <tr><th>Rule</th><th>Setting</th><th>Status</th></tr>
+  <tr><td>Max positions</td><td>2 concurrent</td><td class="g">Working</td></tr>
+  <tr><td>Max leverage</td><td>3x (strategy-dependent: 2-4x)</td><td class="g">Working</td></tr>
+  <tr><td>Max margin usage</td><td>60%</td><td class="y">Working but bot used 100% on later trades</td></tr>
+  <tr><td>Daily loss limit</td><td>$5</td><td class="g">Working (circuit breaker)</td></tr>
+  <tr><td>Per-trade cooldown</td><td>30 min per coin</td><td class="g">Working</td></tr>
+  <tr><td>Stop loss</td><td>0.3-0.7% (strategy-dependent)</td><td class="r">Was broken (isMarket bug). FIXED but untested.</td></tr>
+  <tr><td>Take profit</td><td>0.5-1.2% (strategy-dependent)</td><td class="r">Was broken. FIXED but untested.</td></tr>
+  <tr><td>Quiet hours</td><td>0-6 UTC</td><td class="y">Wrong hours. Data says 07:00 and 15:00 are deadly.</td></tr>
+  <tr><td>Velocity stop</td><td>3+ losses in 30min → pause</td><td class="g">Working</td></tr>
+  <tr><td>Drawdown scaling</td><td>Reduce size at drawdown levels</td><td class="r">Wasn't working — sizes increased during losses</td></tr>
+</table>
+
+<h3>Circuit Breaker Modules</h3>
+<ul>
+  <li><code>circuit-breaker.js</code>: Daily loss tracking, account floor ($45)</li>
+  <li><code>circuit-breaker-v2.js</code>: Velocity stop, drawdown scaling, correlation guard, <code>preTradeCheck()</code></li>
+  <li><code>daily-pnl-tracker.js</code>: Tracks intraday P&L from HL fills</li>
+  <li><code>trading-mutex.js</code>: Process lock to prevent simultaneous execution</li>
+</ul>
+
+<!-- ============================================================ -->
+<h2>7. BUGS FOUND & FIXED (5-Agent Audit, Feb 17)</h2>
+
+<div class="two-col">
+  <div class="card alert">
+    <h3>1. TP/SL Silent Rejection <span class="badge fixed">FIXED</span></h3>
+    <p><code>isMarket: true</code> → HL rejects trigger orders silently. Every TP/SL for 56 trades was dead on arrival.</p>
+  </div>
+  <div class="card alert">
+    <h3>2. Double-Negation SHORT Bias <span class="badge fixed">FIXED</span></h3>
+    <p>Funding component: positive funding (crowded longs) scored as bullish, then inverted. Everything pushed SHORT.</p>
+  </div>
+  <div class="card alert">
+    <h3>3. Nonce Collisions <span class="badge fixed">FIXED</span></h3>
+    <p>Same-millisecond orders caused HL rejections. Sequential nonce now.</p>
+  </div>
+  <div class="card alert">
+    <h3>4. Journal Desync <span class="badge fixed">FIXED</span></h3>
+    <p>Trades opened but never closed in journal. Rebuilt as v2 with lifecycle tracking.</p>
+  </div>
+  <div class="card alert">
+    <h3>5. No Process Lock <span class="badge fixed">FIXED</span></h3>
+    <p>Multiple pipeline instances could run simultaneously → duplicate orders.</p>
+  </div>
+  <div class="card warning">
+    <h3>6. Market Cipher Inverted <span class="badge warn">KNOWN</span></h3>
+    <p>5/10 MC signals flipped from textbook. Context component at 31% reliability. Weighted at 6% — low impact but still noise.</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<h2>8. THE SPECIFIC PROBLEMS</h2>
+
+<div class="card alert">
+  <h3>Problem 1: Short Side Is Broken</h3>
+  <p>STRONG_SELL has 50% accuracy with <em>positive</em> average returns. The system was calling shorts that went up. Root cause was the funding double-negation bug (now fixed), but we have <strong>zero post-fix short data</strong>. We don't know if shorts work now.</p>
+</div>
+
+<div class="card alert">
+  <h3>Problem 2: Component Weights Are Backwards</h3>
+  <p>The two heaviest components (orderbook 0.36 + momentum 0.34 = 70% of score) show <strong>no predictive power</strong>. The best predictor (oiRegime at 60.3%) has only 3% weight. The system is dominated by noise.</p>
+</div>
+
+<div class="card alert">
+  <h3>Problem 3: Fees Eat the Edge</h3>
+  <p>At 0.045% per fill (round trip ~0.09%), with a scalp TP of 0.5% and average wins of $0.034, fees ($0.009 avg per fill) represent <strong>26% of each win</strong>. The edge is thin enough that fees are a material drag.</p>
+</div>
+
+<div class="card alert">
+  <h3>Problem 4: Position Sizing Escalated Into Losses</h3>
+  <p>Started at $10 per trade, ended at $50 (entire account). No winning track record justified the increase. This is the single biggest risk management failure.</p>
+</div>
+
+<div class="card warning">
+  <h3>Problem 5: Wrong Quiet Hours</h3>
+  <p>System avoids 0-6 UTC but trades at 07:00 (31% accuracy) and 15:00 (14.8% accuracy). The actual best hours are 08:00, 14:00, 18:00, 21-22:00.</p>
+</div>
+
+<div class="card warning">
+  <h3>Problem 6: No Backtest Framework</h3>
+  <p>10,000 snapshots with components and 5,903 with outcomes — enough data to backtest properly. But there's no walk-forward testing, no Sharpe calculation, no drawdown simulation. All parameter choices (threshold=38, Kelly fraction, TP/SL %) are arbitrary.</p>
+</div>
+
+<div class="card warning">
+  <h3>Problem 7: API Rate Limits Cause Data Gaps</h3>
+  <p>Collector times out ~30% of runs. Coinglass OKX returns 50001. Coinbase rate limits. This means the engine frequently operates on stale or incomplete data. 1,595 of 10,000 snapshots are missing component data.</p>
+</div>
+
+<div class="card warning">
+  <h3>Problem 8: Overtrading Low-Confidence Coins</h3>
+  <p>XRP was traded 16 times SHORT with 26.1% accuracy. AXS was traded 9 times after being blacklisted. The system had no per-coin performance tracking to stop trading coins that consistently lose.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2>9. KEY FILES & CODEBASE</h2>
+
+<div class="code-block">multi-pipeline.js    (1221 lines) — Main pipeline, config, entry/exit, strategy routing
+engine.js            (618 lines)  — 6-component signal scorer  
+position-monitor.js  (941 lines)  — Position management, TP/SL verification, emergency exits
+hl-trader.js         (789 lines)  — Hyperliquid API (orders, positions, balance, trigger orders)
+collector-v2.js      (557 lines)  — Data collection, 52-coin scan, outcome backfill
+orderbook-signals.js (797 lines)  — Orderbook bid/ask imbalance analysis
+circuit-breaker-v2.js(621 lines)  — Risk controls (daily loss, velocity, drawdown, correlation)
+strategy-router.js   (299 lines)  — Scalp/Momentum/Reversion selection + dynamic TP/SL/leverage
+regime-detector.js   (518 lines)  — Market regime classification (trending/ranging)
+coinglass.js         (559 lines)  — Coinglass API (OI, funding, liquidations)
+coingecko.js         (298 lines)  — CoinGecko (prices, global market data)
+analyzer.js          (357 lines)  — Weight optimization, outcome backfill
+watchdog.js          (479 lines)  — System health monitoring + data quality checks
+grid-dryrun.js       (506 lines)  — Grid trading simulation (untested)
+signal-quality.js    (336 lines)  — Signal confidence scoring
+run-safe.js          (314 lines)  — Error wrapper for cron execution
+─────────────────────────────────────────────────────
+Total:              ~15,675 lines across 34 files</div>
+
+<!-- ============================================================ -->
+<h2>10. WHAT GROK SHOULD INTERROGATE</h2>
+
+<div class="kf">
+  <h3>Core Question</h3>
+  <p style="font-size: 1.05rem; color: #fff;">We have a system where <strong>long signals work</strong> (STRONG_BUY: 73%, +1.53% avg; BUY: 66%, +0.38%) but <strong>short signals are random/broken</strong>, <strong>the two heaviest components have no edge</strong>, <strong>fees eat 26% of wins</strong>, and <strong>position sizing escalated into a loss spiral</strong>. The account survived ($49.43 from $50) only because positions were tiny and the system rarely fired. How do we rebuild this into something that makes money?</p>
+</div>
+
+<h3>Suggested Interrogation Areas</h3>
+<ol>
+  <li><strong>Go long-only?</strong> The data says yes. But is this just sample bias from a bullish 4-day window?</li>
+  <li><strong>Reweight components?</strong> oiRegime (60.3%) should be weighted much higher. orderbook and momentum (49%, 47%) should be reduced or removed. How to validate this properly?</li>
+  <li><strong>Backtest with walk-forward?</strong> We have 10K snapshots. How to split train/test to avoid overfitting? What Sharpe is needed to deploy real capital?</li>
+  <li><strong>Fee-aware sizing?</strong> At 0.045% per fill, what's the minimum edge and position size needed to be net-profitable?</li>
+  <li><strong>Kill underperforming coins?</strong> XRP (26%), TRUMP (20%), IP (17%) are consistent losers. Whitelist only proven coins (JTO, BERA, AXS-long-only)?</li>
+  <li><strong>Fix quiet hours?</strong> Data says avoid 07:00 and 15:00 UTC, trade 08:00/14:00/18:00/21-22:00. How much of a difference would this make?</li>
+  <li><strong>TP/SL calibration?</strong> Zero empirical data on optimal exit points. How to use our 5m outcome data to set realistic TP/SL?</li>
+  <li><strong>Position sizing reset?</strong> Quarter-Kelly sounds right, but it produced the $10→$50 escalation. What went wrong?</li>
+  <li><strong>The Market Cipher question:</strong> 5/10 indicators inverted from textbook. Is MC just useless for crypto perps, or is there a structural reason?</li>
+  <li><strong>Realistic expectations:</strong> On a $50 account with 0.045% fees and 3x leverage, what's the theoretical max return if everything is optimized?</li>
+</ol>
+
+<!-- ============================================================ -->
+<h2>11. RAW DATA SUMMARY</h2>
+
+<div class="code-block">Account: $49.43 USDC on Hyperliquid
+Total snapshots: 10,000 (52 coins × ~200 scans)
+With outcomes: 5,903 (59%)
+With components: 10,000 (100%)
+Signal distribution: NEUTRAL 84.5% | BUY 7.2% | SELL 6.6% | STRONG_BUY 1.3% | STRONG_SELL 0.4%
+Actual trades: 139 fills, 65 closing fills, 56 logged trades
+Win rate: 41.5% (27W/38L)
+Profit factor: 0.508
+Net PnL: -$2.07 (after $1.18 fees)
+Max drawdown: $1.45
+Avg win: $0.034 | Avg loss: -$0.047 | Ratio: 0.715
+Fee rate: 0.045% per fill
+Trading span: Feb 13-17 (91.3 hours)
+Optimized weights: 52,067 MC samples (old engine, may not apply)
+Regime split: 55% trending, 39% pipeline, 6% ranging</div>
+
+<div style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #1a1a2e; color: #555; font-size: 0.8rem; text-align: center;">
+  Generated by Nova • February 18, 2026 01:50 UTC • Complete Diagnostic Briefing v2
+</div>
+
+</div>
+</body>
+</html>
