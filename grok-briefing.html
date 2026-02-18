@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nova Trading System — Grok Briefing</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: #0a0a0f;
+    color: #e0e0e8;
+    line-height: 1.65;
+    padding: 40px 20px;
+  }
+  
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+    letter-spacing: -0.5px;
+  }
+  
+  .subtitle {
+    color: #888;
+    font-size: 0.95rem;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #1a1a2e;
+    padding-bottom: 20px;
+  }
+  
+  h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 40px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #1a1a2e;
+  }
+  
+  h2 .emoji { margin-right: 8px; }
+  
+  h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #c0c0d0;
+    margin: 24px 0 10px;
+  }
+  
+  p, li { font-size: 0.92rem; color: #b8b8c8; }
+  
+  ul { padding-left: 20px; margin: 8px 0; }
+  li { margin: 4px 0; }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 20px;
+    font-size: 0.88rem;
+  }
+  
+  th {
+    background: #12121e;
+    color: #a0a0b8;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 2px solid #2a2a3e;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  td {
+    padding: 9px 14px;
+    border-bottom: 1px solid #16162a;
+    color: #c8c8d8;
+  }
+  
+  tr:hover td { background: #0e0e1a; }
+  
+  .green { color: #4ade80; }
+  .red { color: #f87171; }
+  .yellow { color: #fbbf24; }
+  .dim { color: #666; }
+  
+  code, .mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+  }
+  
+  .code-block {
+    background: #0e0e1a;
+    border: 1px solid #1a1a2e;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 12px 0;
+    overflow-x: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: #a0a0c0;
+  }
+  
+  .card {
+    background: #0e0e1a;
+    border: 1px solid #1a1a2e;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 16px 0;
+  }
+  
+  .card.alert {
+    border-left: 3px solid #f87171;
+  }
+  
+  .card.success {
+    border-left: 3px solid #4ade80;
+  }
+  
+  .card.warning {
+    border-left: 3px solid #fbbf24;
+  }
+  
+  .card.info {
+    border-left: 3px solid #60a5fa;
+  }
+  
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  
+  .badge.fixed { background: #064e3b; color: #4ade80; }
+  .badge.open { background: #7f1d1d; color: #f87171; }
+  .badge.warn { background: #78350f; color: #fbbf24; }
+  
+  .key-finding {
+    background: linear-gradient(135deg, #1a0a2e, #0e0e1a);
+    border: 1px solid #3b1d6e;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 20px 0;
+  }
+  
+  .file-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 24px;
+  }
+  
+  .file-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    font-size: 0.85rem;
+  }
+  
+  .file-item .name { font-family: 'JetBrains Mono', monospace; color: #60a5fa; }
+  .file-item .desc { color: #888; font-size: 0.8rem; }
+  
+  @media print {
+    body { background: #fff; color: #111; padding: 20px; }
+    .container { max-width: 100%; }
+    h1, h2, h3 { color: #000; }
+    p, li, td { color: #333; }
+    th { background: #f0f0f0; color: #333; border-bottom: 2px solid #ccc; }
+    td { border-bottom: 1px solid #ddd; }
+    .card { border: 1px solid #ddd; background: #fafafa; }
+    .card.alert { border-left: 3px solid #dc2626; }
+    .card.success { border-left: 3px solid #16a34a; }
+    .code-block { background: #f5f5f5; border: 1px solid #ddd; }
+    .green { color: #16a34a; }
+    .red { color: #dc2626; }
+    .yellow { color: #ca8a04; }
+    .key-finding { background: #f8f0ff; border: 1px solid #a855f7; }
+  }
+  
+  @page { margin: 0.75in; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>🧠 Nova Trading System — Grok Briefing</h1>
+<p class="subtitle">Compiled February 18, 2026 • For Socratic diagnostic master prompt generation</p>
+
+<!-- SYSTEM OVERVIEW -->
+<h2><span class="emoji">📋</span>System Overview</h2>
+<table>
+  <tr><th style="width:180px">Parameter</th><th>Value</th></tr>
+  <tr><td>Platform</td><td>Hyperliquid (HL) perpetual futures</td></tr>
+  <tr><td>Wallet</td><td class="mono">0xf59F993bc53f8eC2C0278FAF37fB86dE25DB387A</td></tr>
+  <tr><td>Account Balance</td><td>~$49.43 USDC</td></tr>
+  <tr><td>Open Positions</td><td>0</td></tr>
+  <tr><td>Codebase</td><td>34 JS files, ~15,675 lines, Node.js</td></tr>
+  <tr><td>Execution</td><td>Cron-based (10min pipeline, 5min position monitor)</td></tr>
+  <tr><td>Strategy</td><td>Multi-component signal scoring → threshold filter → HL orders with TP/SL</td></tr>
+</table>
+
+<!-- ARCHITECTURE -->
+<h2><span class="emoji">🏗️</span>Architecture: 6-Component Signal Engine</h2>
+<p>Each coin gets scored <strong>-100 to +100</strong> from 6 weighted components:</p>
+
+<table>
+  <tr><th>Component</th><th>Weight</th><th>Source</th><th>What It Measures</th></tr>
+  <tr><td class="mono">orderbook</td><td><strong>0.36</strong></td><td>Hyperliquid</td><td>Bid/ask imbalance, depth analysis</td></tr>
+  <tr><td class="mono">momentum</td><td><strong>0.34</strong></td><td>Coinbase</td><td>RSI, EMA crossovers, price action candles</td></tr>
+  <tr><td class="mono">funding</td><td>0.19</td><td>Hyperliquid</td><td>Funding rate (positive = crowded longs)</td></tr>
+  <tr><td class="mono">context</td><td>0.06</td><td>Market Cipher B</td><td>WaveTrend, MFI, RSI, VWAP signals</td></tr>
+  <tr><td class="mono">oiRegime</td><td>0.03</td><td>Coinglass</td><td>Open interest regime classification</td></tr>
+  <tr><td class="mono">crossExchange</td><td>0.02</td><td>Coinglass</td><td>Cross-exchange price spread anomalies</td></tr>
+</table>
+
+<p><strong>Trade triggers:</strong> Score ≥ 38 = STRONG_BUY, ≤ -38 = STRONG_SELL. Scores above 55 are capped (historically = noise/overfitting).</p>
+
+<!-- DATA SNAPSHOT -->
+<h2><span class="emoji">📊</span>Data Snapshot</h2>
+<div class="card info">
+  <ul>
+    <li><strong>10,000 snapshots</strong> in signal_history_v2.json (all have 6 components)</li>
+    <li><strong>5,903 have 5-minute outcomes</strong> tracked (59%)</li>
+    <li><strong>Score distribution:</strong> 73% cluster between -20 and +20 (NEUTRAL). Only <strong>2% hit the ±38 threshold</strong>.</li>
+  </ul>
+</div>
+
+<h3>Signal Breakdown</h3>
+<table>
+  <tr><th>Signal</th><th>Count</th><th>% of Total</th></tr>
+  <tr><td>NEUTRAL</td><td>8,447</td><td>84.5%</td></tr>
+  <tr><td>BUY</td><td>715</td><td>7.2%</td></tr>
+  <tr><td>SELL</td><td>664</td><td>6.6%</td></tr>
+  <tr><td>STRONG_BUY</td><td>131</td><td>1.3%</td></tr>
+  <tr><td>STRONG_SELL</td><td>43</td><td>0.4%</td></tr>
+</table>
+
+<!-- DIRECTIONAL ACCURACY -->
+<h2><span class="emoji">📈</span>Directional Accuracy (3,557 outcomes evaluated)</h2>
+<table>
+  <tr><th>Signal</th><th>Accuracy</th><th>Sample Size</th><th>Avg 5m Change</th><th>Assessment</th></tr>
+  <tr>
+    <td>STRONG_BUY</td>
+    <td class="green"><strong>73.2%</strong></td>
+    <td>30/41</td>
+    <td class="green"><strong>+1.53%</strong></td>
+    <td class="green">✅ Real edge</td>
+  </tr>
+  <tr>
+    <td>BUY</td>
+    <td class="green"><strong>65.9%</strong></td>
+    <td>143/217</td>
+    <td class="green">+0.38%</td>
+    <td class="green">✅ Useful</td>
+  </tr>
+  <tr>
+    <td>NEUTRAL</td>
+    <td class="dim">49.4%</td>
+    <td>1454/2943</td>
+    <td class="dim">+0.11%</td>
+    <td class="dim">— Coin flip</td>
+  </tr>
+  <tr>
+    <td>SELL</td>
+    <td class="yellow">48.5%</td>
+    <td>161/332</td>
+    <td class="yellow">-0.004%</td>
+    <td class="red">❌ No edge</td>
+  </tr>
+  <tr>
+    <td>STRONG_SELL</td>
+    <td class="red">50.0%</td>
+    <td>12/24</td>
+    <td class="red">+0.06% ⚠️</td>
+    <td class="red">❌ Broken</td>
+  </tr>
+  <tr>
+    <td><strong>Overall</strong></td>
+    <td>50.6%</td>
+    <td>3,557</td>
+    <td>—</td>
+    <td>—</td>
+  </tr>
+</table>
+
+<div class="key-finding">
+  <h3>🚨 Key Finding</h3>
+  <p><strong>STRONG_BUY is genuinely predictive</strong> (73% accuracy, +1.5% avg move). BUY is also useful (66%, +0.38%). But <strong>SELL and STRONG_SELL are basically random</strong> — STRONG_SELL even has a <em>positive</em> average return, meaning it's calling shorts on upward-moving markets. The short side of the model is broken.</p>
+</div>
+
+<!-- TRADE PERFORMANCE -->
+<h2><span class="emoji">💀</span>Actual Trade Performance</h2>
+<div class="card alert">
+  <ul>
+    <li><strong>56 trades</strong> in historical ledger</li>
+    <li><strong>0 wins, 0 losses</strong> — ALL have <code>exitPnL: 0</code> (PnL was never properly captured)</li>
+    <li><strong>43 SHORT / 13 LONG</strong> — massive short bias (77% shorts)</li>
+    <li><strong>55 of 56</strong> have <code>exitReason: "unknown"</code> — exits weren't tracked</li>
+    <li><strong>Journal v2</strong> was rebuilt (currently empty — fresh start post-audit)</li>
+    <li><strong>No live trades since audit</strong> — signals haven't hit threshold (correct behavior)</li>
+  </ul>
+</div>
+
+<!-- CRITICAL BUGS -->
+<h2><span class="emoji">🔴</span>Critical Bugs Found (5-Agent Audit, Feb 17)</h2>
+
+<div class="card alert">
+  <h3>1. TP/SL Never Executed <span class="badge fixed">FIXED</span></h3>
+  <p><code>isMarket: true</code> was set but HL requires <code>isMarket: false</code> for trigger orders. Every single stop-loss and take-profit order was silently rejected.</p>
+</div>
+
+<div class="card alert">
+  <h3>2. Systematic SHORT Bias <span class="badge fixed">FIXED</span></h3>
+  <p>Funding component had a double-negation bug — positive funding (crowded longs) was scored as <em>bullish</em> instead of bearish, then inverted. Net effect: everything pushed SHORT. Explains the 77% short rate.</p>
+</div>
+
+<div class="card alert">
+  <h3>3. Nonce Collisions <span class="badge fixed">FIXED</span></h3>
+  <p>Multiple orders in the same millisecond caused HL rejections. Fixed with sequential nonce generation.</p>
+</div>
+
+<div class="card alert">
+  <h3>4. Journal Desync <span class="badge fixed">FIXED</span></h3>
+  <p>Trades opened but never properly closed in journal. Rebuilt as v2 with complete open/close lifecycle.</p>
+</div>
+
+<div class="card alert">
+  <h3>5. No Process Locking <span class="badge fixed">FIXED</span></h3>
+  <p>Multiple pipeline instances could run simultaneously, causing duplicate orders. Fixed with <code>trading-mutex.js</code>.</p>
+</div>
+
+<div class="card warning">
+  <h3>6. Optimized Weights Contradict Defaults <span class="badge warn">PARTIAL</span></h3>
+  <p>Optimizer analyzed 52,067 samples and found <strong>5 of 10 Market Cipher signals are INVERTED</strong> from textbook expectations:</p>
+  <table>
+    <tr><th>Signal</th><th>Default Weight</th><th>Optimized Weight</th><th>Status</th></tr>
+    <tr><td>WT_CROSS_OVERSOLD</td><td>+30</td><td class="red"><strong>-1</strong></td><td class="red">FLIPPED</td></tr>
+    <tr><td>WT_CROSS_OVERBOUGHT</td><td>-30</td><td class="red"><strong>+5</strong></td><td class="red">FLIPPED</td></tr>
+    <tr><td>WT_CROSS_UP</td><td>+15</td><td class="red"><strong>0</strong></td><td class="red">FLIPPED</td></tr>
+    <tr><td>ABOVE_VWAP</td><td>+5</td><td class="red"><strong>-5</strong></td><td class="red">FLIPPED</td></tr>
+    <tr><td>BELOW_VWAP</td><td>-5</td><td class="red"><strong>+3</strong></td><td class="red">FLIPPED</td></tr>
+  </table>
+  <p>Context component reliability: only <strong>31%</strong> of default expectations. Currently weighted at just 6% of total score.</p>
+</div>
+
+<!-- OPEN ISSUES -->
+<h2><span class="emoji">⚠️</span>Known Issues Still Open</h2>
+
+<div class="card warning">
+  <ol style="padding-left: 18px;">
+    <li><strong>SELL signals are worthless</strong> — 48.5% accuracy with near-zero avg return. Short side doesn't work.</li>
+    <li><strong>PnL never captured</strong> — All 56 historical trades show exitPnL: 0. Zero real performance data.</li>
+    <li><strong>Outcome tracking bug</strong> — <code>outcomes.5m</code> returns an object <code>{price, changePct, directionCorrect}</code> not a number. Accuracy calculations were checking <code>&gt; 0</code> on the object (always false).</li>
+    <li><strong>API fragility</strong> — Coinglass OKX returns 50001 errors frequently, Coinbase rate limits, collector times out ~30% of runs.</li>
+    <li><strong>Lock collisions</strong> — Pipeline sometimes overlaps (10min cron, runs can take &gt;10min).</li>
+    <li><strong>Error alerting gap</strong> — <code>pending-alerts.json</code> gets written on errors but cron agents may clear without sending to Telegram.</li>
+    <li><strong>No backtest framework</strong> — 52K optimized weight samples but no way to simulate trades (Sharpe, drawdown, etc).</li>
+    <li><strong>Grid trading unvalidated</strong> — Dry-run mode running (13 cycles, 0 trades, BTC) but never activated.</li>
+  </ol>
+</div>
+
+<!-- KEY FILES -->
+<h2><span class="emoji">📁</span>Key Files</h2>
+<div class="code-block">
+<div class="file-list">
+  <div class="file-item"><span class="name">multi-pipeline.js</span> <span class="desc">1221 lines — Main pipeline, config, entry/exit</span></div>
+  <div class="file-item"><span class="name">engine.js</span> <span class="desc">618 lines — 6-component signal scorer</span></div>
+  <div class="file-item"><span class="name">position-monitor.js</span> <span class="desc">941 lines — Position management, TP/SL</span></div>
+  <div class="file-item"><span class="name">hl-trader.js</span> <span class="desc">789 lines — Hyperliquid API wrapper</span></div>
+  <div class="file-item"><span class="name">collector-v2.js</span> <span class="desc">557 lines — Data collection, snapshots</span></div>
+  <div class="file-item"><span class="name">orderbook-signals.js</span> <span class="desc">797 lines — Orderbook analysis</span></div>
+  <div class="file-item"><span class="name">circuit-breaker-v2.js</span> <span class="desc">621 lines — Risk controls</span></div>
+  <div class="file-item"><span class="name">regime-detector.js</span> <span class="desc">518 lines — Market regime classification</span></div>
+  <div class="file-item"><span class="name">coinglass.js</span> <span class="desc">559 lines — Coinglass API (OI, funding)</span></div>
+  <div class="file-item"><span class="name">coingecko.js</span> <span class="desc">298 lines — CoinGecko API (prices, global)</span></div>
+  <div class="file-item"><span class="name">watchdog.js</span> <span class="desc">479 lines — System health monitoring</span></div>
+  <div class="file-item"><span class="name">analyzer.js</span> <span class="desc">357 lines — Weight optimization, backfill</span></div>
+</div>
+</div>
+
+<!-- CONFIG -->
+<h2><span class="emoji">🎯</span>Trading Configuration</h2>
+<div class="code-block">
+Threshold:        38 (only STRONG signals trade)
+Score cap:        55 (above = noise)
+Max positions:    2 concurrent
+Leverage:         3x
+Max margin:       60%
+Daily loss limit: $5
+Cooldown:         30min per coin
+Quiet hours:      0-6 UTC
+Blacklist:        AXS
+Position sizing:  Quarter-Kelly (fractional)
+Min volatility:   0.5% (1h range)
+</div>
+
+<!-- QUESTIONS FOR GROK -->
+<h2><span class="emoji">🧪</span>What We Need From Grok</h2>
+<div class="key-finding">
+  <p style="font-size: 1rem; color: #e0e0e8; margin-bottom: 16px;"><strong>Core question:</strong> How do we turn a system where STRONG_BUY works (73% accuracy, +1.5% avg) but everything else is noise into a profitable trading bot on a $50 account?</p>
+  
+  <ol style="padding-left: 20px;">
+    <li><strong>Should we go long-only?</strong> Short signals are broken. Fix or disable?</li>
+    <li><strong>Signal engine redesign:</strong> Which of the 6 components actually contribute edge? How to isolate?</li>
+    <li><strong>Backtesting:</strong> How to build walk-forward backtest with 10K snapshots for actual Sharpe/PnL?</li>
+    <li><strong>Position sizing:</strong> Quarter-Kelly on $50 at 3x leverage — optimal or not?</li>
+    <li><strong>Exit strategy:</strong> No validated exit logic. TP/SL percentages never tuned against data.</li>
+    <li><strong>Feature engineering:</strong> What new signals would add real alpha vs noise?</li>
+    <li><strong>The Market Cipher problem:</strong> 5/10 indicators inverted from textbook. Abandon MC or investigate why?</li>
+  </ol>
+</div>
+
+<!-- OPTIONAL CONTEXT -->
+<h2><span class="emoji">🔧</span>Optional Context</h2>
+<ul>
+  <li><strong>Optimized weights:</strong> 52,067 samples but from old MC-only engine — may not apply to current 6-component model</li>
+  <li><strong>Research:</strong> 22K word deep dive on quant strategies from Substack analysis (saved locally)</li>
+  <li><strong>Infrastructure:</strong> Docker on VPS, cron execution, Telegram alerts, automated git backup</li>
+  <li><strong>Rate limits:</strong> Free tier on most APIs (CoinGecko, Coinbase). Paid Coinglass ($29/mo)</li>
+  <li><strong>Net result:</strong> Account started at ~$50, still at ~$49.43 — system rarely trades, hasn't lost significant money</li>
+</ul>
+
+<div style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #1a1a2e; color: #555; font-size: 0.8rem; text-align: center;">
+  Generated by Nova • February 18, 2026 • For Grok Socratic diagnostic prompt
+</div>
+
+</div>
+</body>
+</html>
