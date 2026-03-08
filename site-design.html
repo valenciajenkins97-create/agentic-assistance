@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Design | Agentic Assistance</title>
+    <meta name="description" content="Professional website design and online ordering integration for restaurants and local businesses. Beat the commissions. Own your orders.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void: #0a0a0a;
+            --charcoal: #141414;
+            --bone: #e0ddd5;
+            --steel: #5a5a5a;
+            --ember: #d69e6b;
+            --ash: #888888;
+            --system-green: #a3cfa3;
+            --font-display: 'Cinzel Decorative', serif;
+            --font-serif: 'Playfair Display', serif;
+            --font-tech: 'Space Mono', monospace;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--void);
+            color: var(--bone);
+            font-family: var(--font-serif);
+            overflow-x: hidden;
+            font-size: 16px;
+            line-height: 1.6;
+            cursor: crosshair;
+        }
+
+        body::before {
+            content: "";
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E");
+            z-index: 9999; opacity: 0.5;
+        }
+
+        /* ─── ATOMS ─── */
+        .tech-label {
+            font-family: var(--font-tech); font-size: 0.7rem;
+            text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--ash); display: inline-flex; align-items: center; gap: 0.5rem;
+        }
+        .tech-label::before { content: "["; color: var(--ember); }
+        .tech-label::after  { content: "]"; color: var(--ember); }
+
+        .display-text { font-family: var(--font-display); line-height: 0.85; text-transform: uppercase; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; position: relative; }
+
+        .cta-btn {
+            display: inline-block; background: transparent; color: var(--bone);
+            border: 1px solid var(--bone); padding: 1rem 3rem;
+            font-family: var(--font-tech); text-transform: uppercase; font-size: 0.8rem;
+            letter-spacing: 0.1em; cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); text-decoration: none;
+        }
+        .cta-btn:hover { background: var(--bone); color: var(--void); }
+        .cta-btn-ember { border-color: var(--ember); color: var(--ember); }
+        .cta-btn-ember:hover { background: var(--ember); color: var(--void); }
+
+        /* ─── HUD BRACKETS ─── */
+        .hud-bracket { position: fixed; width: 20px; height: 20px; border: 1px solid var(--steel); pointer-events: none; z-index: 200; }
+        .hb-tl { top:1.5rem;left:1.5rem;border-right:0;border-bottom:0; }
+        .hb-tr { top:1.5rem;right:1.5rem;border-left:0;border-bottom:0; }
+
+        /* ─── HEADER ─── */
+        header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 1.5rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid var(--charcoal);
+            background: rgba(10,10,10,0.92);
+            backdrop-filter: blur(8px);
+        }
+        .brand { font-family: var(--font-tech); font-size: 0.85rem; letter-spacing: 0.15em; text-decoration: none; color: var(--bone); }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { font-family: var(--font-tech); font-size: 0.7rem; color: var(--ash); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--ember); }
+        .hamburger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 4px; }
+        .hamburger span { display: block; width: 24px; height: 1px; background: var(--bone); }
+
+        /* ─── MOBILE MENU ─── */
+        .mobile-menu {
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--void); z-index: 999; flex-direction: column;
+            align-items: center; justify-content: center; gap: 2rem;
+        }
+        .mobile-menu.open { display: flex; }
+        .mobile-menu a { font-family: var(--font-tech); font-size: 1.2rem; color: var(--bone); text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; }
+        .mobile-menu a:hover { color: var(--ember); }
+        .mobile-menu-close { position: absolute; top: 1.5rem; right: 2rem; background: none; border: none; color: var(--bone); font-size: 1.5rem; cursor: pointer; }
+
+        /* ─── HERO ─── */
+        .hero {
+            padding: 12rem 2rem 6rem;
+            border-bottom: 1px solid var(--charcoal);
+            position: relative; overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute; top: 0; right: 0; width: 60%; height: 100%;
+            background: radial-gradient(ellipse at 80% 50%, rgba(214,158,107,0.04) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-eyebrow { margin-bottom: 2rem; }
+        .hero-title { font-size: clamp(3rem, 8vw, 6.5rem); color: var(--bone); margin-bottom: 1.5rem; }
+        .hero-title .accent { color: var(--ember); }
+        .hero-sub {
+            font-family: var(--font-serif); font-size: 1.25rem;
+            color: var(--ash); max-width: 580px; line-height: 1.7; margin-bottom: 3rem;
+        }
+        .hero-grid-line {
+            position: absolute; background: var(--charcoal); pointer-events: none;
+        }
+        .hero-grid-line.v { width: 1px; top: 0; bottom: 0; }
+        .hero-grid-line.h { height: 1px; left: 0; right: 0; }
+        .hgl-1 { right: 25%; }
+        .hgl-2 { bottom: 40%; }
+
+        /* ─── SECTION HEADER ─── */
+        .section-header {
+            display: flex; justify-content: space-between; align-items: flex-end;
+            padding-bottom: 2rem; border-bottom: 1px solid var(--charcoal); margin-bottom: 4rem;
+        }
+
+        /* ─── PAIN SECTION ─── */
+        .pain-section { padding: 6rem 2rem; border-bottom: 1px solid var(--charcoal); }
+        .pain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; border: 1px solid var(--charcoal); }
+        .pain-card {
+            padding: 2.5rem; border-right: 1px solid var(--charcoal);
+            border-bottom: 1px solid var(--charcoal);
+        }
+        .pain-card:nth-child(2n) { border-right: 0; }
+        .pain-card:nth-last-child(-n+2) { border-bottom: 0; }
+        .pain-number {
+            font-family: var(--font-display); font-size: 3rem; color: var(--charcoal);
+            line-height: 1; margin-bottom: 1rem;
+        }
+        .pain-title { font-family: var(--font-tech); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ember); margin-bottom: 0.75rem; }
+        .pain-text { font-family: var(--font-serif); font-size: 1rem; color: var(--ash); line-height: 1.7; }
+
+        /* ─── PRICING ─── */
+        .pricing-section { padding: 6rem 2rem; border-bottom: 1px solid var(--charcoal); }
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--charcoal); }
+
+        .pricing-card {
+            padding: 3rem 2.5rem; border-right: 1px solid var(--charcoal);
+            display: flex; flex-direction: column; position: relative;
+            transition: background 0.3s ease;
+        }
+        .pricing-card:last-child { border-right: 0; }
+        .pricing-card:hover { background: var(--charcoal); }
+        .pricing-card.featured {
+            background: var(--charcoal);
+            border-color: var(--ember);
+        }
+        .pricing-badge {
+            position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+            font-family: var(--font-tech); font-size: 0.6rem; text-transform: uppercase;
+            letter-spacing: 0.15em; background: var(--ember); color: var(--void);
+            padding: 4px 16px; white-space: nowrap;
+        }
+        .plan-tier { font-family: var(--font-tech); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--ember); margin-bottom: 1rem; }
+        .plan-name { font-family: var(--font-display); font-size: 1.6rem; color: var(--bone); margin-bottom: 0.5rem; line-height: 1.1; text-transform: uppercase; }
+        .plan-price { font-family: var(--font-tech); font-size: 2.8rem; color: var(--bone); line-height: 1; margin-bottom: 0.25rem; }
+        .plan-price-note { font-family: var(--font-tech); font-size: 0.65rem; color: var(--ash); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2rem; }
+        .plan-divider { height: 1px; background: var(--charcoal); margin-bottom: 2rem; }
+        .plan-features { list-style: none; flex: 1; margin-bottom: 2.5rem; }
+        .plan-features li {
+            font-family: var(--font-serif); font-size: 0.95rem; color: var(--ash);
+            padding: 0.6rem 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+            display: flex; align-items: flex-start; gap: 0.75rem; line-height: 1.5;
+        }
+        .plan-features li::before { content: "—"; color: var(--ember); flex-shrink: 0; font-family: var(--font-tech); font-size: 0.8rem; margin-top: 2px; }
+        .plan-features li:last-child { border-bottom: 0; }
+        .plan-cta { margin-top: auto; }
+
+        /* ─── WHAT YOU GET ─── */
+        .what-section { padding: 6rem 2rem; border-bottom: 1px solid var(--charcoal); }
+        .what-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; }
+        .what-card { padding: 2.5rem; border: 1px solid var(--charcoal); transition: border-color 0.3s; }
+        .what-card:hover { border-color: var(--ember); }
+        .what-icon { font-family: var(--font-display); font-size: 2.5rem; color: var(--ember); margin-bottom: 1.5rem; }
+        .what-title { font-family: var(--font-tech); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--bone); margin-bottom: 0.75rem; }
+        .what-text { font-family: var(--font-serif); font-size: 0.95rem; color: var(--ash); line-height: 1.7; }
+
+        /* ─── VS TABLE ─── */
+        .vs-section { padding: 6rem 2rem; border-bottom: 1px solid var(--charcoal); }
+        .vs-table { width: 100%; border-collapse: collapse; border: 1px solid var(--charcoal); }
+        .vs-table th, .vs-table td { padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--charcoal); text-align: left; }
+        .vs-table th { font-family: var(--font-tech); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ash); border-right: 1px solid var(--charcoal); }
+        .vs-table th:first-child { width: 35%; }
+        .vs-table th.us { color: var(--ember); }
+        .vs-table td { font-family: var(--font-serif); font-size: 0.95rem; border-right: 1px solid var(--charcoal); }
+        .vs-table td:first-child { color: var(--ash); font-family: var(--font-tech); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .vs-table td.them { color: var(--steel); }
+        .vs-table td.us { color: var(--system-green); }
+        .vs-table tr:last-child td, .vs-table tr:last-child th { border-bottom: 0; }
+        .vs-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+        /* ─── CTA BAND ─── */
+        .cta-band {
+            padding: 6rem 2rem; text-align: center; border-bottom: 1px solid var(--charcoal);
+        }
+        .cta-band-title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 4rem); color: var(--bone); text-transform: uppercase; line-height: 0.9; margin-bottom: 1.5rem; }
+        .cta-band-sub { font-family: var(--font-serif); font-size: 1.1rem; color: var(--ash); max-width: 500px; margin: 0 auto 3rem; }
+
+        /* ─── FOOTER ─── */
+        footer { padding: 4rem 2rem 2rem; border-top: 1px solid var(--charcoal); }
+        .footer-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+        .footer-brand { font-family: var(--font-tech); font-size: 0.8rem; color: var(--ash); }
+        .footer-links { display: flex; gap: 1.5rem; }
+        .footer-links a { font-family: var(--font-tech); font-size: 0.7rem; color: var(--ash); text-decoration: none; text-transform: uppercase; letter-spacing: 0.08em; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--ember); }
+        .footer-legal { font-family: var(--font-tech); font-size: 0.65rem; color: var(--steel); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--charcoal); }
+
+        /* ─── MODAL ─── */
+        .modal-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.85); z-index: 1000;
+            align-items: center; justify-content: center; padding: 2rem;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: var(--charcoal); border: 1px solid var(--steel);
+            padding: 3rem; max-width: 540px; width: 100%; position: relative;
+            max-height: 90vh; overflow-y: auto;
+        }
+        .modal-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; color: var(--ash); font-size: 1.2rem; cursor: pointer; font-family: var(--font-tech); }
+        .modal-close:hover { color: var(--ember); }
+        .modal-title { font-family: var(--font-display); font-size: 1.8rem; color: var(--bone); margin-bottom: 0.5rem; }
+        .modal-subtitle { font-family: var(--font-tech); font-size: 0.75rem; color: var(--ash); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2rem; }
+        .form-group { margin-bottom: 1.25rem; }
+        .form-label { font-family: var(--font-tech); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ash); display: block; margin-bottom: 0.5rem; }
+        .form-input, .form-textarea, .form-select {
+            width: 100%; background: var(--void); border: 1px solid var(--steel);
+            color: var(--bone); padding: 0.85rem 1rem; font-family: var(--font-serif);
+            font-size: 1rem; transition: border-color 0.2s; outline: none;
+        }
+        .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--ember); }
+        .form-textarea { min-height: 100px; resize: vertical; }
+        .form-select { appearance: none; cursor: pointer; }
+        .form-submit {
+            width: 100%; background: var(--ember); color: var(--void); border: none;
+            padding: 1rem; font-family: var(--font-tech); font-size: 0.8rem;
+            text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer;
+            margin-top: 1rem; transition: opacity 0.2s;
+        }
+        .form-submit:hover { opacity: 0.85; }
+        .form-note { font-family: var(--font-tech); font-size: 0.65rem; color: var(--steel); text-align: center; margin-top: 1rem; letter-spacing: 0.05em; }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .hero { padding: 9rem 1.25rem 4rem; }
+            .pain-grid { grid-template-columns: 1fr; }
+            .pain-card { border-right: 0 !important; border-bottom: 1px solid var(--charcoal) !important; }
+            .pain-card:last-child { border-bottom: 0 !important; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .pricing-card { border-right: 0 !important; border-bottom: 1px solid var(--charcoal); }
+            .pricing-card:last-child { border-bottom: 0; }
+            .what-grid { grid-template-columns: 1fr; }
+            .vs-table { font-size: 0.85rem; }
+            .vs-table th, .vs-table td { padding: 0.85rem 1rem; }
+            .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .footer-row { flex-direction: column; align-items: flex-start; }
+            .modal { padding: 2rem 1.25rem; margin: 0; max-height: 95vh; }
+            .modal-overlay { align-items: flex-end; padding: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HUD -->
+    <div class="hud-bracket hb-tl"></div>
+    <div class="hud-bracket hb-tr"></div>
+
+    <!-- MODAL -->
+    <div class="modal-overlay" id="contactModal" onclick="closeModalOutside(event)">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <div class="modal-title">Start Your Site</div>
+            <div class="modal-subtitle">We'll get back to you within 24 hours</div>
+            <form onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label class="form-label">Full Name *</label>
+                    <input class="form-input" type="text" name="name" placeholder="Your name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Business Name *</label>
+                    <input class="form-input" type="text" name="business" placeholder="Restaurant or business name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address *</label>
+                    <input class="form-input" type="email" name="email" placeholder="you@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone Number <span style="color:var(--ember)">*</span></label>
+                    <input class="form-input" type="tel" name="phone" placeholder="+1 (000) 000-0000" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Which package? *</label>
+                    <select class="form-select" name="package" required>
+                        <option value="" disabled selected>Select a package</option>
+                        <option value="starter">Starter — $199 one-time</option>
+                        <option value="growth">Growth — $399 one-time</option>
+                        <option value="premium">Premium — $299/month</option>
+                        <option value="unsure">Not sure yet — let's talk</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tell us about your business</label>
+                    <textarea class="form-textarea" name="project" placeholder="What type of food do you serve? Do you have a website already? What's your biggest frustration right now?"></textarea>
+                </div>
+                <div class="form-group" style="margin-top:1rem">
+                    <label style="display:flex;align-items:flex-start;gap:0.75rem;cursor:pointer">
+                        <input type="checkbox" name="sms_consent" style="margin-top:3px;flex-shrink:0;accent-color:var(--ember)">
+                        <span style="font-family:var(--font-tech);font-size:0.65rem;color:var(--steel);line-height:1.6;letter-spacing:0.03em;">
+                            I agree to receive SMS notifications from Agentic Assistance regarding my project. Reply STOP to opt out. View our <a href="/privacy.html" target="_blank" style="color:var(--ember);text-decoration:none">Privacy Policy</a> and <a href="/terms.html" target="_blank" style="color:var(--ember);text-decoration:none">Terms</a>.
+                        </span>
+                    </label>
+                </div>
+                <button type="submit" class="form-submit">Get My Site →</button>
+                <div class="form-note">No contracts. No commissions. Just results.</div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" onclick="closeMobileMenu()">✕</button>
+        <a href="/" onclick="closeMobileMenu()">Home</a>
+        <a href="/site-design.html" onclick="closeMobileMenu()">Site Design</a>
+        <a href="/#faq" onclick="closeMobileMenu()">FAQ</a>
+        <a href="#" onclick="closeMobileMenu(); openModal();">Get Started</a>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <a class="brand" href="/"><span style="color:var(--ember)">//</span> AGENTIC.AA</a>
+        <nav class="nav-links">
+            <a href="/">Home</a>
+            <a href="/site-design.html" style="color:var(--ember)">Site Design</a>
+            <a href="/#faq">FAQ</a>
+            <a href="#" onclick="openModal()" style="color:var(--ember)">Get Started →</a>
+        </nav>
+        <button class="hamburger" onclick="openMobileMenu()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <!-- ── HERO ── -->
+    <section class="hero">
+        <div class="hero-grid-line v hgl-1"></div>
+        <div class="hero-grid-line h hgl-2"></div>
+        <div class="container">
+            <div class="hero-eyebrow">
+                <span class="tech-label">Site Design</span>
+            </div>
+            <h1 class="display-text hero-title">
+                Stop Paying<br>
+                <span class="accent">Commissions.</span><br>
+                Own Your Orders.
+            </h1>
+            <p class="hero-sub">
+                We build fast, professional websites with fully integrated online ordering for restaurants and local businesses — so you keep every dollar your customers spend.
+            </p>
+            <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+                <button class="cta-btn cta-btn-ember" onclick="openModal()">Get My Site →</button>
+                <a href="#pricing" class="cta-btn">See Pricing</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── PAIN POINTS ── -->
+    <section class="pain-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="display-text" style="font-size:clamp(1.8rem,4vw,2.8rem)">THE PROBLEM<br>WITH PLATFORMS</h2>
+                <div class="tech-label">Why This Matters</div>
+            </div>
+            <div class="pain-grid">
+                <div class="pain-card">
+                    <div class="pain-number">25%</div>
+                    <div class="pain-title">Commission on Every Order</div>
+                    <p class="pain-text">DoorDash, Uber Eats, and Grubhub take a quarter of every order — sometimes more. You do the work. They take the profit.</p>
+                </div>
+                <div class="pain-card">
+                    <div class="pain-number">0</div>
+                    <div class="pain-title">Customer Data You Own</div>
+                    <p class="pain-text">Those platforms own the relationship. You can't email your customers, retarget them, or build loyalty — because you don't even know who they are.</p>
+                </div>
+                <div class="pain-card">
+                    <div class="pain-number">3wks</div>
+                    <div class="pain-title">Typical Setup Time Elsewhere</div>
+                    <p class="pain-text">Legacy providers like QuikChow quote 3 weeks to get you live. Your customers can't wait 3 weeks. Neither can your revenue.</p>
+                </div>
+                <div class="pain-card">
+                    <div class="pain-number">↓</div>
+                    <div class="pain-title">Outdated Sites Kill Conversions</div>
+                    <p class="pain-text">70% of customers decide where to order based on the website. A bad site sends them straight to your competitor — or back to DoorDash.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── PRICING ── -->
+    <section class="pricing-section" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="display-text" style="font-size:clamp(1.8rem,4vw,2.8rem)">SIMPLE<br>PRICING</h2>
+                <div class="tech-label">No Contracts. No Commissions.</div>
+            </div>
+            <div class="pricing-grid">
+
+                <!-- STARTER -->
+                <div class="pricing-card">
+                    <div class="plan-tier">Starter</div>
+                    <div class="plan-name">Digital<br>Foundation</div>
+                    <div class="plan-price">$199</div>
+                    <div class="plan-price-note">One-time payment</div>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-features">
+                        <li>Custom restaurant website — mobile-first, premium design</li>
+                        <li>Commission-free online ordering via Square</li>
+                        <li>Google Business Profile setup &amp; optimization</li>
+                        <li>Menu integration — your full menu, online</li>
+                        <li>Customer data collection built in</li>
+                        <li>48-hour delivery</li>
+                    </ul>
+                    <div class="plan-cta">
+                        <button class="cta-btn" style="width:100%;text-align:center;" onclick="openModal()">Get Started →</button>
+                    </div>
+                </div>
+
+                <!-- GROWTH -->
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Most Popular</div>
+                    <div class="plan-tier">Growth</div>
+                    <div class="plan-name">Full Digital<br>Presence</div>
+                    <div class="plan-price">$399</div>
+                    <div class="plan-price-note">One-time payment</div>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-features">
+                        <li>Everything in Starter</li>
+                        <li>AI chatbot — answers questions &amp; takes inquiries 24/7</li>
+                        <li>Automated SMS order confirmations to customers</li>
+                        <li>Yelp &amp; TripAdvisor listing optimization</li>
+                        <li>Review request automation after each order</li>
+                        <li>48-hour delivery</li>
+                    </ul>
+                    <div class="plan-cta">
+                        <button class="cta-btn cta-btn-ember" style="width:100%;text-align:center;" onclick="openModal()">Get Started →</button>
+                    </div>
+                </div>
+
+                <!-- PREMIUM -->
+                <div class="pricing-card">
+                    <div class="plan-tier">Premium</div>
+                    <div class="plan-name">Ongoing<br>Growth Engine</div>
+                    <div class="plan-price">$299<span style="font-size:1.2rem;color:var(--ash)">/mo</span></div>
+                    <div class="plan-price-note">Month-to-month · Cancel anytime</div>
+                    <div class="plan-divider"></div>
+                    <ul class="plan-features">
+                        <li>Everything in Growth</li>
+                        <li>4 social media posts per month</li>
+                        <li>Monthly email campaign to your customer list</li>
+                        <li>Analytics dashboard — orders, traffic, conversions</li>
+                        <li>Menu updates &amp; site maintenance included</li>
+                        <li>Priority support — same-day response</li>
+                    </ul>
+                    <div class="plan-cta">
+                        <button class="cta-btn" style="width:100%;text-align:center;" onclick="openModal()">Get Started →</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ── WHAT YOU GET ── -->
+    <section class="what-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="display-text" style="font-size:clamp(1.8rem,4vw,2.8rem)">WHAT MAKES<br>US DIFFERENT</h2>
+                <div class="tech-label">The AA Advantage</div>
+            </div>
+            <div class="what-grid">
+                <div class="what-card">
+                    <div class="what-icon">I</div>
+                    <div class="what-title">Zero Commissions. Forever.</div>
+                    <p class="what-text">Orders go directly to you through Square — no middleman, no percentage taken. What your customers pay, you keep.</p>
+                </div>
+                <div class="what-card">
+                    <div class="what-icon">II</div>
+                    <div class="what-title">Premium Design, Not Templates</div>
+                    <p class="what-text">Every site is built custom — not dropped into a generic CMS theme. Your restaurant deserves a site that looks as good as your food.</p>
+                </div>
+                <div class="what-card">
+                    <div class="what-icon">III</div>
+                    <div class="what-title">AI Working For You 24/7</div>
+                    <p class="what-text">Growth and Premium clients get an AI assistant on their site that answers customer questions, handles inquiries, and never calls in sick.</p>
+                </div>
+                <div class="what-card">
+                    <div class="what-icon">IV</div>
+                    <div class="what-title">You Own Your Customers</div>
+                    <p class="what-text">Every order captures names, emails, and phone numbers. That's your list — to market to, to build loyalty with, to own forever.</p>
+                </div>
+                <div class="what-card">
+                    <div class="what-icon">V</div>
+                    <div class="what-title">Live in 48 Hours</div>
+                    <p class="what-text">We move fast. Most competitors quote 3 weeks. We deliver in 48 hours so you start capturing commission-free revenue immediately.</p>
+                </div>
+                <div class="what-card">
+                    <div class="what-icon">VI</div>
+                    <div class="what-title">No Contracts, Ever</div>
+                    <p class="what-text">One-time packages are yours to keep. The monthly plan is month-to-month — cancel with a single email. No lock-in. No fine print.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── VS TABLE ── -->
+    <section class="vs-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="display-text" style="font-size:clamp(1.8rem,4vw,2.8rem)">US VS.<br>THE REST</h2>
+                <div class="tech-label">Honest Comparison</div>
+            </div>
+            <table class="vs-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>DoorDash / UberEats</th>
+                        <th>Old-School Providers</th>
+                        <th class="us">Agentic Assistance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Order Commissions</td>
+                        <td class="them">15–30% per order</td>
+                        <td class="them">Varies / hidden</td>
+                        <td class="us">$0 — you keep everything</td>
+                    </tr>
+                    <tr>
+                        <td>Setup Time</td>
+                        <td class="them">Fast, but you pay forever</td>
+                        <td class="them">2–3 weeks</td>
+                        <td class="us">48 hours</td>
+                    </tr>
+                    <tr>
+                        <td>You Own Customer Data</td>
+                        <td class="them">No — they own it</td>
+                        <td class="them">Basic capture only</td>
+                        <td class="us">Yes — fully yours</td>
+                    </tr>
+                    <tr>
+                        <td>AI / Automation</td>
+                        <td class="them">None for restaurants</td>
+                        <td class="them">None</td>
+                        <td class="us">Chatbot + SMS + auto-review</td>
+                    </tr>
+                    <tr>
+                        <td>Site Design Quality</td>
+                        <td class="them">Generic listing page</td>
+                        <td class="them">Outdated templates</td>
+                        <td class="us">Custom, premium, modern</td>
+                    </tr>
+                    <tr>
+                        <td>Monthly Fees</td>
+                        <td class="them">High (% of every order)</td>
+                        <td class="them">Unclear monthly costs</td>
+                        <td class="us">$0 (Starter/Growth) or $299/mo</td>
+                    </tr>
+                    <tr>
+                        <td>Contracts</td>
+                        <td class="them">Yes</td>
+                        <td class="them">Often</td>
+                        <td class="us">Never</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ── CTA BAND ── -->
+    <section class="cta-band">
+        <div class="container">
+            <h2 class="cta-band-title">Ready to Stop<br><span style="color:var(--ember)">Splitting Your Revenue?</span></h2>
+            <p class="cta-band-sub">Get a professional site with commission-free ordering — live in 48 hours. No contracts. No commissions. No excuses.</p>
+            <button class="cta-btn cta-btn-ember" onclick="openModal()">Get My Site Now →</button>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer>
+        <div class="container">
+            <div class="footer-row">
+                <span class="footer-brand"><span style="color:var(--ember)">//</span> AGENTIC ASSISTANCE</span>
+                <div class="footer-links">
+                    <a href="/">Home</a>
+                    <a href="/site-design.html">Site Design</a>
+                    <a href="/#faq">FAQ</a>
+                    <a href="/privacy.html">Privacy</a>
+                    <a href="/terms.html">Terms</a>
+                </div>
+            </div>
+            <div class="footer-legal">© 2025 Agentic Assistance · hello@agentic-assistance.com · All Rights Reserved</div>
+        </div>
+    </footer>
+
+    <script>
+        function openModal() {
+            document.getElementById('contactModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal() {
+            document.getElementById('contactModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        function closeModalOutside(e) {
+            if (e.target === document.getElementById('contactModal')) closeModal();
+        }
+        function openMobileMenu() {
+            document.getElementById('mobileMenu').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMobileMenu() {
+            document.getElementById('mobileMenu').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        function handleSubmit(e) {
+            e.preventDefault();
+            const data = new FormData(e.target);
+            const subject = encodeURIComponent('Site Design Inquiry — ' + (data.get('package') || 'Unknown package'));
+            const body = encodeURIComponent(
+                'Name: ' + data.get('name') + '\n' +
+                'Business: ' + data.get('business') + '\n' +
+                'Phone: ' + data.get('phone') + '\n' +
+                'Package: ' + data.get('package') + '\n\n' +
+                'About their business:\n' + (data.get('project') || 'Not provided')
+            );
+            window.location.href = 'mailto:hello@agentic-assistance.com?subject=' + subject + '&body=' + body;
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+            });
+        });
+    </script>
+</body>
+</html>
